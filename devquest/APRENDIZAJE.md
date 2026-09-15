@@ -1,36 +1,65 @@
--PACKAGE.JSON
-SCRIPTS:
-Comandos rapidos del proyecto.
-DEPENDENCIAS:
-librerias que usa la aapp
-DEV.DEPENDENCIAS:
-Herramientas para desarrollar
+# Mi cuaderno de aprendizaje
 
--PACKAGE-LOCK.JSON
-lo gestiona npm
-detallla versiones exactas del arbol completo
-bloquea el estado exacto del proyecto.
+Esta revisión ordena las notas iniciales y las ajusta al código actual. Que un concepto aparezca en el proyecto significa que lo has utilizado; explica con tus palabras cómo funciona antes de marcarlo como comprendido.
 
--INDEX.HTML
-Carga el punto de inicio de JavaS/jsxcript,  arranca react y renderiza la raiz de rooot
+## Archivos que ya he encontrado
 
--MAIN.JSX
-Importamos "librerias" y archivos.
+| Archivo o carpeta | Para qué sirve en este proyecto |
+| --- | --- |
+| `package.json` | Define scripts, dependencias de la app y herramientas de desarrollo. |
+| `package-lock.json` | Registra las versiones concretas del árbol de dependencias que instala npm. Se guarda en Git. |
+| `index.html` | Contiene el elemento `root` y carga el punto de entrada `src/main.jsx`. |
+| `src/main.jsx` | Importa estilos y React, crea la raíz con `createRoot` y renderiza `App` dentro de `StrictMode`. |
+| `src/App.jsx` | Organiza la pantalla: utiliza `Header`, muestra el progreso fijo y utiliza `Article`. |
+| `src/components/Header.jsx` | Muestra el título de la aplicación. |
+| `src/components/Article.jsx` | Muestra la tarjeta y contiene el input y la lista de nombres. |
+| `src/index.css` | Importa Tailwind; las clases de los componentes dan estilo a la pantalla. |
+| `vite.config.js` | Configura los plugins de React y Tailwind para Vite. |
+| `node_modules/` | Contiene las dependencias instaladas. No se guarda en Git. |
+| `dist/` | Contiene los archivos que genera `npm run build` para publicar la app. No se guarda en Git. |
+| `.gitignore` | Indica qué archivos sin seguimiento debe ignorar Git. No oculta archivos ya publicados ni sustituye proteger secretos. |
 
--APP.jsx
-importa un contador y 3 imagenes
+## Lo que ya aparece en mi código
 
--NODE_MODULES
-Donde estan las librerias de mi proyecto
+Completa la última columna con un ejemplo de tu aplicación y marca cada casilla cuando puedas explicarlo al tutor.
 
--DIST
-Prepara la app para publicarla en internet ( o para el servidor)
+| Concepto utilizado | Lo puedo explicar | Mi explicación o duda |
+| --- | --- | --- |
+| Componente: `Header` o `Article` | [ ] | Pendiente de completar |
+| `import` y `export` | [ ] | Pendiente de completar |
+| JSX y `className` | [ ] | Pendiente de completar |
+| `useState`: texto del input y array de nombres | [ ] | Pendiente de completar |
+| Input controlado: `value` y `onChange` | [ ] | Pendiente de completar |
+| Evento `onClick` | [ ] | Pendiente de completar |
+| Comprobación con `trim()` | [ ] | Pendiente de completar |
+| Nuevo array con `[...names, name]` | [ ] | Pendiente de completar |
+| Renderizar una lista con `map` y `key` | [ ] | Pendiente de completar |
+| Clases de Tailwind | [ ] | Pendiente de completar |
 
-.gitgnore
-archivos sensibles o que no queremos qu ese muestren
+## Reto 02 · Preguntas para investigar
 
-en APP.jsx
-Elimino todo el contenido solo impoprto el css de App.
- Genero estructura básica de html dentro:
--Main que sera el conteendor principal donde introduciremos todo.
--Header cabecera que tenemos titulo y texto.
+No hace falta responderlas antes de empezar. Complétalas según avances:
+
+- ¿Qué estado decide si se muestra «Panel» o «Mi lista»?
+- ¿Cómo se entera el componente padre de que he pulsado una opción del navbar?
+- ¿Qué diferencia hay entre una condición dentro de una función y mostrar JSX según una condición?
+- ¿Cuándo me resulta más claro usar un ternario y cuándo `&&`?
+- ¿Qué ocurrió con los nombres cuando dejé de mostrar el componente de la lista?
+- ¿Dónde puse finalmente el array y por qué se conserva al cambiar de vista?
+
+## Comentarios explicativos en el código
+
+Cuando utilices algo por primera vez, escribe un comentario breve con tus palabras junto a esa parte: qué guarda un estado, por qué haces una comprobación o por qué un dato vive en el padre. No comentes cada línea. Usa este archivo para explicaciones largas y actualiza los comentarios si cambia el código.
+
+En JavaScript puedes usar `// comentario`. Dentro del marcado JSX se escribe `{/* comentario */}`.
+
+## Registro de una sesión
+
+Copia este bloque cuando quieras registrar un avance:
+
+- **Fecha:**
+- **Qué intenté conseguir:**
+- **Qué cambié:**
+- **Qué comprobé en el navegador:**
+- **Qué entiendo ahora (con mis palabras):**
+- **Qué duda me queda:**

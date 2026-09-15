@@ -1,5 +1,6 @@
 import {useState} from "react";
 
+
 function Article() {
   const [name, setName] = useState("");
   const [names, setNames] = useState([]);
@@ -19,7 +20,7 @@ function Article() {
           <span>Introduce una tarea</span>
           
           <input type="text"  placeholder="Añadir tarea" value={name} onChange={(e) => setName(e.target.value)} className="rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none" />
-          <button type="button" className="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700" onClick={addNames}>
+          <button type="button" className="rounded-lg  bg-slate-600 px-4 py-2 text-white hover:bg-gray-700" onClick={addNames}>
             Añadir
           </button>
           {names.map((name, index) => (

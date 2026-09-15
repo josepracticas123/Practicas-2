@@ -8,7 +8,7 @@ function Article() {
           <span>Interfaz</span>
           <span>Pendiente</span>
 
-          <button type="button" disabled>
+          <button type="button" className="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
             Abrir reto
           </button>
         </article>

@@ -1,32 +1,26 @@
-import {useState} from "react";
+import { useState, useEffect } from "react";
 
 
-function Article() {
+function Article({ addTareas }) {
   const [name, setName] = useState("");
-  const [names, setNames] = useState([]);
   const addNames = () => {
     if (name.trim() !== "") {
-      setNames([...names, name]);
+      addTareas(name);
       setName("");
     };
   }
   return (
-        <article className="mx-auto flex w-full max-w-xs flex-col gap-2 rounded-lg border border-gray-400 bg-white p-4 text-center shadow-sm">
+    <article className="mx-auto flex w-full max-w-xs flex-col gap-2 rounded-lg border border-gray-400 bg-white p-4 text-center shadow-sm">
 
-          <span>{String(names.length).padStart(2, '0')}</span>
-          <h2>Mi panel</h2>
-          <p>Primer panel con React.</p>
-          
-          <span>Introduce una tarea</span>
-          
-          <input type="text"  placeholder="Añadir tarea" value={name} onChange={(e) => setName(e.target.value)} className="rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none" />
-          <button type="button" className="rounded-lg  bg-slate-600 px-4 py-2 text-white hover:bg-gray-700" onClick={addNames}>
-            Añadir
-          </button>
-          {names.map((name, index) => (
-            <p key={index}> {index + 1}. {name}</p>
-          ))}
-        </article>
+      <h2>Contador de tareas</h2>
+
+      <input type="text" placeholder="Añadir tarea" value={name} onChange={(e) => setName(e.target.value)} className="rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none" />
+      <button type="button" className="rounded-lg  bg-slate-600 px-4 py-2 text-white hover:bg-gray-700" onClick={addNames}>
+        Añadir a la lista
+      </button>
+
+      <h2>Lista de tareas</h2>
+    </article>
   )
 }
 

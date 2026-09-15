@@ -15,13 +15,13 @@ function Article() {
 
           <span>{String(names.length).padStart(2, '0')}</span>
           <h2>Mi panel</h2>
-          <p>Construye tu primer panel con React y JSX.</p>
-          <span>Interfaz</span>
-          <span>Pendiente</span>
+          <p>Primer panel con React.</p>
           
-          <input tipe="text" placeholder="Escribe tu nombre" value={name} onChange={(e) => setName(e.target.value)} className="rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none" />
+          <span>Introduce una tarea</span>
+          
+          <input type="text"  placeholder="Añadir tarea" value={name} onChange={(e) => setName(e.target.value)} className="rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none" />
           <button type="button" className="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700" onClick={addNames}>
-            Añadir tarea
+            Añadir
           </button>
           {names.map((name, index) => (
             <p key={index}> {index + 1}. {name}</p>

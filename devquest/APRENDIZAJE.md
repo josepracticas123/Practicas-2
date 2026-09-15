@@ -29,8 +29,8 @@ Prepara la app para publicarla en internet ( o para el servidor)
 .gitgnore
 archivos sensibles o que no queremos qu ese muestren
 
-en APP.jsx
-Elimino todo el contenido solo impoprto el css de App.
+APP.jsx
+Elimino todo el contenido solo importo el css de App.
  Genero estructura básica de html dentro:
 -Main que sera el conteendor principal donde introduciremos todo.
 -Header cabecera que tenemos titulo y texto.

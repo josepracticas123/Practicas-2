@@ -1,82 +1,100 @@
-# 02 · Un panel con dos vistas
+# 02 · Navega por tu aplicación de tareas
 
-**Tu misión:** aprovechar tu práctica del navbar para cambiar entre «Panel» y «Mi lista». La lista de nombres que ya has creado tendrá su propio espacio y conservará sus datos al navegar.
+**Tu misión:** terminar de dar sentido a las secciones «Inicio», «Pendientes» y «Finalizadas» que ya has creado. Cada opción debe mostrar un contenido claro y las tareas deben conservarse al navegar.
 
-Trabaja sobre tu proyecto actual. Si ya has empezado un navbar, adáptalo: no hace falta repetirlo. Puedes continuar con Tailwind.
+**Practicarás:** renderizado condicional, estado, props y callbacks. Trabaja sobre tu aplicación actual y conserva Tailwind y tus componentes.
 
-**Practicarás:** renderizado condicional, estado, props y callbacks.
+## Lo que ya tienes
 
-## 1. Ordena los detalles de tu lista
+Ya has construido el navbar con `map`, destacado la opción activa y utilizado `seccionActual` para mostrar contenido con `&&`. También guardas `tareas` en `App` y pasas `addTareas` a `Article`. Has empezado a explicar el código con comentarios.
 
-Antes del navbar, dedica un bloque corto a revisar `Article.jsx`:
+Reutiliza ese trabajo. Este reto consiste en corregir detalles, completar las vistas y comprobar que puedes explicar cómo se conectan las piezas.
 
-- Corrige el atributo `tipe` del input: debe ser `type`.
-- Añade una etiqueta visible «Nombre», asociada al input con `htmlFor` e `id`.
-- Cambia «Añadir tarea» por «Añadir nombre» para que los textos sean coherentes.
-- Guarda el nombre sin espacios al principio o al final. Ya compruebas `trim()`: piensa qué valor añades realmente al array.
-- Separa el número fijo de la tarjeta («01») del total de nombres. El contador de nombres pertenece a «Mi lista».
+## 1. Limpia los detalles que dificultan revisar la pantalla
 
-Comprueba que puedes añadir «Ana» y que un texto compuesto solo por espacios no se añade. Conserva el comportamiento de limpiar el input al añadir un nombre.
+Haz estos cambios pequeños y compruébalos uno a uno:
 
-## 2. Separa las dos vistas
+- En `App.jsx` hay un fragmento suelto que empieza con «para poder cambiar la sección actual…» y termina con `*/`. Ahora es texto de la pantalla. Retíralo o conviértelo en un comentario JSX completo con `{/* … */}`.
+- `secciones` no cambia durante el uso de la app. Decláralo como un array constante en lugar de usar `useState` con un `setSecciones` que no utilizas. Mantén en estado `seccionActual` y `tareas`, que sí cambian.
+- En `Article.jsx`, retira el import de `useEffect`, porque no lo estás utilizando.
+- El input ya tiene `type="text"` correcto. Añade una etiqueta visible «Nueva tarea», asociada al input mediante `htmlFor` e `id`.
+- Cambia los nombres internos `name`, `setName` y `addNames` por otros relacionados con tareas, por ejemplo `textoTarea`, `setTextoTarea` y `enviarTarea`. Actualiza todas sus referencias.
 
-Dibuja primero qué quedará en cada una:
+Ejecuta `npm run lint` desde `devquest/`. Comprueba que desaparecen los errores de variables e imports sin utilizar.
 
-| Zona | Contenido |
+## 2. Define qué muestra cada sección
+
+Mantén cabecera, navbar y pie de página visibles. Organiza el contenido así:
+
+| Sección | Contenido esperado |
 | --- | --- |
-| Siempre visible | Cabecera y navbar con «Panel» y «Mi lista». |
-| Panel | Resumen fijo y tarjeta visual del panel. |
-| Mi lista | Etiqueta, input, botón para añadir, total de nombres y lista. |
+| Inicio | Título «Añadir tarea», etiqueta, input y botón «Añadir tarea». |
+| Pendientes | Título «Tareas pendientes», total y lista; si está vacía, un mensaje explicativo. |
+| Finalizadas | Título «Tareas finalizadas» y mensaje fijo «La opción de finalizar tareas todavía no está disponible». |
 
-Extrae el contenido de la lista a un componente, por ejemplo `NameList`. `Article` puede quedarse como tarjeta visual. Decide nombres que describan lo que hace cada componente; no necesitas carpetas nuevas para cada elemento.
+En `Article`, sustituye «Contador de tareas» por «Añadir tarea» y retira el título «Lista de tareas», porque esa lista se muestra en Pendientes.
 
-El progreso puede seguir siendo un texto fijo de la maqueta. No tienes que implementar un sistema de retos ni calcular progreso en este ejercicio.
+Retira el resumen fijo «0 de 1 completados»: ya no representa lo que hace esta pantalla. En Pendientes mostrarás el número real de tareas con la longitud del array.
 
-## 3. Haz funcionar el navbar
+**Alcance de Finalizadas:** solo debes mostrar su título y mensaje cuando se seleccione. No tienes que implementar acciones para finalizar tareas ni cambiar los textos del array a objetos. Todas las tareas añadidas se consideran pendientes en este ejercicio.
 
-1. Guarda en `App` un único valor para la vista activa, inicialmente «Panel». Puedes representarlo con `panel` y `names`.
-2. Construye el navbar con un elemento `nav` y dos botones `type="button"`.
-3. Al pulsar un botón, cambia la vista activa y muestra únicamente su componente mediante una condición en JSX.
-4. Destaca la opción activa. Puedes usar `aria-pressed` en los botones, además del estilo visual, para expresar cuál está seleccionado.
-5. Si el navbar es un componente separado, pásale la vista activa y una función para solicitar el cambio. Esa función es un callback: el hijo la llama y el padre actualiza su estado.
+## 3. Completa el renderizado condicional
 
-Utiliza el estado de React para decidir qué contenido existe. No basta con esconder ambas vistas con CSS. Para este ejercicio los botones cambian contenido dentro de la página; no necesitas rutas ni cambiar la URL.
+1. Conserva `seccionActual` en `App`, inicialmente con el valor `inicio`.
+2. Revisa las condiciones que ya muestran Inicio y Pendientes. Añade la condición que falta para Finalizadas.
+3. Coloca el título y el contenido de cada sección dentro de su condición, para que solo aparezca la sección seleccionada.
+4. Conserva el estilo de opción activa del navbar. Añade `type="button"` a sus botones y `aria-pressed` según estén seleccionados para expresar también ese estado de forma accesible.
+5. Comprueba el recorrido: Inicio → Pendientes → Finalizadas → Inicio. Siempre debe haber un contenido que explique dónde estás.
 
-**Parada para comprobar:** cambia de vista varias veces. Solo debe aparecer una a la vez. Comprueba que puedes usar Tab y activar los botones con el teclado, viendo dónde está el foco.
+El navbar ya recibe datos y la función que actualiza la sección. Explica con tus palabras qué prop se utiliza al pulsar y qué estado cambia en `App`.
 
-## 4. Muestra un mensaje cuando no hay nombres
+**Pista:** utiliza condiciones en JSX para decidir qué se renderiza. No necesitas rutas ni cambiar la URL. Si una condición ya funciona, basta con revisarla y entenderla.
 
-En «Mi lista», muestra «Todavía no has añadido nombres» si el array está vacío. Si contiene datos, muestra los nombres y su total.
+## 4. Distingue una lista vacía de una lista con tareas
 
-Elige una condición que puedas explicar. Puedes usar un ternario para elegir entre dos contenidos o `&&` para mostrar un contenido cuando se cumple una condición. No hace falta utilizar todos los formatos.
+Dentro de Pendientes:
 
-**Pista:** si usas `&&`, compara explícitamente la longitud. Un cero a la izquierda de `&&` puede acabar apareciendo en pantalla.
+- Muestra el total real de tareas, también cuando sea cero.
+- Si no hay tareas, muestra «Todavía no hay tareas pendientes. Añade una desde Inicio».
+- Si hay tareas, muestra su contenido en una lista HTML con `ul` o `ol` y elementos `li`.
 
-## 5. Conserva los nombres al navegar
+Puedes usar un ternario para elegir entre el mensaje y la lista. Si eliges `&&`, compara explícitamente la longitud: un cero a la izquierda de `&&` puede acabar apareciendo en pantalla.
 
-Añade «Ana» y «Luis», vuelve al panel y abre otra vez la lista. ¿Siguen ahí?
+## 5. Revisa cómo añades y conservas las tareas
 
-Si el array vive dentro de un componente que deja de renderizarse, su estado se pierde al retirarlo. Antes de cambiar nada, explica qué observas. Después busca un padre que siga montado al navegar: en esta app puede ser `App`. Mueve allí el array de nombres y pasa a la lista los datos y una función para añadirlos.
+Ya compruebas `trim()`, pero añades el texto original. En `addTareas`, prepara el texto sin espacios al principio o al final, comprueba que no esté vacío y añade ese valor limpio al array.
 
-El texto que aún estás escribiendo puede quedarse dentro del componente de lista: se permite que se reinicie al salir. Los nombres ya añadidos deben conservarse. Recargar la página puede vaciarlos; no necesitas almacenamiento para este reto.
+Mantén la actualización mediante un array nuevo. Conserva también el comportamiento de limpiar el input cuando se añade una tarea válida.
 
-## 6. Explica lo nuevo
+**No muevas el array fuera de `App`:** ya vive en un componente que permanece montado al cambiar de sección. Comprueba ese comportamiento y explica por qué la tarea permanece aunque `Article` deje de renderizarse.
 
-Añade comentarios breves, con tus palabras, donde introduzcas el estado de la vista, una condición de renderizado y la decisión de dónde guardar los nombres. Si ya tienes comentarios que lo explican, revísalos en lugar de duplicarlos.
+El texto que aún no has enviado puede perderse al salir de Inicio, porque pertenece a `Article`. Las tareas ya añadidas deben conservarse. Recargar la página puede vaciarlas; no necesitas guardado persistente.
 
-No describas cada etiqueta. Explica la intención y las cosas que has conocido por primera vez. Completa las preguntas de [APRENDIZAJE.md](../devquest/APRENDIZAJE.md) a medida que las entiendas; puedes dejar dudas escritas.
+## 6. Explica lo que vas entendiendo
+
+Revisa los comentarios que has empezado a añadir. Usa tus palabras para explicar:
+
+- Por qué `secciones` es una constante y `seccionActual` es estado.
+- Cómo una condición decide qué sección se muestra.
+- Cómo `Article` solicita añadir una tarea a `App`.
+- Por qué las tareas permanecen al navegar.
+
+Mantén los comentarios breves y junto a la parte que explican. No hace falta comentar cada línea. Completa las preguntas de [APRENDIZAJE.md](../devquest/APRENDIZAJE.md) según avances; anota las dudas que quieras revisar con el tutor.
 
 ## Comprueba tu entrega
 
-- [ ] Al arrancar se muestra «Panel» y la opción está destacada.
-- [ ] El navbar permanece visible y permite mostrar una sola vista cada vez.
-- [ ] El input tiene etiqueta visible y el botón dice «Añadir nombre».
-- [ ] Un texto vacío o solo con espacios no añade nombres; « Ana » se guarda como «Ana».
-- [ ] La lista vacía muestra su mensaje; al añadir un nombre desaparece.
-- [ ] Añadir «Ana» y «Luis», cambiar al panel y volver conserva ambos nombres.
-- [ ] Cambiar de vista no duplica nombres y el total coincide con la lista.
-- [ ] Se puede usar el navbar con teclado y el foco es visible.
-- [ ] La pantalla sigue siendo legible en móvil y escritorio.
+- [ ] Al arrancar se muestra Inicio y su opción está destacada.
+- [ ] Las tres opciones muestran únicamente su sección, con cabecera y pie siempre visibles.
+- [ ] No aparece texto suelto de comentarios ni el progreso fijo de la antigua maqueta.
+- [ ] El input tiene una etiqueta visible y los textos hablan de tareas.
+- [ ] En Pendientes, cero tareas muestra el total y el mensaje de lista vacía.
+- [ ] Un texto vacío o solo con espacios no crea una tarea.
+- [ ] « Leer React » se guarda como «Leer React»; compruébalo inspeccionando el valor, porque HTML puede disimular espacios al mostrarlo.
+- [ ] Añadir «Leer React» y «Practicar JSX» muestra dos tareas y total 2.
+- [ ] Visitar Finalizadas y regresar a Pendientes conserva ambas tareas sin duplicarlas.
+- [ ] Finalizadas muestra su título y el mensaje provisional.
+- [ ] El navbar funciona con Tab y Enter o Espacio, y el foco es visible.
+- [ ] La pantalla se lee en móvil y escritorio sin desplazamiento horizontal.
 - [ ] Los comentarios y el cuaderno explican lo nuevo con tus palabras.
 - [ ] `npm run lint` y `npm run build` pasan desde `devquest/`.
 
@@ -87,6 +105,6 @@ No describas cada etiqueta. Explica la intención y las cosas que has conocido p
 - [Compartir estado entre componentes · React](https://es.react.dev/learn/sharing-state-between-components).
 - [Preservar y reiniciar el estado · React](https://es.react.dev/learn/preserving-and-resetting-state).
 
-**Demostración al tutor:** añade dos nombres, cambia de vista, vuelve y explica por qué se conservan. Enseña una condición y un comentario que puedas explicar.
+**Demostración al tutor:** empieza con la lista vacía, añade dos tareas desde Inicio, visita las tres secciones y vuelve a Pendientes. Explica una condición, el recorrido de `addTareas` y por qué se conservan los datos.
 
 [Volver a la guía](../README.md)

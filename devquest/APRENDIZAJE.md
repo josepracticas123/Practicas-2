@@ -10,9 +10,10 @@ Esta revisión ordena las notas iniciales y las ajusta al código actual. Que un
 | `package-lock.json` | Registra las versiones concretas del árbol de dependencias que instala npm. Se guarda en Git. |
 | `index.html` | Contiene el elemento `root` y carga el punto de entrada `src/main.jsx`. |
 | `src/main.jsx` | Importa estilos y React, crea la raíz con `createRoot` y renderiza `App` dentro de `StrictMode`. |
-| `src/App.jsx` | Organiza la pantalla: utiliza `Header`, muestra el progreso fijo y utiliza `Article`. |
-| `src/components/Header.jsx` | Muestra el título de la aplicación. |
-| `src/components/Article.jsx` | Muestra la tarjeta y contiene el input y la lista de nombres. |
+| `src/App.jsx` | Guarda la sección actual y las tareas; pasa props a `Header` y `Article`, y decide qué contenido mostrar. |
+| `src/components/Header.jsx` | Muestra el título y los botones del navbar; recibe la sección activa y la función para cambiarla. |
+| `src/components/Article.jsx` | Contiene el input para añadir tareas y llama a `addTareas`, recibida por props. La lista se renderiza desde `App`. |
+| `src/components/Footer.jsx` | Muestra el pie de página. |
 | `src/index.css` | Importa Tailwind; las clases de los componentes dan estilo a la pantalla. |
 | `vite.config.js` | Configura los plugins de React y Tailwind para Vite. |
 | `node_modules/` | Contiene las dependencias instaladas. No se guarda en Git. |
@@ -28,24 +29,29 @@ Completa la última columna con un ejemplo de tu aplicación y marca cada casill
 | Componente: `Header` o `Article` | [ ] | Pendiente de completar |
 | `import` y `export` | [ ] | Pendiente de completar |
 | JSX y `className` | [ ] | Pendiente de completar |
-| `useState`: texto del input y array de nombres | [ ] | Pendiente de completar |
+| `useState`: texto del input, sección actual y array de tareas | [ ] | Pendiente de completar |
 | Input controlado: `value` y `onChange` | [ ] | Pendiente de completar |
 | Evento `onClick` | [ ] | Pendiente de completar |
 | Comprobación con `trim()` | [ ] | Pendiente de completar |
-| Nuevo array con `[...names, name]` | [ ] | Pendiente de completar |
+| Nuevo array con `[...tareas, tarea]` | [ ] | Pendiente de completar |
 | Renderizar una lista con `map` y `key` | [ ] | Pendiente de completar |
+| Renderizado condicional con `seccionActual` y `&&` | [ ] | Pendiente de completar |
+| Props y callback `addTareas` | [ ] | Pendiente de completar |
 | Clases de Tailwind | [ ] | Pendiente de completar |
 
 ## Reto 02 · Preguntas para investigar
 
 No hace falta responderlas antes de empezar. Complétalas según avances:
 
-- ¿Qué estado decide si se muestra «Panel» o «Mi lista»?
-- ¿Cómo se entera el componente padre de que he pulsado una opción del navbar?
-- ¿Qué diferencia hay entre una condición dentro de una función y mostrar JSX según una condición?
-- ¿Cuándo me resulta más claro usar un ternario y cuándo `&&`?
-- ¿Qué ocurrió con los nombres cuando dejé de mostrar el componente de la lista?
-- ¿Dónde puse finalmente el array y por qué se conserva al cambiar de vista?
+- ¿Qué estado decide si se muestra Inicio, Pendientes o Finalizadas?
+- ¿Por qué el array de secciones puede ser una constante?
+- ¿Cómo se entera `App` de que he pulsado una opción del navbar?
+- ¿Qué diferencia hay entre comprobar un texto dentro de una función y mostrar JSX según una condición?
+- ¿Cómo decido entre mostrar la lista de pendientes y el mensaje de lista vacía?
+- ¿Qué recorrido hace el texto desde el input de `Article` hasta el array de `App`?
+- ¿Por qué las tareas siguen ahí cuando `Article` deja de mostrarse?
+- ¿Qué diferencia hay entre comprobar `trim()` y guardar su resultado?
+- ¿Cómo se escribe un comentario dentro de JSX para que no aparezca como texto en la página?
 
 ## Comentarios explicativos en el código
 

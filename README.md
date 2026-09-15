@@ -1,12 +1,12 @@
 # DevQuest · Tu panel de retos
 
-Estás construyendo tu propia aplicación de prácticas con React. Partiste de un panel visual y ya has añadido una lista de nombres. Ahora trabajarás la navegación entre esas dos vistas. Tú eliges su nombre, colores y estilo.
+Estás construyendo tu propia aplicación de prácticas con React. Partiste de un panel visual y ya has añadido tareas y un navbar. Ahora completarás la navegación entre Inicio, Pendientes y Finalizadas. Tú eliges su nombre, colores y estilo.
 
 El proyecto lo creas tú desde cero con **React + Vite + JavaScript y CSS**. Aquí tienes las instrucciones, no la aplicación resuelta. Usaremos JavaScript para practicar sus bases junto a React.
 
 ## Qué vas a construir
 
-El panel visual es la base del proyecto. El reto actual consiste en mostrar «Panel» o «Mi lista» según la opción del navbar, conservando los nombres al cambiar de vista. Puedes continuar con el Tailwind que has incorporado.
+El panel visual es la base del proyecto. El reto actual consiste en completar «Inicio», «Pendientes» y «Finalizadas» según la opción del navbar, conservando las tareas al cambiar de sección. Finalizadas mostrará un mensaje provisional. Puedes continuar con el Tailwind que has incorporado.
 
 No necesitas conocer todo para empezar. Trabaja en un paso, compruébalo en el navegador y continúa. Las ampliaciones son opcionales.
 
@@ -14,7 +14,7 @@ No necesitas conocer todo para empezar. Trabaja en un paso, compruébalo en el n
 
 **El proyecto ya está creado. No repitas la instalación inicial ni generes otro Vite.** Para continuar, abre una terminal en `Practicas-2/devquest`, instala las dependencias con `npm install` si faltan y ejecuta `npm run dev`.
 
-Empieza por [02 · Un panel con dos vistas](retos/02-renderizado-condicional.md). La sección de creación que sigue queda como referencia de los primeros pasos.
+Empieza por [02 · Navega por tu aplicación de tareas](retos/02-renderizado-condicional.md). La sección de creación que sigue queda como referencia de los primeros pasos.
 
 ## 0. Crea y entiende tu proyecto (referencia inicial)
 
@@ -74,7 +74,7 @@ Lee [Tu primer componente](https://es.react.dev/learn/your-first-component) y [E
 ## Retos definidos
 
 - [01 · Mi panel](retos/01-panel-visual.md): enunciado inicial de la estructura visual.
-- [02 · Un panel con dos vistas](retos/02-renderizado-condicional.md): reto actual, adaptado a tu lista de nombres y a la práctica del navbar.
+- [02 · Navega por tu aplicación de tareas](retos/02-renderizado-condicional.md): reto actual, adaptado a tus tareas y al navbar que ya has creado.
 
 Trabaja por bloques y comprueba cada uno antes de continuar.
 
@@ -98,7 +98,7 @@ npm run build
 
 Comprueba `scripts` en `package.json` si algún comando no existe. No quites reglas para esconder errores: léelos y pide ayuda si lo necesitas. Estas comprobaciones no sustituyen revisar la pantalla en el navegador.
 
-Para entregar el trabajo actual, revisa la checklist del [reto 02](retos/02-renderizado-condicional.md) y enseña al tutor cómo funciona la navegación y por qué se conservan los nombres.
+Para entregar el trabajo actual, revisa la checklist del [reto 02](retos/02-renderizado-condicional.md) y enseña al tutor cómo funciona la navegación y por qué se conservan las tareas.
 
 ## Organización del proyecto
 

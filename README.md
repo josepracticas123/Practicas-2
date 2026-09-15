@@ -1,16 +1,22 @@
 # DevQuest · Tu panel de retos
 
-Vas a diseñar el panel visual de una aplicación de retos de programación. Tú eliges su nombre, colores y estilo. El objetivo es crear una pantalla propia que puedas enseñar y explicar.
+Estás construyendo tu propia aplicación de prácticas con React. Partiste de un panel visual y ya has añadido una lista de nombres. Ahora trabajarás la navegación entre esas dos vistas. Tú eliges su nombre, colores y estilo.
 
 El proyecto lo creas tú desde cero con **React + Vite + JavaScript y CSS**. Aquí tienes las instrucciones, no la aplicación resuelta. Usaremos JavaScript para practicar sus bases junto a React.
 
 ## Qué vas a construir
 
-Harás una pantalla con cabecera, un resumen de progreso estático y una tarjeta para el reto «Mi panel». Practicarás la estructura de la página y su diseño en móvil y escritorio. Todo el contenido será visual, sin interactividad.
+El panel visual es la base del proyecto. El reto actual consiste en mostrar «Panel» o «Mi lista» según la opción del navbar, conservando los nombres al cambiar de vista. Puedes continuar con el Tailwind que has incorporado.
 
 No necesitas conocer todo para empezar. Trabaja en un paso, compruébalo en el navegador y continúa. Las ampliaciones son opcionales.
 
-## 0. Crea y entiende tu proyecto
+## Punto de partida
+
+**El proyecto ya está creado. No repitas la instalación inicial ni generes otro Vite.** Para continuar, abre una terminal en `Practicas-2/devquest`, instala las dependencias con `npm install` si faltan y ejecuta `npm run dev`.
+
+Empieza por [02 · Un panel con dos vistas](retos/02-renderizado-condicional.md). La sección de creación que sigue queda como referencia de los primeros pasos.
+
+## 0. Crea y entiende tu proyecto (referencia inicial)
 
 ### Comprueba las herramientas
 
@@ -65,9 +71,12 @@ Lee [Tu primer componente](https://es.react.dev/learn/your-first-component) y [E
 
 **Listo para empezar:** puedes arrancar la app, cambiar un texto y explicar dónde lo has cambiado.
 
-## Tu reto: el panel visual
+## Retos definidos
 
-Abre [01 · Mi panel](retos/01-panel-visual.md) y sigue sus pasos. Encontrarás los elementos que debe mostrar la pantalla, un esquema orientativo y una lista para comprobar tu entrega.
+- [01 · Mi panel](retos/01-panel-visual.md): enunciado inicial de la estructura visual.
+- [02 · Un panel con dos vistas](retos/02-renderizado-condicional.md): reto actual, adaptado a tu lista de nombres y a la práctica del navbar.
+
+Trabaja por bloques y comprueba cada uno antes de continuar.
 
 ## Cómo trabajar el reto
 
@@ -75,7 +84,7 @@ Abre [01 · Mi panel](retos/01-panel-visual.md) y sigue sus pasos. Encontrarás 
 2. Dibuja la pantalla o escribe tres pasos pequeños en tu cuaderno.
 3. Construye primero la versión mínima y compruébala.
 4. Usa las pistas solo cuando las necesites. Lee el apartado enlazado de documentación, no la documentación entera.
-5. Anota en `APRENDIZAJE.md` qué hiciste, qué no entendías y cómo lo resolviste.
+5. Añade comentarios breves sobre los conceptos que uses por primera vez. En `APRENDIZAJE.md`, explica con tus palabras lo aprendido y anota tus dudas; no marques como comprendido algo solo por haberlo utilizado.
 6. Enseña el resultado y explica una parte del código al tutor.
 
 Si llevas 20–30 minutos sin avanzar, pide ayuda con: qué esperabas, qué ocurre, el error exacto y lo que has probado. Puedes pedir explicaciones o pistas a una IA; cualquier código que incorpores debes poder explicarlo y modificarlo tú.
@@ -89,38 +98,30 @@ npm run build
 
 Comprueba `scripts` en `package.json` si algún comando no existe. No quites reglas para esconder errores: léelos y pide ayuda si lo necesitas. Estas comprobaciones no sustituyen revisar la pantalla en el navegador.
 
-Desde la raíz `Practicas-2`, revisa y guarda tu trabajo:
-
-```bash
-git status
-git diff
-git add devquest
-git diff --cached
-git commit -m "Completa reto 01: panel visual"
-```
-
-Comprueba que no has añadido `node_modules`, `dist` ni archivos personales. Este repositorio ya existe: no necesitas `git init` ni crear otro repositorio dentro. Coordina con tu tutor la rama y cuándo hacer `push`.
+Para entregar el trabajo actual, revisa la checklist del [reto 02](retos/02-renderizado-condicional.md) y enseña al tutor cómo funciona la navegación y por qué se conservan los nombres.
 
 ## Organización del proyecto
 
-La aplicación se creará dentro de `devquest/`. Trabaja con los archivos que genera Vite; no necesitas preparar carpetas adicionales para este ejercicio.
+La aplicación está dentro de `devquest/`. Reutiliza sus componentes y crea los que necesites para separar las vistas.
 
 ```text
 Practicas-2/
 ├── README.md
 ├── retos/
-│   └── 01-panel-visual.md
-└── devquest/              # Tú lo crearás con Vite
+│   ├── 01-panel-visual.md
+│   └── 02-renderizado-condicional.md
+└── devquest/
     ├── APRENDIZAJE.md
     ├── package.json
     ├── index.html
     └── src/
         ├── App.jsx
+        ├── components/
         ├── main.jsx
         └── …              # Estilos y archivos generados por Vite
 ```
 
-Utiliza CSS propio, etiquetas HTML y React para construir la pantalla.
+Utiliza etiquetas HTML y React para construir la pantalla. Puedes mantener Tailwind para los estilos.
 
 ## Si algo falla al arrancar
 

@@ -1,6 +1,5 @@
 import {useState} from "react";
 
-
 function Article() {
   const [name, setName] = useState("");
   const [names, setNames] = useState([]);

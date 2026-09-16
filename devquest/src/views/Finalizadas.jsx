@@ -15,7 +15,7 @@ function Finalizadas({
                     htmlFor="buscar-finalizadas"
                     className="font-semibold text-white"
                 >
-                    Buscar tareas finalizadas
+                    Buscar tareas
                 </label>
 
                 <input
@@ -45,7 +45,7 @@ function Finalizadas({
                 <>
                     {tareasFinalizadasFiltradas.length === 0 ? (
                         <p>
-                            No se encontraron tareas finalizadas que coincidan con la búsqueda.
+                            «No hay resultados para esta búsqueda»
                         </p>
                     ) : (
                         <>

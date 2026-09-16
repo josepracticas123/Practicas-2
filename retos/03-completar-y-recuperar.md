@@ -62,19 +62,31 @@ Añade comentarios breves sobre la identidad de la tarea y la actualización sin
 
 ## Comprueba tu entrega
 
-- [ ] Cada tarea nueva tiene `id`, `texto` limpio y `completada: false`.
-- [ ] La lista usa identificadores estables como `key`, sin avisos en consola.
-- [ ] Pendientes y Finalizadas muestran únicamente las tareas de su estado y el total correcto.
-- [ ] Ambas secciones muestran un mensaje cuando están vacías.
-- [ ] Completar una tarea la mueve a Finalizadas sin duplicarla ni cambiar su identificador.
-- [ ] Recuperarla la devuelve a Pendientes con el mismo texto e identificador.
-- [ ] Con dos tareas llamadas «Leer React», completar una deja exactamente una pendiente y una finalizada.
-- [ ] Recuperar esa tarea devuelve los totales a 2 pendientes y 0 finalizadas.
-- [ ] La suma de los contadores no cambia al completar o recuperar.
-- [ ] Navegar conserva los datos; siguen rechazándose entradas vacías o con solo espacios.
+- [x] Cada tarea nueva tiene `id`, `texto` limpio y `completada: false`.
+- [x] La lista usa identificadores estables como `key`, sin avisos en consola.
+- [x] Pendientes y Finalizadas muestran únicamente las tareas de su estado y el total correcto.
+- [x] Ambas secciones muestran un mensaje cuando están vacías.
+- [x] Completar una tarea la mueve a Finalizadas sin duplicarla ni cambiar su identificador.
+- [x] Recuperarla la devuelve a Pendientes con el mismo texto e identificador.
+- [x] Con dos tareas llamadas «Leer React», completar una deja exactamente una pendiente y una finalizada.
+- [x] Recuperar esa tarea devuelve los totales a 2 pendientes y 0 finalizadas.
+- [x] La suma de los contadores no cambia al completar o recuperar.
+- [x] Navegar conserva los datos; siguen rechazándose entradas vacías o con solo espacios.
 - [ ] Los botones se pueden usar con teclado y el diseño sigue siendo legible en móvil.
 - [ ] Puedes explicar los identificadores, las listas calculadas y cómo actualizas un objeto del array; has completado el cuaderno.
 - [ ] `npm run lint` y `npm run build` pasan desde `devquest/`.
+
+
+### Revisión del 16/09/2026 · `58b0bea`
+
+Verificados en código y navegador: objetos con identificadores estables, dos tareas iguales, completar solo una, recuperar, contadores, conservación al navegar y rechazo de entradas vacías. No se observaron avisos de claves en consola.
+
+Pendientes para cerrar:
+
+- Recuperar el foco visible del navbar: `focus:outline-none` se mantiene, pero se ha retirado el anillo de foco. La opción activa y el foco de teclado son estados diferentes.
+- Volver a comprobar móvil con las nuevas filas y buscadores; esta revisión funcional se hizo en escritorio.
+- Las respuestas del reto 03 ya están escritas y explican correctamente el enfoque. Falta confirmar con el tutor la explicación en directo antes de marcar ese punto.
+- Build pasa. Lint falla porque se importa `Inicio` en `App.jsx` sin utilizarlo. Puedes renderizar esa vista en la condición de Inicio en lugar de duplicar su contenido, o retirar el import si decides no usarla.
 
 ## Documentación
 

@@ -77,6 +77,7 @@ Lee [Tu primer componente](https://es.react.dev/learn/your-first-component) y [E
 - [02 · Navega por tu aplicación de tareas](retos/02-renderizado-condicional.md): navegación y conservación de tareas; consulta sus checks de revisión.
 - [03 · Completa y recupera tus tareas](retos/03-completar-y-recuperar.md): objetos, identificadores y cambio de estado.
 - [04 · Busca y elimina tareas](retos/04-buscar-y-eliminar.md): búsqueda por sección y eliminación de una tarea concreta.
+- [05 · Tus tareas sobreviven a una recarga](retos/05-persistencia-local.md): `localStorage` y `useEffect`. **Disponible para leer; no empezar hasta revisar los retos anteriores con el tutor.**
 
 Trabaja por bloques y comprueba cada uno antes de continuar.
 
@@ -113,7 +114,8 @@ Practicas-2/
 │   ├── 01-panel-visual.md
 │   ├── 02-renderizado-condicional.md
 │   ├── 03-completar-y-recuperar.md
-│   └── 04-buscar-y-eliminar.md
+│   ├── 04-buscar-y-eliminar.md
+│   └── 05-persistencia-local.md
 └── devquest/
     ├── APRENDIZAJE.md
     ├── package.json

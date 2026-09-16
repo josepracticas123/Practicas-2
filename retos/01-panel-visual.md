@@ -16,15 +16,15 @@ Esquema orientativo; puedes darle tu propio estilo:
 
 ```text
 ┌────────────────────────────────────────────────────┐
-│ DevQuest                     Mi ruta de aprendizaje │
-│ Pequeños pasos, proyectos reales                     │
+│ DevQuest                    Mi ruta de aprendizaje │
+│ Pequeños pasos, proyectos reales                   │
 ├────────────────────────────────────────────────────┤
-│ Mi progreso: 0 de 1 completados                │
+│ Mi progreso: 0 de 1 completados                    │
 │                                                    │
-│ [01 · Mi panel]                                     │
+│ [01 · Mi panel]                                    │
 │ Interfaz · Pendiente                               │
-│ Diseña la pantalla de tu plataforma de retos.        │
-│ [Abrir reto · deshabilitado]                        │
+│ Diseña la pantalla de tu plataforma de retos.      │
+│ [Abrir reto · deshabilitado]                       │
 │                                                    │
 └────────────────────────────────────────────────────┘
 ```

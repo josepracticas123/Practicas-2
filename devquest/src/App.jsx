@@ -3,7 +3,6 @@ import Article from './components/Article'
 import Footer from './components/Footer'
 import Pendientes from './views/Pendientes'
 import Finalizadas from './views/Finalizadas'
-import Inicio from './views/Inicio'
 import { useState } from "react";
 
 function App() {
@@ -59,6 +58,11 @@ function App() {
     setTareas(nuevasTareas);
   };
 
+  const eliminarTarea = (id) => {
+    const nuevasTareas = tareas.filter((tarea) => tarea.id !== id);
+    setTareas(nuevasTareas);
+  };
+
   // Calculamos las tareas de cada grupo
   const tareasPendientes = tareas.filter((tarea) => !tarea.completada);
   const tareasFinalizadas = tareas.filter((tarea) => tarea.completada);
@@ -70,7 +74,7 @@ function App() {
   const tareasFinalizadasFiltradas = tareasFinalizadas.filter((tarea) =>
     tarea.texto.toLowerCase().includes(textoBusqueda)
   );
-  
+
 
   return (
     <div className="flex flex-col min-h-screen bg-black-100">
@@ -98,6 +102,7 @@ function App() {
             busqueda={busqueda}
             setBusqueda={setBusqueda}
             completarTarea={completarTarea}
+            eliminarTarea={eliminarTarea}
           />
         )}
 
@@ -109,6 +114,7 @@ function App() {
             busqueda={busqueda}
             setBusqueda={setBusqueda}
             recuperarTarea={recuperarTarea}
+            eliminarTarea={eliminarTarea}
           />
         )}
 

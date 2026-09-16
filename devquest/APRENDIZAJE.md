@@ -67,11 +67,17 @@ Dentro de JSX tengo que escribirlo entre {/* y */}. De esta forma React lo entie
 Completa estas respuestas cuando lo implementes; no implican que ya esté hecho:
 
 - ¿Qué información aporta un objeto de tarea frente a un texto?
+Permite guardar mas información que un simple texto. En la app guardo el texto de tarea, un  id para identificarla y completada pra saber si esta pendiente o finalizada.
 - ¿Cuándo genero su `id` y por qué no lo cambio al completarla?
+El id se genera cuando creo una tarea nueva. No lo cambio al completarla porque el id sirve para identificar siempre a esa misma tarea. Al completar solo cambio el valor de completada.
 - ¿Por qué dos tareas con el mismo texto necesitan identificadores diferentes?
+Porque dos tareas pueden tenr el mismo texto pero, siguen siendo tareas dieferentes. Por eso cada una necesita un id distinto, para que se reconozca o se pueda saber exactamente cual estoy modificando o completando.
 - ¿Qué hace `map` al completar una tarea y qué hace `filter` al mostrar Pendientes?
+map recorre todas las tareas y crea un nuevo array. Cuando encuentra la tarea que he seleccioando, crea una copia cambiando de completada a true. filter crea otro array seleccionando solo las tareas que cumplen esa condición, y en pendienets selecciona las qu etienen completada en false.
 - ¿Por qué copio también el objeto que cambia y no solo el array?
+Copio el objeto con ...tarea para no modificar directamente la tarea original. Así creo un nuevo objeto con la misma información y solo cambio el valor de completada. De esta forma actualizo el estado creando los datos nuevos en lugar de cambiar directamente los anteriores.
 - ¿Por qué no guardo pendientes y finalizadas en dos estados independientes?
+No necesito guardar las tareas pendientes y finalizadas por separado porque todas las tareas ya están en tareas. Uso filter para obtener las pendientes o las finalizadas según el valor de completada. Así tengo un único estado con todas las tareas y evito tener que mantener dos listas actualizadas.
 
 ## Reto 04 · Preguntas para investigar
 

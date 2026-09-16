@@ -5,51 +5,71 @@ import Footer from './components/Footer'
 import { useState } from "react";
 
 function App() {
-  //Array de secciones con id y nombre para poder renderizar los botones del header y cambiar la sección actual al hacer click en ellos
-  const [secciones, setSecciones] = useState([{ id: "inicio", nombre: "Inicio" }, { id: "pendientes", nombre: "Pendientes" }, { id: "finalizadas", nombre: "Finalizadas" }]);
+  const secciones = [
+    { id: "inicio", nombre: "Inicio" },
+    { id: "pendientes", nombre: "Pendientes" },
+    { id: "finalizadas", nombre: "Finalizadas" }];
   //Variable de estado para almacenar la sección actual y poder renderizar la sección correspondiente al hacer click en los botones del header
   const [seccionActual, setSeccionActual] = useState("inicio");
   //Array para para el esatdo de tareas
-  const[tareas, setTareas] = useState([]);
-  //Función para añadir tareas al array de tareas
+  const [tareas, setTareas] = useState([]);
+  //limpia el texto antes de enviarlo a la lista de tareas y evita que se agreguen tareas vacías
   const addTareas = (tarea) => {
-    if (tarea.trim() !== "") {
-      setTareas([...tareas, tarea]);
+    const tareaLimpia = tarea.trim();
+    
+    if (tareaLimpia !== "") {
+      setTareas([...tareas, tareaLimpia]);
     }
   };
 
 
   return (
 
-
     <div className="flex flex-col min-h-screen bg-black-100">
-      <main className="flex-1"> 
-         para poder cambiar la sección actual al hacer click en los botones del header*/
-        <Header secciones={secciones} seccionActual={seccionActual} setSeccionActual={setSeccionActual}  />
-        <section>
-          <p className="text-center my-5 bg-white text-black p-4 rounded-lg shadow-md">
-            0 de 1 completados
-          </p>
+      <main className="flex-1">
+         {/*para poder cambiar la sección actual al hacer click en los botones del header*/}
+        <Header secciones={secciones} seccionActual={seccionActual} setSeccionActual={setSeccionActual} />
+
+        {/*Renderizado condicional para mostrar la sección correspondiente al hacer click en los botones del header*/}
+        <section className ="mt-5">
+          {seccionActual === "inicio" && (<Article addTareas={addTareas} />)}
         </section>
 
-        <section > 
-          {seccionActual === "inicio" && (<Article  addTareas={addTareas}/>)}
-        </section>
-
-        <section>
+        {/*Renderizado condicional para mostrar la sección correspondiente al hacer click en los botones del header*/}
+        <section className="text-white text-center">
           {seccionActual === "pendientes" && (
-            tareas.map((tarea, index) => (
-              <p key={index}  className="text-center bg-white text-black p-4 rounded-lg shadow-md">
-                {index + 1}. {tarea}
-              </p>
-            ))
+            <>
+            <h2 >Tareas pendientes</h2>
+            <p >Total: {tareas.length}</p>
+            {tareas.length === 0 ? (
+              <p>Todavía no hay tareas pendientes. Añade una desde Inicio</p>
+            ) : (
+              <ul>
+                {tareas.map((tarea, index) => (
+                  <li key={index}>
+                    {index + 1}. {tarea}
+                  </li>
+                ))}
+              </ul>
+              
+            )}
+          </>
           )}
+        </section>
+        <section className="text-white text-center">
+          {seccionActual === "finalizadas" && (
+            <>
+              <h2>Tareas finalizadas</h2>
+              <p>La opción de tareas finalizadas aún no está implementada.</p>
+            </>
+          )}
+        
         </section>
 
       </main>
       <Footer />
     </div>
-  
+
 
   )
 }

@@ -6,18 +6,22 @@ function Header({ secciones, seccionActual, setSeccionActual }) {
         Aplicación de Tareas
       </h1>
       <nav className="mt-4 flex justify-center space-x-4">
-           {/*
+        {/*
            Función map para recorrer el array de secciones y renderizar un botón por cada sección.
            Al hacer click en el botón se llama a la función setSeccionActual con
            el id de la sección correspondiente para cambiar la sección actual.
            */}
         {secciones.map((seccion) => (
           <button
+            type="button"
+            aria-pressed={seccion.id === seccionActual}
             key={seccion.id}
             onClick={() => setSeccionActual(seccion.id)}
-            className={seccion.id === seccionActual ? "border-b-2 border-white" : ""}
+            className={seccion.id === seccionActual ? "border-b-2 border-white focus:outline-none focus:ring-2 focus:ring-white" 
+              : "focus:outline-none focus:ring-2 focus:ring-white" }
+            
           >
-            {seccion.nombre} 
+            {seccion.nombre}
           </button>
         ))}
       </nav>

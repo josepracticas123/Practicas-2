@@ -17,9 +17,12 @@ function Header({ secciones, seccionActual, setSeccionActual }) {
             aria-pressed={seccion.id === seccionActual}
             key={seccion.id}
             onClick={() => setSeccionActual(seccion.id)}
-            className={seccion.id === seccionActual ? "border-b-2 border-white focus:outline-none focus:ring-2 focus:ring-white" 
-              : "focus:outline-none focus:ring-2 focus:ring-white" }
-            
+            className={
+              seccion.id === seccionActual
+                ? "border-b-2 border-white pb-1 focus:outline-none"
+                : "border-b-2 border-transparent pb-1 hover:border-gray-400 focus:outline-none"
+            }
+
           >
             {seccion.nombre}
           </button>

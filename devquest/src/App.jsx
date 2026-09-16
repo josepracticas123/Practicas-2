@@ -1,129 +1,122 @@
-
 import Header from './components/Header'
 import Article from './components/Article'
 import Footer from './components/Footer'
+import Pendientes from './views/Pendientes'
+import Finalizadas from './views/Finalizadas'
+import Inicio from './views/Inicio'
 import { useState } from "react";
 
 function App() {
   const secciones = [
     { id: "inicio", nombre: "Inicio" },
     { id: "pendientes", nombre: "Pendientes" },
-    { id: "finalizadas", nombre: "Finalizadas" }];
-  //Variable de estado para almacenar la sección actual y poder renderizar la sección correspondiente al hacer click en los botones del header
-  const [seccionActual, setSeccionActual] = useState("inicio");
-  //Array para para el esatdo de tareas
-  const [tareas, setTareas] = useState([]);
+    { id: "finalizadas", nombre: "Finalizadas" }
+  ];
 
-  //limpia el texto antes de enviarlo a la lista de tareas y evita que se agreguen tareas vacías
+  const [seccionActual, setSeccionActual] = useState("inicio");
+  const [tareas, setTareas] = useState([]);
+  const [busqueda, setBusqueda] = useState("");
+
+  // Limpia el texto antes de enviarlo a la lista de tareas y evita tareas vacías
   const addTareas = (tarea) => {
     const tareaLimpia = tarea.trim();
 
     if (tareaLimpia !== "") {
-      //Creamos un objeto para que cada tarea tenga un id único y podamos distinguirlo.
+      // Creamos un objeto para que cada tarea tenga un id único
       const nuevaTarea = {
-        id: crypto.randomUUID(), // Método de identificador único para cada tarea
+        id: crypto.randomUUID(),
         texto: tareaLimpia,
         completada: false
       };
+
       setTareas([...tareas, nuevaTarea]);
     }
-
   };
-  //Función para  tareas completadas y actualizar el estado de tareas.
+
+  // Función para completar tareas
   const completarTarea = (id) => {
     const nuevasTareas = tareas.map((tarea) => {
       if (tarea.id === id) {
         return { ...tarea, completada: true };
       }
+
       return tarea;
     });
+
     setTareas(nuevasTareas);
   };
+
+  // Función para recuperar tareas
   const recuperarTarea = (id) => {
     const nuevasTareas = tareas.map((tarea) => {
       if (tarea.id === id) {
         return { ...tarea, completada: false };
       }
+
       return tarea;
     });
+
     setTareas(nuevasTareas);
   };
 
-  //Constantes para calcular que tareas pertenece a cada grupo.
+  // Calculamos las tareas de cada grupo
   const tareasPendientes = tareas.filter((tarea) => !tarea.completada);
   const tareasFinalizadas = tareas.filter((tarea) => tarea.completada);
 
+  const textoBusqueda = busqueda.trim().toLowerCase();
+  const tareasPendientesFiltradas = tareasPendientes.filter((tarea) =>
+    tarea.texto.toLowerCase().includes(textoBusqueda)
+  );
+  const tareasFinalizadasFiltradas = tareasFinalizadas.filter((tarea) =>
+    tarea.texto.toLowerCase().includes(textoBusqueda)
+  );
+  
 
   return (
-
     <div className="flex flex-col min-h-screen bg-black-100">
-      {/*para poder cambiar la sección actual al hacer click en los botones del header*/}
-      <Header secciones={secciones} seccionActual={seccionActual} setSeccionActual={setSeccionActual} />
+
+      <Header
+        secciones={secciones}
+        seccionActual={seccionActual}
+        setSeccionActual={setSeccionActual}
+      />
+
       <main className="flex-1">
-        {/*Renderizado condicional para mostrar la sección correspondiente al hacer click en los botones del header*/}
-        <section className="mt-5">
-          {seccionActual === "inicio" && (<Article addTareas={addTareas} />)}
-        </section>
 
-        {/*Renderizado condicional para mostrar la sección correspondiente al hacer click en los botones del header*/}
-        <section className="text-white text-center">
-          {seccionActual === "pendientes" && (
-            <>
-              <h2 >Tareas pendientes</h2>
-              <p >Total: {tareasPendientes.length}</p>
-              {tareasPendientes.length === 0 ? (
-                <p>Todavía no hay tareas pendientes. Añade una desde Inicio</p>
-              ) : (
-                <ul>
-                  {tareasPendientes.map((tarea, index) => (
-                    <li key={tarea.id}>
-                      {index + 1}. {tarea.texto}
-                      <button type="button"
-                        className="ml-4 bg-red-500 px-4 py-2 text-white"
-                        onClick={() => completarTarea(tarea.id)}>
-                        Completar
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+        {/* Vista Inicio */}
+        {seccionActual === "inicio" && (
+          <section className="mt-5">
+            <Article addTareas={addTareas} />
+          </section>
+        )}
 
-              )}
-            </>
-          )}
-        </section>
-        <section className="text-white text-center">
-          {seccionActual === "finalizadas" && (
-            <>
-              <h2>Tareas finalizadas</h2>
-              <p>Total: {tareasFinalizadas.length}</p>
-              {tareasFinalizadas.length === 0 ? (
-                <p>Aún no hay tareas finalizadas.</p>
-              ) : (
-                <ul>
-                  {tareasFinalizadas.map((tarea, index) => (
-                    <li key={tarea.id}>
-                      {index + 1}. {tarea.texto}
-                      <button type="button"
-                        className="ml-4 bg-green-500 px-4 py-2 text-white"
-                        onClick={() => recuperarTarea(tarea.id)}>
-                        Recuperar
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </>
-          )}
+        {/* Vista Pendientes */}
+        {seccionActual === "pendientes" && (
+          <Pendientes
+           tareasPendientes={tareasPendientes}
+            tareasPendientesFiltradas={tareasPendientesFiltradas}
+            busqueda={busqueda}
+            setBusqueda={setBusqueda}
+            completarTarea={completarTarea}
+          />
+        )}
 
-        </section>
+        {/* Vista Finalizadas */}
+        {seccionActual === "finalizadas" && (
+          <Finalizadas
+            tareasFinalizadas={tareasFinalizadas}
+            tareasFinalizadasFiltradas={tareasFinalizadasFiltradas}
+            busqueda={busqueda}
+            setBusqueda={setBusqueda}
+            recuperarTarea={recuperarTarea}
+          />
+        )}
 
       </main>
+
       <Footer />
     </div>
-
-
-  )
+  );
 }
-
 
 export default App;

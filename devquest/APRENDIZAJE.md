@@ -61,7 +61,27 @@ Al hacer trim() puedo comprobar si el texto tiene algo más que espacios. Si gua
 en la página?
 Dentro de JSX tengo que escribirlo entre {/* y */}. De esta forma React lo entiende como un comentario y no lo muestra en la página.
 - ¿Cómo se escribe un comentario dentro de JSX para que no aparezca como texto en la página?
-{/* see scribe dentro de los corchetes y la barra y asterisco*/}
+
+## Reto 03 · Preguntas para investigar
+
+Completa estas respuestas cuando lo implementes; no implican que ya esté hecho:
+
+- ¿Qué información aporta un objeto de tarea frente a un texto?
+- ¿Cuándo genero su `id` y por qué no lo cambio al completarla?
+- ¿Por qué dos tareas con el mismo texto necesitan identificadores diferentes?
+- ¿Qué hace `map` al completar una tarea y qué hace `filter` al mostrar Pendientes?
+- ¿Por qué copio también el objeto que cambia y no solo el array?
+- ¿Por qué no guardo pendientes y finalizadas en dos estados independientes?
+
+## Reto 04 · Preguntas para investigar
+
+- ¿Qué diferencia hay entre las tareas de la sección y los resultados visibles?
+- ¿Por qué buscar no debe llamar a `setTareas` para sustituir los datos?
+- ¿Cómo distingo una sección vacía de una búsqueda sin resultados?
+- ¿Por qué eliminar por el índice de la lista filtrada podría borrar otra tarea?
+- ¿Cómo utilizo `filter` para mostrar coincidencias y cómo lo utilizo para eliminar?
+- ¿Qué comprobé con dos tareas iguales y con tareas ocultas por la búsqueda?
+
 ## Comentarios explicativos en el código
 
 Cuando utilices algo por primera vez, escribe un comentario breve con tus palabras junto a esa parte: qué guarda un estado, por qué haces una comprobación o por qué un dato vive en el padre. No comentes cada línea. Usa este archivo para explicaciones largas y actualiza los comentarios si cambia el código.

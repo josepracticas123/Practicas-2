@@ -58,13 +58,13 @@ No necesitas persistencia, backend, nuevas rutas ni librerías. Recargar la pág
 
 ## Comprueba tu entrega
 
-- [ ] El buscador tiene etiqueta visible y su valor se conserva al navegar.
-- [ ] Buscar `REACT` y ` react ` encuentra las mismas tareas que `react`.
+- [x] El buscador tiene etiqueta visible y su valor se conserva al navegar.
+- [x] Buscar `REACT` y ` react ` encuentra las mismas tareas que `react`.
 - [ ] Una búsqueda de solo espacios muestra toda la sección; limpiar restaura su lista completa.
-- [ ] La búsqueda se aplica solo a la sección activa, respetando el estado de las tareas.
+- [x] La búsqueda se aplica solo a la sección activa, respetando el estado de las tareas.
 - [ ] Se distingue sección vacía de búsqueda sin coincidencias.
 - [ ] El resumen diferencia resultados visibles y total de la sección.
-- [ ] Completar y recuperar siguen funcionando mientras hay una búsqueda activa.
+- [x] Completar y recuperar siguen funcionando mientras hay una búsqueda activa.
 - [ ] Se puede eliminar desde Pendientes y desde Finalizadas.
 - [ ] Eliminar una de dos tareas iguales conserva la otra.
 - [ ] Eliminar un resultado filtrado no borra las tareas ocultas por la búsqueda.
@@ -72,6 +72,35 @@ No necesitas persistencia, backend, nuevas rutas ni librerías. Recargar la pág
 - [ ] Buscador y botones funcionan con teclado, con foco visible, y siguen siendo legibles en móvil.
 - [ ] Los comentarios y el cuaderno explican por qué buscar no debe modificar el array original.
 - [ ] `npm run lint` y `npm run build` pasan desde `devquest/`.
+
+
+### Revisión del 16/09/2026 · `58b0bea`
+
+Comprobados búsqueda sin distinguir mayúsculas, recorte de espacios, conservación del texto al navegar y completar/recuperar con búsqueda activa. Una búsqueda formada solo por espacios muestra las tareas; el check conjunto sigue pendiente porque falta el botón «Limpiar búsqueda».
+
+Todavía faltan:
+
+- Botón para limpiar la búsqueda en ambas vistas.
+- Mensaje «No hay resultados» cuando la sección tiene tareas pero el filtro no devuelve ninguna. Ahora aparece una lista vacía debajo de un total mayor que cero.
+- Resumen que distinga coincidencias del total de la sección.
+- Eliminar por identificador en ambas vistas y realizar las pruebas de borrado.
+- Recuperar el foco visible del navbar y revisar el diseño móvil de los buscadores y filas.
+- Completar las respuestas del reto 04 y corregir el import de `Inicio` sin uso para que pase lint. Build sí pasa.
+
+### Buena práctica: esta búsqueda no necesita `useEffect`
+
+`busqueda` cambia con el input y provoca otro renderizado. En ese renderizado se calculan las listas filtradas a partir de `tareas` y `busqueda`. Esos resultados se pueden calcular directamente: no necesitan otro estado ni un efecto para mantenerlos sincronizados.
+
+Conserva este enfoque. Los efectos sirven para sincronizar con sistemas externos; no hacen falta para filtrar este array local. No añadas `useMemo` sin haber detectado un cálculo costoso. Referencia: [Quizás no necesites un Efecto · React](https://es.react.dev/learn/you-might-not-need-an-effect).
+
+### Mejoras pequeñas de mantenimiento
+
+Después de completar los pendientes funcionales:
+
+- Usa márgenes o `gap` para separar bloques, en lugar de `<br/>` después de los títulos y contadores.
+- Valora compartir el buscador que ahora repites en Pendientes y Finalizadas; mantén etiquetas asociadas e identificadores únicos.
+- Para actualizar tareas a partir de las anteriores, puedes utilizar `setTareas(anteriores => ...)`. El código actual funciona con estos eventos; es una mejora de claridad y robustez, no un fallo reproducido.
+- Prueba añadir con Enter desde el input. Un `form` con `onSubmit` y un botón de envío permitiría ese comportamiento. Es una mejora de usabilidad, no un requisito que estuviera pendiente del reto original.
 
 ## Prueba final guiada
 

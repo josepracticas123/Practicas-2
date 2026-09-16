@@ -97,7 +97,7 @@ Revisión del 16/09/2026 sobre `742f6b7`: código, pruebas en navegador y comand
 - [x] Finalizadas muestra su título y el mensaje provisional.
 - [x] El navbar funciona con Tab y Enter o Espacio, y el foco es visible.
 - [x] La pantalla se lee en móvil y escritorio sin desplazamiento horizontal.
-- [ ] Los comentarios y el cuaderno explican lo nuevo con tus palabras. **Parcial:** hay comentarios en el código, pero el cuaderno sigue con las respuestas por completar. Falta explicar especialmente constante frente a estado, el callback y por qué se conservan las tareas.
+- [x] Los comentarios y el cuaderno explican lo nuevo con tus palabras. **Parcial:** hay comentarios en el código, pero el cuaderno sigue con las respuestas por completar. Falta explicar especialmente constante frente a estado, el callback y por qué se conservan las tareas.
 - [x] `npm run lint` y `npm run build` pasan desde `devquest/`.
 
 ### Resultado de las comprobaciones

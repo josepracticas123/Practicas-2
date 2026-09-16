@@ -62,16 +62,16 @@ No necesitas persistencia, backend, nuevas rutas ni librerías. Recargar la pág
 - [x] Buscar `REACT` y ` react ` encuentra las mismas tareas que `react`.
 - [ ] Una búsqueda de solo espacios muestra toda la sección; limpiar restaura su lista completa.
 - [x] La búsqueda se aplica solo a la sección activa, respetando el estado de las tareas.
-- [ ] Se distingue sección vacía de búsqueda sin coincidencias.
-- [ ] El resumen diferencia resultados visibles y total de la sección.
+- [x] Se distingue sección vacía de búsqueda sin coincidencias.
+- [x] El resumen diferencia resultados visibles y total de la sección.
 - [x] Completar y recuperar siguen funcionando mientras hay una búsqueda activa.
-- [ ] Se puede eliminar desde Pendientes y desde Finalizadas.
+- [x] Se puede eliminar desde Pendientes y desde Finalizadas.
 - [ ] Eliminar una de dos tareas iguales conserva la otra.
 - [ ] Eliminar un resultado filtrado no borra las tareas ocultas por la búsqueda.
 - [ ] Eliminar la última coincidencia y la última tarea produce el mensaje correcto en cada caso.
 - [ ] Buscador y botones funcionan con teclado, con foco visible, y siguen siendo legibles en móvil.
 - [ ] Los comentarios y el cuaderno explican por qué buscar no debe modificar el array original.
-- [ ] `npm run lint` y `npm run build` pasan desde `devquest/`.
+- [x] `npm run lint` y `npm run build` pasan desde `devquest/`.
 
 
 ### Revisión del 16/09/2026 · `58b0bea`

@@ -82,7 +82,9 @@ No necesito guardar las tareas pendientes y finalizadas por separado porque toda
 ## Reto 04 · Preguntas para investigar
 
 - ¿Qué diferencia hay entre las tareas de la sección y los resultados visibles?
+Las tareas de la sección son todas als tareas que pertenecen a la sección. Los resultados visibles son las que coinciden con la búsqueda.puedo tener 3 tareas pendientes pero mostrar solo 1 de ellas si busco algo en concreto.
 - ¿Por qué buscar no debe llamar a `setTareas` para sustituir los datos?
+
 - ¿Cómo distingo una sección vacía de una búsqueda sin resultados?
 - ¿Por qué eliminar por el índice de la lista filtrada podría borrar otra tarea?
 - ¿Cómo utilizo `filter` para mostrar coincidencias y cómo lo utilizo para eliminar?

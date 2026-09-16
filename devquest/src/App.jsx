@@ -85,8 +85,7 @@ function App() {
         setSeccionActual={setSeccionActual}
       />
 
-      <main className="flex-1">
-
+      <main>
         {/* Vista Inicio */}
         {seccionActual === "inicio" && (
           <section className="mt-5">
@@ -97,7 +96,7 @@ function App() {
         {/* Vista Pendientes */}
         {seccionActual === "pendientes" && (
           <Pendientes
-           tareasPendientes={tareasPendientes}
+            tareasPendientes={tareasPendientes}
             tareasPendientesFiltradas={tareasPendientesFiltradas}
             busqueda={busqueda}
             setBusqueda={setBusqueda}

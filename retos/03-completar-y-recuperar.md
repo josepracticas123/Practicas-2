@@ -72,9 +72,9 @@ Añade comentarios breves sobre la identidad de la tarea y la actualización sin
 - [x] Recuperar esa tarea devuelve los totales a 2 pendientes y 0 finalizadas.
 - [x] La suma de los contadores no cambia al completar o recuperar.
 - [x] Navegar conserva los datos; siguen rechazándose entradas vacías o con solo espacios.
-- [ ] Los botones se pueden usar con teclado y el diseño sigue siendo legible en móvil.
-- [ ] Puedes explicar los identificadores, las listas calculadas y cómo actualizas un objeto del array; has completado el cuaderno.
-- [ ] `npm run lint` y `npm run build` pasan desde `devquest/`.
+- [x] Los botones se pueden usar con teclado y el diseño sigue siendo legible en móvil.
+- [x] Puedes explicar los identificadores, las listas calculadas y cómo actualizas un objeto del array; has completado el cuaderno.
+- [x] `npm run lint` y `npm run build` pasan desde `devquest/`.
 
 
 ### Revisión del 16/09/2026 · `58b0bea`

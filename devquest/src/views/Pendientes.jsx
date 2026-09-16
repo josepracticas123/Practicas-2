@@ -21,6 +21,7 @@ function Pendientes({
                 <input
                     id="buscar-pendientes"
                     type="text"
+                    tabIndex={0}
                     value={busqueda}
                     onChange={(e) => setBusqueda(e.target.value)}
                     placeholder="Buscar tareas"

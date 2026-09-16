@@ -26,10 +26,9 @@ function App() {
   return (
 
     <div className="flex flex-col min-h-screen bg-black-100">
-      <main className="flex-1">
-         {/*para poder cambiar la sección actual al hacer click en los botones del header*/}
+       {/*para poder cambiar la sección actual al hacer click en los botones del header*/}
         <Header secciones={secciones} seccionActual={seccionActual} setSeccionActual={setSeccionActual} />
-
+      <main className="flex-1">
         {/*Renderizado condicional para mostrar la sección correspondiente al hacer click en los botones del header*/}
         <section className ="mt-5">
           {seccionActual === "inicio" && (<Article addTareas={addTareas} />)}

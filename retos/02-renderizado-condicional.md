@@ -83,20 +83,30 @@ Mantén los comentarios breves y junto a la parte que explican. No hace falta co
 
 ## Comprueba tu entrega
 
-- [ ] Al arrancar se muestra Inicio y su opción está destacada.
-- [ ] Las tres opciones muestran únicamente su sección, con cabecera y pie siempre visibles.
-- [ ] No aparece texto suelto de comentarios ni el progreso fijo de la antigua maqueta.
-- [ ] El input tiene una etiqueta visible y los textos hablan de tareas.
-- [ ] En Pendientes, cero tareas muestra el total y el mensaje de lista vacía.
-- [ ] Un texto vacío o solo con espacios no crea una tarea.
-- [ ] « Leer React » se guarda como «Leer React»; compruébalo inspeccionando el valor, porque HTML puede disimular espacios al mostrarlo.
-- [ ] Añadir «Leer React» y «Practicar JSX» muestra dos tareas y total 2.
-- [ ] Visitar Finalizadas y regresar a Pendientes conserva ambas tareas sin duplicarlas.
-- [ ] Finalizadas muestra su título y el mensaje provisional.
-- [ ] El navbar funciona con Tab y Enter o Espacio, y el foco es visible.
-- [ ] La pantalla se lee en móvil y escritorio sin desplazamiento horizontal.
-- [ ] Los comentarios y el cuaderno explican lo nuevo con tus palabras.
-- [ ] `npm run lint` y `npm run build` pasan desde `devquest/`.
+Revisión del 16/09/2026 sobre `742f6b7`: código, pruebas en navegador y comandos de validación. Los checks técnicos están verificados; la explicación personal queda para revisar con el tutor.
+
+- [x] Al arrancar se muestra Inicio y su opción está destacada.
+- [x] Las tres opciones muestran únicamente su sección, con cabecera y pie siempre visibles.
+- [x] No aparece texto suelto de comentarios ni el progreso fijo de la antigua maqueta.
+- [x] El input tiene una etiqueta visible y los textos hablan de tareas.
+- [x] En Pendientes, cero tareas muestra el total y el mensaje de lista vacía.
+- [x] Un texto vacío o solo con espacios no crea una tarea.
+- [x] « Leer React » se guarda como «Leer React»; compruébalo inspeccionando el valor, porque HTML puede disimular espacios al mostrarlo.
+- [x] Añadir «Leer React» y «Practicar JSX» muestra dos tareas y total 2.
+- [x] Visitar Finalizadas y regresar a Pendientes conserva ambas tareas sin duplicarlas.
+- [x] Finalizadas muestra su título y el mensaje provisional.
+- [x] El navbar funciona con Tab y Enter o Espacio, y el foco es visible.
+- [x] La pantalla se lee en móvil y escritorio sin desplazamiento horizontal.
+- [ ] Los comentarios y el cuaderno explican lo nuevo con tus palabras. **Parcial:** hay comentarios en el código, pero el cuaderno sigue con las respuestas por completar. Falta explicar especialmente constante frente a estado, el callback y por qué se conservan las tareas.
+- [x] `npm run lint` y `npm run build` pasan desde `devquest/`.
+
+### Resultado de las comprobaciones
+
+Se probaron entradas vacías y con espacios, « Leer React » y «Practicar JSX», total 0 y total 2, y el recorrido por las tres secciones. El texto de la primera tarea se comprobó también sin los espacios sobrantes en el DOM. Ambas tareas permanecen al volver desde Finalizadas. La navegación con Tab, Enter y Espacio funciona y el foco es visible.
+
+Se revisó la presentación a 375 px y 1280 px con esos contenidos. `npm run lint` y `npm run build` terminaron correctamente. El mensaje provisional de Finalizadas tiene una redacción equivalente a la propuesta y cumple su objetivo.
+
+Las correcciones iniciales también están hechas: comentario JSX, `secciones` constante, retirada de `useEffect`, etiqueta asociada al input y nombres internos relacionados con tareas. No necesitas repetir esos cambios; céntrate en completar el cuaderno y explicar lo que has implementado.
 
 ## Documentación para consultar por bloques
 

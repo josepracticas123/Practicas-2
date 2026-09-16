@@ -42,12 +42,16 @@ En móvil, la tarjeta debe ajustarse al espacio disponible. La prioridad es que 
 
 ## Comprueba tu entrega
 
-- [ ] Están la cabecera, el resumen y la tarjeta del panel.
-- [ ] A 375 px y a 1280 px de ancho se lee todo sin desplazamiento horizontal.
-- [ ] El estado se entiende por su texto, además de su color.
-- [ ] El botón está realmente deshabilitado con `disabled`.
-- [ ] Ya no aparecen los logos ni el contador de la plantilla de Vite.
-- [ ] Puedes explicar qué hace una clase CSS y qué parte pinta `App`.
+Revisión del 16/09/2026 sobre `742f6b7`. Se ha consultado también la primera maqueta (`61214e5`) para distinguir lo realizado de lo que cambió al pasar al reto 02. `[x]` significa comprobado; los puntos sin marcar incluyen su motivo.
+
+- [x] Están la cabecera, el resumen y la tarjeta del panel. **Verificado en la maqueta inicial.** El resumen y la tarjeta original se sustituyeron al evolucionar al reto 02; no hay que recuperarlos.
+- [x] A 375 px y a 1280 px de ancho se lee todo sin desplazamiento horizontal. **Comprobado en navegador sobre la aplicación actual**, con las tareas de prueba del reto 02.
+- [x] El estado se entiende por su texto, además de su color. La maqueta inicial mostraba «Pendiente»; la app actual identifica las secciones y muestra mensajes explicativos.
+- [ ] El botón está realmente deshabilitado con `disabled`. **No se implementó en la maqueta revisada. Ya no aplica al alcance actual:** el botón ahora añade tareas y debe estar operativo. No hay que deshabilitarlo para cerrar este punto antiguo.
+- [x] Ya no aparecen los logos ni el contador de la plantilla de Vite.
+- [ ] Puedes explicar qué hace una clase CSS y qué parte pinta `App`. **Pendiente de explicación al tutor.** El cuaderno todavía no contiene sus respuestas.
+
+La base visual está realizada y ha evolucionado. Queda validar la comprensión; el requisito antiguo de `disabled` se conserva como registro, no como una corrección a aplicar a la app actual.
 
 ## Pistas, si las necesitas
 

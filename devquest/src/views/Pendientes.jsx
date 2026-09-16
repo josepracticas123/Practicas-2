@@ -6,27 +6,28 @@ function Pendientes({
     completarTarea
 }) {
     return (
-        <section className="text-white text-center">
-            <h2>Tareas pendientes</h2>
-            <div className="mb-4 flex items-center justify-center gap-3">
-            <label
-                htmlFor="buscar-pendientes"
-                className="font-semibold text-white"
-            >
-                Buscar tareas
-            </label>
+        <section className="text-white text-center mt-5">
+            <h2>Tareas pendientes</h2><br/>
 
-            <input
-                id="buscar-pendientes"
-                type="text"
-                value={busqueda}
-                onChange={(e) => setBusqueda(e.target.value)}
-                placeholder="Buscar tareas"
-                className="w-64 rounded-md border border-white bg-white px-3 py-1.5 text-sm text-black outline-none focus:ring-2 focus:ring-gray-400"
-            />
+            <div className="mb-4 flex items-center justify-center gap-3">
+                <label
+                    htmlFor="buscar-pendientes"
+                    className="font-semibold text-white"
+                >
+                    Buscar tareas
+                </label>
+
+                <input
+                    id="buscar-pendientes"
+                    type="text"
+                    value={busqueda}
+                    onChange={(e) => setBusqueda(e.target.value)}
+                    placeholder="Buscar tareas"
+                    className="w-64 rounded-md border border-white bg-white px-3 py-1.5 text-sm text-black outline-none focus:ring-2 focus:ring-gray-400"
+                />
             </div>
 
-            <p>Total: {tareasPendientes.length}</p>
+            <p>Total: {tareasPendientes.length}</p><br/>
 
             {tareasPendientes.length === 0 ? (
                 <p>
@@ -35,8 +36,10 @@ function Pendientes({
             ) : (
                 <ul className="space-y-3">
                     {tareasPendientesFiltradas.map((tarea, index) => (
-                        <li key={tarea.id} className="flex items-center justify-center gap-16">
-                            {index + 1}. {tarea.texto}
+                        <li key={tarea.id} className="flex items-center justify-center">
+                            <span className="w-72">
+                                {index + 1}. {tarea.texto}
+                            </span>
 
                             <button
                                 type="button"

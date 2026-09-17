@@ -15,7 +15,6 @@ function Header({ secciones, seccionActual, setSeccionActual }) {
               aria-pressed={estaActiva}
               key={seccion.id}
               onClick={() => setSeccionActual(seccion.id)}
-              onFocus={() => console.log("FOCO:", seccion.nombre)}
               className={[
                 "pb-1 border-b border-transparent transition-colors duration-200",
                 "focus-visible:border-b focus-visible:border-yellow-300",

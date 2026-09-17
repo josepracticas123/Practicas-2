@@ -85,7 +85,7 @@ function App() {
         setSeccionActual={setSeccionActual}
       />
 
-      <main>
+      <main className= "flex-1">
         {/* Vista Inicio */}
         {seccionActual === "inicio" && (
           <section className="mt-5">

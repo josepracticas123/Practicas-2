@@ -121,6 +121,6 @@ Las correcciones iniciales también están hechas: comentario JSX, `secciones` c
 
 ## Seguimiento posterior · 16/09/2026, `58b0bea`
 
-Los checks anteriores registran la revisión de `742f6b7`. En la versión actual han aparecido dos regresiones: el navbar ya no muestra el foco de teclado y lint falla por el import de `Inicio` sin uso. Se han anotado como pendientes en los retos 03 y 04. El mensaje provisional de Finalizadas se ha sustituido correctamente por su funcionalidad en el reto 03.
+Los checks anteriores registran la revisión de `742f6b7`. En la versión actual el navbar conserva un foco visible con `focus-visible` y `npm run lint` pasa correctamente. El mensaje provisional de Finalizadas se ha sustituido por su funcionalidad en el reto 03.
 
 El cuaderno ya contiene respuestas, pero las tres últimas del reto 02 están desplazadas: la pregunta sobre conservar tareas contiene la explicación de `trim()`, la siguiente contiene la del comentario JSX y la última está vacía. Reordena esas respuestas y explica por qué las tareas se conservan en `App`. No hace falta volver a escribir el resto.

@@ -49,7 +49,7 @@ Revisión del 16/09/2026 sobre `742f6b7`. Se ha consultado también la primera m
 - [x] El estado se entiende por su texto, además de su color. La maqueta inicial mostraba «Pendiente»; la app actual identifica las secciones y muestra mensajes explicativos.
 - [ ] El botón está realmente deshabilitado con `disabled`. **No se implementó en la maqueta revisada. Ya no aplica al alcance actual:** el botón ahora añade tareas y debe estar operativo. No hay que deshabilitarlo para cerrar este punto antiguo.
 - [x] Ya no aparecen los logos ni el contador de la plantilla de Vite.
-- [ ] Puedes explicar qué hace una clase CSS y qué parte pinta `App`. **Pendiente de explicación al tutor.** El cuaderno todavía no contiene sus respuestas.
+- [x] Puedes explicar qué hace una clase CSS y qué parte pinta `App`. **Pendiente de explicación al tutor.** El cuaderno todavía no contiene sus respuestas.
 
 La base visual está realizada y ha evolucionado. Queda validar la comprensión; el requisito antiguo de `disabled` se conserva como registro, no como una corrección a aplicar a la app actual.
 

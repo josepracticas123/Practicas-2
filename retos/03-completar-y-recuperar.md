@@ -83,10 +83,10 @@ Verificados en código y navegador: objetos con identificadores estables, dos ta
 
 Pendientes para cerrar:
 
-- Recuperar el foco visible del navbar: `focus:outline-none` se mantiene, pero se ha retirado el anillo de foco. La opción activa y el foco de teclado son estados diferentes.
-- Volver a comprobar móvil con las nuevas filas y buscadores; esta revisión funcional se hizo en escritorio.
+- El navbar conserva un foco visible con `focus-visible`; la opción activa y el foco de teclado son estados diferentes.
+- La interfaz se comprobó en móvil con las filas y los buscadores; no se observaron solapamientos en 390 px ni en 320 px.
 - Las respuestas del reto 03 ya están escritas y explican correctamente el enfoque. Falta confirmar con el tutor la explicación en directo antes de marcar ese punto.
-- Build pasa. Lint falla porque se importa `Inicio` en `App.jsx` sin utilizarlo. Puedes renderizar esa vista en la condición de Inicio en lugar de duplicar su contenido, o retirar el import si decides no usarla.
+- `npm run lint` y `npm run build` pasan correctamente desde `devquest/`.
 
 ## Documentación
 

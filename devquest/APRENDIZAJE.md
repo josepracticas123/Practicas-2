@@ -56,11 +56,11 @@ Miro cuántas tareas hay en el array tareas. Si no hay ninguna, muestro el mensa
 - ¿Qué recorrido hace el texto desde el input de `Article` hasta el array de `App`?
 Primero escribo la tarea en el input y onChange va guardando lo que escribo en textoTarea. Cuando pulso "Añadir tarea", se limpia el texto con trim() y Article llama a addTareas. Esa función está en App y añade la tarea al array tareas.
 - ¿Por qué las tareas siguen ahí cuando `Article` deja de mostrarse?
-Al hacer trim() puedo comprobar si el texto tiene algo más que espacios. Si guardo el resultado de trim(), además me aseguro de que la tarea se guarde ya sin los espacios que sobraban.
+Porque el array `tareas` está guardado en `App`, que permanece montado al cambiar de sección. `Article` solo deja de mostrarse; no se desmonta el estado que vive en `App`.
 - ¿Qué diferencia hay entre comprobar `trim()` y guardar su resultado?
-en la página?
-Dentro de JSX tengo que escribirlo entre {/* y */}. De esta forma React lo entiende como un comentario y no lo muestra en la página.
+Comprobar `trim()` permite saber si el texto está vacío o solo contiene espacios. Guardar su resultado permite añadir el texto ya limpio, sin espacios al principio ni al final.
 - ¿Cómo se escribe un comentario dentro de JSX para que no aparezca como texto en la página?
+Dentro de JSX se escribe entre `{/*` y `*/}`. React lo interpreta como un comentario y no lo muestra en la página.
 
 ## Reto 03 · Preguntas para investigar
 
@@ -71,7 +71,7 @@ Permite guardar mas información que un simple texto. En la app guardo el texto 
 - ¿Cuándo genero su `id` y por qué no lo cambio al completarla?
 El id se genera cuando creo una tarea nueva. No lo cambio al completarla porque el id sirve para identificar siempre a esa misma tarea. Al completar solo cambio el valor de completada.
 - ¿Por qué dos tareas con el mismo texto necesitan identificadores diferentes?
-Porque dos tareas pueden tenr el mismo texto pero, siguen siendo tareas dieferentes. Por eso cada una necesita un id distinto, para que se reconozca o se pueda saber exactamente cual estoy modificando o completando.
+Porque dos tareas pueden tener el mismo texto pero, siguen siendo tareas dieferentes. Por eso cada una necesita un id distinto, para que se reconozca o se pueda saber exactamente cual estoy modificando o completando.
 - ¿Qué hace `map` al completar una tarea y qué hace `filter` al mostrar Pendientes?
 map recorre todas las tareas y crea un nuevo array. Cuando encuentra la tarea que he seleccioando, crea una copia cambiando de completada a true. filter crea otro array seleccionando solo las tareas que cumplen esa condición, y en pendienets selecciona las qu etienen completada en false.
 - ¿Por qué copio también el objeto que cambia y no solo el array?
@@ -82,13 +82,17 @@ No necesito guardar las tareas pendientes y finalizadas por separado porque toda
 ## Reto 04 · Preguntas para investigar
 
 - ¿Qué diferencia hay entre las tareas de la sección y los resultados visibles?
-Las tareas de la sección son todas als tareas que pertenecen a la sección. Los resultados visibles son las que coinciden con la búsqueda.puedo tener 3 tareas pendientes pero mostrar solo 1 de ellas si busco algo en concreto.
+Las tareas de la sección son todas las tareas que pertenecen a esa sección. Los resultados visibles son las tareas que coinciden con la búsqueda. Puedo tener 3 tareas pendientes, pero mostrar solo 1 de ellas si busco algo en concreto.
 - ¿Por qué buscar no debe llamar a `setTareas` para sustituir los datos?
-
+Buscar solo debe cambiar las tareas que se muestran, no los datos originales. Los resultados se pueden calcular usando filter() a partir de tareas y busqueda. Si utilizo setTareas para guardar los resultados de la búsqueda, estaría eliminando de tareas las tareas que no coinciden y después podría perderlas al cambiar o limpiar la búsqueda.
 - ¿Cómo distingo una sección vacía de una búsqueda sin resultados?
+Compruebo si una sección tiene tareas. Si no tiene ninguna, muestro el mensaje de lista vacía y el total es 0. Si sí tenemos tareas, pero después de aplicar la búsqueda no hay coincidencias, muestro el mensaje de "No hay resultados en la búsqueda". De esta forma sé si realmente no hay tareas o si simplemente la búsqueda no encuentra ninguna.
 - ¿Por qué eliminar por el índice de la lista filtrada podría borrar otra tarea?
+El índice pertenece a la lista que estoy mostrando después de aplicar el filtro y no tiene por qué coincidir con la posición de la tarea en el array original. Por eso no usamos la posición. Utilizando el id se identifica de forma única la tarea que queremos eliminar.
 - ¿Cómo utilizo `filter` para mostrar coincidencias y cómo lo utilizo para eliminar?
+Se utiliza filter() para generar una lista nueva de tareas que coinciden con el texto introducido en la búsqueda. Para eliminar también usamos filter(), pero conservamos todas las tareas cuyo id sea diferente al de la tarea que queremos eliminar. Después guardamos el nuevo array con setTareas().
 - ¿Qué comprobé con dos tareas iguales y con tareas ocultas por la búsqueda?
+Comprobé que podemos eliminar una tarea aunque tenga el mismo texto que otra, porque cada una tiene un id diferente. Posteriormente verifiqué que, al eliminar una tarea que aparece en la búsqueda, las tareas que estaban ocultas por el filtro siguen existiendo.
 
 ## Comentarios explicativos en el código
 

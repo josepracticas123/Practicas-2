@@ -11,6 +11,7 @@ Esta revisión ordena las notas iniciales y las ajusta al código actual. Que un
 | `index.html` | Contiene el elemento `root` y carga el punto de entrada `src/main.jsx`. |
 | `src/main.jsx` | Importa estilos y React, crea la raíz con `createRoot` y renderiza `App` dentro de `StrictMode`. |
 | `src/App.jsx` | Guarda la sección actual y las tareas; pasa props a `Header` y `Article`, y decide qué contenido mostrar. |
+| `src/utils/Almacenamiento.js` | Lee y guarda las tareas en `localStorage`, comprobando que los datos tengan el formato esperado. |
 | `src/components/Header.jsx` | Muestra el título y los botones del navbar; recibe la sección activa y la función para cambiarla. |
 | `src/components/Article.jsx` | Contiene el input para añadir tareas y llama a `addTareas`, recibida por props. La lista se renderiza desde `App`. |
 | `src/components/Footer.jsx` | Muestra el pie de página. |
@@ -93,6 +94,34 @@ El índice pertenece a la lista que estoy mostrando después de aplicar el filtr
 Se utiliza filter() para generar una lista nueva de tareas que coinciden con el texto introducido en la búsqueda. Para eliminar también usamos filter(), pero conservamos todas las tareas cuyo id sea diferente al de la tarea que queremos eliminar. Después guardamos el nuevo array con setTareas().
 - ¿Qué comprobé con dos tareas iguales y con tareas ocultas por la búsqueda?
 Comprobé que podemos eliminar una tarea aunque tenga el mismo texto que otra, porque cada una tiene un id diferente. Posteriormente verifiqué que, al eliminar una tarea que aparece en la búsqueda, las tareas que estaban ocultas por el filtro siguen existiendo.
+
+## Reto 05 · Preguntas para investigar
+
+- ¿Qué diferencia hay entre el estado en memoria y `localStorage`?
+Las tareas viven en el estado de React mientras la aplicación está abierta. Si recargo o cierro la página, ese estado se pierde. `localStorage` me permite guardarlas en el navegador y recuperarlas después.
+- ¿Por qué utilizo JSON y por qué valido el resultado de `JSON.parse`?
+`localStorage` guarda texto, así que uso `JSON.stringify()` para convertir el array de tareas antes de guardarlo. Después uso `JSON.parse()` para recuperarlo. Valido el resultado porque un JSON puede estar bien escrito, pero no tener tareas con la estructura correcta.
+- ¿Qué podría ocurrir si guardo un array vacío antes de leer los datos anteriores?
+Podría borrar sin querer las tareas que ya estaban guardadas. Por eso primero leo los datos con una función inicializadora de `useState`. Después se puede guardar el estado correcto sin sobrescribir los datos antiguos al empezar.
+- ¿Por qué guardar sí necesita sincronización y filtrar la búsqueda no?
+Guardar necesita sincronización porque tengo que copiar los cambios de `tareas` a `localStorage`. Para eso uso `useEffect` cada vez que cambia ese estado. La búsqueda solo filtra lo que se muestra y se puede calcular otra vez sin guardar nada nuevo.
+- ¿Qué debe pasar cuando elimino la última tarea?
+También tengo que guardar `[]` en `localStorage`. Así queda constancia de que ya no hay tareas. Si no lo hiciera, al recargar podría volver a aparecer la última tarea eliminada.
+- ¿Qué ocurre si el navegador no permite guardar?
+La aplicación sigue funcionando con las tareas que tiene en memoria mientras la página está abierta. El `try/catch` captura el error y lo muestra en la consola. Al no poder guardar, esas tareas no se podrán recuperar después de recargar.
+
+### Reto 05 — Lo que he aprendido
+**Qué hice:**
+Guardé las tareas en `localStorage` usando la clave `devquest.tareas.v1`. Preparé una lectura inicial con validación y un guardado que se ejecuta cuando cambia `tareas`.
+
+**Para qué sirve:**
+Sirve para que las tareas sobrevivan a una recarga o al cierre y la reapertura de la misma URL.
+
+**Comprobación:**
+Comprobé crear, recargar, completar, recuperar, eliminar y volver a recargar. También comprobé tareas repetidas, búsquedas, datos inválidos, IDs duplicados y el array vacío.
+
+**Estado:**
+Hecho. `npm run lint` y `npm run build` pasan desde `devquest/`.
 
 ## Comentarios explicativos en el código
 

@@ -1,6 +1,6 @@
 # 05 · Tus tareas sobreviven a una recarga
 
-**Estado: siguiente reto para trabajar hoy, después del cierre breve del 04.**
+**Estado: implementación realizada y pruebas de persistencia completadas.**
 
 La revisión técnica del 17/09/2026 ya está hecha: la funcionalidad hasta el 04 está implementada, lint y build pasan y el cuaderno está completado. Antes de añadir persistencia, corrige el desbordamiento con textos largos descrito en el [reto 04](04-buscar-y-eliminar.md) y muestra al tutor la corrección y una explicación breve de la eliminación por identificador. Las mejoras opcionales de organización no bloquean este reto.
 
@@ -112,23 +112,23 @@ Añade comentarios breves sobre la lectura inicial, la dependencia del efecto y 
 
 ## Comprueba tu entrega
 
-La revisión previa ya está hecha. La corrección visual y toda la implementación de persistencia siguen pendientes de comprobar.
+La revisión previa ya está hecha. La persistencia y el ciclo completo se han comprobado con tareas de prueba. Queda comprobar los comandos de validación del proyecto.
 
 - [x] Revisión técnica de los retos anteriores realizada el 17/09/2026 sobre `96de975`.
 - [x] He corregido el desbordamiento del 04 y mostrado al tutor la prueba y la explicación antes de añadir persistencia.
-- [ ] Se guarda el array completo en `devquest.tareas.v1`, con sus identificadores originales.
-- [ ] Crear, completar, recuperar y eliminar persisten después de recargar.
-- [ ] Dos tareas iguales siguen siendo independientes tras recuperarlas.
-- [ ] Eliminar la última tarea deja la lista vacía también después de recargar.
-- [ ] Cerrar y abrir la misma URL recupera los datos guardados.
-- [ ] La búsqueda no hace que se guarde solo el subconjunto visible.
-- [ ] Una clave ausente, JSON inválido o una estructura incorrecta no rompen la aplicación.
-- [ ] Se rechazan identificadores duplicados y campos de tipo incorrecto.
-- [ ] Lectura y escritura manejan errores; si guardar falla, la app sigue funcionando en memoria.
-- [ ] La lectura inicial no escribe datos y el efecto depende de `tareas`.
-- [ ] No se modifica ninguna otra clave de almacenamiento.
-- [ ] Los comentarios y el cuaderno explican las decisiones con tus palabras.
-- [ ] `npm run lint` y `npm run build` pasan desde `devquest/`.
+- [x] Se guarda el array completo en `devquest.tareas.v1`, con sus identificadores originales.
+- [x] Crear, completar, recuperar y eliminar persisten después de recargar.
+- [x] Dos tareas iguales siguen siendo independientes tras recuperarlas.
+- [x] Eliminar la última tarea deja la lista vacía también después de recargar.
+- [x] Cerrar y abrir la misma URL recupera los datos guardados.
+- [x] La búsqueda no hace que se guarde solo el subconjunto visible.
+- [x] Una clave ausente, JSON inválido o una estructura incorrecta no rompen la aplicación.
+- [x] Se rechazan identificadores duplicados y campos de tipo incorrecto.
+- [x] Lectura y escritura manejan errores; si guardar falla, la app sigue funcionando en memoria.
+- [x] La lectura inicial no escribe datos y el efecto depende de `tareas`.
+- [x] No se modifica ninguna otra clave de almacenamiento.
+- [x] Los comentarios y el cuaderno explican las decisiones con tus palabras.
+- [x] `npm run lint` y `npm run build` pasan desde `devquest/`.
 
 ## Documentación oficial
 

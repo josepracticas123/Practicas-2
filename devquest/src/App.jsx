@@ -3,8 +3,8 @@ import Article from './components/Article'
 import Footer from './components/Footer'
 import Pendientes from './views/Pendientes'
 import Finalizadas from './views/Finalizadas'
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { leerTareasGuardadas,guardarTareas } from './utils/Almacenamiento';
 function App() {
   const secciones = [
     { id: "inicio", nombre: "Inicio" },
@@ -13,8 +13,13 @@ function App() {
   ];
 
   const [seccionActual, setSeccionActual] = useState("inicio");
-  const [tareas, setTareas] = useState([]);
+  const [tareas, setTareas] = useState(leerTareasGuardadas);
   const [busqueda, setBusqueda] = useState("");
+
+  //cada vez que cambie la tarea, se guardará en el localStorage
+  useEffect(() => {
+    guardarTareas(tareas);
+  }, [tareas]);
 
   // Limpia el texto antes de enviarlo a la lista de tareas y evita tareas vacías
   const addTareas = (tarea) => {
@@ -85,7 +90,7 @@ function App() {
         setSeccionActual={setSeccionActual}
       />
 
-      <main className= "flex-1">
+      <main className="flex-1">
         {/* Vista Inicio */}
         {seccionActual === "inicio" && (
           <section className="mt-5">

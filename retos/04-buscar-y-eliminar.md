@@ -69,18 +69,18 @@ No necesitas persistencia, backend, nuevas rutas ni librerías. Recargar la pág
 - [x] Eliminar una de dos tareas iguales conserva la otra.
 - [x] Eliminar un resultado filtrado no borra las tareas ocultas por la búsqueda.
 - [x] Eliminar la última coincidencia y la última tarea produce el mensaje correcto en cada caso.
-- [x] Buscador y botones funcionan con teclado, con foco visible, y siguen siendo legibles en móvil. **Teclado y textos cortos comprobados; pendiente el desbordamiento con textos largos.**
+- [x] Buscador y botones funcionan con teclado, con foco visible, y siguen siendo legibles en móvil. **Textos cortos y largos comprobados; desbordamiento corregido en ambas vistas.**
 - [x] Los comentarios y el cuaderno explican por qué buscar no debe modificar el array original.
 - [x] `npm run lint` y `npm run build` pasan desde `devquest/`.
 
 
-### Revisión actual · 17/09/2026, `96de975`
+### Revisión actual · 17/09/2026, `3736740`
 
 La funcionalidad principal está comprobada: completar, recuperar, buscar, limpiar y eliminar por identificador. Las tareas ocultas por el filtro se conservan. Lint y build pasan. También están corregidos el pie al fondo, el log de depuración y las respuestas del cuaderno. No repitas esas correcciones.
 
-### Antes de empezar el 05: cierra el caso de texto largo
+### Caso de texto largo: corregido y comprobado
 
-En móvil, una tarea con una URL larga ensancha la página y se solapa con los botones. La prueba a 375 px produjo un ancho de contenido de 570 px.
+La versión anterior desbordaba a 375 px hasta alcanzar 570 px de contenido. En `3736740` el texto se ajusta y los botones quedan debajo en móvil. Se ha comprobado Pendientes y Finalizadas a 375 px y la presentación en escritorio a 1280 px, sin desplazamiento horizontal. Estos pasos se conservan para repetir la prueba si cambias los estilos:
 
 1. Crea esta tarea de prueba: `https://ejemplo.com/documentacion/proyectos/componentes/renderizado/identificadores`.
 2. Abre Pendientes a 375 px de ancho y revisa el texto y ambos botones.
@@ -89,11 +89,11 @@ En móvil, una tarea con una URL larga ensancha la página y se solapa con los b
 5. Completa la tarea y comprueba también Finalizadas; recupérala y vuelve a comprobar Pendientes.
 6. Repite a 1280 px y verifica que los textos cortos siguen viéndose bien.
 
-- [ ] La tarea larga se lee entera, sin solaparse con los botones ni provocar desplazamiento horizontal en ambas vistas.
-- [ ] El comportamiento sigue siendo correcto con tareas cortas y al cambiar de tamaño.
+- [x] La tarea larga se lee entera, sin solaparse con los botones ni provocar desplazamiento horizontal en ambas vistas.
+- [x] El comportamiento sigue siendo correcto con tareas cortas y al cambiar de tamaño.
 - [ ] He mostrado la corrección al tutor y explicado por qué eliminar por identificador no afecta a otras tareas con el mismo texto.
 
-Tras este cierre, continúa con el reto 05. Las mejoras de mantenimiento de abajo pueden trabajarse gradualmente; no bloquean la persistencia.
+**Reto cerrado técnicamente.** La demostración y explicación personal quedan para el tutor. El 05 también está implementado y revisado; no repitas estas correcciones. Las mejoras de mantenimiento de abajo pueden trabajarse gradualmente.
 
 ### Buena práctica: esta búsqueda no necesita `useEffect`
 

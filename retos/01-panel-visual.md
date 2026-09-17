@@ -45,13 +45,13 @@ En móvil, la tarjeta debe ajustarse al espacio disponible. La prioridad es que 
 Revisión del 16/09/2026 sobre `742f6b7`. Se ha consultado también la primera maqueta (`61214e5`) para distinguir lo realizado de lo que cambió al pasar al reto 02. `[x]` significa comprobado; los puntos sin marcar incluyen su motivo.
 
 - [x] Están la cabecera, el resumen y la tarjeta del panel. **Verificado en la maqueta inicial.** El resumen y la tarjeta original se sustituyeron al evolucionar al reto 02; no hay que recuperarlos.
-- [x] A 375 px y a 1280 px de ancho se lee todo sin desplazamiento horizontal. **Comprobado en la versión `742f6b7`**, con las tareas de prueba del reto 02. El caso nuevo de texto largo se sigue en el reto 04.
+- [x] A 375 px y a 1280 px de ancho se lee todo sin desplazamiento horizontal. **Comprobado en la versión `742f6b7`**, con las tareas de prueba del reto 02. El caso de texto largo también quedó corregido y comprobado en la revisión de `3736740` del reto 04.
 - [x] El estado se entiende por su texto, además de su color. La maqueta inicial mostraba «Pendiente»; la app actual identifica las secciones y muestra mensajes explicativos.
 - [ ] El botón está realmente deshabilitado con `disabled`. **No se implementó en la maqueta revisada. Ya no aplica al alcance actual:** el botón ahora añade tareas y debe estar operativo. No hay que deshabilitarlo para cerrar este punto antiguo.
 - [x] Ya no aparecen los logos ni el contador de la plantilla de Vite.
 - [x] Puedes explicar qué hace una clase CSS y qué parte pinta `App`. **Autoevaluación del alumno respaldada por respuestas escritas.** Confirmar la explicación con el tutor.
 
-La base visual está realizada y ha evolucionado. Las respuestas ya están escritas; queda comentarlas con el tutor; el requisito antiguo de `disabled` se conserva como registro, no como una corrección a aplicar a la app actual.
+**Cierre técnico confirmado el 17/09/2026 sobre `3736740`.** La base visual está realizada y ha evolucionado. Las respuestas ya están escritas; queda comentarlas con el tutor; el requisito antiguo de `disabled` se conserva como registro, no como una corrección a aplicar a la app actual.
 
 ## Pistas, si las necesitas
 

@@ -72,16 +72,16 @@ Añade comentarios breves sobre la identidad de la tarea y la actualización sin
 - [x] Recuperar esa tarea devuelve los totales a 2 pendientes y 0 finalizadas.
 - [x] La suma de los contadores no cambia al completar o recuperar.
 - [x] Navegar conserva los datos; siguen rechazándose entradas vacías o con solo espacios.
-- [ ] Los botones se pueden usar con teclado y el diseño sigue siendo legible en móvil. **Teclado comprobado; falta corregir el caso de texto largo descrito en el reto 04.**
+- [x] Los botones se pueden usar con teclado y el diseño sigue siendo legible en móvil. **El caso de texto largo está corregido en ambas vistas; revisión de `3736740`.**
 - [x] Puedes explicar los identificadores, las listas calculadas y cómo actualizas un objeto del array; has completado el cuaderno.
 - [x] `npm run lint` y `npm run build` pasan desde `devquest/`.
 
 
-### Revisión actual · 17/09/2026, `96de975`
+### Revisión actual · 17/09/2026, `3736740`
 
 La lógica de objetos, identificadores, completar y recuperar está implementada. Se ha vuelto a probar completar una de dos tareas iguales, eliminar una coincidencia filtrada sin perder la otra ni las tareas ocultas y recuperar desde Finalizadas. Lint y build pasan. Las respuestas del reto 03 están escritas; la explicación en directo queda para la revisión con el tutor.
 
-El único pendiente técnico compartido con el reto 04 es la presentación de tareas largas: a 375 px, una URL sin espacios provoca desbordamiento. Corrígelo en ambas vistas siguiendo la prueba del 04; no necesitas rehacer la lógica del 03.
+**Reto cerrado técnicamente.** El pendiente visual compartido con el 04 está resuelto: las cadenas largas se parten y los botones se disponen debajo en móvil, sin desbordamiento. No necesitas rehacer la lógica del 03.
 
 ## Documentación
 

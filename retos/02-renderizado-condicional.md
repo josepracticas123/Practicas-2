@@ -119,8 +119,8 @@ Las correcciones iniciales también están hechas: comentario JSX, `secciones` c
 
 [Volver a la guía](../README.md)
 
-## Seguimiento actual · 17/09/2026, `96de975`
+## Seguimiento actual · 17/09/2026, `3736740`
 
 Los checks anteriores describen la entrega del reto 02. El foco del navbar funciona, lint y build pasan, el pie vuelve a quedar al fondo y las respuestas del cuaderno están corregidas. El mensaje provisional de Finalizadas se sustituyó correctamente por su funcionalidad del reto 03.
 
-No hay que repetir las correcciones iniciales. La presentación con tareas largas tiene una incidencia nueva descrita en el reto 04; los checks históricos de móvil no cubrían ese caso. Comenta con el tutor las explicaciones escritas para confirmar que puedes aplicarlas.
+No hay que repetir las correcciones iniciales. La incidencia posterior con tareas largas quedó corregida y comprobada en el reto 04. El reto 02 está cerrado técnicamente. Comenta con el tutor las explicaciones escritas para confirmar que puedes aplicarlas.

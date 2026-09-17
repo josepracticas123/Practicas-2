@@ -123,6 +123,10 @@ Comprobé crear, recargar, completar, recuperar, eliminar y volver a recargar. T
 **Estado:**
 Hecho. `npm run lint` y `npm run build` pasan desde `devquest/`.
 
+## Seguimiento de la revisión · 17/09/2026, `3736740`
+
+Los retos 01–05 están cerrados técnicamente. Las respuestas anteriores pertenecen al alumno; la revisión técnica no confirma por sí sola su comprensión. Queda explicar al tutor el inicializador de `useState`, la validación con `Set` y la dependencia `[tareas]` del efecto. No hace falta reescribir las respuestas: anota después las dudas o aclaraciones que salgan de esa conversación.
+
 ## Comentarios explicativos en el código
 
 Cuando utilices algo por primera vez, escribe un comentario breve con tus palabras junto a esa parte: qué guarda un estado, por qué haces una comprobación o por qué un dato vive en el padre. No comentes cada línea. Usa este archivo para explicaciones largas y actualiza los comentarios si cambia el código.

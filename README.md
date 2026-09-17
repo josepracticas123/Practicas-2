@@ -1,12 +1,12 @@
 # DevQuest · Tu panel de retos
 
-Estás construyendo tu propia aplicación de prácticas con React. Partiste de un panel visual y ya has añadido tareas y un navbar. Ya puedes completar, recuperar, buscar y eliminar tareas. El siguiente paso será conservarlas al recargar. Tú eliges su nombre, colores y estilo.
+Estás construyendo tu propia aplicación de prácticas con React. Partiste de un panel visual y ya has añadido tareas y un navbar. Ya puedes completar, recuperar, buscar y eliminar tareas. Las tareas ya se conservan al recargar. Tú eliges su nombre, colores y estilo.
 
 El proyecto lo creas tú desde cero con **React + Vite + JavaScript y CSS**. Aquí tienes las instrucciones, no la aplicación resuelta. Usaremos JavaScript para practicar sus bases junto a React.
 
 ## Qué vas a construir
 
-El panel visual evolucionó hacia una aplicación de tareas. El reto 05 añadirá persistencia con `localStorage` sobre lo que ya funciona. Conserva el diseño y Tailwind.
+El panel visual evolucionó hacia una aplicación de tareas. El reto 05 incorpora persistencia con `localStorage` sobre lo que ya funciona. Conserva el diseño y Tailwind.
 
 No necesitas conocer todo para empezar. Trabaja en un paso, compruébalo en el navegador y continúa. Las ampliaciones son opcionales.
 
@@ -14,13 +14,15 @@ No necesitas conocer todo para empezar. Trabaja en un paso, compruébalo en el n
 
 **El proyecto ya está creado. No repitas la instalación inicial ni generes otro Vite.** Para continuar, abre una terminal en `Practicas-2/devquest`, instala las dependencias con `npm install` si faltan y ejecuta `npm run dev`.
 
-## Trabajo de hoy · 17/09/2026
+## Seguimiento · 17/09/2026, `3736740`
 
-1. **Cierra el detalle visual del 04:** corrige las tareas con textos largos en móvil y prueba ambas vistas. Tienes una URL de ejemplo y los pasos en el [reto 04](retos/04-buscar-y-eliminar.md).
-2. **Enséñalo al tutor** y explica por qué eliminar por identificador conserva las otras tareas, incluso si tienen el mismo texto. Las respuestas del cuaderno ya están completas; no tienes que reescribirlas.
-3. **Empieza el [reto 05](retos/05-persistencia-local.md):** lectura inicial, guardado con un efecto y pruebas de persistencia, en ese orden.
+**Los retos 01–04 y la implementación del 05 están cerrados técnicamente.** La corrección de textos largos funciona en móvil y escritorio. Se ha comprobado la persistencia al recargar y reabrir la pestaña; lint y build pasan.
 
-La revisión actual confirma la funcionalidad principal y lint/build correctos. Compartir componentes, sustituir separaciones por CSS o adoptar un formulario son mejoras graduales, no una reescritura obligatoria antes del 05.
+1. **Comenta el cierre con el tutor:** explica por qué eliminar por identificador conserva otras tareas con el mismo texto.
+2. **Explica el reto 05:** por qué pasas la función de lectura a `useState`, para qué utilizas `Set` y por qué guardar necesita un efecto pero buscar no. Las respuestas del cuaderno ya están escritas; no necesitas reescribirlas.
+3. **Acuerda el siguiente paso con el tutor.** No hay correcciones funcionales pendientes que bloqueen el cierre del 05.
+
+Compartir componentes, sustituir separaciones por CSS o adoptar un formulario son mejoras graduales. La explicación en directo sigue pendiente de confirmación del tutor; los checks técnicos no acreditan por sí solos la comprensión.
 
 La sección siguiente conserva la guía de instalación inicial como referencia.
 
@@ -85,7 +87,7 @@ Lee [Tu primer componente](https://es.react.dev/learn/your-first-component) y [E
 - [02 · Navega por tu aplicación de tareas](retos/02-renderizado-condicional.md): navegación y conservación de tareas; consulta sus checks de revisión.
 - [03 · Completa y recupera tus tareas](retos/03-completar-y-recuperar.md): objetos, identificadores y cambio de estado.
 - [04 · Busca y elimina tareas](retos/04-buscar-y-eliminar.md): búsqueda por sección y eliminación de una tarea concreta.
-- [05 · Tus tareas sobreviven a una recarga](retos/05-persistencia-local.md): `localStorage` y `useEffect`. **Trabajo de hoy tras corregir y revisar el detalle visual pendiente del 04.**
+- [05 · Tus tareas sobreviven a una recarga](retos/05-persistencia-local.md): `localStorage` y `useEffect`. **Cerrado técnicamente; pendiente comentar las decisiones con el tutor.**
 
 Trabaja por bloques y comprueba cada uno antes de continuar.
 

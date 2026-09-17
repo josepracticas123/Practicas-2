@@ -1,8 +1,8 @@
 # 05 · Tus tareas sobreviven a una recarga
 
-**Estado: implementación realizada y pruebas de persistencia completadas.**
+**Estado: cerrado técnicamente en la revisión del 17/09/2026 sobre `3736740`. Pendiente explicación en directo con el tutor.**
 
-La revisión técnica del 17/09/2026 ya está hecha: la funcionalidad hasta el 04 está implementada, lint y build pasan y el cuaderno está completado. Antes de añadir persistencia, corrige el desbordamiento con textos largos descrito en el [reto 04](04-buscar-y-eliminar.md) y muestra al tutor la corrección y una explicación breve de la eliminación por identificador. Las mejoras opcionales de organización no bloquean este reto.
+Los retos 01–04 están cerrados técnicamente, incluido el desbordamiento con textos largos. La persistencia está implementada y las comprobaciones realizadas pasan. Los pasos siguientes quedan como referencia; no necesitas rehacerlos.
 
 **Tu misión:** conservar las tareas al recargar o volver a abrir la aplicación en el mismo navegador.
 
@@ -112,10 +112,11 @@ Añade comentarios breves sobre la lectura inicial, la dependencia del efecto y 
 
 ## Comprueba tu entrega
 
-La revisión previa ya está hecha. La persistencia y el ciclo completo se han comprobado con tareas de prueba. Queda comprobar los comandos de validación del proyecto.
+La revisión de `3736740` confirma el ciclo de recarga y reapertura en navegador, además de pruebas aisladas de validación y errores de lectura/escritura con almacenamiento simulado. `npm run lint` y `npm run build` pasan. Los checks técnicos no sustituyen la explicación personal al tutor.
 
 - [x] Revisión técnica de los retos anteriores realizada el 17/09/2026 sobre `96de975`.
-- [x] He corregido el desbordamiento del 04 y mostrado al tutor la prueba y la explicación antes de añadir persistencia.
+- [x] El desbordamiento del 04 está corregido y verificado en la revisión técnica.
+- [ ] He explicado al tutor la corrección y las decisiones del reto 05. **Pendiente de confirmación del tutor.**
 - [x] Se guarda el array completo en `devquest.tareas.v1`, con sus identificadores originales.
 - [x] Crear, completar, recuperar y eliminar persisten después de recargar.
 - [x] Dos tareas iguales siguen siendo independientes tras recuperarlas.
@@ -129,6 +130,22 @@ La revisión previa ya está hecha. La persistencia y el ciclo completo se han c
 - [x] No se modifica ninguna otra clave de almacenamiento.
 - [x] Los comentarios y el cuaderno explican las decisiones con tus palabras.
 - [x] `npm run lint` y `npm run build` pasan desde `devquest/`.
+
+## Cómo se mantiene actualizado el almacenamiento
+
+La implementación actual cumple el reto: cada acción crea un nuevo estado `tareas` y el efecto con `[tareas]` guarda el array completo, incluido `[]`. Buscar o navegar no cambia ese array, por lo que no necesita provocar otro guardado. Al abrir la app, la función inicializadora recupera los datos antes del primer guardado.
+
+No necesitas intervalos, guardar desde cada botón ni un evento de cierre de página. Tampoco necesitas sincronización entre pestañas para este reto: si modificas los datos desde otra pestaña o desde las herramientas del navegador, esta instancia no los incorpora automáticamente; los vuelve a leer al recargar. Si guardar falla, la app continúa en memoria y registra el error, tal como pide el enunciado.
+
+### Pendiente · Explicación al tutor
+
+El código está cerrado técnicamente. Estos puntos quedan pendientes hasta que los expliques con tus palabras al tutor:
+
+- [ ] Explicar por qué pasas `leerTareasGuardadas` sin ejecutarla a `useState` y cómo evita leer en cada renderizado.
+- [ ] Explicar cómo utilizas `Set` para detectar identificadores repetidos y qué ocurre si los datos no son válidos.
+- [ ] Explicar por qué el efecto depende de `[tareas]`, cuándo vuelve a guardar y por qué buscar no necesita otro efecto. Incluye qué ocurre al eliminar la última tarea.
+
+No necesitas añadir funcionalidades para completar esta explicación. Si al prepararla detectas un comentario poco claro, mejóralo para explicar la decisión; no hace falta comentar cada línea. El tutor confirmará estos checks después de la conversación.
 
 ## Documentación oficial
 

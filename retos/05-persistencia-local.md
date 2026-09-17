@@ -104,11 +104,19 @@ Después de cada caso, confirma que puedes añadir una tarea nueva. No utilices 
 Añade comentarios breves sobre la lectura inicial, la dependencia del efecto y el tratamiento de errores. Responde con tus palabras en `APRENDIZAJE.md` cuando implementes el reto:
 
 - ¿Qué diferencia hay entre el estado en memoria y `localStorage`?
+  El estado de memoria existe mientras la aplicación see sta ejecutando. si recargamos la pagina se pierde.
+  localStorage: permite guardar los datos en el navegador para que permanezcan usando la key y valor del navegador.
 - ¿Por qué utilizo JSON y por qué valido el resultado de `JSON.parse`?
+  porque localStorage guarda texto, y mis tareas son objetos dentro de un array, usamos JSON.stringfy para conertir estas tareas en texto al guardarlas. Posteriormente usamos JSON.parse para volver a convertir este texto en un array de objetos de nuevo.
+  Validamos JSON.parse: ya qu elos datos podrían no existir o no tener el formato esperado y así evitamos que la APP falle.
 - ¿Qué podría ocurrir si guardo un array vacío antes de leer los datos anteriores?
+  Creo que podría sobreescribir los datos y borrar o eliminar los existentes.
 - ¿Por qué guardar sí necesita sincronización y filtrar la búsqueda no?
+  Guardar modifica algo externo de React, qu ees localStorage, de ahi el sincronizarlo cuando cambia el estado. Filtrar solo calcula que tareas queremos mostrar usando los datos qu eya tenemos
 - ¿Qué debe pasar cuando elimino la última tarea?
+  Pues debe eliminarse la tarea, y eliminarse tambien del localStorage y debe de guardar el estado de nuevo.
 - ¿Qué ocurre si el navegador no permite guardar?
+  Pues guardaria la APP los datos pero al recargar no podríamos cargar las tareas guardadas, ya que no se habrian cargado a localStorage, de ahi el controlar el error para evitar que esto falle
 
 ## Comprueba tu entrega
 

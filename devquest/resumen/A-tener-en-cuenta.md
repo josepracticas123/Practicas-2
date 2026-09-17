@@ -55,7 +55,7 @@ Uso `filter` para crear una lista temporal con las tareas cuyo texto coincide co
 
 - ¿Por qué `useState(leerTareasGuardadas)` y no `useState(leerTareasGuardadas())`?
 
-Porque paso la función como inicializador para que React obtenga el valor inicial. Con () la ejecutaría directamente antes de pasársela a useState.
+Porque paso la función como inicializador para que React obtenga el valor inicial. Con () la ejecutaría directamente antes de pasársela a useState. Al pasarla sin (), React puede ejecutarla como inicialización perezosa para obtener el estado inicial.
 
 - ¿Qué hace `[...tareas]`?
 Crea un nuevo array copiando el que ya teníamos. Para cambiar una tarea sin modificar la original, también se copia el objeto.

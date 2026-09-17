@@ -1,0 +1,100 @@
+# 06 · Tu portal de miniapps
+
+**Tu misión:** convertir el inicio del proyecto en un portal desde el que abrir tus miniapps. La aplicación de tareas seguirá funcionando en `/tareas`.
+
+**Antes:** la implementación del 05 está revisada. Conserva sus pendientes de explicación al tutor. **Practicarás:** rutas, enlaces, composición de páginas y ubicación del estado.
+
+Trabaja en el mismo `devquest/`. No crees otro Vite. Haz un bloque cada vez; no necesitas terminar todos los retos nuevos hoy.
+
+## 1. Separa la página de tareas
+
+La aplicación que ahora vive en `App` pasará a una página, por ejemplo `pages/TareasPage.jsx`.
+
+1. Mueve allí el estado de tareas, su lectura inicial, el efecto de guardado, las acciones y sus listas calculadas.
+2. Conserva los componentes existentes y las secciones internas. No cambies completar, recuperar, buscar ni eliminar.
+3. Reserva `App` para la estructura común y las rutas. Mantén una sola cabecera global, un solo `main` y un solo pie. El menú propio de Tareas puede estar dentro de esa página, sin repetir la estructura global.
+4. Para distinguir los dos niveles, llama «Portal» al acceso global a `/` y «Añadir tarea» al antiguo «Inicio» de Tareas. Su identificador interno puede seguir siendo `inicio`.
+
+No mantengas dos copias del estado ni dos efectos de guardado. Conserva la clave `devquest.tareas.v1` y los identificadores existentes.
+
+**Parada:** antes de añadir rutas, renderiza la página de tareas desde `App` y comprueba que sigue funcionando y conservando datos al recargar.
+
+## 2. Añade React Router
+
+Desde `devquest/`, instala la librería:
+
+```bash
+npm install react-router
+```
+
+Sigue la [instalación en modo declarativo](https://reactrouter.com/start/declarative/installation). Es el modo que usaremos con el Vite existente; no necesitas generar otro proyecto.
+
+1. Coloca un único `BrowserRouter` alrededor de la aplicación, manteniendo `StrictMode`.
+2. Utiliza `Routes` y `Route` para asociar las páginas con estas direcciones:
+
+| Dirección | Contenido |
+| --- | --- |
+| `/` | Portal de miniapps. |
+| `/tareas` | Aplicación de tareas actual. |
+| Cualquier otra | «Página no encontrada» y un enlace al portal. |
+
+3. Usa `Link` para los accesos y `NavLink` si quieres destacar la página activa. Si el enlace al portal se marca activo también en otras páginas, consulta la propiedad `end`.
+
+La URL decide qué página se muestra. No crees otro estado para duplicar la ruta ni uses `window.location` para cambiar entre miniapps. Las secciones internas de Tareas siguen utilizando su estado actual; no necesitan rutas propias en este reto.
+
+**Parada:** entra en `/tareas` escribiendo la dirección completa en el navegador. Debe aparecer Tareas sin pasar por el portal.
+
+## 3. Construye el portal
+
+Muestra un título, una introducción breve y dos tarjetas:
+
+- **Tareas:** descripción de lo que hace y enlace «Abrir tareas» a `/tareas`.
+- **Quiz de React:** descripción y texto «Próximamente». Todavía no tiene enlace: lo activarás en el 07.
+
+Define sus datos en un array y renderiza las tarjetas con `map` y claves estables. Extrae un componente de tarjeta que reciba sus datos por props. Para una tarjeta sin ruta, muestra el estado informativo sin crear un enlace vacío o con `#`.
+
+Mantén la identidad visual del proyecto. En móvil las tarjetas deben apilarse y los textos largos ajustarse. Los enlaces deben tener nombres claros y foco visible.
+
+## 4. Comprueba la navegación y los datos
+
+La página de Tareas se desmonta al salir de su ruta. Al volver, su inicializador recupera las tareas guardadas. La sección activa, el buscador y un texto sin enviar pueden reiniciarse: es el comportamiento aceptado. Las tareas guardadas deben conservarse.
+
+1. Crea dos tareas, completa una y sal al portal.
+2. Vuelve a Tareas y comprueba ambas secciones.
+3. Usa atrás y adelante del navegador: la URL y la página deben coincidir.
+4. Recarga directamente en `/tareas` usando el mismo origen y puerto.
+5. Abre `/no-existe` y utiliza su enlace para volver al portal.
+
+Estas pruebas se realizan con el servidor local de Vite. Cuando llegue el momento de publicar, habrá que configurar el alojamiento para servir la app al abrir rutas directamente; publicar no forma parte de este reto.
+
+## 5. Explica lo nuevo
+
+Añade comentarios breves sobre la responsabilidad de las rutas y dónde vive ahora el estado de Tareas. Actualiza en el cuaderno la descripción de `App` y de los archivos que hayas movido. Responde las preguntas del 06 sin copiar las definiciones de la documentación.
+
+## Comprueba tu entrega
+
+- [ ] El proyecto sigue siendo un único Vite y tiene un solo `BrowserRouter`.
+- [ ] `/` muestra el portal con tarjetas generadas desde datos y un componente reutilizable.
+- [ ] Tareas tiene enlace real; Quiz muestra «Próximamente» sin un enlace roto.
+- [ ] `/tareas` muestra la app existente con sus secciones internas.
+- [ ] La navegación global y la interna se distinguen; no se duplican cabecera, `main` ni pie.
+- [ ] Los enlaces cambian la URL y funcionan con teclado y foco visible.
+- [ ] Atrás, adelante y recarga directa en `/tareas` funcionan en Vite.
+- [ ] Una ruta desconocida muestra una página explicativa y permite volver al portal.
+- [ ] Crear, completar, recuperar, buscar y eliminar siguen funcionando.
+- [ ] Salir y volver conserva las tareas y sus estados sin duplicarlas ni cambiar la clave de almacenamiento.
+- [ ] A 375 px y 1280 px el portal y Tareas se leen sin desbordamiento, también con la URL larga del 04.
+- [ ] He actualizado el cuaderno y puedo explicar la diferencia entre una ruta y una sección interna.
+- [ ] `npm run lint` y `npm run build` pasan.
+
+## Documentación por bloques
+
+- [Instalación · React Router](https://reactrouter.com/start/declarative/installation).
+- [Rutas · React Router](https://reactrouter.com/start/declarative/routing).
+- [NavLink · React Router](https://reactrouter.com/api/components/NavLink).
+- [Pasar props · React](https://es.react.dev/learn/passing-props-to-a-component).
+- [Conservar y reiniciar estado · React](https://es.react.dev/learn/preserving-and-resetting-state).
+
+**Demostración al tutor:** abre Tareas desde el portal, modifica una tarea, vuelve al portal y regresa. Explica qué se recupera y qué puede reiniciarse.
+
+[Volver a la guía](../README.md) · [Reto 07](07-quiz-respuestas.md)

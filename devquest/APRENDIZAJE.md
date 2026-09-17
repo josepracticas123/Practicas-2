@@ -127,6 +127,41 @@ Hecho. `npm run lint` y `npm run build` pasan desde `devquest/`.
 
 Los retos 01–05 están cerrados técnicamente. Las respuestas anteriores pertenecen al alumno; la revisión técnica no confirma por sí sola su comprensión. Queda explicar al tutor el inicializador de `useState`, la validación con `Set` y la dependencia `[tareas]` del efecto. No hace falta reescribir las respuestas: anota después las dudas o aclaraciones que salgan de esa conversación.
 
+## Retos 06–08 · Preguntas para completar al avanzar
+
+Estas preguntas todavía no están respondidas. Completa solo el bloque del reto que estés trabajando, con ejemplos de tu código. Las descripciones de archivos del inicio corresponden a la app anterior al portal: actualízalas cuando muevas responsabilidades.
+
+### Reto 06 · Portal y rutas
+
+- ¿Qué diferencia hay entre cambiar `seccionActual` y navegar a `/tareas`?
+- ¿Qué responsabilidad tienen `BrowserRouter`, `Routes`, `Route` y `Link`?
+- ¿Dónde vive ahora el estado de Tareas? ¿Qué sucede al salir de esa página y volver?
+- ¿Por qué las tareas se recuperan pero el buscador puede reiniciarse?
+- ¿Qué props recibe mi tarjeta y cómo represento una miniapp todavía no disponible?
+
+**Mi explicación y dudas:** pendiente.
+
+### Reto 07 · Seleccionar y comprobar
+
+- ¿Por qué las preguntas son datos constantes y la selección es estado?
+- ¿Qué significa controlar un input `radio` desde React?
+- ¿Cómo comunica el componente de pregunta una elección a la página?
+- ¿Por qué guardo un ID en vez de copiar la opción completa?
+- ¿Qué guardo al comprobar y qué puedo calcular? ¿Por qué no necesito un efecto?
+
+**Mi explicación y dudas:** pendiente.
+
+### Reto 08 · Recorrido y resultado
+
+- ¿Qué datos necesito guardar para reconstruir el estado de la partida?
+- ¿Cómo evito que una pregunta herede la selección de la anterior?
+- ¿Cómo impido contar dos veces una misma respuesta?
+- ¿Cómo calculo la puntuación a partir de las respuestas confirmadas?
+- ¿Qué reinicio al volver a jugar y qué sucede al salir de la ruta?
+- ¿Cómo evito leer una pregunta que no existe al llegar al final?
+
+**Mi explicación y dudas:** pendiente.
+
 ## Comentarios explicativos en el código
 
 Cuando utilices algo por primera vez, escribe un comentario breve con tus palabras junto a esa parte: qué guarda un estado, por qué haces una comprobación o por qué un dato vive en el padre. No comentes cada línea. Usa este archivo para explicaciones largas y actualiza los comentarios si cambia el código.

@@ -6,7 +6,7 @@ El proyecto lo creas tú desde cero con **React + Vite + JavaScript y CSS**. Aqu
 
 ## Qué vas a construir
 
-El panel visual evolucionó hacia una aplicación de tareas. El reto 05 incorpora persistencia con `localStorage` sobre lo que ya funciona. Conserva el diseño y Tailwind.
+El panel visual evolucionó hacia una aplicación de tareas. El reto 05 incorpora persistencia con `localStorage` sobre lo que ya funciona. Conserva el diseño y Tailwind. Ahora convertirás el inicio en un portal de miniapps: Tareas tendrá su propia ruta y añadirás un Quiz de React en dos etapas.
 
 No necesitas conocer todo para empezar. Trabaja en un paso, compruébalo en el navegador y continúa. Las ampliaciones son opcionales.
 
@@ -20,7 +20,8 @@ No necesitas conocer todo para empezar. Trabaja en un paso, compruébalo en el n
 
 1. **Comenta el cierre con el tutor:** explica por qué eliminar por identificador conserva otras tareas con el mismo texto.
 2. **Explica el reto 05:** por qué pasas la función de lectura a `useState`, para qué utilizas `Set` y por qué guardar necesita un efecto pero buscar no. Las respuestas del cuaderno ya están escritas; no necesitas reescribirlas.
-3. **Acuerda el siguiente paso con el tutor.** No hay correcciones funcionales pendientes que bloqueen el cierre del 05.
+3. **Empieza el [reto 06](retos/06-portal-y-rutas.md):** portal y navegación, conservando la app de Tareas.
+4. **Cuando termines y compruebes el 06**, continúa con el [07](retos/07-quiz-respuestas.md), y después con el [08](retos/08-quiz-recorrido.md). Son bloques sucesivos, no una obligación de terminar los tres hoy.
 
 Compartir componentes, sustituir separaciones por CSS o adoptar un formulario son mejoras graduales. La explicación en directo sigue pendiente de confirmación del tutor; los checks técnicos no acreditan por sí solos la comprensión.
 
@@ -89,6 +90,10 @@ Lee [Tu primer componente](https://es.react.dev/learn/your-first-component) y [E
 - [04 · Busca y elimina tareas](retos/04-buscar-y-eliminar.md): búsqueda por sección y eliminación de una tarea concreta.
 - [05 · Tus tareas sobreviven a una recarga](retos/05-persistencia-local.md): `localStorage` y `useEffect`. **Cerrado técnicamente; pendiente comentar las decisiones con el tutor.**
 
+- [06 · Tu portal de miniapps](retos/06-portal-y-rutas.md): home, React Router y Tareas en `/tareas`. **Siguiente reto.**
+- [07 · Tu primera pregunta del quiz](retos/07-quiz-respuestas.md): `/quiz`, datos locales, selección y comprobación de respuestas.
+- [08 · Completa el quiz y consulta tu resultado](retos/08-quiz-recorrido.md): progreso, respuestas confirmadas, puntuación y nueva partida.
+
 Trabaja por bloques y comprueba cada uno antes de continuar.
 
 ## Cómo trabajar el reto
@@ -125,7 +130,10 @@ Practicas-2/
 │   ├── 02-renderizado-condicional.md
 │   ├── 03-completar-y-recuperar.md
 │   ├── 04-buscar-y-eliminar.md
-│   └── 05-persistencia-local.md
+│   ├── 05-persistencia-local.md
+│   ├── 06-portal-y-rutas.md
+│   ├── 07-quiz-respuestas.md
+│   └── 08-quiz-recorrido.md
 └── devquest/
     ├── APRENDIZAJE.md
     ├── package.json

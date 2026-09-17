@@ -157,4 +157,4 @@ No necesitas añadir funcionalidades para completar esta explicación. Si al pre
 
 **Demostración al tutor:** crea, completa, recupera y elimina recargando entre acciones. Enseña la clave guardada y explica cómo evitas sobrescribirla antes de leerla.
 
-[Volver a la guía](../README.md)
+[Volver a la guía](../README.md) · [Reto 06](06-portal-y-rutas.md)

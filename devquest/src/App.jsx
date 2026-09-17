@@ -4,7 +4,7 @@ import Footer from './components/Footer' // Importa el pie de página.
 import Pendientes from './views/Pendientes' // Importa la vista de tareas pendientes.
 import Finalizadas from './views/Finalizadas' // Importa la vista de tareas finalizadas.
 import { useEffect, useState } from "react"; // Hooks para guardar estado y sincronizarlo.
-import { leerTareasGuardadas,guardarTareas } from './utils/Almacenamiento'; // Lee y guarda tareas.
+import { leerTareasGuardadas, guardarTareas } from './utils/Almacenamiento'; // Lee y guarda tareas.
 
 // App coordina el estado y las vistas principales.
 function App() {
@@ -16,6 +16,10 @@ function App() {
   ];
 
   const [seccionActual, setSeccionActual] = useState("inicio"); // Guarda la sección visible.
+  /* React usa la función "const [tareas, setTareas] = useState(leerTareasGuardadas);" 
+   para obtener el valor inicial, osea se usa la función como inicializadora por no tener el (),
+   con el () ejecuta la función y despues pasa el resutado. 
+   Esto evita leer localStorage en cada renderizado.*/
   const [tareas, setTareas] = useState(leerTareasGuardadas); // Guarda tareas y las recupera al iniciar.
   const [busqueda, setBusqueda] = useState(""); // Guarda el texto que se busca.
 
@@ -36,7 +40,7 @@ function App() {
         completada: false
       };
 
-      setTareas([...tareas, nuevaTarea]);
+      setTareas([...tareas, nuevaTarea]); // Crea un array nuevo copiando las tareas qu eya teniamos y añade la nueva al final.
     }
   };
 
@@ -105,7 +109,7 @@ function App() {
           <Inicio addTareas={addTareas} />
         )}
 
-          {/* Vista Pendientes */}
+        {/* Vista Pendientes */}
         {seccionActual === "pendientes" && (
           <Pendientes
             tareasPendientes={tareasPendientes}

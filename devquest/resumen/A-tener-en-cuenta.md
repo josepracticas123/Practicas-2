@@ -1,3 +1,9 @@
+## Observaciones pendientes
+
+- [ ] He revisado las observaciones del inicio de [mi resumen](resumen.md) y ajustado estas notas breves para que sean coherentes. Puedo localizar los ejemplos en mi código y explicarlos.
+
+---
+
 App → coordina el estado y las partes principales de la aplicación.
 useState → guarda datos que pueden cambiar.
 setTareas → modifica el estado de las tareas y provoca un nuevo renderizado.

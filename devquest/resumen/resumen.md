@@ -1,5 +1,23 @@
 # Resumen de mi primer proyecto React
 
+## Observaciones para revisar antes del reto 06
+
+El resumen es una buena base. Revisa estos puntos en tu código y completa las explicaciones con tus palabras. Marca cada casilla cuando hayas corregido o ampliado el apartado correspondiente y puedas mostrar un ejemplo; leer la observación no basta. Conserva tus notas y anota cualquier duda para el tutor.
+
+- [ ] **Estado y copias (apartados 5, 7 y 8):** explica por qué no basta con llamar a `setTareas` después de modificar el array original. Distingue crear un array nuevo de copiar el objeto que cambia: `[...tareas]` no copia en profundidad los objetos interiores. Señala dónde tu código hace cada cosa.
+- [ ] **Inicializador de `useState` (apartado 5):** compara `useState(leerTareasGuardadas)` con `useState(leerTareasGuardadas())`. Explica cuándo se ejecutaría la lectura en cada caso y por qué elegiste la primera forma. No lo describas como «exactamente una llamada»: en desarrollo, Strict Mode puede repetir la inicialización para detectar problemas.
+- [ ] **Efecto y búsqueda (apartados 9 y 13):** aclara que el efecto guarda al montar y después cuando cambia su dependencia `tareas`. Explica qué ocurre al escribir en el buscador y por qué puede haber otro renderizado sin otra escritura en el almacenamiento. Añade qué se guarda al eliminar la última tarea.
+- [ ] **Validación (apartados 12 y 14):** recorre `every`, `ids.has` e `ids.add` con dos tareas del mismo ID. Explica por qué se rechaza toda la lista. Distingue JSON inválido (`hola`) de JSON válido con estructura incorrecta (`{}`). Explica también qué conserva la app si falla el guardado y qué podría perderse al recargar.
+- [ ] **Responsive (apartado 15):** precisa que `sm:flex-row` se aplica desde el breakpoint `sm` hacia arriba (640 px por defecto), no exclusivamente en móviles pequeños. Identifica qué clase organiza la vista por debajo de ese ancho.
+- [ ] **Formulario y comentarios (apartados 6, 10 y 17):** comprueba si existe un elemento `<form>` en `Article` y describe cómo se envía actualmente. Tras el paso previo del 06, actualiza la explicación a `onSubmit`. Revisa los comentarios nuevos: conserva los que te ayudan a explicar una decisión y elimina los que solo repiten el nombre del import, etiqueta o función.
+- [ ] **Resumen breve coherente:** actualiza también `A-tener-en-cuenta.md` para que no conserve las simplificaciones que acabas de corregir, especialmente las de `setTareas` y `useEffect`.
+
+**Mis dudas para comentar:**
+
+_Escribe aquí las dudas que aparezcan al revisar._
+
+---
+
 ## 1. Qué es este proyecto
 
 DevQuest es una aplicación de tareas hecha con React y Vite. Permite:

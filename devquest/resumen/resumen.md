@@ -344,7 +344,7 @@ Busca errores de estilo o problemas comunes en el código.
 npm run build
 ```
 
-Comprueba que la aplicación se puede preparar para producción.
+Comprueba que la aplicación se puede preparar para producción. ( y genera la carpeta dist)
 
 ## 17. Cosas importantes para recordar
 

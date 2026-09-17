@@ -1,5 +1,5 @@
 import Header from './components/Header' // Importa la cabecera y su navegación.
-import Article from './components/Article' // Importa el formulario para añadir tareas.
+import Inicio from './views/Inicio' // Importa el formulario para añadir tareas.
 import Footer from './components/Footer' // Importa el pie de página.
 import Pendientes from './views/Pendientes' // Importa la vista de tareas pendientes.
 import Finalizadas from './views/Finalizadas' // Importa la vista de tareas finalizadas.
@@ -100,14 +100,12 @@ function App() {
       />
 
       <main className="flex-1">
-        {/* Solo se muestra la vista cuya id coincide con seccionActual. */}
+        {/* Vista Inicio */}
         {seccionActual === "inicio" && (
-          <section className="mt-5">
-            <Article addTareas={addTareas} />
-          </section>
+          <Inicio addTareas={addTareas} />
         )}
 
-        {/* Vista Pendientes */}
+          {/* Vista Pendientes */}
         {seccionActual === "pendientes" && (
           <Pendientes
             tareasPendientes={tareasPendientes}

@@ -63,7 +63,7 @@ function Finalizadas({
                                         key={tarea.id}
                                         className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:justify-center"
                                     >
-                                        <span className="w-full min-w-0 break-words sm:w-72">
+                                        <span className="w-full min-w-0 wrap-break-words sm:w-72">
                                             {index + 1}. {tarea.texto}
                                         </span>
 

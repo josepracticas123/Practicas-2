@@ -1,24 +1,26 @@
-import { useState } from "react";
+import { useState } from "react"; // Permite controlar el texto del formulario.
 
+// Article recibe por props la función que añade una tarea en App.
 function Article({ addTareas }) {
-  const [textoTarea, setTextoTarea] = useState("");
+  const [textoTarea, setTextoTarea] = useState(""); // Guarda lo escrito en el input.
 
-  //Función para enviar la tarea al array de tareas y limpiar el input
+  // Envía el texto limpio y vacía el input si es válido.
   const enviarTarea = () => {
     const tareaLimpia = textoTarea.trim();
     if (tareaLimpia !== "") {
-      addTareas(tareaLimpia);
+      addTareas(tareaLimpia); // Llama al callback que vive en App.
       setTextoTarea("");
     };
   }
+  // JSX muestra el formulario para crear una tarea.
   return (
     <article className="mx-auto flex w-full max-w-xs flex-col gap-2 rounded-lg border border-gray-400 bg-white p-4 text-center shadow-sm">
       <h2>Añadir tarea</h2>
       <label htmlFor="nueva-tarea">Nueva tarea</label>
       <input id="nueva-tarea" 
       type="text" placeholder="Añadir tarea" 
-      value={textoTarea} onChange={(e) => setTextoTarea(e.target.value)} 
-      onKeyDown={(e) => {
+      value={textoTarea} onChange={(e) => setTextoTarea(e.target.value)} // Input controlado por el estado.
+      onKeyDown={(e) => { // Permite enviar con Enter.
         if (e.key === "Enter") {
           enviarTarea();
         }

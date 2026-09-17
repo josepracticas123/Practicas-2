@@ -1,3 +1,4 @@
+// Finalizadas recibe tareas y acciones desde App mediante props.
 function Finalizadas({
     tareasFinalizadas,
     tareasFinalizadasFiltradas,
@@ -7,7 +8,7 @@ function Finalizadas({
     eliminarTarea
 }) {
     return (
-        <section className="mt-5 px-4 text-center text-white">
+        <section className="mt-5 px-4 text-center text-white"> {/* Tailwind adapta espacio y color. */}
             <h2>Tareas finalizadas</h2><br />
 
             <div className="mx-auto mb-4 flex w-full max-w-2xl flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
@@ -22,13 +23,13 @@ function Finalizadas({
                     id="buscar-finalizadas"
                     type="text"
                     value={busqueda}
-                    onChange={(e) => setBusqueda(e.target.value)}
+                    onChange={(e) => setBusqueda(e.target.value)} // Actualiza la búsqueda al escribir.
                     placeholder="Buscar tareas"
                     className="w-full min-w-0 rounded-md border border-white bg-white px-3 py-1.5 text-sm text-black outline-none focus:ring-2 focus:ring-gray-400 sm:w-64"
                 />
                 <button
                     type="button"
-                    onClick={() => setBusqueda("")}
+                    onClick={() => setBusqueda("")} // Limpia el filtro.
                     className="w-full px-3 py-1.5 text-white bg-gray-500 sm:w-auto"
                 >
                     Limpiar búsqueda
@@ -57,7 +58,7 @@ function Finalizadas({
                             <br />
 
                             <ul className="mx-auto max-w-3xl space-y-3">
-                                {tareasFinalizadasFiltradas.map((tarea, index) => (
+                                {tareasFinalizadasFiltradas.map((tarea, index) => ( // Dibuja cada tarea visible.
                                     <li
                                         key={tarea.id}
                                         className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:justify-center"
@@ -69,14 +70,14 @@ function Finalizadas({
                                         <button
                                             type="button"
                                             className="w-full bg-green-500 px-4 py-2 text-white sm:ml-4 sm:w-auto"
-                                            onClick={() => recuperarTarea(tarea.id)}
+                                            onClick={() => recuperarTarea(tarea.id)} // Devuelve la tarea a pendientes.
                                         >
                                             Recuperar
                                         </button>
                                         <button
                                             type="button"
                                             className="w-full bg-gray-500 px-4 py-2 text-white sm:ml-2 sm:w-auto"
-                                            onClick={() => eliminarTarea(tarea.id)}
+                                            onClick={() => eliminarTarea(tarea.id)} // Elimina por id.
                                         >
                                             Eliminar
                                         </button>

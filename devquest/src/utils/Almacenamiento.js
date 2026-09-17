@@ -1,23 +1,23 @@
-//variable qu eusaremos en el local stroage para guardar las tareas
+// Clave propia donde guardamos las tareas en localStorage.
 const CLAVE_TAREAS = "devquest.tareas.v1";
 
-// Función para leer las tareas guardadas en el localStorage
+// Lee las tareas guardadas y devuelve [] si no son utilizables.
 export function leerTareasGuardadas() {
   try {
     const tareasGuardadas = localStorage.getItem(CLAVE_TAREAS);
-// Si no hay tareas guardadas, devolvemos un array vacío
+  // Si no existe la clave, empezamos con una lista vacía.
     if (tareasGuardadas === null) {
       return [];
     }
-// Intentamos parsear las tareas guardadas y validarlas
+  // JSON.parse convierte el texto guardado en datos de JavaScript.
     const tareasParseadas = JSON.parse(tareasGuardadas);
-// Validamos que sea un array y que cada tarea tenga las propiedades correctas
+  // Primero comprobamos que el dato principal sea un array.
     if (!Array.isArray(tareasParseadas)) {
       return [];
     }
 
-    const ids = new Set();
-// Validamos que cada tarea tenga las propiedades correctas y que no haya ids duplicados
+    const ids = new Set(); // Set ayuda a detectar ids repetidos.
+    // every comprueba que todas las tareas tengan la forma esperada.
     const tareasValidas = tareasParseadas.every((tarea) => {
       if (
         tarea === null ||
@@ -39,21 +39,22 @@ export function leerTareasGuardadas() {
       return true;
     });
 
-    if (!tareasValidas) {
+    if (!tareasValidas) { // Si una falla, rechazamos toda la lista.
       return [];
     }
 
     return tareasParseadas;
-  } catch (error) {
+  } catch (error) { // Controla errores de lectura o de JSON.
     console.error("No se pudieron recuperar las tareas:", error);
     return [];
   }
 }
-// Función para guardar las tareas en el localStorage
+// Convierte y guarda la lista completa de tareas.
 export function guardarTareas(tareas) {
   try {
+    // JSON.stringify convierte el array en texto para localStorage.
     localStorage.setItem(CLAVE_TAREAS, JSON.stringify(tareas));
-  } catch (error) {
+  } catch (error) { // Si falla, la app puede seguir usando la memoria.
     console.error("No se pudieron guardar las tareas:", error);
   }
 }

@@ -1,32 +1,35 @@
-import Header from './components/Header'
-import Article from './components/Article'
-import Footer from './components/Footer'
-import Pendientes from './views/Pendientes'
-import Finalizadas from './views/Finalizadas'
-import { useEffect, useState } from "react";
-import { leerTareasGuardadas,guardarTareas } from './utils/Almacenamiento';
+import Header from './components/Header' // Importa la cabecera y su navegación.
+import Article from './components/Article' // Importa el formulario para añadir tareas.
+import Footer from './components/Footer' // Importa el pie de página.
+import Pendientes from './views/Pendientes' // Importa la vista de tareas pendientes.
+import Finalizadas from './views/Finalizadas' // Importa la vista de tareas finalizadas.
+import { useEffect, useState } from "react"; // Hooks para guardar estado y sincronizarlo.
+import { leerTareasGuardadas,guardarTareas } from './utils/Almacenamiento'; // Lee y guarda tareas.
+
+// App coordina el estado y las vistas principales.
 function App() {
+  // Lista fija de opciones que aparecen en el navbar.
   const secciones = [
     { id: "inicio", nombre: "Inicio" },
     { id: "pendientes", nombre: "Pendientes" },
     { id: "finalizadas", nombre: "Finalizadas" }
   ];
 
-  const [seccionActual, setSeccionActual] = useState("inicio");
-  const [tareas, setTareas] = useState(leerTareasGuardadas);
-  const [busqueda, setBusqueda] = useState("");
+  const [seccionActual, setSeccionActual] = useState("inicio"); // Guarda la sección visible.
+  const [tareas, setTareas] = useState(leerTareasGuardadas); // Guarda tareas y las recupera al iniciar.
+  const [busqueda, setBusqueda] = useState(""); // Guarda el texto que se busca.
 
-  //cada vez que cambie la tarea, se guardará en el localStorage
+  // Guarda las tareas cuando cambia el estado tareas.
   useEffect(() => {
     guardarTareas(tareas);
   }, [tareas]);
 
-  // Limpia el texto antes de enviarlo a la lista de tareas y evita tareas vacías
+  // Limpia el texto y evita crear tareas vacías.
   const addTareas = (tarea) => {
     const tareaLimpia = tarea.trim();
 
     if (tareaLimpia !== "") {
-      // Creamos un objeto para que cada tarea tenga un id único
+      // Cada tarea recibe su identidad una sola vez al crearse.
       const nuevaTarea = {
         id: crypto.randomUUID(),
         texto: tareaLimpia,
@@ -37,10 +40,12 @@ function App() {
     }
   };
 
-  // Función para completar tareas
+  // Cambia a true solo la tarea cuyo id recibe.
   const completarTarea = (id) => {
+    // map crea una lista nueva y conserva las demás tareas.
     const nuevasTareas = tareas.map((tarea) => {
       if (tarea.id === id) {
+        // Copiamos el objeto para no modificar directamente el estado anterior.
         return { ...tarea, completada: true };
       }
 
@@ -50,8 +55,9 @@ function App() {
     setTareas(nuevasTareas);
   };
 
-  // Función para recuperar tareas
+  // Cambia a false solo la tarea cuyo id recibe.
   const recuperarTarea = (id) => {
+    // map devuelve otra lista con la tarea actualizada.
     const nuevasTareas = tareas.map((tarea) => {
       if (tarea.id === id) {
         return { ...tarea, completada: false };
@@ -63,16 +69,18 @@ function App() {
     setTareas(nuevasTareas);
   };
 
+  // filter elimina la tarea indicada y conserva las demás.
   const eliminarTarea = (id) => {
     const nuevasTareas = tareas.filter((tarea) => tarea.id !== id);
     setTareas(nuevasTareas);
   };
 
-  // Calculamos las tareas de cada grupo
+  // filter separa las tareas según su estado.
   const tareasPendientes = tareas.filter((tarea) => !tarea.completada);
   const tareasFinalizadas = tareas.filter((tarea) => tarea.completada);
 
-  const textoBusqueda = busqueda.trim().toLowerCase();
+  const textoBusqueda = busqueda.trim().toLowerCase(); // Normaliza la búsqueda.
+  // La búsqueda calcula qué se ve, pero no modifica tareas.
   const tareasPendientesFiltradas = tareasPendientes.filter((tarea) =>
     tarea.texto.toLowerCase().includes(textoBusqueda)
   );
@@ -81,6 +89,7 @@ function App() {
   );
 
 
+  // JSX describe la estructura que se mostrará en pantalla.
   return (
     <div className="flex flex-col min-h-screen bg-black-100">
 
@@ -91,7 +100,7 @@ function App() {
       />
 
       <main className="flex-1">
-        {/* Vista Inicio */}
+        {/* Solo se muestra la vista cuya id coincide con seccionActual. */}
         {seccionActual === "inicio" && (
           <section className="mt-5">
             <Article addTareas={addTareas} />

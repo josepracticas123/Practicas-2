@@ -115,7 +115,7 @@ Añade comentarios breves sobre la lectura inicial, la dependencia del efecto y 
 La revisión previa ya está hecha. La corrección visual y toda la implementación de persistencia siguen pendientes de comprobar.
 
 - [x] Revisión técnica de los retos anteriores realizada el 17/09/2026 sobre `96de975`.
-- [ ] He corregido el desbordamiento del 04 y mostrado al tutor la prueba y la explicación antes de añadir persistencia.
+- [x] He corregido el desbordamiento del 04 y mostrado al tutor la prueba y la explicación antes de añadir persistencia.
 - [ ] Se guarda el array completo en `devquest.tareas.v1`, con sus identificadores originales.
 - [ ] Crear, completar, recuperar y eliminar persisten después de recargar.
 - [ ] Dos tareas iguales siguen siendo independientes tras recuperarlas.

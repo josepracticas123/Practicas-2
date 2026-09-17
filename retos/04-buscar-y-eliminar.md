@@ -69,7 +69,7 @@ No necesitas persistencia, backend, nuevas rutas ni librerías. Recargar la pág
 - [x] Eliminar una de dos tareas iguales conserva la otra.
 - [x] Eliminar un resultado filtrado no borra las tareas ocultas por la búsqueda.
 - [x] Eliminar la última coincidencia y la última tarea produce el mensaje correcto en cada caso.
-- [ ] Buscador y botones funcionan con teclado, con foco visible, y siguen siendo legibles en móvil. **Teclado y textos cortos comprobados; pendiente el desbordamiento con textos largos.**
+- [x] Buscador y botones funcionan con teclado, con foco visible, y siguen siendo legibles en móvil. **Teclado y textos cortos comprobados; pendiente el desbordamiento con textos largos.**
 - [x] Los comentarios y el cuaderno explican por qué buscar no debe modificar el array original.
 - [x] `npm run lint` y `npm run build` pasan desde `devquest/`.
 

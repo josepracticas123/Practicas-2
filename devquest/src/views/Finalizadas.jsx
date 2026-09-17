@@ -7,13 +7,13 @@ function Finalizadas({
     eliminarTarea
 }) {
     return (
-        <section className="text-white text-center mt-5">
+        <section className="mt-5 px-4 text-center text-white">
             <h2>Tareas finalizadas</h2><br />
 
-            <div className="mb-4 flex items-center justify-center gap-3">
+            <div className="mx-auto mb-4 flex w-full max-w-2xl flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
                 <label
                     htmlFor="buscar-finalizadas"
-                    className="font-semibold text-white"
+                    className="font-semibold text-white sm:shrink-0"
                 >
                     Buscar tareas
                 </label>
@@ -24,12 +24,12 @@ function Finalizadas({
                     value={busqueda}
                     onChange={(e) => setBusqueda(e.target.value)}
                     placeholder="Buscar tareas"
-                    className="w-64 rounded-md border border-white bg-white px-3 py-1.5 text-sm text-black outline-none focus:ring-2 focus:ring-gray-400"
+                    className="w-full min-w-0 rounded-md border border-white bg-white px-3 py-1.5 text-sm text-black outline-none focus:ring-2 focus:ring-gray-400 sm:w-64"
                 />
                 <button
                     type="button"
                     onClick={() => setBusqueda("")}
-                    className="bg-gray-500 px-3 py-1.5 text-white"
+                    className="w-full px-3 py-1.5 text-white bg-gray-500 sm:w-auto"
                 >
                     Limpiar búsqueda
                 </button>
@@ -56,26 +56,26 @@ function Finalizadas({
 
                             <br />
 
-                            <ul className="space-y-3">
+                            <ul className="mx-auto max-w-3xl space-y-3">
                                 {tareasFinalizadasFiltradas.map((tarea, index) => (
                                     <li
                                         key={tarea.id}
-                                        className="flex items-center justify-center"
+                                        className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:justify-center"
                                     >
-                                        <span className="w-72">
+                                        <span className="w-full min-w-0 break-words sm:w-72">
                                             {index + 1}. {tarea.texto}
                                         </span>
 
                                         <button
                                             type="button"
-                                            className="ml-4 bg-green-500 px-4 py-2 text-white"
+                                            className="w-full bg-green-500 px-4 py-2 text-white sm:ml-4 sm:w-auto"
                                             onClick={() => recuperarTarea(tarea.id)}
                                         >
                                             Recuperar
                                         </button>
                                         <button
                                             type="button"
-                                            className="ml-2 bg-gray-500 px-4 py-2 text-white"
+                                            className="w-full bg-gray-500 px-4 py-2 text-white sm:ml-2 sm:w-auto"
                                             onClick={() => eliminarTarea(tarea.id)}
                                         >
                                             Eliminar

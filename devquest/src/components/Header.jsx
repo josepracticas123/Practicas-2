@@ -17,7 +17,7 @@ function Header({ secciones, seccionActual, setSeccionActual }) {
               onClick={() => setSeccionActual(seccion.id)}
               className={[
                 "pb-1 border-b border-transparent transition-colors duration-200",
-                "focus-visible:border-b focus-visible:border-yellow-300",
+                "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-1 focus-visible:ring-offset-gray-800",
                 estaActiva
                   ? "border-white/90 text-white"
                   : "text-gray-300 hover:border-gray-500 hover:text-white",

@@ -1,6 +1,6 @@
-## Observaciones pendientes
+Observaciones pendientes
 
-- [x] He revisado las observaciones del inicio de [mi resumen](resumen.md) y ajustado estas notas breves para que sean coherentes. Puedo localizar los ejemplos en mi código y explicarlos.
+- [x] He revisado las observaciones del inicio de "mi resumen" (resumen.md) y ajustado estas notas breves para que sean coherentes. Puedo localizar los ejemplos en mi código y explicarlos.
 
 ---
 
@@ -8,89 +8,106 @@ App → Coordina el estado y las partes principales de la aplicación.
 
 useState → Guarda datos que pueden cambiar.
 
-setTareas → Actualiza el estado de las tareas y React vuelve a renderizar la interfaz.
+setTareas → Actualiza el estado de las tareas. React recibe un nuevo estado y puede volver a renderizar la interfaz. No debemos modificar directamente el estado original esperando que React detecte correctamente el cambio.
 
-useEffect → Se ejecuta al montar el componente y cuando cambia el estado de tareas.
-En el código tiene `[tareas]` porque queremos que el efecto se ejecute cuando cambie tareas.
+useEffect → Se ejecuta al montar el componente y después cuando cambia "tareas", porque "tareas" está incluida en el array de dependencias "[tareas]".
 
-localStorage → Guarda las tareas para que no se pierdan al recargar.
+localStorage → Guarda las tareas en el navegador para poder recuperarlas después de recargar.
 
-JSON.stringify → Convierte las tareas ose el JSON en texto para guardarlas.
+JSON.stringify → Convierte un valor de JavaScript, como el array de tareas, en texto JSON para poder guardarlo.
 
-JSON.parse → Convierte el texto guardado otra vez en datos serian un JSON.
+JSON.parse → Convierte el texto JSON guardado en valores de JavaScript.
 
-try/catch → Controla posibles errores.
+try/catch → Permite controlar posibles errores, por ejemplo, al leer o analizar datos almacenados.
 
-Set → Permite comprobar que no haya IDs repetidos.
+Set → Permite almacenar valores únicos y comprobar que no haya IDs repetidos.
 
-map → Recorre las tareas y crea un nuevo array, por ejemplo, para actualizar una.
+map → Recorre un array y crea un nuevo array transformando sus elementos. En este proyecto puede utilizarse para crear una nueva lista de tareas modificando solo la tarea que corresponde.
 
-filter → Crea un nuevo array solo con las tareas que cumplen una condición.
-
-Al cambiar la búsqueda, se vuelve a renderizar la aplicación y `filter` calcula qué mostrar, pero `tareas` no cambia.
+filter → Crea un nuevo array únicamente con los elementos que cumplen una condición.
 
 Props → Permiten pasar datos o funciones de un componente a otro.
 
 onClick → Ejecuta una función cuando hacemos clic.
 
-onChange → Detecta cambios en un input.
+onChange → Detecta cambios realizados en un input.
 
-Tailwind → Sus clases controlan el diseño, los tamaños, los espacios y la adaptación a móvil.
+onSubmit → Ejecuta la función asociada cuando se envía un formulario.
 
-JSON.stringify() → Convierte un dato de JavaScript en texto.
+Tailwind → Sus clases controlan el diseño, los tamaños, los espacios y la adaptación a diferentes tamaños de pantalla.
 
-## Preguntas con respuestas
+Preguntas con respuestas
 
-- ¿Por qué `setTareas` y no modificar directamente `tareas`?
+¿Por qué "setTareas" y no modificar directamente "tareas"?
 
-Porque React necesita que actualicemos el estado con su función para detectar el cambio y volver a renderizar.
+Porque el estado no debe modificarse directamente. Si modificamos el array original, podemos mantener la misma referencia y React no tiene una nueva referencia de estado que utilizar para detectar correctamente el cambio. Por eso creamos un nuevo array y lo pasamos a "setTareas".
 
-- ¿Por qué usamos `useEffect` para `localStorage`?
+¿Qué hace "[...tareas]"?
 
-Porque queremos guardar las tareas cada vez que cambia el estado `tareas`.
+Crea un nuevo array copiando los elementos del array "tareas".
 
-- ¿Cómo funciona el buscador?
+¿"[...tareas]" copia también los objetos que hay dentro?
 
-Uso `filter` para crear una lista temporal con las tareas cuyo texto coincide con lo que escribe el usuario. No modifico ni guardo esa lista, solo la muestro.
+No. Hace una copia superficial: crea un nuevo array, pero los objetos interiores siguen siendo las mismas referencias. Si necesitamos modificar una tarea concreta sin modificar el objeto original, también debemos crear un nuevo objeto para esa tarea, por ejemplo mediante "{ ...tarea, ...cambios }".
 
-- ¿Por qué `useState(leerTareasGuardadas)` y no `useState(leerTareasGuardadas())`?
+¿Por qué usamos "useEffect" para "localStorage"?
 
-Porque paso la función como inicializador para que React obtenga el valor inicial. Con () la ejecutaría directamente antes de pasársela a useState. Al pasarla sin (), React puede ejecutarla como inicialización perezosa para obtener el estado inicial.
+Porque queremos guardar las tareas cuando cambia el estado "tareas". El efecto se ejecuta al montar el componente y posteriormente cada vez que cambia "tareas".
 
-- ¿Qué hace `[...tareas]`?
-Crea un nuevo array copiando el que ya teníamos. Para cambiar una tarea sin modificar la original, también se copia el objeto.
+¿Cómo funciona el buscador?
 
-- ¿`[...tareas]` copia los objetos que hay dentro?
-No. Solo copia el array; los objetos siguen siendo los mismos.
+Cuando cambia "busqueda", React vuelve a renderizar. En ese renderizado, "filter" crea una lista temporal con las tareas cuyo texto coincide con la búsqueda. Esa lista solo se utiliza para mostrar los resultados: no modifica "tareas" ni se guarda en "localStorage".
 
-- ¿Qué pasa al eliminar la última tarea?
-`tareas` pasa a ser un array vacío. `useEffect` detecta el cambio y guarda el array vacío en `localStorage`.
+Por eso cambiar el buscador puede producir un renderizado sin que se ejecute de nuevo el efecto que depende de "[tareas]".
 
-- ¿Qué pasa cuando escribo en el buscador?
-Cambia `busqueda`, React vuelve a renderizar y `filter` calcula las tareas que se muestran. No modifica `tareas` ni guarda el resultado de la búsqueda.
+¿Por qué "useState(leerTareasGuardadas)" y no "useState(leerTareasGuardadas())"?
 
-- ¿Para qué sirve `every`?
-Comprueba que todas las tareas cumplan la condición.
+Con "useState(leerTareasGuardadas)" paso la función como inicializador para que React obtenga el valor inicial del estado mediante esa función.
 
-- ¿Para qué sirven `ids.has` e `ids.add`?
-`has` comprueba si el ID existe y `add` guarda el ID.
+Con "useState(leerTareasGuardadas())", la función se ejecutaría directamente antes de pasar su resultado a "useState".
 
-- ¿Qué pasa si hay dos tareas con el mismo ID?
-Se detecta el duplicado y se rechaza la lista.
+La primera forma permite que React utilice esa función como inicializador perezoso, en lugar de ejecutar "leerTareasGuardadas()" directamente durante la evaluación del componente.
 
-- ¿Qué diferencia hay entre JSON inválido y una estructura incorrecta?
-"hola" → JSON inválido
-{}     → JSON válido, pero estructura incorrecta.
+En desarrollo, "StrictMode" puede repetir la inicialización para detectar problemas, por lo que no debe entenderse como una ejecución garantizada exactamente una sola vez.
 
-- ¿Qué significa `sm:flex-row`?
-Desde `sm` (640 px por defecto), los elementos pasan a estar en fila.
+¿Qué pasa al eliminar la última tarea?
 
-- ¿Y por debajo de `sm`?
-Se mantiene la disposición de la clase base, por ejemplo, `flex-col` si está puesta.
+"setTareas" establece "tareas" como un array vacío "[]". Como "tareas" ha cambiado, el "useEffect" detecta el cambio y guarda el array vacío en "localStorage". Al recargar, la aplicación puede recuperar correctamente que no quedan tareas.
 
-`useEffect` se ejecuta al montar el componente y cuando cambia el estado de tareas.
+¿Para qué sirve "every"?
 
-## Funcionamiento de guardar las tareas en `localStorage`
+Comprueba que todos los elementos del array cumplen una condición.
 
-Cuando añadimos una tarea, generamos un array nuevo copiando las tareas que ya teníamos y colocando la nueva al final.
-Se utiliza `setTareas` para actualizar el estado. React vuelve a renderizar y `useEffect` detecta el cambio en `tareas`. Después se llama a `guardarTareas`, que convierte las tareas con `JSON.stringify` y las guarda en `localStorage`.
+¿Para qué sirven "ids.has" e "ids.add"?
+
+"ids.has(id)" comprueba si ese ID ya está dentro del "Set".
+
+"ids.add(id)" añade el ID al "Set".
+
+Si hay dos tareas con el mismo ID, cuando se procesa la segunda, "ids.has(id)" devuelve "true", por lo que la validación falla y se rechaza toda la lista.
+
+¿Qué diferencia hay entre JSON inválido y una estructura incorrecta?
+
+"hola" → JSON inválido. "JSON.parse()" no puede interpretarlo.
+
+"{}" → JSON válido, pero puede tener una estructura incorrecta para lo que espera la aplicación.
+
+¿Qué significa "sm:flex-row"?
+
+Desde el breakpoint "sm", que en Tailwind es de 640 px por defecto, se aplica "flex-row".
+
+Por debajo de 640 px se mantiene la clase base. Si la clase base es "flex-col", los elementos permanecen organizados en columna.
+
+¿Qué ocurre actualmente al enviar el formulario?
+
+"Article" contiene un elemento "<form>". El envío se gestiona mediante "onSubmit", que ejecuta la función correspondiente y evita el comportamiento de envío por defecto del navegador mediante "preventDefault()".
+
+Funcionamiento de guardar las tareas en "localStorage"
+
+Cuando añadimos una tarea, generamos un array nuevo copiando las tareas que ya teníamos y colocando la nueva al final. Después utilizamos "setTareas" para actualizar el estado.
+
+React vuelve a renderizar y el "useEffect" detecta que "tareas" ha cambiado. Entonces se llama a "guardarTareas", que convierte las tareas mediante "JSON.stringify" y las guarda en "localStorage".
+
+Si cambiamos solamente el texto de búsqueda, cambia "busqueda" y se produce otro renderizado, pero "tareas" no cambia. Por ello el efecto cuya dependencia es "[tareas]" no vuelve a guardar las tareas en "localStorage".
+
+Si eliminamos la última tarea, "tareas" pasa a ser "[]" y el efecto guarda ese array vacío.

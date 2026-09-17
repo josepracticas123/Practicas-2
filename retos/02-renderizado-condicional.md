@@ -97,7 +97,7 @@ Revisión del 16/09/2026 sobre `742f6b7`: código, pruebas en navegador y comand
 - [x] Finalizadas muestra su título y el mensaje provisional.
 - [x] El navbar funciona con Tab y Enter o Espacio, y el foco es visible.
 - [x] La pantalla se lee en móvil y escritorio sin desplazamiento horizontal.
-- [x] Los comentarios y el cuaderno explican lo nuevo con tus palabras. **Parcial:** hay comentarios en el código, pero el cuaderno sigue con las respuestas por completar. Falta explicar especialmente constante frente a estado, el callback y por qué se conservan las tareas.
+- [x] Los comentarios y el cuaderno explican lo nuevo con tus palabras. **Actualizado el 17/09:** las respuestas están completas y ordenadas. Confirmar la explicación oral con el tutor.
 - [x] `npm run lint` y `npm run build` pasan desde `devquest/`.
 
 ### Resultado de las comprobaciones
@@ -106,7 +106,7 @@ Se probaron entradas vacías y con espacios, « Leer React » y «Practicar JSX�
 
 Se revisó la presentación a 375 px y 1280 px con esos contenidos. `npm run lint` y `npm run build` terminaron correctamente. El mensaje provisional de Finalizadas tiene una redacción equivalente a la propuesta y cumple su objetivo.
 
-Las correcciones iniciales también están hechas: comentario JSX, `secciones` constante, retirada de `useEffect`, etiqueta asociada al input y nombres internos relacionados con tareas. No necesitas repetir esos cambios; céntrate en completar el cuaderno y explicar lo que has implementado.
+Las correcciones iniciales también están hechas: comentario JSX, `secciones` constante, retirada de `useEffect`, etiqueta asociada al input y nombres internos relacionados con tareas. No necesitas repetir esos cambios. El cuaderno ya está completado; comenta con el tutor lo que has implementado.
 
 ## Documentación para consultar por bloques
 
@@ -119,8 +119,8 @@ Las correcciones iniciales también están hechas: comentario JSX, `secciones` c
 
 [Volver a la guía](../README.md)
 
-## Seguimiento posterior · 16/09/2026, `58b0bea`
+## Seguimiento actual · 17/09/2026, `96de975`
 
-Los checks anteriores registran la revisión de `742f6b7`. En la versión actual el navbar conserva un foco visible con `focus-visible` y `npm run lint` pasa correctamente. El mensaje provisional de Finalizadas se ha sustituido por su funcionalidad en el reto 03.
+Los checks anteriores describen la entrega del reto 02. El foco del navbar funciona, lint y build pasan, el pie vuelve a quedar al fondo y las respuestas del cuaderno están corregidas. El mensaje provisional de Finalizadas se sustituyó correctamente por su funcionalidad del reto 03.
 
-El cuaderno ya contiene respuestas, pero las tres últimas del reto 02 están desplazadas: la pregunta sobre conservar tareas contiene la explicación de `trim()`, la siguiente contiene la del comentario JSX y la última está vacía. Reordena esas respuestas y explica por qué las tareas se conservan en `App`. No hace falta volver a escribir el resto.
+No hay que repetir las correcciones iniciales. La presentación con tareas largas tiene una incidencia nueva descrita en el reto 04; los checks históricos de móvil no cubrían ese caso. Comenta con el tutor las explicaciones escritas para confirmar que puedes aplicarlas.

@@ -69,27 +69,31 @@ No necesitas persistencia, backend, nuevas rutas ni librerías. Recargar la pág
 - [x] Eliminar una de dos tareas iguales conserva la otra.
 - [x] Eliminar un resultado filtrado no borra las tareas ocultas por la búsqueda.
 - [x] Eliminar la última coincidencia y la última tarea produce el mensaje correcto en cada caso.
-- [x] Buscador y botones funcionan con teclado, con foco visible, y siguen siendo legibles en móvil.
+- [ ] Buscador y botones funcionan con teclado, con foco visible, y siguen siendo legibles en móvil. **Teclado y textos cortos comprobados; pendiente el desbordamiento con textos largos.**
 - [x] Los comentarios y el cuaderno explican por qué buscar no debe modificar el array original.
 - [x] `npm run lint` y `npm run build` pasan desde `devquest/`.
 
 
-### Revisión del 16/09/2026 · `58b0bea`
+### Revisión actual · 17/09/2026, `96de975`
 
-Comprobados búsqueda sin distinguir mayúsculas, recorte de espacios, conservación del texto al navegar y completar/recuperar con búsqueda activa. Una búsqueda formada solo por espacios muestra las tareas; el check conjunto sigue pendiente porque falta el botón «Limpiar búsqueda».
+La funcionalidad principal está comprobada: completar, recuperar, buscar, limpiar y eliminar por identificador. Las tareas ocultas por el filtro se conservan. Lint y build pasan. También están corregidos el pie al fondo, el log de depuración y las respuestas del cuaderno. No repitas esas correcciones.
 
-Se han completado y comprobado los requisitos pendientes del reto 04:
+### Antes de empezar el 05: cierra el caso de texto largo
 
-- Buscador con botón «Limpiar búsqueda» en Pendientes y Finalizadas.
-- Mensaje «No hay resultados» cuando existen tareas pero ninguna coincide con la búsqueda.
-- Resumen que distingue las coincidencias del total de la sección.
-- Eliminación de tareas mediante su `id` desde Pendientes y Finalizadas.
-- Comprobación de que eliminar una tarea no afecta a las tareas ocultas por la búsqueda.
-- Comprobación de completar y recuperar tareas mientras hay una búsqueda activa.
-- Foco visible del navbar y revisión del diseño móvil.
-- Respuestas del reto 04 añadidas en `APRENDIZAJE.md`.
-- Import de `Inicio` sin uso corregido.
-- `npm run lint` y `npm run build` comprobados correctamente.
+En móvil, una tarea con una URL larga ensancha la página y se solapa con los botones. La prueba a 375 px produjo un ancho de contenido de 570 px.
+
+1. Crea esta tarea de prueba: `https://ejemplo.com/documentacion/proyectos/componentes/renderizado/identificadores`.
+2. Abre Pendientes a 375 px de ancho y revisa el texto y ambos botones.
+3. Permite partir cadenas largas y que el bloque de texto se ajuste al espacio disponible. Si hace falta, coloca los botones debajo en móvil. Revisa el ancho fijo `w-72` y la fila flex en ambas vistas.
+4. No escondas el problema con `overflow-x: hidden`: el contenido debe poder leerse y las acciones seguir accesibles.
+5. Completa la tarea y comprueba también Finalizadas; recupérala y vuelve a comprobar Pendientes.
+6. Repite a 1280 px y verifica que los textos cortos siguen viéndose bien.
+
+- [ ] La tarea larga se lee entera, sin solaparse con los botones ni provocar desplazamiento horizontal en ambas vistas.
+- [ ] El comportamiento sigue siendo correcto con tareas cortas y al cambiar de tamaño.
+- [ ] He mostrado la corrección al tutor y explicado por qué eliminar por identificador no afecta a otras tareas con el mismo texto.
+
+Tras este cierre, continúa con el reto 05. Las mejoras de mantenimiento de abajo pueden trabajarse gradualmente; no bloquean la persistencia.
 
 ### Buena práctica: esta búsqueda no necesita `useEffect`
 
@@ -97,14 +101,15 @@ Se han completado y comprobado los requisitos pendientes del reto 04:
 
 Conserva este enfoque. Los efectos sirven para sincronizar con sistemas externos; no hacen falta para filtrar este array local. No añadas `useMemo` sin haber detectado un cálculo costoso. Referencia: [Quizás no necesites un Efecto · React](https://es.react.dev/learn/you-might-not-need-an-effect).
 
-### Mejoras pequeñas de mantenimiento
+### Mejoras opcionales de mantenimiento
 
-Después de completar los pendientes funcionales:
+Después del cierre, puedes acordar con el tutor una mejora cada vez:
 
 - Usa márgenes o `gap` para separar bloques, en lugar de `<br/>` después de los títulos y contadores.
 - Valora compartir el buscador que ahora repites en Pendientes y Finalizadas; mantén etiquetas asociadas e identificadores únicos.
 - Para actualizar tareas a partir de las anteriores, puedes utilizar `setTareas(anteriores => ...)`. El código actual funciona con estos eventos; es una mejora de claridad y robustez, no un fallo reproducido.
-- Prueba añadir con Enter desde el input. Un `form` con `onSubmit` y un botón de envío permitiría ese comportamiento. Es una mejora de usabilidad, no un requisito que estuviera pendiente del reto original.
+- Enter ya funciona mediante `onKeyDown`. Como aprendizaje adicional, puedes centralizar el envío en un `form` con `onSubmit` y un botón de envío.
+- Decide si utilizar `views/Inicio.jsx` o retirarlo: el archivo existe, pero `App` renderiza directamente `Article`.
 
 ## Prueba final guiada
 

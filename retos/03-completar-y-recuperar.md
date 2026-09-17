@@ -72,21 +72,16 @@ Añade comentarios breves sobre la identidad de la tarea y la actualización sin
 - [x] Recuperar esa tarea devuelve los totales a 2 pendientes y 0 finalizadas.
 - [x] La suma de los contadores no cambia al completar o recuperar.
 - [x] Navegar conserva los datos; siguen rechazándose entradas vacías o con solo espacios.
-- [x] Los botones se pueden usar con teclado y el diseño sigue siendo legible en móvil.
+- [ ] Los botones se pueden usar con teclado y el diseño sigue siendo legible en móvil. **Teclado comprobado; falta corregir el caso de texto largo descrito en el reto 04.**
 - [x] Puedes explicar los identificadores, las listas calculadas y cómo actualizas un objeto del array; has completado el cuaderno.
 - [x] `npm run lint` y `npm run build` pasan desde `devquest/`.
 
 
-### Revisión del 16/09/2026 · `58b0bea`
+### Revisión actual · 17/09/2026, `96de975`
 
-Verificados en código y navegador: objetos con identificadores estables, dos tareas iguales, completar solo una, recuperar, contadores, conservación al navegar y rechazo de entradas vacías. No se observaron avisos de claves en consola.
+La lógica de objetos, identificadores, completar y recuperar está implementada. Se ha vuelto a probar completar una de dos tareas iguales, eliminar una coincidencia filtrada sin perder la otra ni las tareas ocultas y recuperar desde Finalizadas. Lint y build pasan. Las respuestas del reto 03 están escritas; la explicación en directo queda para la revisión con el tutor.
 
-Pendientes para cerrar:
-
-- El navbar conserva un foco visible con `focus-visible`; la opción activa y el foco de teclado son estados diferentes.
-- La interfaz se comprobó en móvil con las filas y los buscadores; no se observaron solapamientos en 390 px ni en 320 px.
-- Las respuestas del reto 03 ya están escritas y explican correctamente el enfoque. Falta confirmar con el tutor la explicación en directo antes de marcar ese punto.
-- `npm run lint` y `npm run build` pasan correctamente desde `devquest/`.
+El único pendiente técnico compartido con el reto 04 es la presentación de tareas largas: a 375 px, una URL sin espacios provoca desbordamiento. Corrígelo en ambas vistas siguiendo la prueba del 04; no necesitas rehacer la lógica del 03.
 
 ## Documentación
 

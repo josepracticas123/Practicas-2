@@ -1,12 +1,12 @@
 # DevQuest · Tu panel de retos
 
-Estás construyendo tu propia aplicación de prácticas con React. Partiste de un panel visual y ya has añadido tareas y un navbar. Ahora darás utilidad a Finalizadas y añadirás búsqueda y eliminación de tareas. Tú eliges su nombre, colores y estilo.
+Estás construyendo tu propia aplicación de prácticas con React. Partiste de un panel visual y ya has añadido tareas y un navbar. Ya puedes completar, recuperar, buscar y eliminar tareas. El siguiente paso será conservarlas al recargar. Tú eliges su nombre, colores y estilo.
 
 El proyecto lo creas tú desde cero con **React + Vite + JavaScript y CSS**. Aquí tienes las instrucciones, no la aplicación resuelta. Usaremos JavaScript para practicar sus bases junto a React.
 
 ## Qué vas a construir
 
-El panel visual es la base del proyecto. Con los retos 03 y 04 podrás completar y recuperar tareas, buscarlas y eliminarlas. Trabajarás sobre la navegación que ya has construido. Puedes continuar con el Tailwind que has incorporado.
+El panel visual evolucionó hacia una aplicación de tareas. El reto 05 añadirá persistencia con `localStorage` sobre lo que ya funciona. Conserva el diseño y Tailwind.
 
 No necesitas conocer todo para empezar. Trabaja en un paso, compruébalo en el navegador y continúa. Las ampliaciones son opcionales.
 
@@ -14,7 +14,15 @@ No necesitas conocer todo para empezar. Trabaja en un paso, compruébalo en el n
 
 **El proyecto ya está creado. No repitas la instalación inicial ni generes otro Vite.** Para continuar, abre una terminal en `Practicas-2/devquest`, instala las dependencias con `npm install` si faltan y ejecuta `npm run dev`.
 
-Antes de empezar, dedica unos diez minutos a explicar al tutor lo pendiente del reto 02. Después continúa por [03 · Completa y recupera tus tareas](retos/03-completar-y-recuperar.md), y pasa al 04 cuando funcione y puedas explicarlo. No necesitas terminar ambos en un día. La sección de creación que sigue queda como referencia de los primeros pasos.
+## Trabajo de hoy · 17/09/2026
+
+1. **Cierra el detalle visual del 04:** corrige las tareas con textos largos en móvil y prueba ambas vistas. Tienes una URL de ejemplo y los pasos en el [reto 04](retos/04-buscar-y-eliminar.md).
+2. **Enséñalo al tutor** y explica por qué eliminar por identificador conserva las otras tareas, incluso si tienen el mismo texto. Las respuestas del cuaderno ya están completas; no tienes que reescribirlas.
+3. **Empieza el [reto 05](retos/05-persistencia-local.md):** lectura inicial, guardado con un efecto y pruebas de persistencia, en ese orden.
+
+La revisión actual confirma la funcionalidad principal y lint/build correctos. Compartir componentes, sustituir separaciones por CSS o adoptar un formulario son mejoras graduales, no una reescritura obligatoria antes del 05.
+
+La sección siguiente conserva la guía de instalación inicial como referencia.
 
 ## 0. Crea y entiende tu proyecto (referencia inicial)
 
@@ -77,7 +85,7 @@ Lee [Tu primer componente](https://es.react.dev/learn/your-first-component) y [E
 - [02 · Navega por tu aplicación de tareas](retos/02-renderizado-condicional.md): navegación y conservación de tareas; consulta sus checks de revisión.
 - [03 · Completa y recupera tus tareas](retos/03-completar-y-recuperar.md): objetos, identificadores y cambio de estado.
 - [04 · Busca y elimina tareas](retos/04-buscar-y-eliminar.md): búsqueda por sección y eliminación de una tarea concreta.
-- [05 · Tus tareas sobreviven a una recarga](retos/05-persistencia-local.md): `localStorage` y `useEffect`. **Disponible para leer; no empezar hasta revisar los retos anteriores con el tutor.**
+- [05 · Tus tareas sobreviven a una recarga](retos/05-persistencia-local.md): `localStorage` y `useEffect`. **Trabajo de hoy tras corregir y revisar el detalle visual pendiente del 04.**
 
 Trabaja por bloques y comprueba cada uno antes de continuar.
 

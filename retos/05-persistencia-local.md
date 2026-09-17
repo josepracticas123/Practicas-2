@@ -1,12 +1,23 @@
 # 05 · Tus tareas sobreviven a una recarga
 
-**Estado: preparado para leer, pendiente de revisión antes de empezar.**
+**Estado: siguiente reto para trabajar hoy, después del cierre breve del 04.**
 
-Primero termina los retos anteriores y avisa al tutor. Revisaréis juntos lo implementado y las posibles mejoras antes de comenzar este reto. Puedes leerlo para conocer el siguiente paso; todavía no necesitas cambiar el código.
+La revisión técnica del 17/09/2026 ya está hecha: la funcionalidad hasta el 04 está implementada, lint y build pasan y el cuaderno está completado. Antes de añadir persistencia, corrige el desbordamiento con textos largos descrito en el [reto 04](04-buscar-y-eliminar.md) y muestra al tutor la corrección y una explicación breve de la eliminación por identificador. Las mejoras opcionales de organización no bloquean este reto.
 
 **Tu misión:** conservar las tareas al recargar o volver a abrir la aplicación en el mismo navegador.
 
 **Practicarás:** `localStorage`, JSON, inicialización de estado y `useEffect`. Mantendrás los objetos con `id`, `texto` y `completada` que ya utiliza tu app.
+
+## Orden de trabajo
+
+Avanza por bloques y comprueba cada uno antes de continuar:
+
+1. Lectura inicial de una clave ausente o con datos válidos, incluyendo validación y control de errores.
+2. Efecto de guardado cuando cambian las tareas.
+3. Pruebas de crear, completar, recuperar y eliminar, recargando entre acciones.
+4. Pruebas con datos dañados y explicación en el cuaderno.
+
+Conserva la búsqueda, los identificadores y las actualizaciones que ya funcionan. Añade comentarios sobre lo nuevo sin resolver la práctica copiando una aplicación completa.
 
 ## Qué guardarás
 
@@ -101,9 +112,10 @@ Añade comentarios breves sobre la lectura inicial, la dependencia del efecto y 
 
 ## Comprueba tu entrega
 
-Todos los puntos quedan pendientes hasta realizar el reto y revisarlo.
+La revisión previa ya está hecha. La corrección visual y toda la implementación de persistencia siguen pendientes de comprobar.
 
-- [ ] El tutor ha revisado los retos anteriores antes de empezar esta implementación.
+- [x] Revisión técnica de los retos anteriores realizada el 17/09/2026 sobre `96de975`.
+- [ ] He corregido el desbordamiento del 04 y mostrado al tutor la prueba y la explicación antes de añadir persistencia.
 - [ ] Se guarda el array completo en `devquest.tareas.v1`, con sus identificadores originales.
 - [ ] Crear, completar, recuperar y eliminar persisten después de recargar.
 - [ ] Dos tareas iguales siguen siendo independientes tras recuperarlas.

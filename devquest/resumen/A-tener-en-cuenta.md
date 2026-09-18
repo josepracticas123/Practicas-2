@@ -100,7 +100,7 @@ Por debajo de 640 px se mantiene la clase base. Si la clase base es "flex-col", 
 
 ### ¿Qué ocurre actualmente al enviar el formulario?
 
-`Article` utiliza `<form onSubmit={enviarTarea}>`. La función recibe el evento, ejecuta `event.preventDefault()` para evitar la recarga del navegador y valida el texto antes de llamar a `addTareas`. El botón tiene `type="submit"`, por lo que tanto el clic como la tecla Enter pasan por el mismo envío. Ya no se necesita gestionar Enter con `onKeyDown` ni añadir un `onClick` específico para enviar.
+`Article` ya contiene `<form>` y un botón `type="submit"`, pero `enviarTarea` sigue conectada al `onClick` del botón. La función recibe ese evento, llama a `preventDefault()`, valida el texto y ejecuta `addTareas`. Aún falta conectar `onSubmit` al formulario y retirar el `onClick` de envío, como pide el reto 06.
 
 ## Funcionamiento del guardado en `localStorage`
 

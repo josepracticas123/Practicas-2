@@ -89,8 +89,7 @@ function TareasPage() {
   const tareasFinalizadasFiltradas = tareasFinalizadas.filter((tarea) =>
     tarea.texto.toLowerCase().includes(textoBusqueda)
   );
-
-
+  
   return (
     <>
       {/*Navegador de botones*/}

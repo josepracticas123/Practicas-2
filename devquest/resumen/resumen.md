@@ -39,6 +39,8 @@ devquest/
 ├─ src/
 │  ├─ App.jsx
 │  ├─ main.jsx
+│  ├─ pages/
+│  │  └─ TareasPage.jsx
 │  ├─ index.css
 │  ├─ components/
 │  │  ├─ Header.jsx
@@ -55,15 +57,17 @@ devquest/
 
 ### Archivos importantes
 
-main.jsx: inicia React y muestra App dentro del elemento root.
+main.jsx: inicia React y muestra App dentro de `BrowserRouter` y del elemento root. El router ya está preparado, pero todavía no se han declarado las rutas.
 
-App.jsx: guarda el estado, modifica las tareas y decide qué vista mostrar.
+App.jsx: mantiene la estructura global con Header, TareasPage y Footer.
 
-Header.jsx: muestra el título y los botones de navegación.
+TareasPage.jsx: guarda el estado, modifica las tareas, calcula las listas y decide qué vista interna mostrar.
 
-Article.jsx: contiene el input y los eventos para añadir una tarea; la conversión a `<form>` está pendiente.
+Header.jsx: muestra la cabecera global del portal.
 
-Inicio.jsx: recibe `addTareas` desde `App` y muestra `Article`.
+Article.jsx: contiene el formulario, el input controlado y el envío de nuevas tareas mediante `onSubmit`.
+
+Inicio.jsx: recibe `addTareas` desde `TareasPage` y muestra `Article`.
 
 Pendientes.jsx: muestra, busca, completa y elimina tareas pendientes.
 
@@ -84,20 +88,23 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
+import { BrowserRouter } from "react-router";
 ```
 
 import permite utilizar en este archivo algo que ha sido exportado desde otro módulo.
 
 createRoot conecta React con el elemento HTML root.
 
-App es el componente principal.
+App es el componente principal de la estructura global. La lógica de tareas está en `TareasPage`.
 
 StrictMode ayuda a encontrar problemas durante el desarrollo.
 
 ```jsx
 createRoot(document.getElementById("root")).render(
     <StrictMode>
-        <App />
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
     </StrictMode>
 );
 ```
@@ -134,7 +141,7 @@ useState permite que React conserve el dato entre renderizados y actualice la in
 
 leerTareasGuardadas obtiene el valor inicial desde localStorage.
 
-Otros estados de App son:
+Otros estados de `TareasPage` son:
 
 ```js
 const [seccionActual, setSeccionActual] = useState("inicio");
@@ -186,9 +193,9 @@ Las props son datos o funciones que un componente recibe de su padre:
 <Article addTareas={addTareas} />
 ```
 
-App pasa `addTareas` a `Inicio`, que la pasa a `Article`. Cuando el usuario pulsa el botón o Enter, `Article` llama a esa función y `App` añade la tarea a su estado.
+`TareasPage` pasa `addTareas` a `Inicio`, que la pasa a `Article`. Cuando el usuario pulsa el botón o Enter, el formulario de `Article` llama a esa función y `TareasPage` añade la tarea a su estado.
 
-También se pasan listas y acciones a Pendientes y Finalizadas. Así las vistas pueden mostrar datos y avisar a App cuando el usuario pulsa un botón.
+También se pasan listas y acciones a Pendientes y Finalizadas. Así las vistas pueden mostrar datos y avisar a `TareasPage` cuando el usuario pulsa un botón.
 
 ## 7. Añadir una tarea
 
@@ -297,11 +304,9 @@ onClick: ejecuta una función al pulsar un botón.
 
 onChange: detecta que ha cambiado un input.
 
-onKeyDown: detecta una tecla, por ejemplo Enter.
-
 onSubmit: controla el envío de un formulario.
 
-Actualmente `Article` no tiene `<form>`, `onSubmit` ni `preventDefault`. El botón utiliza `onClick` y Enter se gestiona con `onKeyDown`. El paso 0 del reto 06 pide centralizar ambos en un formulario con `onSubmit`; esa mejora todavía está pendiente.
+`Article` utiliza `<form onSubmit={enviarTarea}>`, `event.preventDefault()` y un botón `type="submit"`. El clic y Enter pasan por el mismo flujo de envío; ya no se usa `onKeyDown` ni un `onClick` específico para enviar.
 
 Ejemplo de input controlado:
 
@@ -322,7 +327,7 @@ El valor del input viene del estado y cada cambio actualiza ese estado.
 )}
 ```
 
-Este ejemplo simplificado muestra un título cuando se cumple la condición. En `App`, esa condición muestra `Pendientes` con sus props.
+Este ejemplo simplificado muestra un título cuando se cumple la condición. En `TareasPage`, esa condición muestra `Pendientes` con sus props.
 
 Para mostrar muchas tareas se usa map dentro del JSX:
 

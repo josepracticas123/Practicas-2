@@ -2,7 +2,9 @@
 
 Pendientes prácticos: [lista de revisión](REVISION-PENDIENTE.md).
 
-App → Coordina el estado y las partes principales de la aplicación.
+App → Mantiene la estructura global: cabecera, contenido principal y pie de página.
+
+TareasPage → Coordina el estado, las acciones, los filtros y la navegación interna de la aplicación de tareas.
 
 useState → Guarda datos que pueden cambiar.
 
@@ -98,7 +100,7 @@ Por debajo de 640 px se mantiene la clase base. Si la clase base es "flex-col", 
 
 ### ¿Qué ocurre actualmente al enviar el formulario?
 
-`Article` todavía no contiene `<form>`. El botón llama a `enviarTarea` mediante `onClick` y Enter lo hace mediante `onKeyDown`. La conversión a `onSubmit` con `preventDefault()` pertenece al paso 0 del reto 06 y está pendiente.
+`Article` utiliza `<form onSubmit={enviarTarea}>`. La función recibe el evento, ejecuta `event.preventDefault()` para evitar la recarga del navegador y valida el texto antes de llamar a `addTareas`. El botón tiene `type="submit"`, por lo que tanto el clic como la tecla Enter pasan por el mismo envío. Ya no se necesita gestionar Enter con `onKeyDown` ni añadir un `onClick` específico para enviar.
 
 ## Funcionamiento del guardado en `localStorage`
 

@@ -19,13 +19,13 @@ No hace falta extraer ahora todos los componentes repetidos ni cambiar las funci
 
 ### Comprobación previa
 
-- [ ] He completado la revisión práctica pendiente y localizado los ejemplos en mi código.
-- [ ] Clic y Enter añaden exactamente una tarea; no recargan la página.
-- [ ] Un texto vacío o solo con espacios no crea tareas; un texto válido se guarda limpio y vacía el input.
-- [ ] Los comentarios explican decisiones.
+- [x] He completado la revisión práctica pendiente y localizado los ejemplos en mi código.
+- [x] Clic y Enter añaden exactamente una tarea; no recargan la página.
+- [x] Un texto vacío o solo con espacios no crea tareas; un texto válido se guarda limpio y vacía el input.
+- [x] Los comentarios explican decisiones.
 - [x] `Inicio.jsx` se utiliza desde `App` y pasa `addTareas` a `Article` (verificado el 18/09/2026).
-- [ ] Completar, recuperar, buscar, eliminar y conservar tareas tras recargar siguen funcionando.
-- [ ] `npm run lint` y `npm run build` pasan antes de empezar la separación de páginas.
+- [x] Completar, recuperar, buscar, eliminar y conservar tareas tras recargar siguen funcionando.
+- [x] `npm run lint` y `npm run build` pasan antes de empezar la separación de páginas.
 
 Referencias: [el elemento form · MDN](https://developer.mozilla.org/es/docs/Web/HTML/Element/form), [preventDefault · MDN](https://developer.mozilla.org/es/docs/Web/API/Event/preventDefault) y [responder a eventos · React](https://es.react.dev/learn/responding-to-events).
 
@@ -96,7 +96,7 @@ Añade comentarios breves sobre la responsabilidad de las rutas y dónde vive ah
 
 ## Comprueba tu entrega
 
-- [ ] El proyecto sigue siendo un único Vite y tiene un solo `BrowserRouter`.
+- [x] El proyecto sigue siendo un único Vite y tiene un solo `BrowserRouter`.
 - [ ] `/` muestra el portal con tarjetas generadas desde datos y un componente reutilizable.
 - [ ] Tareas tiene enlace real; Quiz muestra «Próximamente» sin un enlace roto.
 - [ ] `/tareas` muestra la app existente con sus secciones internas.

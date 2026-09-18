@@ -26,7 +26,7 @@ Cada tarea se guarda como un objeto con esta forma general:
 
 El `id` identifica la tarea. `texto` contiene lo que escribió el usuario y `completada` indica si aparece como pendiente o finalizada.
 
-La navegación interna actual no utiliza rutas: `Header` muestra botones y `App` guarda en `seccionActual` cuál de las tres secciones se ve: `inicio`, `pendientes` o `finalizadas`.
+La navegación interna actual no utiliza rutas: `TareasPage` muestra los botones y guarda en `seccionActual` cuál de las tres secciones se ve: `inicio`, `pendientes` o `finalizadas`. `Header` es ahora la cabecera global del portal y no contiene esa navegación.
 
 ## 2. Cómo arranca React
 
@@ -38,13 +38,16 @@ La navegación interna actual no utiliza rutas: `Header` muestra botones y `App`
 - `createRoot` desde `react-dom/client`.
 - `index.css`, que carga Tailwind.
 - `App`, el componente principal.
+- `BrowserRouter` desde `react-router`, que ya envuelve `App`.
 
 La parte principal es:
 
 ```jsx
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </StrictMode>,
 );
 ```
@@ -67,8 +70,9 @@ Un componente React es normalmente una función que devuelve JSX. El JSX describ
 
 Los componentes actuales son:
 
-- `App.jsx`: componente principal. Mantiene estados, lee y guarda tareas, define las acciones y decide qué vista interna mostrar.
-- `Header.jsx`: recibe las secciones y muestra los botones de navegación interna.
+- `App.jsx`: componente principal. Mantiene la estructura global con `Header`, `TareasPage` y `Footer`.
+- `TareasPage.jsx`: página de tareas. Mantiene estados, lee y guarda tareas, define las acciones, calcula las listas y decide qué vista interna mostrar.
+- `Header.jsx`: cabecera global del portal.
 - `Footer.jsx`: muestra el pie de página.
 - `Article.jsx`: muestra el campo para escribir y el botón para añadir una tarea.
 - `Inicio.jsx`: contiene la sección de inicio y renderiza `Article`.
@@ -78,15 +82,15 @@ Los componentes actuales son:
 
 ### Relación padre e hijo
 
-`App` es el componente padre principal. Renderiza `Header`, `Inicio`, `Pendientes`, `Finalizadas` y `Footer`.
+`App` es el componente padre de la estructura global. Renderiza `Header`, `TareasPage` y `Footer`. `TareasPage` renderiza la navegación interna y las vistas `Inicio`, `Pendientes` y `Finalizadas`.
 
 El recorrido de la sección de inicio es:
 
 ```text
-App -> Inicio -> Article
+App -> TareasPage -> Inicio -> Article
 ```
 
-`App` pasa `addTareas` a `Inicio`, e `Inicio` se la pasa a `Article`. De esta manera el formulario visual está separado, pero el estado de todas las tareas sigue viviendo en `App`.
+`TareasPage` pasa `addTareas` a `Inicio`, e `Inicio` se la pasa a `Article`. De esta manera el formulario visual está separado, pero el estado de todas las tareas vive en la página que coordina esta funcionalidad.
 
 ## 4. Estado: `useState`
 
@@ -102,7 +106,7 @@ const [valor, setValor] = useState(valorInicial);
 - La función `set...` solicita una actualización.
 - El valor inicial se utiliza al comenzar el componente.
 
-En `App.jsx` hay tres estados.
+En `TareasPage.jsx` hay tres estados.
 
 ### `seccionActual`
 
@@ -112,7 +116,7 @@ const [seccionActual, setSeccionActual] = useState("inicio");
 
 - Guarda la sección que debe mostrarse.
 - Empieza en `"inicio"`.
-- `setSeccionActual` lo cambia cuando se pulsa un botón de `Header`.
+- `setSeccionActual` lo cambia cuando se pulsa un botón de la navegación interna de `TareasPage`.
 - Al cambiar, React vuelve a renderizar y las condiciones del JSX muestran otra vista.
 
 ### `tareas`
@@ -169,7 +173,7 @@ Ejemplo actual:
 <Inicio addTareas={addTareas} />
 ```
 
-`App` pasa la función `addTareas` a `Inicio`. Después `Inicio` hace:
+`TareasPage` pasa la función `addTareas` a `Inicio`. Después `Inicio` hace:
 
 ```jsx
 <Article addTareas={addTareas} />
@@ -177,9 +181,8 @@ Ejemplo actual:
 
 Otros ejemplos reales:
 
-- `App` pasa `secciones`, `seccionActual` y `setSeccionActual` a `Header`.
-- `App` pasa a `Pendientes` las listas pendientes, la búsqueda y las funciones `setBusqueda`, `completarTarea` y `eliminarTarea`.
-- `App` pasa a `Finalizadas` las listas finalizadas, la búsqueda y las funciones `setBusqueda`, `recuperarTarea` y `eliminarTarea`.
+- `TareasPage` pasa a `Pendientes` las listas pendientes, la búsqueda y las funciones `setBusqueda`, `completarTarea` y `eliminarTarea`.
+- `TareasPage` pasa a `Finalizadas` las listas finalizadas, la búsqueda y las funciones `setBusqueda`, `recuperarTarea` y `eliminarTarea`.
 
 Las props permiten reutilizar componentes sin mover todo el estado a cada hijo.
 
@@ -187,16 +190,16 @@ Las props permiten reutilizar componentes sin mover todo el estado a cada hijo.
 
 Una función también es un valor de JavaScript, así que puede pasarse como prop. Cuando la función se pasa para que el hijo la llame como respuesta a una acción, suele llamarse callback.
 
-En este proyecto, `addTareas` se define en `App`, pero el botón está en `Article`:
+En este proyecto, `addTareas` se define en `TareasPage`, pero el botón está en `Article`:
 
 ```text
-App define addTareas
-App -> Inicio -> Article recibe addTareas
+TareasPage define addTareas
+TareasPage -> Inicio -> Article recibe addTareas
 Article llama addTareas
-App actualiza tareas
+TareasPage actualiza tareas
 ```
 
-`Article` no modifica directamente el estado `tareas`, porque ese estado pertenece a `App`. Al llamar al callback, comunica al padre que el usuario quiere añadir una tarea. El padre decide cómo crearla y actualizar el estado.
+`Article` no modifica directamente el estado `tareas`, porque ese estado pertenece a `TareasPage`. Al llamar al callback, comunica al padre que el usuario quiere añadir una tarea. El padre decide cómo crearla y actualizar el estado.
 
 Lo mismo ocurre cuando una vista llama a `completarTarea`, `recuperarTarea` o `eliminarTarea`.
 
@@ -225,7 +228,7 @@ Cuando se pulsa el botón o la tecla Enter, se llama a `enviarTarea`:
 4. Llama a `addTareas(tareaLimpia)`.
 5. Vacía el input con `setTextoTarea("")` si la entrada era válida.
 
-En `App`, `addTareas` vuelve a limpiar el texto y, si no está vacío, crea:
+En `TareasPage`, `addTareas` vuelve a limpiar el texto y, si no está vacío, crea:
 
 ```jsx
 const nuevaTarea = {
@@ -327,7 +330,7 @@ La búsqueda vuelve a utilizar `filter` sobre las tareas de cada sección. Solo 
 
 ## 12. Búsqueda
 
-En `App` se normaliza el texto:
+En `TareasPage` se normaliza el texto:
 
 ```jsx
 const textoBusqueda = busqueda.trim().toLowerCase();
@@ -351,7 +354,7 @@ No se necesita otro `useEffect` porque la búsqueda es un dato derivado que se p
 
 Renderizar condicionalmente significa mostrar una parte del JSX solo cuando se cumple una condición.
 
-En `App` se usa `&&`:
+En `TareasPage` se usa `&&`:
 
 ```jsx
 {
@@ -385,7 +388,7 @@ React necesita una `key` estable para distinguir los elementos de una lista entr
 
 El `index` solo se utiliza para mostrar el número visible de la tarea. No se usa como `key`.
 
-`Header` también usa `secciones.map` y `key={seccion.id}` para crear los botones de navegación interna.
+La navegación interna de `TareasPage` usa `secciones.map` y `key={seccion.id}` para crear los botones.
 
 ## 15. Formularios y eventos
 
@@ -403,15 +406,9 @@ En los buscadores hace algo parecido con `setBusqueda`.
 
 Se ejecuta al pulsar un botón. Los botones de completar, recuperar, eliminar y limpiar búsqueda utilizan `onClick`.
 
-### `onKeyDown`
-
-Se ejecuta cuando se pulsa una tecla dentro del input. Actualmente `Article` comprueba si `e.key === "Enter"` y entonces llama a `enviarTarea`.
-
 ### Estado actual de `onSubmit` y `preventDefault`
 
-El proyecto actual todavía no utiliza un elemento `<form>`, `onSubmit` ni `event.preventDefault()` en `Article`. El `article` es un elemento contenedor; el envío se hace manualmente mediante `onClick` y `onKeyDown`.
-
-El Reto 06 pide cambiar ese sistema por un `<form onSubmit={...}>`, llamar a `event.preventDefault()` para evitar la recarga del navegador y usar un botón `type="submit"`. En ese diseño, tanto clic como Enter pasarían por la misma función de envío. Ese cambio pertenece al Reto 06 y todavía no está implementado.
+`Article` utiliza un elemento `<form onSubmit={enviarTarea}>`. `enviarTarea` llama a `event.preventDefault()` para evitar la recarga, limpia y valida el texto, y después ejecuta `addTareas`. El botón tiene `type="submit"`; por eso el clic y Enter utilizan el mismo flujo. Ya no se utiliza `onKeyDown` ni un `onClick` específico para enviar.
 
 ### Input controlado
 
@@ -521,7 +518,7 @@ El array de dependencias indica que el efecto depende de `tareas`. El efecto se 
 
 ### Por qué guarda al montar
 
-Al montar `App`, `tareas` contiene el valor obtenido por `leerTareasGuardadas`. El efecto sincroniza ese estado inicial con el almacenamiento. En `StrictMode` puede haber ejecuciones adicionales de comprobación durante el desarrollo, por lo que no se debe describir como una única ejecución garantizada.
+Al montar `TareasPage`, `tareas` contiene el valor obtenido por `leerTareasGuardadas`. El efecto sincroniza ese estado inicial con el almacenamiento. En `StrictMode` puede haber ejecuciones adicionales de comprobación durante el desarrollo, por lo que no se debe describir como una única ejecución garantizada.
 
 ### Por qué vuelve a guardar
 
@@ -589,7 +586,7 @@ La aplicación actual no incluye un sistema separado de diseño para escritorio:
 
 ## 22. Flujo completo de una tarea
 
-En el código actual no hay todavía un `<form>`; el flujo real utiliza un input, `onChange`, `onClick` y `onKeyDown`.
+El flujo real utiliza un `<form>`, un input controlado, `onChange`, `onSubmit` y `preventDefault`.
 
 ```text
 Usuario escribe
@@ -599,7 +596,7 @@ Usuario escribe
 -> usuario pulsa el botón o Enter
 -> enviarTarea
 -> trim y validación
--> addTareas en App
+-> addTareas en TareasPage
 -> crypto.randomUUID y nuevo objeto
 -> setTareas([...tareas, nuevaTarea])
 -> React renderiza de nuevo
@@ -615,7 +612,7 @@ Si el texto queda vacío después de `trim`, el flujo termina sin crear una tare
 
 1. En `Pendientes`, el usuario pulsa `Completar`.
 2. El botón llama a `completarTarea(tarea.id)`.
-3. `App` ejecuta `tareas.map(...)`.
+3. `TareasPage` ejecuta `tareas.map(...)`.
 4. Para la tarea cuyo `id` coincide, crea un objeto nuevo con `completada: true`.
 5. Las demás tareas se devuelven sin cambiar.
 6. `setTareas(nuevasTareas)` actualiza el estado.
@@ -627,7 +624,7 @@ Si el texto queda vacío después de `trim`, el flujo termina sin crear una tare
 
 1. El usuario pulsa `Eliminar` en `Pendientes` o `Finalizadas`.
 2. El botón llama a `eliminarTarea(tarea.id)`.
-3. `App` ejecuta `tareas.filter((tarea) => tarea.id !== id)`.
+3. `TareasPage` ejecuta `tareas.filter((tarea) => tarea.id !== id)`.
 4. La tarea con ese ID queda fuera de la lista nueva.
 5. `setTareas(nuevasTareas)` actualiza el estado.
 6. React vuelve a renderizar las listas y los totales.
@@ -639,12 +636,12 @@ Si era la última tarea, la lista resultante es `[]`. Esa lista vacía se serial
 
 1. El navegador vuelve a cargar la aplicación.
 2. `main.jsx` busca `root` y monta `<App />` dentro de `StrictMode`.
-3. `App` inicializa `tareas` usando `leerTareasGuardadas`.
+3. `TareasPage` inicializa `tareas` usando `leerTareasGuardadas`.
 4. La función obtiene el texto de `localStorage` con la clave `devquest.tareas.v1`.
 5. Si no hay valor, devuelve `[]`.
 6. Si hay valor, `JSON.parse` lo convierte a datos de JavaScript.
 7. Se valida que sea una lista de tareas con IDs únicos y campos correctos.
-8. `App` calcula pendientes, finalizadas y resultados de búsqueda.
+8. `TareasPage` calcula pendientes, finalizadas y resultados de búsqueda.
 9. React muestra la sección inicial y sus componentes.
 10. El efecto sincroniza el estado inicial con el almacenamiento.
 
@@ -664,7 +661,7 @@ Estos conceptos aparecen realmente en el código actual:
 - Props.
 - Callbacks o funciones pasadas como props.
 - Inputs controlados con `value` y `onChange`.
-- Eventos `onClick` y `onKeyDown`.
+- Eventos `onClick`, `onChange` y `onSubmit`.
 - Renderizado condicional con `&&` y operador ternario.
 - Renderizado de listas con `map`.
 - `key` estable en listas JSX.
@@ -676,7 +673,7 @@ Estos conceptos aparecen realmente en el código actual:
 - Manejo de errores con `try/catch`.
 - Clases Tailwind y diseño responsive.
 
-No tengo todavía en el código actual React Router, `BrowserRouter`, `Routes`, `Route`, `Link`, `NavLink`, páginas separadas para rutas ni portales de miniapps.
+React Router ya está instalado y `BrowserRouter` ya envuelve `App` en `main.jsx`. Todavía no existen `Routes`, `Route`, `Link`, `NavLink`, páginas separadas por rutas ni el portal de miniapps.
 
 ## 27. Lo que voy a aprender en el Reto 06
 
@@ -685,17 +682,17 @@ Esta sección describe las instrucciones del Reto 06, no funcionalidades que ya 
 ### YA LO TENGO
 
 - Una aplicación de tareas funcional.
-- Una navegación interna por estado con botones de `Header`.
+- Una navegación interna por estado con botones de `TareasPage`.
 - Componentes separados para cabecera, pie, formulario y vistas.
-- Estado de tareas en `App`.
+- Estado de tareas en `TareasPage`.
 - Persistencia de tareas en `localStorage`.
 
 ### LO VOY A APRENDER EN RETO 06
 
-- **Separar `TareasPage`:** mover a una página de tareas el estado, la lectura inicial, el efecto, las acciones y las listas calculadas que ahora están en `App`.
+- **Separar `TareasPage`:** este paso ya está implementado: la página contiene el estado, la lectura inicial, el efecto, las acciones y las listas calculadas.
 - **Páginas:** componentes que representan pantallas completas, como una futura página de portal o de tareas.
 - **React Router:** librería para decidir qué componente se muestra según la URL.
-- **`BrowserRouter`:** componente que proporciona el contexto de navegación basado en la dirección del navegador.
+- **`BrowserRouter`:** ya está colocado en `main.jsx` alrededor de `App` y proporciona el contexto para la futura navegación basada en URL.
 - **`Routes`:** contenedor de las rutas declaradas.
 - **`Route`:** asociación entre una dirección y el elemento que debe mostrarse.
 - **`Link`:** enlace de navegación de React Router que cambia de ruta sin usar un botón de estado manual.
@@ -706,7 +703,7 @@ Esta sección describe las instrucciones del Reto 06, no funcionalidades que ya 
 - **Rutas desconocidas:** una ruta que no coincide debe mostrar una página de no encontrado con un enlace al portal.
 - **Estado al desmontar y montar:** al salir de la ruta de tareas, el componente puede desmontarse y perder estados locales como la sección activa o el texto de búsqueda. Al volver a montarse, el inicializador vuelve a leer las tareas persistidas. Las tareas se conservan porque están en `localStorage`, mientras que un texto sin enviar puede reiniciarse.
 
-El Reto 06 también pide convertir el envío de `Article` en un formulario con `onSubmit` y `preventDefault`, pero ese cambio todavía no forma parte del código actual.
+La conversión del envío de `Article` a un formulario con `onSubmit`, `preventDefault` y `type="submit"` ya está implementada. La parte de rutas del reto continúa pendiente.
 
 ## 28. Preguntas que debería saber responder
 
@@ -714,7 +711,7 @@ El Reto 06 también pide convertir el envío de `Article` en un formulario con `
 
 Porque necesito guardar datos que cambian y provocar un nuevo renderizado cuando cambian. Lo uso para la sección, la lista de tareas, la búsqueda y el texto del input.
 
-### ¿Qué guarda cada estado de `App`?
+### ¿Qué guarda cada estado de `TareasPage`?
 
 `seccionActual` guarda la vista, `tareas` guarda todas las tareas y `busqueda` guarda el texto del buscador.
 
@@ -740,11 +737,11 @@ Para identificar una tarea concreta aunque otra tenga el mismo texto. También l
 
 ### ¿Qué son las props?
 
-Son valores que un padre pasa a un hijo. Por ejemplo, `App` pasa listas y funciones a `Pendientes` y `Finalizadas`.
+Son valores que un padre pasa a un hijo. Por ejemplo, `TareasPage` pasa listas y funciones a `Pendientes` y `Finalizadas`.
 
 ### ¿Qué es un callback en este proyecto?
 
-Es una función que un componente recibe y llama después. `Article` llama a `addTareas`, que está definida en `App`.
+Es una función que un componente recibe y llama después. `Article` llama a `addTareas`, que está definida en `TareasPage`.
 
 ### ¿Por qué utilizas `useEffect`?
 
@@ -792,8 +789,8 @@ La aplicación conserva las tareas en el estado de React durante la sesión, per
 
 ### ¿Cómo se envía actualmente una tarea?
 
-`Article` no usa todavía `<form>`. El botón llama a `enviarTarea` con `onClick` y Enter la llama con `onKeyDown`.
+`Article` usa `<form onSubmit={enviarTarea}>`. `enviarTarea` ejecuta `preventDefault`, valida el texto y llama a `addTareas`; el botón tiene `type="submit"`.
 
 ### ¿Qué cambiará en el Reto 06?
 
-Se centralizará el envío en `<form onSubmit>`, se usará `preventDefault` y un botón `type="submit"`. Además, se separará la página de tareas y se añadirán rutas con React Router. Esos cambios aún no están implementados.
+El envío ya está centralizado en `<form onSubmit>`, con `preventDefault` y un botón `type="submit"`. También se separó `TareasPage` y se colocó `BrowserRouter`, pero todavía faltan las rutas con `Routes` y `Route`, los enlaces y las páginas del portal.

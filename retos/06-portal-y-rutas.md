@@ -10,19 +10,20 @@ Trabaja en el mismo `devquest/`. No crees otro Vite. Haz un bloque cada vez; no 
 
 La app funciona y el 05 sigue cerrado técnicamente. Este paso prepara el código para el portal y sirve para comprobar lo que has aprendido. Haz un cambio cada vez y pruébalo antes de añadir Router.
 
-1. Revisa las [observaciones de tu resumen](../devquest/resumen/resumen.md). Amplía los puntos confusos con ejemplos reales y prepara la explicación al tutor; no necesitas otro documento largo.
+1. Completa la [revisión práctica pendiente](../devquest/resumen/REVISION-PENDIENTE.md). Las aclaraciones teóricas ya están incorporadas; contrástalas con ejemplos reales. No necesitas otro documento largo ni esperar al tutor para hacer estas comprobaciones.
 2. **Centraliza el envío de tareas en un formulario.** En `Article`, utiliza un `<form>` con `onSubmit`, evita la recarga mediante `event.preventDefault()` y usa un botón `type="submit"`. Conserva la etiqueta y el input controlado. Retira el envío manual mediante `onKeyDown` y el `onClick` de envío del botón para que Enter y clic recorran una sola función. Mantén `trim`, el rechazo de entradas vacías y el vaciado del input tras añadir.
 3. **Revisa los comentarios nuevos.** Conserva las explicaciones sobre identidad, copias, lectura inicial y dependencia del efecto. Retira comentarios que solo repiten lo que ya dice una línea. Donde un concepto sea nuevo para ti, explica brevemente el motivo o anota la duda en el resumen.
-4. **Aclara el papel de `views/Inicio.jsx`.** Actualmente existe, pero `App` muestra `Article` directamente. Decide si vas a utilizar esa vista o si sobra y retírala si no se usa. No crees dos caminos que mantengan por separado el mismo formulario.
+4. **`views/Inicio.jsx` ya está integrado.** `App` renderiza `Inicio` y este pasa `addTareas` a `Article`. Conserva ese recorrido al reorganizar las páginas; no necesitas repetir esta corrección.
 
 No hace falta extraer ahora todos los componentes repetidos ni cambiar las funciones de tareas a una arquitectura nueva. Los setters actuales funcionan en estos eventos; la prioridad es entender las copias y conservar el comportamiento.
 
 ### Comprobación previa
 
-- [ ] He revisado las observaciones del resumen y puedo enseñar sus ejemplos en el código.
+- [ ] He completado la revisión práctica pendiente y localizado los ejemplos en mi código.
 - [ ] Clic y Enter añaden exactamente una tarea; no recargan la página.
 - [ ] Un texto vacío o solo con espacios no crea tareas; un texto válido se guarda limpio y vacía el input.
-- [ ] Los comentarios explican decisiones y he resuelto el archivo `Inicio.jsx` sin uso.
+- [ ] Los comentarios explican decisiones.
+- [x] `Inicio.jsx` se utiliza desde `App` y pasa `addTareas` a `Article` (verificado el 18/09/2026).
 - [ ] Completar, recuperar, buscar, eliminar y conservar tareas tras recargar siguen funcionando.
 - [ ] `npm run lint` y `npm run build` pasan antes de empezar la separación de páginas.
 

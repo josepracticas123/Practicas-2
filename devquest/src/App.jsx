@@ -3,7 +3,7 @@ import Footer from './components/Footer' // Importa el pie de página.
 import TareasPage from './pages/TareasPage' // Importa el contenido ahora.
 import { Routes, Route, Link } from 'react-router';
 import PortalPage from './pages/PortalPage'
-
+import QuizPage from './pages/QuizPage';
 
 // App coordina el estado y las vistas principales.
 function App() {
@@ -17,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<PortalPage/>} />
           <Route path="/tareas" element={<TareasPage/>} />
+          <Route path="/quiz" element={<QuizPage/>}/>
           <Route
             path="*"
             element={

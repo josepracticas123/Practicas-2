@@ -6,7 +6,7 @@ function Article({ addTareas }) {
 
   // Envía el texto limpio y vacía el input si es válido.
   const enviarTarea = (event) => {
-    event.preventDefault(); // Evita el comportamienro por defecto del navegador, osea recargar, deja que react lo realice.
+   event.preventDefault(); // Evita el comportamienro por defecto del navegador, osea recargar, deja que react lo realice.
     const tareaLimpia = textoTarea.trim();
     if (tareaLimpia !== "") {
       addTareas(tareaLimpia); // Llama al callback que vive en App.

@@ -15,12 +15,11 @@ function PortalPage(){
       id: "quiz",
       titulo: "Quiz de React",
       descripcion: "Pon a prueba tus conocimientos de React.",
-      accion: "Próximamente...",
+      accion: "Abrir quiz",
+      ruta:"/quiz"
     }
   ]
     return(
-        
-
         <section className="px-6 py-10 text-white">
             <h2 className="mb-8 text-center text-4xl font-bold">Portal de miniapps</h2>
             <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">

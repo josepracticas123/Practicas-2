@@ -30,7 +30,7 @@ function Finalizadas({
                 <button
                     type="button"
                     onClick={() => setBusqueda("")} // Limpia el filtro.
-                    className="w-full px-3 py-1.5 text-white bg-gray-500 sm:w-auto"
+                    className="w-full rounded-lg px-3 py-1.5 text-white bg-gray-500 sm:w-auto"
                 >
                     Limpiar búsqueda
                 </button>
@@ -69,14 +69,14 @@ function Finalizadas({
 
                                         <button
                                             type="button"
-                                            className="w-full bg-green-500 px-4 py-2 text-white sm:ml-4 sm:w-auto"
+                                            className="w-full rounded-lg bg-green-500 px-4 py-2 text-white sm:ml-4 sm:w-auto"
                                             onClick={() => recuperarTarea(tarea.id)} // Devuelve la tarea a pendientes.
                                         >
                                             Recuperar
                                         </button>
                                         <button
                                             type="button"
-                                            className="w-full bg-gray-500 px-4 py-2 text-white sm:ml-2 sm:w-auto"
+                                            className="w-full rounded-lg bg-gray-500 px-4 py-2 text-white sm:ml-2 sm:w-auto"
                                             onClick={() => eliminarTarea(tarea.id)} // Elimina por id.
                                         >
                                             Eliminar

@@ -7,7 +7,7 @@ import { leerTareasGuardadas, guardarTareas } from '../utils/Almacenamiento'; //
 function TareasPage() {
   // Lista fija de opciones que aparecen en el navbar.
   const secciones = [
-    { id: "inicio", nombre: "Inicio" },
+    { id: "inicio", nombre: "Añadir tarea" },
     { id: "pendientes", nombre: "Pendientes" },
     { id: "finalizadas", nombre: "Finalizadas" }
   ];

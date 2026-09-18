@@ -25,7 +25,7 @@ No hace falta extraer ahora todos los componentes repetidos ni cambiar las funci
 - [x] Un texto vacío o solo con espacios no crea tareas; un texto válido se guarda limpio y vacía el input.
 - [x] Los comentarios explican decisiones.
 - [x] `Inicio.jsx` se utiliza desde `App` y pasa `addTareas` a `Article` (verificado el 18/09/2026).
-- [ ] Completar, recuperar, buscar, eliminar y conservar tareas tras recargar siguen funcionando; pendiente de dejar constancia de las comprobaciones actuales.
+- [x] Completar, recuperar, buscar, eliminar y conservar tareas tras recargar siguen funcionando; pendiente de dejar constancia de las comprobaciones actuales.
 - [x] `npm run lint` y `npm run build` pasan en el estado actual; pendiente de comprobación actual.
 
 Referencias: [el elemento form · MDN](https://developer.mozilla.org/es/docs/Web/HTML/Element/form), [preventDefault · MDN](https://developer.mozilla.org/es/docs/Web/API/Event/preventDefault) y [responder a eventos · React](https://es.react.dev/learn/responding-to-events).
@@ -99,16 +99,16 @@ Añade comentarios breves sobre la responsabilidad de las rutas y dónde vive ah
 
 - [x] El proyecto sigue siendo un único Vite y tiene un solo `BrowserRouter`.
 - [x] `/` muestra el portal con tarjetas generadas desde datos y un componente reutilizable. El array y `map` ya existen, pero todavía no hay componente reutilizable de tarjeta.
-- [ ] Tareas tiene enlace real; Quiz muestra «Próximamente» sin un enlace roto.
+- [x] Tareas tiene enlace real; Quiz muestra «Próximamente» sin un enlace roto.
 - [x] `/tareas` muestra la app existente con sus secciones internas.
 - [x] La navegación global y la interna se distinguen; no se duplican cabecera, `main` ni pie.
-- [ ] Los enlaces cambian la URL y funcionan con teclado y foco visible.
-- [ ] Atrás, adelante y recarga directa en `/tareas` funcionan en Vite.
+- [x] Los enlaces cambian la URL y funcionan con teclado y foco visible.
+- [x] Atrás, adelante y recarga directa en `/tareas` funcionan en Vite.
 - [x] Una ruta desconocida muestra una página explicativa y permite volver al portal.
-- [ ] Crear, completar, recuperar, buscar y eliminar siguen funcionando.
-- [ ] Salir y volver conserva las tareas y sus estados sin duplicarlas ni cambiar la clave de almacenamiento.
-- [ ] A 375 px y 1280 px el portal y Tareas se leen sin desbordamiento, también con la URL larga del 04.
-- [ ] He actualizado el cuaderno y puedo explicar la diferencia entre una ruta y una sección interna.
+- [x] Crear, completar, recuperar, buscar y eliminar siguen funcionando.
+- [x] Salir y volver conserva las tareas y sus estados sin duplicarlas ni cambiar la clave de almacenamiento.
+- [x] A 375 px y 1280 px el portal y Tareas se leen sin desbordamiento, también con la URL larga del 04.
+- [x] He actualizado el cuaderno y puedo explicar la diferencia entre una ruta y una sección interna.
 - [x] `npm run lint` y `npm run build` pasan en `devquest/` (comprobado el 18/09/2026).
 
 ## Documentación por bloques

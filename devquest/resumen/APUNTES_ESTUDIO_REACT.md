@@ -408,7 +408,9 @@ Se ejecuta al pulsar un botón. Los botones de completar, recuperar, eliminar y 
 
 ### Estado actual de `onSubmit` y `preventDefault`
 
-`Article` ya contiene `<form>` y un botón `type="submit"`, pero `enviarTarea` sigue conectada al `onClick` del botón. La función recibe ese evento, llama a `preventDefault()`, valida el texto y ejecuta `addTareas`. Aún falta conectar `onSubmit` al formulario y retirar el `onClick` de envío, como pide el reto 06.
+`Article` ya contiene un `<form>` y un botón `type="submit"`, pero el código actual todavía conecta `enviarTarea` al `onClick` del botón. La función ejecuta `event.preventDefault()`, aplica `trim()`, rechaza entradas vacías, llama a `addTareas` y limpia el input si la entrada es válida. Aún falta conectar la función al `onSubmit` del formulario y retirar el `onClick` independiente.
+
+La centralización pendiente hará que el clic y Enter recorran un único camino de envío. Así se evita duplicar la lógica de creación y validación de tareas.
 
 ### Input controlado
 
@@ -586,7 +588,7 @@ La aplicación actual no incluye un sistema separado de diseño para escritorio:
 
 ## 22. Flujo completo de una tarea
 
-El flujo actual del clic utiliza un `<form>`, un input controlado, `onChange`, el `onClick` del botón y `preventDefault`. La conexión al evento `onSubmit` sigue pendiente.
+El flujo actual utiliza un `<form>`, un input controlado, `onChange`, el `onClick` del botón y `preventDefault`. La conexión directa del formulario con `onSubmit` sigue pendiente.
 
 ```text
 Usuario escribe
@@ -704,7 +706,7 @@ Esta sección describe las instrucciones del Reto 06, no funcionalidades que ya 
 - **Rutas desconocidas:** una ruta que no coincide debe mostrar una página de no encontrado con un enlace al portal.
 - **Estado al desmontar y montar:** al salir de la ruta de tareas, el componente puede desmontarse y perder estados locales como la sección activa o el texto de búsqueda. Al volver a montarse, el inicializador vuelve a leer las tareas persistidas. Las tareas se conservan porque están en `localStorage`, mientras que un texto sin enviar puede reiniciarse.
 
-La conversión del envío de `Article` está en proceso: ya existen `<form>`, `preventDefault` y `type="submit"`, pero falta trasladar el manejador de `onClick` a `onSubmit`. La parte de rutas del reto continúa pendiente.
+El formulario de `Article` ya utiliza `preventDefault`, `trim` y `type="submit"`, pero la conexión con `onSubmit` sigue pendiente. La parte de rutas del reto también continúa pendiente.
 
 ## 28. Preguntas que debería saber responder
 
@@ -790,7 +792,7 @@ La aplicación conserva las tareas en el estado de React durante la sesión, per
 
 ### ¿Cómo se envía actualmente una tarea?
 
-`Article` ya contiene `<form>` y un botón `type="submit"`, pero `enviarTarea` sigue conectada al `onClick` del botón. La función recibe ese evento, llama a `preventDefault()`, valida el texto y ejecuta `addTareas`. Aún falta conectar `onSubmit` al formulario y retirar el `onClick` de envío, como pide el reto 06.
+`Article` ya contiene un `<form>` y un botón `type="submit"`, pero actualmente el botón llama a `enviarTarea` mediante `onClick`. La función ejecuta `preventDefault()`, aplica `trim()`, valida el texto y llama a `addTareas`. Falta centralizar ese envío en `onSubmit`.
 
 ### ¿Qué cambiará en el Reto 06?
 

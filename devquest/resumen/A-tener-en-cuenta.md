@@ -100,7 +100,9 @@ Por debajo de 640 px se mantiene la clase base. Si la clase base es "flex-col", 
 
 ### ¿Qué ocurre actualmente al enviar el formulario?
 
-`Article` ya contiene `<form>` y un botón `type="submit"`, pero `enviarTarea` sigue conectada al `onClick` del botón. La función recibe ese evento, llama a `preventDefault()`, valida el texto y ejecuta `addTareas`. Aún falta conectar `onSubmit` al formulario y retirar el `onClick` de envío, como pide el reto 06.
+`Article` ya contiene un `<form>` y un botón `type="submit"`, pero el código actual todavía conecta `enviarTarea` al `onClick` del botón. La función ejecuta `event.preventDefault()`, aplica `trim()`, rechaza entradas vacías, llama a `addTareas` y limpia el input si la entrada es válida. La conexión de `enviarTarea` al `onSubmit` del formulario y la retirada del `onClick` independiente siguen pendientes.
+
+La centralización pendiente busca que el clic y la tecla Enter recorran un único `onSubmit`, evitando duplicar caminos de envío y manteniendo la validación en un solo lugar.
 
 ## Funcionamiento del guardado en `localStorage`
 

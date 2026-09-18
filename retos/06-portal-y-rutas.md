@@ -20,12 +20,13 @@ No hace falta extraer ahora todos los componentes repetidos ni cambiar las funci
 ### Comprobación previa
 
 - [x] He completado la revisión práctica pendiente y localizado los ejemplos en mi código.
-- [x] Clic y Enter añaden exactamente una tarea; no recargan la página.
+- [ ] El formulario está centralizado en `onSubmit`; actualmente el botón todavía llama a `enviarTarea` mediante `onClick`.
+- [ ] Clic y Enter recorren el mismo `onSubmit`; esta comprobación queda pendiente hasta conectar el manejador al formulario.
 - [x] Un texto vacío o solo con espacios no crea tareas; un texto válido se guarda limpio y vacía el input.
 - [x] Los comentarios explican decisiones.
 - [x] `Inicio.jsx` se utiliza desde `App` y pasa `addTareas` a `Article` (verificado el 18/09/2026).
-- [x] Completar, recuperar, buscar, eliminar y conservar tareas tras recargar siguen funcionando.
-- [x] `npm run lint` y `npm run build` pasan antes de empezar la separación de páginas.
+- [ ] Completar, recuperar, buscar, eliminar y conservar tareas tras recargar siguen funcionando; pendiente de dejar constancia de las comprobaciones actuales.
+- [ ] `npm run lint` y `npm run build` pasan en el estado actual; pendiente de comprobación actual.
 
 Referencias: [el elemento form · MDN](https://developer.mozilla.org/es/docs/Web/HTML/Element/form), [preventDefault · MDN](https://developer.mozilla.org/es/docs/Web/API/Event/preventDefault) y [responder a eventos · React](https://es.react.dev/learn/responding-to-events).
 

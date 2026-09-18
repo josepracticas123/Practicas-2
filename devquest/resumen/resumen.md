@@ -65,7 +65,7 @@ TareasPage.jsx: guarda el estado, modifica las tareas, calcula las listas y deci
 
 Header.jsx: muestra la cabecera global del portal.
 
-Article.jsx: contiene el formulario y el input controlado; el envío sigue conectado al `onClick` del botón. La conexión a `onSubmit` está pendiente.
+Article.jsx: contiene el formulario y el input controlado; actualmente el envío se realiza desde el `onClick` del botón mediante `enviarTarea`. La conexión directa a `onSubmit` sigue pendiente.
 
 Inicio.jsx: recibe `addTareas` desde `TareasPage` y muestra `Article`.
 
@@ -193,7 +193,9 @@ Las props son datos o funciones que un componente recibe de su padre:
 <Article addTareas={addTareas} />
 ```
 
-`TareasPage` pasa `addTareas` a `Inicio`, que la pasa a `Article`. Al pulsar el botón, su `onClick` ejecuta `enviarTarea`, que llama a `addTareas`; `TareasPage` añade la tarea a su estado.
+`TareasPage` pasa `addTareas` a `Inicio`, que la pasa a `Article`. El input se controla con `value` y `onChange`; actualmente el `onClick` del botón ejecuta `enviarTarea`, que llama a `preventDefault`, aplica `trim`, rechaza entradas vacías, llama a `addTareas` y limpia el input si la entrada es válida.
+
+El objetivo pendiente es conectar `enviarTarea` al `onSubmit` del formulario y retirar el `onClick` independiente, para que clic y Enter utilicen un único camino de envío.
 
 También se pasan listas y acciones a Pendientes y Finalizadas. Así las vistas pueden mostrar datos y avisar a `TareasPage` cuando el usuario pulsa un botón.
 
@@ -306,7 +308,7 @@ onChange: detecta que ha cambiado un input.
 
 onSubmit: controla el envío de un formulario.
 
-`Article` ya contiene `<form>` y un botón `type="submit"`, pero `enviarTarea` sigue conectada al `onClick` del botón. La función recibe ese evento, llama a `preventDefault()`, valida el texto y ejecuta `addTareas`. Aún falta conectar `onSubmit` al formulario y retirar el `onClick` de envío, como pide el reto 06.
+`Article` ya contiene `<form>` y un botón `type="submit"`, pero actualmente `enviarTarea` está conectada al `onClick` del botón. La función usa `preventDefault()`, `trim()`, valida el texto y limpia el input después de añadir una tarea válida. Aún falta conectarla al `onSubmit` del formulario y retirar el `onClick` independiente.
 
 Ejemplo de input controlado:
 

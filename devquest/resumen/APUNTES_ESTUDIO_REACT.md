@@ -240,6 +240,8 @@ const nuevaTarea = {
 
 `crypto.randomUUID()` crea un identificador para esa tarea. Después se actualiza el estado:
 
+Cada alta genera un ID nuevo, por lo que dos tareas con el mismo texto siguen siendo tareas distintas.
+
 ```jsx
 setTareas([...tareas, nuevaTarea]);
 ```
@@ -676,7 +678,7 @@ Estos conceptos aparecen realmente en el código actual:
 - Manejo de errores con `try/catch`.
 - Clases Tailwind y diseño responsive.
 
-React Router ya está instalado y `BrowserRouter` ya envuelve `App` en `main.jsx`. Todavía no existen `Routes`, `Route`, `Link`, `NavLink`, páginas separadas por rutas ni el portal de miniapps.
+React Router ya está instalado. `BrowserRouter` envuelve `App` en `main.jsx` y `App` ya declara `Routes`, las rutas `/`, `/tareas` y una ruta comodín. Existe `PortalPage` con un array de miniapps recorrido mediante `map`, pero todavía faltan el componente reutilizable de tarjeta y el enlace real de Tareas. `NavLink` no se utiliza.
 
 ## 27. Lo que voy a aprender en el Reto 06
 
@@ -693,17 +695,17 @@ Esta sección describe las instrucciones del Reto 06, no funcionalidades que ya 
 ### LO VOY A APRENDER EN RETO 06
 
 - **Separar `TareasPage`:** este paso ya está implementado: la página contiene el estado, la lectura inicial, el efecto, las acciones y las listas calculadas.
-- **Páginas:** componentes que representan pantallas completas, como una futura página de portal o de tareas.
-- **React Router:** librería para decidir qué componente se muestra según la URL.
+- **Páginas:** ya existen `PortalPage` y `TareasPage` como componentes que representan pantallas completas.
+- **React Router:** ya se utiliza para decidir qué componente se muestra según la URL.
 - **`BrowserRouter`:** ya está colocado en `main.jsx` alrededor de `App` y proporciona el contexto para la futura navegación basada en URL.
-- **`Routes`:** contenedor de las rutas declaradas.
-- **`Route`:** asociación entre una dirección y el elemento que debe mostrarse.
-- **`Link`:** enlace de navegación de React Router que cambia de ruta sin usar un botón de estado manual.
+- **`Routes`:** ya contiene las rutas declaradas en `App`.
+- **`Route`:** ya asocia `/`, `/tareas` y la ruta comodín con sus elementos.
+- **`Link`:** se utiliza en la ruta comodín para volver al portal; todavía falta usarlo en la tarjeta de Tareas.
 - **`NavLink`:** enlace que puede recibir un estilo especial cuando su ruta está activa.
 - **Rutas:** direcciones como `/` y `/tareas`, distintas de las secciones internas actuales.
 - **Navegación:** pasar de una URL a otra mediante enlaces y poder usar atrás y adelante del navegador.
-- **Portal:** página global en `/` desde la que se abrirán las miniapps.
-- **Rutas desconocidas:** una ruta que no coincide debe mostrar una página de no encontrado con un enlace al portal.
+- **Portal:** `PortalPage` ya se muestra en `/` y presenta las miniapps iniciales mediante datos y `map`.
+- **Rutas desconocidas:** la ruta comodín ya muestra «Página no encontrada» y un enlace al portal.
 - **Estado al desmontar y montar:** al salir de la ruta de tareas, el componente puede desmontarse y perder estados locales como la sección activa o el texto de búsqueda. Al volver a montarse, el inicializador vuelve a leer las tareas persistidas. Las tareas se conservan porque están en `localStorage`, mientras que un texto sin enviar puede reiniciarse.
 
 El formulario de `Article` ya utiliza `preventDefault`, `trim` y `type="submit"`, pero la conexión con `onSubmit` sigue pendiente. La parte de rutas del reto también continúa pendiente.
@@ -796,4 +798,4 @@ La aplicación conserva las tareas en el estado de React durante la sesión, per
 
 ### ¿Qué cambiará en el Reto 06?
 
-Falta centralizar el envío en `onSubmit` del formulario. Ya se separó `TareasPage` y se colocó `BrowserRouter`; las rutas, los enlaces y el portal siguen en proceso dentro del 06.
+Falta centralizar el envío en `onSubmit` del formulario. Ya se separó `TareasPage`, se colocó `BrowserRouter`, se declararon las rutas y se creó `PortalPage`; siguen pendientes el enlace real de Tareas, el componente reutilizable de tarjeta y las comprobaciones de navegación y responsive.

@@ -57,7 +57,7 @@ devquest/
 
 ### Archivos importantes
 
-main.jsx: inicia React y muestra App dentro de `BrowserRouter` y del elemento root. El router ya está preparado, pero todavía no se han declarado las rutas.
+main.jsx: inicia React y muestra App dentro de `BrowserRouter` y del elemento root. Las rutas se declaran en `App.jsx`.
 
 App.jsx: mantiene la estructura global con Header, TareasPage y Footer.
 
@@ -216,6 +216,8 @@ const nuevaTarea = {
 ```
 
 crypto.randomUUID() crea un identificador único.
+
+Por eso dos tareas con el mismo texto pueden tener IDs diferentes: cada alta genera un nuevo ID.
 
 El texto se guarda limpio.
 

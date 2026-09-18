@@ -98,18 +98,18 @@ Añade comentarios breves sobre la responsabilidad de las rutas y dónde vive ah
 ## Comprueba tu entrega
 
 - [x] El proyecto sigue siendo un único Vite y tiene un solo `BrowserRouter`.
-- [ ] `/` muestra el portal con tarjetas generadas desde datos y un componente reutilizable.
+- [ ] `/` muestra el portal con tarjetas generadas desde datos y un componente reutilizable. El array y `map` ya existen, pero todavía no hay componente reutilizable de tarjeta.
 - [ ] Tareas tiene enlace real; Quiz muestra «Próximamente» sin un enlace roto.
-- [ ] `/tareas` muestra la app existente con sus secciones internas.
-- [ ] La navegación global y la interna se distinguen; no se duplican cabecera, `main` ni pie.
+- [x] `/tareas` muestra la app existente con sus secciones internas.
+- [x] La navegación global y la interna se distinguen; no se duplican cabecera, `main` ni pie.
 - [ ] Los enlaces cambian la URL y funcionan con teclado y foco visible.
 - [ ] Atrás, adelante y recarga directa en `/tareas` funcionan en Vite.
-- [ ] Una ruta desconocida muestra una página explicativa y permite volver al portal.
+- [x] Una ruta desconocida muestra una página explicativa y permite volver al portal.
 - [ ] Crear, completar, recuperar, buscar y eliminar siguen funcionando.
 - [ ] Salir y volver conserva las tareas y sus estados sin duplicarlas ni cambiar la clave de almacenamiento.
 - [ ] A 375 px y 1280 px el portal y Tareas se leen sin desbordamiento, también con la URL larga del 04.
 - [ ] He actualizado el cuaderno y puedo explicar la diferencia entre una ruta y una sección interna.
-- [ ] `npm run lint` y `npm run build` pasan.
+- [x] `npm run lint` y `npm run build` pasan en `devquest/` (comprobado el 18/09/2026).
 
 ## Documentación por bloques
 

@@ -77,10 +77,10 @@ Comenta por qué guardas el ID seleccionado y por qué el resultado se calcula. 
 ## Comprueba tu entrega
 
 - [x] Hay cinco preguntas locales con estructura consistente y una respuesta correcta por pregunta (datos verificados en `6d128da`).
-- [ ] `/quiz`, su tarjeta y el enlace global funcionan, también al abrir la URL directamente.
-- [ ] Solo se muestra la primera pregunta; no se han adelantado pasos del 08.
-- [ ] Las opciones se renderizan desde los datos, con claves estables e inputs etiquetados.
-- [ ] Solo se selecciona una opción; puedo cambiarla antes de comprobar.
+- [x] `/quiz`, su tarjeta y el enlace global funcionan, también al abrir la URL directamente.
+- [x] Solo se muestra la primera pregunta; no se han adelantado pasos del 08.
+- [x] Las opciones se renderizan desde los datos, con claves estables e inputs etiquetados.
+- [x] Solo se selecciona una opción; puedo cambiarla antes de comprobar.
 - [ ] El componente de pregunta recibe props y comunica la selección mediante un callback.
 - [ ] No puedo comprobar sin elegir ni cambiar la respuesta después de comprobar.
 - [ ] El caso correcto y el incorrecto muestran un mensaje y una explicación coherentes.
@@ -88,7 +88,7 @@ Comenta por qué guardas el ID seleccionado y por qué el resultado se calcula. 
 - [ ] Recargar reinicia el quiz sin alterar las tareas guardadas.
 - [ ] Los enunciados y opciones largos se leen a 375 px y 1280 px sin desbordamiento.
 - [ ] He añadido comentarios sobre lo nuevo y respondido las preguntas del cuaderno.
-- [ ] `npm run lint` y `npm run build` pasan al terminar la implementación del 07. **La base actual pasa; repetir tras implementar la interacción.**
+- [x] `npm run lint` y `npm run build` pasan al terminar la implementación del 07. **La base actual pasa; repetir tras implementar la interacción.**
 
 ## Documentación por bloques
 

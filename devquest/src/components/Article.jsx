@@ -16,7 +16,7 @@ function Article({ addTareas }) {
   // JSX muestra el formulario para crear una tarea.
   return (
     //form agrupa los componentes
-    <form className="mx-auto flex w-full max-w-xs flex-col gap-2 rounded-lg border border-gray-400 bg-white p-4 text-center shadow-sm">
+    <form onSubmit={enviarTarea} className="mx-auto flex w-full max-w-xs flex-col gap-2 rounded-lg border border-gray-400 bg-white p-4 text-center shadow-sm">
       <h2>Añadir tarea</h2>
       <label htmlFor="nueva-tarea">Nueva tarea</label>
       <input id="nueva-tarea"
@@ -25,7 +25,7 @@ function Article({ addTareas }) {
         //setTextoTarea( actualiza ele stado de la tarea)
         onChange={(e) => setTextoTarea(e.target.value)} // detecta cambios en un input
         className="rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none" />
-      <button type="submit" className="rounded-lg  bg-slate-600 px-4 py-2 text-white hover:bg-gray-700" onClick={enviarTarea}>
+      <button type="submit" className="rounded-lg  bg-slate-600 px-4 py-2 text-white hover:bg-gray-700">
         Añadir tarea
       </button>
     </form>

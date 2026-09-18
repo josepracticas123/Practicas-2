@@ -40,11 +40,13 @@ devquest/
 │  ├─ App.jsx
 │  ├─ main.jsx
 │  ├─ pages/
-│  │  └─ TareasPage.jsx
+│  │  ├─ TareasPage.jsx
+│  │  └─ PortalPage.jsx
 │  ├─ index.css
 │  ├─ components/
 │  │  ├─ Header.jsx
 │  │  ├─ Article.jsx
+│  │  ├─ MiniappCards.jsx
 │  │  └─ Footer.jsx
 │  ├─ views/
 │  │  ├─ Inicio.jsx
@@ -66,6 +68,10 @@ TareasPage.jsx: guarda el estado, modifica las tareas, calcula las listas y deci
 Header.jsx: muestra la cabecera global del portal.
 
 Article.jsx: contiene el formulario y el input controlado; actualmente el envío se realiza desde el `onClick` del botón mediante `enviarTarea`. La conexión directa a `onSubmit` sigue pendiente.
+
+PortalPage.jsx: define el array de miniapps y lo recorre con `map`.
+
+MiniappCards.jsx: recibe un objeto `miniapp` por props y muestra sus datos. Recibe el objeto desde `PortalPage` para separar los datos de la presentación y poder reutilizar la tarjeta.
 
 Inicio.jsx: recibe `addTareas` desde `TareasPage` y muestra `Article`.
 
@@ -95,7 +101,7 @@ import permite utilizar en este archivo algo que ha sido exportado desde otro m�
 
 createRoot conecta React con el elemento HTML root.
 
-App es el componente principal de la estructura global. La lógica de tareas está en `TareasPage`.
+App es el componente principal de la estructura global. Contiene `Routes` y decide si muestra `PortalPage`, `TareasPage` o la página no encontrada.
 
 StrictMode ayuda a encontrar problemas durante el desarrollo.
 
@@ -109,7 +115,11 @@ createRoot(document.getElementById("root")).render(
 );
 ```
 
-render muestra el JSX de App en la página.
+render muestra el JSX de App en la página. `BrowserRouter` proporciona el contexto para que las rutas cambien según la URL.
+
+`Routes` agrupa las rutas declaradas y cada `Route` relaciona una URL con una página: `/` muestra `PortalPage`, `/tareas` muestra `TareasPage` y la ruta comodín muestra la página no encontrada. `Link` permite volver al portal desde esa ruta sin recargar.
+
+La navegación global se realiza mediante esas rutas y modifica la URL. Dentro de `TareasPage`, la navegación entre `inicio`, `pendientes` y `finalizadas` es interna: usa `seccionActual` y `setSeccionActual`, por lo que cambia el contenido sin crear rutas nuevas.
 
 ## 4. Componentes y funciones
 

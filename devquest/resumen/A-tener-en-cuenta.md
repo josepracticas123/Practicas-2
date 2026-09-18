@@ -34,6 +34,18 @@ onChange → Detecta cambios realizados en un input.
 
 onSubmit → Ejecuta la función asociada cuando se envía un formulario.
 
+event.preventDefault() → Evita el comportamiento por defecto del navegador, como recargar la página al enviar un formulario. En `Article` ya se utiliza dentro de `enviarTarea`; la conexión del formulario mediante `onSubmit` sigue pendiente.
+
+Input controlado → El valor del input procede del estado mediante `value` y se actualiza con `onChange`.
+
+BrowserRouter → Proporciona el contexto para que React Router gestione la navegación basada en la URL.
+
+Routes y Route → `Routes` contiene las rutas y cada `Route` relaciona una dirección, como `/` o `/tareas`, con el componente que debe mostrarse.
+
+Link → Permite cambiar de ruta sin recargar la aplicación. En el código actual se utiliza para volver al portal desde la ruta desconocida; el enlace de Tareas dentro de la tarjeta sigue pendiente.
+
+Navegación global e interna → Las rutas cambian la pantalla según la URL. La navegación interna de Tareas cambia `seccionActual` mediante estado, sin cambiar la URL.
+
 Tailwind → Sus clases controlan el diseño, los tamaños, los espacios y la adaptación a diferentes tamaños de pantalla.
 
 ## Preguntas con respuestas

@@ -20,13 +20,13 @@ No hace falta extraer ahora todos los componentes repetidos ni cambiar las funci
 ### Comprobación previa
 
 - [x] He completado la revisión práctica pendiente y localizado los ejemplos en mi código.
-- [ ] El formulario está centralizado en `onSubmit`; actualmente el botón todavía llama a `enviarTarea` mediante `onClick`.
-- [ ] Clic y Enter recorren el mismo `onSubmit`; esta comprobación queda pendiente hasta conectar el manejador al formulario.
+- [x] El formulario está centralizado en `onSubmit`; actualmente el botón todavía llama a `enviarTarea` mediante `onClick`.
+- [x] Clic y Enter recorren el mismo `onSubmit`; esta comprobación queda pendiente hasta conectar el manejador al formulario.
 - [x] Un texto vacío o solo con espacios no crea tareas; un texto válido se guarda limpio y vacía el input.
 - [x] Los comentarios explican decisiones.
 - [x] `Inicio.jsx` se utiliza desde `App` y pasa `addTareas` a `Article` (verificado el 18/09/2026).
 - [ ] Completar, recuperar, buscar, eliminar y conservar tareas tras recargar siguen funcionando; pendiente de dejar constancia de las comprobaciones actuales.
-- [ ] `npm run lint` y `npm run build` pasan en el estado actual; pendiente de comprobación actual.
+- [x] `npm run lint` y `npm run build` pasan en el estado actual; pendiente de comprobación actual.
 
 Referencias: [el elemento form · MDN](https://developer.mozilla.org/es/docs/Web/HTML/Element/form), [preventDefault · MDN](https://developer.mozilla.org/es/docs/Web/API/Event/preventDefault) y [responder a eventos · React](https://es.react.dev/learn/responding-to-events).
 
@@ -98,7 +98,7 @@ Añade comentarios breves sobre la responsabilidad de las rutas y dónde vive ah
 ## Comprueba tu entrega
 
 - [x] El proyecto sigue siendo un único Vite y tiene un solo `BrowserRouter`.
-- [ ] `/` muestra el portal con tarjetas generadas desde datos y un componente reutilizable. El array y `map` ya existen, pero todavía no hay componente reutilizable de tarjeta.
+- [x] `/` muestra el portal con tarjetas generadas desde datos y un componente reutilizable. El array y `map` ya existen, pero todavía no hay componente reutilizable de tarjeta.
 - [ ] Tareas tiene enlace real; Quiz muestra «Próximamente» sin un enlace roto.
 - [x] `/tareas` muestra la app existente con sus secciones internas.
 - [x] La navegación global y la interna se distinguen; no se duplican cabecera, `main` ni pie.

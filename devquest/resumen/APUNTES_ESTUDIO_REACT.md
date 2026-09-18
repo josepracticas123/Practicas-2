@@ -72,6 +72,8 @@ Los componentes actuales son:
 
 - `App.jsx`: componente principal. Mantiene la estructura global con `Header`, `TareasPage` y `Footer`.
 - `TareasPage.jsx`: página de tareas. Mantiene estados, lee y guarda tareas, define las acciones, calcula las listas y decide qué vista interna mostrar.
+- `PortalPage.jsx`: página global que define los datos de las miniapps y los recorre con `map`.
+- `MiniappCards.jsx`: componente reutilizable que recibe una miniapp mediante props y muestra sus datos.
 - `Header.jsx`: cabecera global del portal.
 - `Footer.jsx`: muestra el pie de página.
 - `Article.jsx`: muestra el campo para escribir y el botón para añadir una tarea.
@@ -91,6 +93,10 @@ App -> TareasPage -> Inicio -> Article
 ```
 
 `TareasPage` pasa `addTareas` a `Inicio`, e `Inicio` se la pasa a `Article`. De esta manera el formulario visual está separado, pero el estado de todas las tareas vive en la página que coordina esta funcionalidad.
+
+En el portal, `PortalPage` crea el array `miniapps` y pasa cada objeto a `MiniappCards` mediante `miniapp={miniapp}`. El componente recibe los datos en lugar de crearlos por su cuenta porque así la información y la presentación tienen responsabilidades separadas: la página decide qué miniapps existen y la tarjeta decide cómo mostrar una miniapp.
+
+`PortalPage` utiliza `miniapps.map(...)` para renderizar una tarjeta por objeto. Las listas de React necesitan una `key` estable para identificar sus elementos; el código actual conserva `miniapp.id` dentro de `MiniappCards`, pero la `key` debería revisarse en el elemento que se crea directamente dentro del `map`.
 
 ## 4. Estado: `useState`
 
@@ -301,7 +307,7 @@ return { ...tarea, completada: false };
 
 Al final, `setTareas(nuevasTareas)` coloca la nueva lista en el estado.
 
-También se usa `map` dentro de `Header` y de las vistas para convertir datos en elementos JSX.
+También se usa `map` dentro de `PortalPage`, la navegación interna y las vistas para convertir datos en elementos JSX.
 
 ## 11. `filter`
 
@@ -678,7 +684,7 @@ Estos conceptos aparecen realmente en el código actual:
 - Manejo de errores con `try/catch`.
 - Clases Tailwind y diseño responsive.
 
-React Router ya está instalado. `BrowserRouter` envuelve `App` en `main.jsx` y `App` ya declara `Routes`, las rutas `/`, `/tareas` y una ruta comodín. Existe `PortalPage` con un array de miniapps recorrido mediante `map`, pero todavía faltan el componente reutilizable de tarjeta y el enlace real de Tareas. `NavLink` no se utiliza.
+React Router ya está instalado. `BrowserRouter` envuelve `App` en `main.jsx` y `App` ya declara `Routes`, las rutas `/`, `/tareas` y una ruta comodín. Existe `PortalPage` con un array de miniapps, `map` y el componente reutilizable `MiniappCards`; todavía falta el enlace real de Tareas dentro de la tarjeta. `NavLink` no se utiliza.
 
 ## 27. Lo que voy a aprender en el Reto 06
 
@@ -697,18 +703,18 @@ Esta sección describe las instrucciones del Reto 06, no funcionalidades que ya 
 - **Separar `TareasPage`:** este paso ya está implementado: la página contiene el estado, la lectura inicial, el efecto, las acciones y las listas calculadas.
 - **Páginas:** ya existen `PortalPage` y `TareasPage` como componentes que representan pantallas completas.
 - **React Router:** ya se utiliza para decidir qué componente se muestra según la URL.
-- **`BrowserRouter`:** ya está colocado en `main.jsx` alrededor de `App` y proporciona el contexto para la futura navegación basada en URL.
+- **`BrowserRouter`:** ya está colocado en `main.jsx` alrededor de `App` y proporciona el contexto para la navegación basada en URL.
 - **`Routes`:** ya contiene las rutas declaradas en `App`.
 - **`Route`:** ya asocia `/`, `/tareas` y la ruta comodín con sus elementos.
 - **`Link`:** se utiliza en la ruta comodín para volver al portal; todavía falta usarlo en la tarjeta de Tareas.
 - **`NavLink`:** enlace que puede recibir un estilo especial cuando su ruta está activa.
 - **Rutas:** direcciones como `/` y `/tareas`, distintas de las secciones internas actuales.
 - **Navegación:** pasar de una URL a otra mediante enlaces y poder usar atrás y adelante del navegador.
-- **Portal:** `PortalPage` ya se muestra en `/` y presenta las miniapps iniciales mediante datos y `map`.
+- **Portal:** `PortalPage` ya se muestra en `/` y presenta las miniapps iniciales mediante datos, `map` y `MiniappCards`.
 - **Rutas desconocidas:** la ruta comodín ya muestra «Página no encontrada» y un enlace al portal.
 - **Estado al desmontar y montar:** al salir de la ruta de tareas, el componente puede desmontarse y perder estados locales como la sección activa o el texto de búsqueda. Al volver a montarse, el inicializador vuelve a leer las tareas persistidas. Las tareas se conservan porque están en `localStorage`, mientras que un texto sin enviar puede reiniciarse.
 
-El formulario de `Article` ya utiliza `preventDefault`, `trim` y `type="submit"`, pero la conexión con `onSubmit` sigue pendiente. La parte de rutas del reto también continúa pendiente.
+El formulario de `Article` ya utiliza `preventDefault`, `trim` y `type="submit"`, pero la conexión con `onSubmit` sigue pendiente. En Router ya están las rutas principales; continúan pendientes el enlace de Tareas dentro de la tarjeta y las comprobaciones prácticas de navegación y responsive.
 
 ## 28. Preguntas que debería saber responder
 
@@ -798,4 +804,4 @@ La aplicación conserva las tareas en el estado de React durante la sesión, per
 
 ### ¿Qué cambiará en el Reto 06?
 
-Falta centralizar el envío en `onSubmit` del formulario. Ya se separó `TareasPage`, se colocó `BrowserRouter`, se declararon las rutas y se creó `PortalPage`; siguen pendientes el enlace real de Tareas, el componente reutilizable de tarjeta y las comprobaciones de navegación y responsive.
+Falta centralizar el envío en `onSubmit` del formulario. Ya se separó `TareasPage`, se colocó `BrowserRouter`, se declararon las rutas, se creó `PortalPage` y se extrajo `MiniappCards`; siguen pendientes el enlace real de Tareas y las comprobaciones de navegación y responsive.

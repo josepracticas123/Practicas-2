@@ -40,9 +40,11 @@ Input controlado → El valor del input procede del estado mediante `value` y se
 
 BrowserRouter → Proporciona el contexto para que React Router gestione la navegación basada en la URL.
 
-Routes y Route → `Routes` contiene las rutas y cada `Route` relaciona una dirección, como `/` o `/tareas`, con el componente que debe mostrarse.
+Routes y Route → `Routes` contiene las rutas y cada `Route` relaciona una dirección, como `/`, `/tareas` o `/quiz`, con el componente que debe mostrarse.
 
-Link → Permite cambiar de ruta sin recargar la aplicación. Se utiliza en la tarjeta de Tareas, la cabecera y el enlace de la página no encontrada.
+Link → Permite cambiar de ruta sin recargar la aplicación. Se utiliza en las tarjetas de Tareas y Quiz, la cabecera y el enlace de la página no encontrada.
+
+Quiz inicial → `QuizPage` muestra la primera pregunta de `preguntas.js`. Sus tres opciones se generan con `map()` y se controlan con `seleccionadaId`; la comprobación de la respuesta todavía está pendiente.
 
 Navegación global e interna → Las rutas cambian la pantalla según la URL. La navegación interna de Tareas cambia `seccionActual` mediante estado, sin cambiar la URL.
 

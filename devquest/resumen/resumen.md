@@ -41,7 +41,10 @@ devquest/
 │  ├─ main.jsx
 │  ├─ pages/
 │  │  ├─ TareasPage.jsx
-│  │  └─ PortalPage.jsx
+│  │  ├─ PortalPage.jsx
+│  │  └─ QuizPage.jsx
+│  ├─ data/
+│  │  └─ preguntas.js
 │  ├─ index.css
 │  ├─ components/
 │  │  ├─ Header.jsx
@@ -72,6 +75,10 @@ Article.jsx: contiene el formulario con `onSubmit`, el input controlado y la val
 PortalPage.jsx: define el array de miniapps y lo recorre con `map`.
 
 MiniappCards.jsx: recibe un objeto `miniapp` por props y muestra sus datos. Recibe el objeto desde `PortalPage` para separar los datos de la presentación y poder reutilizar la tarjeta.
+
+QuizPage.jsx: muestra la primera pregunta del Quiz y controla la opción seleccionada mediante `useState`.
+
+preguntas.js: contiene cinco preguntas locales, cada una con tres opciones, una respuesta correcta y una explicación.
 
 Inicio.jsx: recibe `addTareas` desde `TareasPage` y muestra `Article`.
 
@@ -117,9 +124,26 @@ createRoot(document.getElementById("root")).render(
 
 render muestra el JSX de App en la página. `BrowserRouter` proporciona el contexto para que las rutas cambien según la URL.
 
-`Routes` agrupa las rutas declaradas y cada `Route` relaciona una URL con una página: `/` muestra `PortalPage`, `/tareas` muestra `TareasPage` y la ruta comodín muestra la página no encontrada. `Link` permite volver al portal desde esa ruta sin recargar.
+`Routes` agrupa las rutas declaradas y cada `Route` relaciona una URL con una página: `/` muestra `PortalPage`, `/tareas` muestra `TareasPage`, `/quiz` muestra `QuizPage` y la ruta comodín muestra la página no encontrada. `Link` permite navegar sin recargar.
 
 La navegación global se realiza mediante esas rutas y modifica la URL. Dentro de `TareasPage`, la navegación entre `inicio`, `pendientes` y `finalizadas` es interna: usa `seccionActual` y `setSeccionActual`, por lo que cambia el contenido sin crear rutas nuevas.
+
+## Estado actual del Reto 07
+
+El ejercicio 06 está terminado técnicamente. El ejercicio 07 está en desarrollo.
+
+Ya está implementado:
+
+- `src/data/preguntas.js` con cinco preguntas locales.
+- Cada pregunta tiene `id`, `enunciado`, tres opciones, `respuestaCorrectaId` y `explicacion`.
+- `QuizPage.jsx`, la ruta `/quiz` y los accesos desde el Portal y el Header.
+- La primera pregunta y sus opciones generadas mediante `map()`.
+- Radios dentro de `form` y `fieldset`, con `legend` para el enunciado.
+- Selección controlada con `useState` y `seleccionadaId`.
+- IDs estables y `label` asociado mediante `htmlFor`.
+- Diseño con Tailwind y clases responsive.
+
+Todavía falta implementar el botón «Comprobar respuesta», la lógica de corrección, el resultado, la explicación y la desactivación de las opciones después de comprobar. También falta completar la documentación específica del ejercicio 07.
 
 ## 4. Componentes y funciones
 

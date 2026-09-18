@@ -74,6 +74,8 @@ Los componentes actuales son:
 - `TareasPage.jsx`: página de tareas. Mantiene estados, lee y guarda tareas, define las acciones, calcula las listas y decide qué vista interna mostrar.
 - `PortalPage.jsx`: página global que define los datos de las miniapps y los recorre con `map`.
 - `MiniappCards.jsx`: componente reutilizable que recibe una miniapp mediante props y muestra sus datos.
+- `QuizPage.jsx`: página del Quiz que muestra la primera pregunta y controla la opción seleccionada.
+- `preguntas.js`: datos locales de cinco preguntas, con tres opciones, respuesta correcta y explicación.
 - `Header.jsx`: cabecera global del portal.
 - `Footer.jsx`: muestra el pie de página.
 - `Article.jsx`: muestra el campo para escribir y el botón para añadir una tarea.
@@ -673,6 +675,8 @@ Estos conceptos aparecen realmente en el código actual:
 - Callbacks o funciones pasadas como props.
 - Inputs controlados con `value` y `onChange`.
 - Eventos `onClick`, `onChange` y `onSubmit`.
+- Inputs `radio` controlados con `useState`, `checked` y `onChange`.
+- `fieldset` y `legend` para agrupar las opciones de una pregunta.
 - Renderizado condicional con `&&` y operador ternario.
 - Renderizado de listas con `map`.
 - `key` estable en listas JSX.
@@ -684,7 +688,7 @@ Estos conceptos aparecen realmente en el código actual:
 - Manejo de errores con `try/catch`.
 - Clases Tailwind y diseño responsive.
 
-React Router ya está instalado. `BrowserRouter` envuelve `App` en `main.jsx` y `App` ya declara `Routes`, las rutas `/`, `/tareas` y una ruta comodín. Existe `PortalPage` con un array de miniapps, `map` y el componente reutilizable `MiniappCards`; todavía falta el enlace real de Tareas dentro de la tarjeta. `NavLink` no se utiliza.
+React Router ya está instalado. `BrowserRouter` envuelve `App` en `main.jsx` y `App` declara `Routes` para `/`, `/tareas`, `/quiz` y una ruta comodín. `PortalPage` tiene un array de miniapps, `map` y el componente reutilizable `MiniappCards`; sus tarjetas de Tareas y Quiz tienen enlaces. `Header` también enlaza Portal, Tareas y Quiz. `NavLink` no se utiliza.
 
 ## 27. Lo que voy a aprender en el Reto 06
 
@@ -714,7 +718,7 @@ Esta sección describe las instrucciones del Reto 06, no funcionalidades que ya 
 - **Rutas desconocidas:** la ruta comodín ya muestra «Página no encontrada» y un enlace al portal.
 - **Estado al desmontar y montar:** al salir de la ruta de tareas, el componente puede desmontarse y perder estados locales como la sección activa o el texto de búsqueda. Al volver a montarse, el inicializador vuelve a leer las tareas persistidas. Las tareas se conservan porque están en `localStorage`, mientras que un texto sin enviar puede reiniciarse.
 
-El formulario ya centraliza el envío en `onSubmit`. Las rutas principales y el enlace de la tarjeta de Tareas están implementados; quedan las comprobaciones prácticas de cierre del 06.
+El formulario ya centraliza el envío en `onSubmit`. Las rutas principales y los enlaces del portal están implementados; el ejercicio 06 está terminado técnicamente.
 
 ## 28. Preguntas que debería saber responder
 
@@ -804,4 +808,26 @@ La aplicación conserva las tareas en el estado de React durante la sesión, per
 
 ### ¿Qué cambiará en el Reto 06?
 
-El envío con `onSubmit`, las rutas principales y el enlace real de Tareas ya están implementados. Sigue el checklist del 06 para las comprobaciones prácticas pendientes.
+El envío con `onSubmit`, las rutas principales y los enlaces del portal ya están implementados. El ejercicio 06 está terminado técnicamente.
+
+## 29. Estado actual del Reto 07
+
+El ejercicio 07 está en desarrollo. Ya están implementados:
+
+- `src/data/preguntas.js` con cinco preguntas locales.
+- Tres opciones por pregunta, con `id`, `texto`, `respuestaCorrectaId` y `explicacion`.
+- `QuizPage.jsx` y la ruta `/quiz`.
+- Acceso al Quiz desde `PortalPage` y `Header`.
+- La primera pregunta y sus tres opciones generadas mediante `map()`.
+- Radios dentro de un `form` y un `fieldset`, con `legend` para el enunciado.
+- Selección controlada mediante `useState` y `seleccionadaId`.
+- IDs estables y `label` asociado mediante `htmlFor`.
+- Diseño con Tailwind y clases responsive.
+
+Todavía faltan:
+
+- El botón «Comprobar respuesta».
+- La lógica que compara la selección con `respuestaCorrectaId`.
+- Mostrar el resultado y la explicación.
+- Desactivar las opciones después de comprobar.
+- Completar la documentación y el cuestionario específico del reto 07.

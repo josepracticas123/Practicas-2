@@ -1,34 +1,11 @@
-// Header recibe por props las secciones, la activa y su función de cambio.
-function Header({ secciones, seccionActual, setSeccionActual }) {
+// cabecera global
+function Header() {
   return (
     <header className="bg-gray-800 text-white py-4">
       <h1 className="text-center text-5xl font-bold">
-        Aplicación de Tareas
+        Portal
       </h1>
 
-      <nav className="mt-4 flex justify-center space-x-4">
-        {secciones.map((seccion) => { // map crea un botón por cada sección.
-          const estaActiva = seccion.id === seccionActual;
-
-          return (
-            <button
-              type="button"
-              aria-pressed={estaActiva}
-              key={seccion.id}
-              onClick={() => setSeccionActual(seccion.id)} // Cambia la sección al pulsar.
-              className={[
-                "pb-1 border-b border-transparent transition-colors duration-200", // Clases de Tailwind para el estilo.
-                "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-1 focus-visible:ring-offset-gray-800",
-                estaActiva
-                  ? "border-white/90 text-white"
-                  : "text-gray-300 hover:border-gray-500 hover:text-white",
-              ].join(" ")}
-            >
-              {seccion.nombre}
-            </button>
-          );
-        })}
-      </nav>
     </header>
   );
 }

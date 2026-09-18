@@ -14,16 +14,15 @@ No necesitas conocer todo para empezar. Trabaja en un paso, compruébalo en el n
 
 **El proyecto ya está creado. No repitas la instalación inicial ni generes otro Vite.** Para continuar, abre una terminal en `Practicas-2/devquest`, instala las dependencias con `npm install` si faltan y ejecuta `npm run dev`.
 
-## Seguimiento · 17/09/2026, `3736740`
+## Seguimiento · 18/09/2026, `6d128da`
 
-**Los retos 01–04 y la implementación del 05 están cerrados técnicamente.** La corrección de textos largos funciona en móvil y escritorio. Se ha comprobado la persistencia al recargar y reabrir la pestaña; lint y build pasan.
+Los retos 01–05 siguen cerrados técnicamente. El 06 y el 07 están en proceso: ya existen portal, rutas y formulario con `onSubmit`; el Quiz tiene las cinco preguntas preparadas y su página todavía está vacía.
 
-1. **Comenta el cierre con el tutor:** explica por qué eliminar por identificador conserva otras tareas con el mismo texto.
-2. **Explica el reto 05:** por qué pasas la función de lectura a `useState`, para qué utilizas `Set` y por qué guardar necesita un efecto pero buscar no. Las respuestas del cuaderno ya están escritas; no necesitas reescribirlas.
-3. **Empieza el [reto 06](retos/06-portal-y-rutas.md):** portal y navegación, conservando la app de Tareas.
-4. **Cuando termines y compruebes el 06**, continúa con el [07](retos/07-quiz-respuestas.md), y después con el [08](retos/08-quiz-recorrido.md). Son bloques sucesivos, no una obligación de terminar los tres hoy.
+1. **Completa el [repaso personal](devquest/resumen/REVISION-PENDIENTE.md):** cuatro explicaciones breves sobre tu propio código. Las notas generales ya están ampliadas; no necesitas otro resumen.
+2. **Sigue el [cierre del 06](retos/06-portal-y-rutas.md):** conserva lo implementado y comprueba navegación, persistencia, teclado y responsive. Registra el resultado junto al checklist.
+3. **Continúa el [07 desde el bloque 2](retos/07-quiz-respuestas.md):** página y ruta del Quiz, primera pregunta, selección y comprobación. El 08 vendrá después.
 
-Compartir componentes, sustituir separaciones por CSS o adoptar un formulario son mejoras graduales. La explicación en directo sigue pendiente de confirmación del tutor; los checks técnicos no acreditan por sí solos la comprensión.
+Lint y build pasan en esta revisión. Los checks de implementación no sustituyen las pruebas prácticas ni la explicación personal al tutor.
 
 La sección siguiente conserva la guía de instalación inicial como referencia.
 
@@ -90,7 +89,7 @@ Lee [Tu primer componente](https://es.react.dev/learn/your-first-component) y [E
 - [04 · Busca y elimina tareas](retos/04-buscar-y-eliminar.md): búsqueda por sección y eliminación de una tarea concreta.
 - [05 · Tus tareas sobreviven a una recarga](retos/05-persistencia-local.md): `localStorage` y `useEffect`. **Cerrado técnicamente; pendiente comentar las decisiones con el tutor.**
 
-- [06 · Tu portal de miniapps](retos/06-portal-y-rutas.md): home, React Router y Tareas en `/tareas`. **Siguiente reto.**
+- [06 · Tu portal de miniapps](retos/06-portal-y-rutas.md): home, React Router y Tareas en `/tareas`. **En proceso; consulta su seguimiento.**
 - [07 · Tu primera pregunta del quiz](retos/07-quiz-respuestas.md): `/quiz`, datos locales, selección y comprobación de respuestas.
 - [08 · Completa el quiz y consulta tu resultado](retos/08-quiz-recorrido.md): progreso, respuestas confirmadas, puntuación y nueva partida.
 

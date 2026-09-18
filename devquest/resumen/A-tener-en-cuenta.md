@@ -34,7 +34,7 @@ onChange → Detecta cambios realizados en un input.
 
 onSubmit → Ejecuta la función asociada cuando se envía un formulario.
 
-event.preventDefault() → Evita el comportamiento por defecto del navegador, como recargar la página al enviar un formulario. En `Article` ya se utiliza dentro de `enviarTarea`; la conexión del formulario mediante `onSubmit` sigue pendiente.
+event.preventDefault() → Evita el envío por defecto del navegador. `Article` lo utiliza dentro del manejador conectado a `onSubmit`.
 
 Input controlado → El valor del input procede del estado mediante `value` y se actualiza con `onChange`.
 
@@ -42,7 +42,7 @@ BrowserRouter → Proporciona el contexto para que React Router gestione la nave
 
 Routes y Route → `Routes` contiene las rutas y cada `Route` relaciona una dirección, como `/` o `/tareas`, con el componente que debe mostrarse.
 
-Link → Permite cambiar de ruta sin recargar la aplicación. En el código actual se utiliza para volver al portal desde la ruta desconocida; el enlace de Tareas dentro de la tarjeta sigue pendiente.
+Link → Permite cambiar de ruta sin recargar la aplicación. Se utiliza en la tarjeta de Tareas, la cabecera y el enlace de la página no encontrada.
 
 Navegación global e interna → Las rutas cambian la pantalla según la URL. La navegación interna de Tareas cambia `seccionActual` mediante estado, sin cambiar la URL.
 
@@ -112,9 +112,9 @@ Por debajo de 640 px se mantiene la clase base. Si la clase base es "flex-col", 
 
 ### ¿Qué ocurre actualmente al enviar el formulario?
 
-`Article` ya contiene un `<form>` y un botón `type="submit"`, pero el código actual todavía conecta `enviarTarea` al `onClick` del botón. La función ejecuta `event.preventDefault()`, aplica `trim()`, rechaza entradas vacías, llama a `addTareas` y limpia el input si la entrada es válida. La conexión de `enviarTarea` al `onSubmit` del formulario y la retirada del `onClick` independiente siguen pendientes.
+`Article` utiliza `<form onSubmit={enviarTarea}>`. La función recibe el evento de envío, llama a `preventDefault()`, limpia y valida el texto, añade la tarea y vacía el input. El botón tiene `type="submit"` y ya no lleva un `onClick` de envío. La implementación está presente; las pruebas de clic y Enter se registran en el checklist del 06.
 
-La centralización pendiente busca que el clic y la tecla Enter recorran un único `onSubmit`, evitando duplicar caminos de envío y manteniendo la validación en un solo lugar.
+El formulario centraliza el envío en `onSubmit`; no hay que repetir esa modificación.
 
 ## Funcionamiento del guardado en `localStorage`
 

@@ -15,7 +15,7 @@ Marca cada casilla cuando hayas revisado el código y ampliado tu ejemplo de aba
 
 ## Nota sobre la documentación y el 06
 
-Se ha corregido la descripción del formulario en los apuntes: actualmente existe `<form>`, pero `enviarTarea` sigue conectada al `onClick` del botón; todavía falta conectarla al `onSubmit` del formulario. Esa implementación se continúa en el 06. Cuando cambie el código, actualiza las notas después de comprobarlo, sin marcar como hecho algo que solo está previsto.
+El formulario ya está conectado a `onSubmit` y no utiliza `onClick` para enviar. Las notas se han actualizado al código revisado el 18/09/2026 (`6d128da`). Esta corrección no completa por sí sola los cuatro puntos de tu ejemplo personal: siguen pendientes.
 
 Tu texto anterior se conserva a continuación para que lo revises tú. Los checks anteriores no se mantienen como prueba de comprensión: estos cuatro puntos concretan lo que falta explicar. No hace falta reescribir el resto de los resúmenes.
 

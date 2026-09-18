@@ -1,5 +1,11 @@
 # 07 · Tu primera pregunta del quiz
 
+## Seguimiento · 18/09/2026, `6d128da`
+
+**En proceso: datos preparados.** `src/data/Preguntas.js` contiene cinco preguntas, tres opciones por pregunta, IDs consistentes y una respuesta correcta referenciada en cada caso. `QuizPage.jsx` existe, pero está vacío; la ruta `/quiz` todavía no está conectada.
+
+**Siguiente bloque:** implementa el apartado 2 y muestra solo la primera pregunta. Después continúa con la selección y comprobación de los apartados 3 y 4. No hace falta rehacer las preguntas ni adelantar la puntuación del 08. Mantén también el repaso personal pendiente y las pruebas de cierre del 06.
+
 **Tu misión:** añadir una miniapp en `/quiz` donde puedas elegir una respuesta y comprobarla con una explicación.
 
 **Antes:** termina el 06. **Practicarás:** modelado de datos, componentes con props, inputs controlados y estados de una interacción.
@@ -70,7 +76,7 @@ Comenta por qué guardas el ID seleccionado y por qué el resultado se calcula. 
 
 ## Comprueba tu entrega
 
-- [ ] Hay cinco preguntas locales con estructura consistente y una respuesta correcta por pregunta.
+- [x] Hay cinco preguntas locales con estructura consistente y una respuesta correcta por pregunta (datos verificados en `6d128da`).
 - [ ] `/quiz`, su tarjeta y el enlace global funcionan, también al abrir la URL directamente.
 - [ ] Solo se muestra la primera pregunta; no se han adelantado pasos del 08.
 - [ ] Las opciones se renderizan desde los datos, con claves estables e inputs etiquetados.
@@ -82,7 +88,7 @@ Comenta por qué guardas el ID seleccionado y por qué el resultado se calcula. 
 - [ ] Recargar reinicia el quiz sin alterar las tareas guardadas.
 - [ ] Los enunciados y opciones largos se leen a 375 px y 1280 px sin desbordamiento.
 - [ ] He añadido comentarios sobre lo nuevo y respondido las preguntas del cuaderno.
-- [ ] `npm run lint` y `npm run build` pasan.
+- [ ] `npm run lint` y `npm run build` pasan al terminar la implementación del 07. **La base actual pasa; repetir tras implementar la interacción.**
 
 ## Documentación por bloques
 

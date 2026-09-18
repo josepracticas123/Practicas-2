@@ -1,5 +1,18 @@
 # 06 · Tu portal de miniapps
 
+## Seguimiento · 18/09/2026, `6d128da`
+
+**En proceso.** Están implementados el formulario con `onSubmit`, la separación de `TareasPage`, las rutas `/` y `/tareas`, la página no encontrada y las tarjetas con enlaces. No repitas esos cambios.
+
+**Orden para continuar:**
+
+1. Completa los cuatro puntos de [tu repaso personal](../devquest/resumen/REVISION-PENDIENTE.md): identidad, copias, búsqueda e inicialización. Bastan unas líneas y las funciones localizadas; no necesitas otro resumen.
+2. Revisa los comentarios que solo repiten una línea. Las notas sobre el formulario, el enlace de Tareas y la `key` del portal ya se han actualizado al código actual.
+3. Realiza las pruebas de navegación, persistencia, teclado y tamaños del apartado 4 y del checklist final. Anota qué probaste y el resultado antes de marcar su cierre.
+4. Continúa el 07 desde su bloque 2: los datos de las cinco preguntas ya están preparados.
+
+Los checks siguientes distinguen implementación comprobada por lectura de código de pruebas prácticas pendientes de verificación. Las marcas previas de pruebas sin evidencia anotada quedan pendientes de confirmación; esto no significa que se haya detectado un fallo. Lint y build pasan en esta revisión.
+
 **Tu misión:** convertir el inicio del proyecto en un portal desde el que abrir tus miniapps. La aplicación de tareas seguirá funcionando en `/tareas`.
 
 **Antes:** la implementación del 05 está revisada. Conserva sus pendientes de explicación al tutor. **Practicarás:** rutas, enlaces, composición de páginas y ubicación del estado.
@@ -13,20 +26,20 @@ La app funciona y el 05 sigue cerrado técnicamente. Este paso prepara el códig
 1. Completa la [revisión práctica pendiente](../devquest/resumen/REVISION-PENDIENTE.md). Las aclaraciones teóricas ya están incorporadas; contrástalas con ejemplos reales. No necesitas otro documento largo ni esperar al tutor para hacer estas comprobaciones.
 2. **Centraliza el envío de tareas en un formulario.** En `Article`, utiliza un `<form>` con `onSubmit`, evita la recarga mediante `event.preventDefault()` y usa un botón `type="submit"`. Conserva la etiqueta y el input controlado. Retira el envío manual mediante `onKeyDown` y el `onClick` de envío del botón para que Enter y clic recorran una sola función. Mantén `trim`, el rechazo de entradas vacías y el vaciado del input tras añadir.
 3. **Revisa los comentarios nuevos.** Conserva las explicaciones sobre identidad, copias, lectura inicial y dependencia del efecto. Retira comentarios que solo repiten lo que ya dice una línea. Donde un concepto sea nuevo para ti, explica brevemente el motivo o anota la duda en el resumen.
-4. **`views/Inicio.jsx` ya está integrado.** `App` renderiza `Inicio` y este pasa `addTareas` a `Article`. Conserva ese recorrido al reorganizar las páginas; no necesitas repetir esta corrección.
+4. **`views/Inicio.jsx` ya está integrado.** `TareasPage` renderiza `Inicio` y este pasa `addTareas` a `Article`. Conserva ese recorrido al reorganizar las páginas; no necesitas repetir esta corrección.
 
 No hace falta extraer ahora todos los componentes repetidos ni cambiar las funciones de tareas a una arquitectura nueva. Los setters actuales funcionan en estos eventos; la prioridad es entender las copias y conservar el comportamiento.
 
 ### Comprobación previa
 
-- [x] He completado la revisión práctica pendiente y localizado los ejemplos en mi código.
-- [x] El formulario está centralizado en `onSubmit`; actualmente el botón todavía llama a `enviarTarea` mediante `onClick`.
-- [x] Clic y Enter recorren el mismo `onSubmit`; esta comprobación queda pendiente hasta conectar el manejador al formulario.
-- [x] Un texto vacío o solo con espacios no crea tareas; un texto válido se guarda limpio y vacía el input.
-- [x] Los comentarios explican decisiones.
-- [x] `Inicio.jsx` se utiliza desde `App` y pasa `addTareas` a `Article` (verificado el 18/09/2026).
-- [x] Completar, recuperar, buscar, eliminar y conservar tareas tras recargar siguen funcionando; pendiente de dejar constancia de las comprobaciones actuales.
-- [x] `npm run lint` y `npm run build` pasan en el estado actual; pendiente de comprobación actual.
+- [ ] He completado los cuatro puntos del repaso con mi ejemplo; siguen pendientes de ampliar.
+- [x] El formulario tiene `onSubmit={enviarTarea}` y el botón `type="submit"` ya no tiene `onClick` de envío.
+- [ ] He probado clic y Enter: cada envío añade exactamente una tarea y no recarga la página.
+- [x] El código mantiene `trim`, rechazo del texto vacío y vaciado del input tras añadir una tarea válida.
+- [ ] He revisado los comentarios para que expliquen decisiones sin repetir cada línea.
+- [x] `Inicio.jsx` se utiliza desde `TareasPage` y pasa `addTareas` a `Article`.
+- [ ] He repetido las pruebas de completar, recuperar, buscar, eliminar y recargar después de la reorganización.
+- [x] `npm run lint` y `npm run build` pasan en `6d128da`.
 
 Referencias: [el elemento form · MDN](https://developer.mozilla.org/es/docs/Web/HTML/Element/form), [preventDefault · MDN](https://developer.mozilla.org/es/docs/Web/API/Event/preventDefault) y [responder a eventos · React](https://es.react.dev/learn/responding-to-events).
 
@@ -98,18 +111,22 @@ Añade comentarios breves sobre la responsabilidad de las rutas y dónde vive ah
 ## Comprueba tu entrega
 
 - [x] El proyecto sigue siendo un único Vite y tiene un solo `BrowserRouter`.
-- [x] `/` muestra el portal con tarjetas generadas desde datos y un componente reutilizable. El array y `map` ya existen, pero todavía no hay componente reutilizable de tarjeta.
-- [x] Tareas tiene enlace real; Quiz muestra «Próximamente» sin un enlace roto.
-- [x] `/tareas` muestra la app existente con sus secciones internas.
-- [x] La navegación global y la interna se distinguen; no se duplican cabecera, `main` ni pie.
-- [x] Los enlaces cambian la URL y funcionan con teclado y foco visible.
-- [x] Atrás, adelante y recarga directa en `/tareas` funcionan en Vite.
-- [x] Una ruta desconocida muestra una página explicativa y permite volver al portal.
-- [x] Crear, completar, recuperar, buscar y eliminar siguen funcionando.
-- [x] Salir y volver conserva las tareas y sus estados sin duplicarlas ni cambiar la clave de almacenamiento.
-- [x] A 375 px y 1280 px el portal y Tareas se leen sin desbordamiento, también con la URL larga del 04.
-- [x] He actualizado el cuaderno y puedo explicar la diferencia entre una ruta y una sección interna.
-- [x] `npm run lint` y `npm run build` pasan en `devquest/` (comprobado el 18/09/2026).
+- [x] `/` tiene `PortalPage`, tarjetas generadas desde datos y el componente reutilizable `MiniappCards`, con `key` en el `map`.
+- [x] Tareas tiene un `Link` real; Quiz muestra «Próximamente» sin un enlace roto.
+- [x] `/tareas` renderiza `TareasPage` con sus secciones internas.
+- [x] Se separan navegación global e interna sin duplicar cabecera, `main` ni pie.
+- [ ] He comprobado los enlaces con teclado y foco visible.
+- [ ] He probado atrás, adelante y recarga directa en `/tareas` desde Vite.
+- [x] Existe una ruta comodín con mensaje de página no encontrada y enlace al portal.
+- [ ] He probado crear, completar, recuperar, buscar y eliminar en esta versión.
+- [ ] He comprobado que salir al portal y volver conserva las tareas y sus estados sin duplicarlas.
+- [ ] He probado portal y Tareas a 375 px y 1280 px, también con la URL larga del 04.
+- [ ] He completado el repaso personal y las preguntas del 06 en el cuaderno; puedo explicar una ruta frente a una sección interna.
+- [x] `npm run lint` y `npm run build` pasan (revisión del 18/09/2026, `6d128da`).
+
+**Registro breve de pruebas:** anota aquí las acciones, el resultado y cualquier fallo encontrado. No hace falta otro archivo.
+
+_Pendiente de completar._
 
 ## Documentación por bloques
 

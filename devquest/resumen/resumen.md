@@ -65,7 +65,7 @@ TareasPage.jsx: guarda el estado, modifica las tareas, calcula las listas y deci
 
 Header.jsx: muestra la cabecera global del portal.
 
-Article.jsx: contiene el formulario, el input controlado y el envío de nuevas tareas mediante `onSubmit`.
+Article.jsx: contiene el formulario y el input controlado; el envío sigue conectado al `onClick` del botón. La conexión a `onSubmit` está pendiente.
 
 Inicio.jsx: recibe `addTareas` desde `TareasPage` y muestra `Article`.
 
@@ -193,7 +193,7 @@ Las props son datos o funciones que un componente recibe de su padre:
 <Article addTareas={addTareas} />
 ```
 
-`TareasPage` pasa `addTareas` a `Inicio`, que la pasa a `Article`. Cuando el usuario pulsa el botón o Enter, el formulario de `Article` llama a esa función y `TareasPage` añade la tarea a su estado.
+`TareasPage` pasa `addTareas` a `Inicio`, que la pasa a `Article`. Al pulsar el botón, su `onClick` ejecuta `enviarTarea`, que llama a `addTareas`; `TareasPage` añade la tarea a su estado.
 
 También se pasan listas y acciones a Pendientes y Finalizadas. Así las vistas pueden mostrar datos y avisar a `TareasPage` cuando el usuario pulsa un botón.
 
@@ -306,7 +306,7 @@ onChange: detecta que ha cambiado un input.
 
 onSubmit: controla el envío de un formulario.
 
-`Article` utiliza `<form onSubmit={enviarTarea}>`, `event.preventDefault()` y un botón `type="submit"`. El clic y Enter pasan por el mismo flujo de envío; ya no se usa `onKeyDown` ni un `onClick` específico para enviar.
+`Article` ya contiene `<form>` y un botón `type="submit"`, pero `enviarTarea` sigue conectada al `onClick` del botón. La función recibe ese evento, llama a `preventDefault()`, valida el texto y ejecuta `addTareas`. Aún falta conectar `onSubmit` al formulario y retirar el `onClick` de envío, como pide el reto 06.
 
 Ejemplo de input controlado:
 

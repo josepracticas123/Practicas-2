@@ -408,7 +408,7 @@ Se ejecuta al pulsar un botón. Los botones de completar, recuperar, eliminar y 
 
 ### Estado actual de `onSubmit` y `preventDefault`
 
-`Article` utiliza un elemento `<form onSubmit={enviarTarea}>`. `enviarTarea` llama a `event.preventDefault()` para evitar la recarga, limpia y valida el texto, y después ejecuta `addTareas`. El botón tiene `type="submit"`; por eso el clic y Enter utilizan el mismo flujo. Ya no se utiliza `onKeyDown` ni un `onClick` específico para enviar.
+`Article` ya contiene `<form>` y un botón `type="submit"`, pero `enviarTarea` sigue conectada al `onClick` del botón. La función recibe ese evento, llama a `preventDefault()`, valida el texto y ejecuta `addTareas`. Aún falta conectar `onSubmit` al formulario y retirar el `onClick` de envío, como pide el reto 06.
 
 ### Input controlado
 
@@ -586,14 +586,15 @@ La aplicación actual no incluye un sistema separado de diseño para escritorio:
 
 ## 22. Flujo completo de una tarea
 
-El flujo real utiliza un `<form>`, un input controlado, `onChange`, `onSubmit` y `preventDefault`.
+El flujo actual del clic utiliza un `<form>`, un input controlado, `onChange`, el `onClick` del botón y `preventDefault`. La conexión al evento `onSubmit` sigue pendiente.
 
 ```text
 Usuario escribe
 -> onChange
 -> setTextoTarea
 -> React renderiza Article con el nuevo value
--> usuario pulsa el botón o Enter
+-> usuario pulsa el botón
+-> onClick del botón
 -> enviarTarea
 -> trim y validación
 -> addTareas en TareasPage
@@ -661,7 +662,7 @@ Estos conceptos aparecen realmente en el código actual:
 - Props.
 - Callbacks o funciones pasadas como props.
 - Inputs controlados con `value` y `onChange`.
-- Eventos `onClick`, `onChange` y `onSubmit`.
+- Eventos `onClick` y `onChange`; `onSubmit` está previsto en el 06.
 - Renderizado condicional con `&&` y operador ternario.
 - Renderizado de listas con `map`.
 - `key` estable en listas JSX.
@@ -703,7 +704,7 @@ Esta sección describe las instrucciones del Reto 06, no funcionalidades que ya 
 - **Rutas desconocidas:** una ruta que no coincide debe mostrar una página de no encontrado con un enlace al portal.
 - **Estado al desmontar y montar:** al salir de la ruta de tareas, el componente puede desmontarse y perder estados locales como la sección activa o el texto de búsqueda. Al volver a montarse, el inicializador vuelve a leer las tareas persistidas. Las tareas se conservan porque están en `localStorage`, mientras que un texto sin enviar puede reiniciarse.
 
-La conversión del envío de `Article` a un formulario con `onSubmit`, `preventDefault` y `type="submit"` ya está implementada. La parte de rutas del reto continúa pendiente.
+La conversión del envío de `Article` está en proceso: ya existen `<form>`, `preventDefault` y `type="submit"`, pero falta trasladar el manejador de `onClick` a `onSubmit`. La parte de rutas del reto continúa pendiente.
 
 ## 28. Preguntas que debería saber responder
 
@@ -789,8 +790,8 @@ La aplicación conserva las tareas en el estado de React durante la sesión, per
 
 ### ¿Cómo se envía actualmente una tarea?
 
-`Article` usa `<form onSubmit={enviarTarea}>`. `enviarTarea` ejecuta `preventDefault`, valida el texto y llama a `addTareas`; el botón tiene `type="submit"`.
+`Article` ya contiene `<form>` y un botón `type="submit"`, pero `enviarTarea` sigue conectada al `onClick` del botón. La función recibe ese evento, llama a `preventDefault()`, valida el texto y ejecuta `addTareas`. Aún falta conectar `onSubmit` al formulario y retirar el `onClick` de envío, como pide el reto 06.
 
 ### ¿Qué cambiará en el Reto 06?
 
-El envío ya está centralizado en `<form onSubmit>`, con `preventDefault` y un botón `type="submit"`. También se separó `TareasPage` y se colocó `BrowserRouter`, pero todavía faltan las rutas con `Routes` y `Route`, los enlaces y las páginas del portal.
+Falta centralizar el envío en `onSubmit` del formulario. Ya se separó `TareasPage` y se colocó `BrowserRouter`; las rutas, los enlaces y el portal siguen en proceso dentro del 06.

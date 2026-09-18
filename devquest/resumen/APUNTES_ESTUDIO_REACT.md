@@ -355,7 +355,7 @@ En `App` se usa `&&`:
 
 ```jsx
 {
-  seccionActual === "inicio" && <Inicio addTareas={addTareas} />;
+  seccionActual === "inicio" && <Inicio addTareas={addTareas} />
 }
 ```
 
@@ -377,7 +377,7 @@ En las vistas, un array de tareas se convierte en varios elementos `<li>`:
     <li key={tarea.id}>
       {index + 1}. {tarea.texto}
     </li>
-  ));
+  ))
 }
 ```
 

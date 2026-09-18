@@ -1,8 +1,6 @@
-Observaciones pendientes
+# Recordatorio de conceptos
 
-- [x] He revisado las observaciones del inicio de "mi resumen" (resumen.md) y ajustado estas notas breves para que sean coherentes. Puedo localizar los ejemplos en mi código y explicarlos.
-
----
+Pendientes prácticos: [lista de revisión](REVISION-PENDIENTE.md).
 
 App → Coordina el estado y las partes principales de la aplicación.
 
@@ -36,31 +34,31 @@ onSubmit → Ejecuta la función asociada cuando se envía un formulario.
 
 Tailwind → Sus clases controlan el diseño, los tamaños, los espacios y la adaptación a diferentes tamaños de pantalla.
 
-Preguntas con respuestas
+## Preguntas con respuestas
 
-¿Por qué "setTareas" y no modificar directamente "tareas"?
+### ¿Por qué "setTareas" y no modificar directamente "tareas"?
 
 Porque el estado no debe modificarse directamente. Si modificamos el array original, podemos mantener la misma referencia y React no tiene una nueva referencia de estado que utilizar para detectar correctamente el cambio. Por eso creamos un nuevo array y lo pasamos a "setTareas".
 
-¿Qué hace "[...tareas]"?
+### ¿Qué hace "[...tareas]"?
 
 Crea un nuevo array copiando los elementos del array "tareas".
 
-¿"[...tareas]" copia también los objetos que hay dentro?
+### ¿"[...tareas]" copia también los objetos que hay dentro?
 
 No. Hace una copia superficial: crea un nuevo array, pero los objetos interiores siguen siendo las mismas referencias. Si necesitamos modificar una tarea concreta sin modificar el objeto original, también debemos crear un nuevo objeto para esa tarea, por ejemplo mediante "{ ...tarea, ...cambios }".
 
-¿Por qué usamos "useEffect" para "localStorage"?
+### ¿Por qué usamos "useEffect" para "localStorage"?
 
 Porque queremos guardar las tareas cuando cambia el estado "tareas". El efecto se ejecuta al montar el componente y posteriormente cada vez que cambia "tareas".
 
-¿Cómo funciona el buscador?
+### ¿Cómo funciona el buscador?
 
 Cuando cambia "busqueda", React vuelve a renderizar. En ese renderizado, "filter" crea una lista temporal con las tareas cuyo texto coincide con la búsqueda. Esa lista solo se utiliza para mostrar los resultados: no modifica "tareas" ni se guarda en "localStorage".
 
 Por eso cambiar el buscador puede producir un renderizado sin que se ejecute de nuevo el efecto que depende de "[tareas]".
 
-¿Por qué "useState(leerTareasGuardadas)" y no "useState(leerTareasGuardadas())"?
+### ¿Por qué "useState(leerTareasGuardadas)" y no "useState(leerTareasGuardadas())"?
 
 Con "useState(leerTareasGuardadas)" paso la función como inicializador para que React obtenga el valor inicial del estado mediante esa función.
 
@@ -70,15 +68,15 @@ La primera forma permite que React utilice esa función como inicializador perez
 
 En desarrollo, "StrictMode" puede repetir la inicialización para detectar problemas, por lo que no debe entenderse como una ejecución garantizada exactamente una sola vez.
 
-¿Qué pasa al eliminar la última tarea?
+### ¿Qué pasa al eliminar la última tarea?
 
 "setTareas" establece "tareas" como un array vacío "[]". Como "tareas" ha cambiado, el "useEffect" detecta el cambio y guarda el array vacío en "localStorage". Al recargar, la aplicación puede recuperar correctamente que no quedan tareas.
 
-¿Para qué sirve "every"?
+### ¿Para qué sirve "every"?
 
 Comprueba que todos los elementos del array cumplen una condición.
 
-¿Para qué sirven "ids.has" e "ids.add"?
+### ¿Para qué sirven "ids.has" e "ids.add"?
 
 "ids.has(id)" comprueba si ese ID ya está dentro del "Set".
 
@@ -86,23 +84,23 @@ Comprueba que todos los elementos del array cumplen una condición.
 
 Si hay dos tareas con el mismo ID, cuando se procesa la segunda, "ids.has(id)" devuelve "true", por lo que la validación falla y se rechaza toda la lista.
 
-¿Qué diferencia hay entre JSON inválido y una estructura incorrecta?
+### ¿Qué diferencia hay entre JSON inválido y una estructura incorrecta?
 
-"hola" → JSON inválido. "JSON.parse()" no puede interpretarlo.
+El contenido `hola` sin comillas JSON es inválido: `JSON.parse` falla. El contenido `"hola"` con comillas JSON sí representa una cadena válida, pero tampoco es un array de tareas.
 
 "{}" → JSON válido, pero puede tener una estructura incorrecta para lo que espera la aplicación.
 
-¿Qué significa "sm:flex-row"?
+### ¿Qué significa "sm:flex-row"?
 
 Desde el breakpoint "sm", que en Tailwind es de 640 px por defecto, se aplica "flex-row".
 
 Por debajo de 640 px se mantiene la clase base. Si la clase base es "flex-col", los elementos permanecen organizados en columna.
 
-¿Qué ocurre actualmente al enviar el formulario?
+### ¿Qué ocurre actualmente al enviar el formulario?
 
-"Article" contiene un elemento "<form>". El envío se gestiona mediante "onSubmit", que ejecuta la función correspondiente y evita el comportamiento de envío por defecto del navegador mediante "preventDefault()".
+`Article` todavía no contiene `<form>`. El botón llama a `enviarTarea` mediante `onClick` y Enter lo hace mediante `onKeyDown`. La conversión a `onSubmit` con `preventDefault()` pertenece al paso 0 del reto 06 y está pendiente.
 
-Funcionamiento de guardar las tareas en "localStorage"
+## Funcionamiento del guardado en `localStorage`
 
 Cuando añadimos una tarea, generamos un array nuevo copiando las tareas que ya teníamos y colocando la nueva al final. Después utilizamos "setTareas" para actualizar el estado.
 

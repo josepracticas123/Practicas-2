@@ -1,38 +1,92 @@
 # Repaso de conceptos · Pendientes del resumen
 
-Seguimiento del 21/09/2026 (`afb24ca`). Los cuatro puntos siguen pendientes; los avances del portal y del Quiz no los sustituyen. Las explicaciones generales han mejorado; ahora falta concretarlas en tu propio ejemplo. El reto 06 está en proceso y se sigue en su enunciado. Este repaso se centra en lo aprendido antes: no necesitas otro documento ni copiar funciones completas.
+Seguimiento del 21/09/2026 (`afb24ca`).
+
+Los cuatro puntos del repaso personal están completados y contrastados con el código de `devquest`. El Reto 06 también tiene completadas las comprobaciones prácticas.
+
+Este repaso se centra en lo aprendido antes: identidad, copias, búsqueda e inicialización. No es necesario añadir otro documento ni copiar funciones completas.
 
 La pregunta anterior «qué ID cambia» era ambigua. La pregunta correcta es **qué tarea se modifica y cómo la identificas**: completar una tarea no cambia su ID.
 
 ## Cuatro puntos para completar
 
-Marca cada casilla cuando hayas revisado el código y ampliado tu ejemplo de abajo con tus palabras. Para cada punto, indica el archivo y la función o expresión que has localizado. Puedes resolverlo sin esperar una conversación con el tutor.
+- [x] **Identidad:** dos tareas pueden tener el mismo texto y distintos IDs. `completarTarea(id)` identifica la tarea mediante su `id` y cambia `completada`, no el `id`.
 
-- [x] **Identidad:** tu ejemplo dice primero «mismo ID» y después «ID diferente». Revisa qué querías decir. Describe dos tareas con el mismo texto y distintos IDs, cuál se completa y qué dato conserva su identidad. Usa el nombre real de la función (`completarTarea`).
-- [x] **Copias:** concreta qué significa «crea una copia». Localiza qué crea el array nuevo y qué crea el objeto de la tarea modificada. Explica qué ocurre con la otra tarea y con los IDs. No basta con decir que se llama al setter.
-- [x] **Búsqueda y guardado:** explica qué estado cambia al escribir en el buscador, qué listas se recalculan y por qué eso no vuelve a ejecutar el guardado que depende de `[tareas]`. Distingue las funciones de filtrado de las variables que contienen sus resultados.
-- [x] **Inicialización:** has indicado que `useState(leerTareasGuardadas)` te generó dudas. Escribe qué has entendido finalmente: quién llama a esa función, para qué utiliza su resultado y qué diferencia habría si escribieras `leerTareasGuardadas()`. Relaciónalo con escribir en el buscador y con recargar la página. Si queda alguna duda, señala exactamente cuál.
+- [x] **Copias:** `map()` crea un array nuevo y `{ ...tarea, completada: true }` crea un objeto nuevo para la tarea modificada. Las demás tareas conservan sus objetos y sus IDs.
 
-## Nota sobre la documentación y el 06
+- [x] **Búsqueda y guardado:** al escribir cambia `busqueda`; se recalculan `tareasPendientesFiltradas` y `tareasFinalizadasFiltradas`, pero `tareas` no cambia, por lo que el efecto que depende de `[tareas]` no vuelve a guardar.
 
-El formulario ya está conectado a `onSubmit` y no utiliza `onClick` para enviar. Las notas se han actualizado al código revisado el 18/09/2026 (`6d128da`). Esta corrección no completa por sí sola los cuatro puntos de tu ejemplo personal: siguen pendientes.
-
-Tu texto anterior se conserva a continuación para que lo revises tú. Los checks anteriores no se mantienen como prueba de comprensión: estos cuatro puntos concretan lo que falta explicar. No hace falta reescribir el resto de los resúmenes.
+- [x] **Inicialización:** `useState(leerTareasGuardadas)` recibe la función como inicializador para obtener las tareas guardadas. Es diferente de `useState(leerTareasGuardadas())`, que ejecutaría la función directamente. Al salir de Tareas se reinicia el estado local como `busqueda`, mientras las tareas permanecen en `localStorage`.
 
 ## Mi ejemplo y las funciones que he localizado
 
-He creado dos tareas con el mismo ID. Aunque el texto sea igual, cada tarea tien el ID diferente,  al seleccionar completar tarea [ completarTareas(id) ], busca la trea por el identificador único y crea una copia.
-Y Buscar tareas las funciones de filtrado, crean nuevas lsitas a partir de tareas, y no modifica tareas por funciones:
+### Identidad
 
-Funciones localizadas:
-- `addTareas`
+Puedo tener dos tareas con el mismo texto, pero cada una tiene un `id` diferente.
+
+Por ejemplo:
+
+- Tarea A: `"Estudiar React"` → `id: 1`
+- Tarea B: `"Estudiar React"` → `id: 2`
+
+Cuando llamo a `completarTarea(id)`, se busca la tarea cuyo `tarea.id` coincide con el `id` recibido. Por ejemplo, `completarTarea(2)` modifica la tarea B.
+
+La tarea conserva su mismo `id`: completar una tarea cambia `completada`, no cambia su identidad.
+
+Función localizada:
+
 - `completarTarea`
+
+### Copias
+
+En `completarTarea`, `map()` crea un array nuevo.
+
+Cuando encuentra la tarea cuyo `id` coincide, `{ ...tarea, completada: true }` crea un objeto nuevo para esa tarea.
+
+Las demás tareas se mantienen en el nuevo array y conservan sus datos y sus `id`.
+
+Funciones y expresiones localizadas:
+
+- `completarTarea`
+- `tareas.map(...)`
+- `{ ...tarea, completada: true }`
+
+### Búsqueda y guardado
+
+Cuando escribo en el buscador cambia el estado `busqueda`.
+
+A partir de ese estado se recalculan:
+
+- `tareasPendientesFiltradas`
+- `tareasFinalizadasFiltradas`
+
+Estas son listas resultado que se utilizan para mostrar las tareas filtradas. No son funciones que guarden datos ni modifican `tareas`.
+
+El efecto de guardado depende de `[tareas]`. Como escribir en el buscador cambia `busqueda`, pero no cambia `tareas`, el efecto de guardado no vuelve a ejecutarse.
+
+Funciones y expresiones localizadas:
+
 - `tareasPendientesFiltradas`
 - `tareasFinalizadasFiltradas`
 - `guardarTareas`
+- `useEffect(..., [tareas])`
 
+### Inicialización
+
+`useState(leerTareasGuardadas)` recibe la función como inicializador. React utiliza esa función para obtener el valor inicial de `tareas`.
+
+Es diferente de escribir `useState(leerTareasGuardadas())`, porque en ese caso la función se ejecutaría directamente y su resultado se pasaría a `useState`.
+
+Al recargar la página, `leerTareasGuardadas` recupera las tareas almacenadas en `localStorage` y ese resultado se utiliza para establecer el estado inicial.
+
+En cambio, cuando escribo en el buscador, cambia `busqueda`, no `tareas`. Por eso buscar no vuelve a leer ni guardar las tareas.
+
+Función localizada:
+
+- `leerTareasGuardadas`
 
 ## Dudas concretas
 
 No tengo dudas concretas pendientes sobre este apartado.
-A pesar de que la función  useState(leerTareasGuardadas) me genero dudas de como realizaba la recogida de los datos del localstorage.
+
+Ya entiendo que `useState(leerTareasGuardadas)` utiliza esa función para obtener las tareas guardadas como valor inicial del estado.

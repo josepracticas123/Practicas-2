@@ -1,4 +1,4 @@
-// Finalizadas recibe tareas y acciones desde App mediante props.
+// Finalizadas recibe los datos y acciones que necesita mediante props.
 function Finalizadas({
     tareasFinalizadas,
     tareasFinalizadasFiltradas,

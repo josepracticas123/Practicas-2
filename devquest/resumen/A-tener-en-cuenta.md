@@ -127,3 +127,15 @@ React vuelve a renderizar y el "useEffect" detecta que "tareas" ha cambiado. Ent
 Si cambiamos solamente el texto de búsqueda, cambia "busqueda" y se produce otro renderizado, pero "tareas" no cambia. Por ello el efecto cuya dependencia es "[tareas]" no vuelve a guardar las tareas en "localStorage".
 
 Si eliminamos la última tarea, "tareas" pasa a ser "[]" y el efecto guarda ese array vacío.
+
+## Registro breve de pruebas
+
+- **Navegación:** se comprobó el acceso entre `/`, `/tareas` y `/quiz`, además de atrás y adelante del navegador. La URL y la página mostrada coinciden.
+- **Ruta inexistente:** se comprobó `/no-existe`. Se muestra la página no encontrada y el enlace permite volver al portal.
+- **Persistencia:** se crearon dos tareas, se completó una, se salió al portal y se volvió a Tareas. Las dos tareas y sus estados se conservaron sin duplicarse. También se comprobó la recarga directa de `/tareas`.
+- **Operaciones de tareas:** se probaron crear, completar, recuperar, buscar y eliminar tareas. El comportamiento fue correcto.
+- **Teclado y foco:** se recorrieron los elementos interactivos con el teclado y se comprobó que el foco era visible. También se comprobó el envío mediante teclado.
+- **Responsive:** se comprobó el portal y Tareas a 375 px y 1280 px. No se detectaron problemas de disposición ni desbordamiento horizontal.
+- **URL larga:** se comprobó una URL larga del reto 04. La aplicación mantuvo el funcionamiento y la ruta inexistente permitió volver al portal.
+
+**Resultado:** todas las comprobaciones realizadas fueron correctas y no se detectaron fallos durante las pruebas.

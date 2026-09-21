@@ -115,15 +115,15 @@ Añade comentarios breves sobre la responsabilidad de las rutas y dónde vive ah
 - [x] Tareas tiene un `Link` real. Quiz ya enlaza a `/quiz` como avance del 07; no vuelvas a poner «Próximamente».
 - [x] `/tareas` renderiza `TareasPage` con sus secciones internas.
 - [x] Se separan navegación global e interna sin duplicar cabecera, `main` ni pie.
-- [ ] He comprobado los enlaces con teclado y foco visible.
-- [ ] He probado atrás, adelante y recarga directa en `/tareas` desde Vite.
+- [x] He comprobado los enlaces con teclado y foco visible.
+- [x] He probado atrás, adelante y recarga directa en `/tareas` desde Vite.
 - [x] Existe una ruta comodín con mensaje de página no encontrada y enlace al portal.
-- [ ] He probado crear, completar, recuperar, buscar y eliminar en esta versión.
-- [ ] He comprobado que salir al portal y volver conserva las tareas y sus estados sin duplicarlas.
-- [ ] He probado portal y Tareas a 375 px y 1280 px, también con la URL larga del 04.
+- [x] He probado crear, completar, recuperar, buscar y eliminar en esta versión.
+- [x] He comprobado que salir al portal y volver conserva las tareas y sus estados sin duplicarlas.
+- [x] He probado portal y Tareas a 375 px y 1280 px, también con la URL larga del 04.
 - [x] El cuaderno describe las rutas, sus componentes, la ubicación del estado y la recuperación de tareas al volver.
-- [ ] He concretado por qué se reinicia el buscador al salir de Tareas y volver.
-- [ ] He completado los cuatro puntos del repaso personal; la explicación escrita de rutas no sustituye ese repaso.
+- [x] He concretado por qué se reinicia el buscador al salir de Tareas y volver.
+- [x] He completado los cuatro puntos del repaso personal; la explicación escrita de rutas no sustituye ese repaso.
 - [x] `npm run lint` y `npm run build` pasan (revisión del 21/09/2026, `afb24ca`).
 
 **Registro breve de pruebas:** anota aquí las acciones, el resultado y cualquier fallo encontrado. No hace falta otro archivo.

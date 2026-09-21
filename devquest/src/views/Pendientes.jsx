@@ -1,4 +1,4 @@
-// Pendientes recibe datos y funciones de App mediante props.
+// Pendientes recibe los datos y acciones que necesita mediante props.
 function Pendientes({
     tareasPendientes,
     tareasPendientesFiltradas,
@@ -54,7 +54,7 @@ function Pendientes({
                                 {tareasPendientes.length} tareas pendientes</p><br />
 
                             <ul className="mx-auto max-w-3xl space-y-3">
-                                {tareasPendientesFiltradas.map((tarea, index) => ( // Dibuja cada tarea visible.
+                                {tareasPendientesFiltradas.map((tarea, index) => ( // Dibuja cada tarea visible
                                     <li key={tarea.id} className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:justify-center">
                                         <span className="w-full min-w-0 wrap-break-words sm:w-72">
                                             {index + 1}. {tarea.texto}

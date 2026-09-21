@@ -13,7 +13,7 @@ function MiniappCards({ miniapp }) {
                 {miniapp.descripcion}
             </p>
 
-            {/*Condicional que revisa si hay ruta o no, como quiz no tiene ruta mostrara el span.*/}
+            {/* Condicional que revisa si hay ruta: si existe, muestra un Link; si no, muestra un span. */}
             {miniapp.ruta ? (
                 <Link 
                className="mt-auto inline-block w-fit rounded-lg bg-slate-600 px-4 py-2 text-white transition hover:bg-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400"

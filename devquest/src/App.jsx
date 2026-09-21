@@ -5,7 +5,7 @@ import { Routes, Route, Link } from 'react-router';
 import PortalPage from './pages/PortalPage'
 import QuizPage from './pages/QuizPage';
 
-// App coordina el estado y las vistas principales.
+// App organiza las rutas y la estructura común de la aplicación.
 function App() {
   // JSX describe la estructura que se mostrará en pantalla.
   return (

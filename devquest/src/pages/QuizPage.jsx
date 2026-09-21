@@ -10,6 +10,8 @@ function QuizPage() {
     // Estado que indica si la respuesta ya ha sido comprobada.
     const [comprobada, setComprobada] = useState(false);
 
+    const[esCorrecta, setEsCorrecta] = useState(null);
+
     // Marca la respuesta como comprobada.
     const comprobarRespuesta = (event) => {
         event.preventDefault();
@@ -43,7 +45,7 @@ function QuizPage() {
                 />
                 {/* mensaje de si es correcta o incorrecta la respuesta*/}
                 {comprobada && (
-                    <p>{esCorrecta} ? "Correcto!" : "Incorrecto"</p> // Es un operador ternario.
+                    <p>{esCorrecta ? "Correcto!" : "Incorrecto"}</p> // Es un operador ternario.
                 )}
 
                 {/* Solo mostramos este bloque si la respuesta ya ha sido comprobada

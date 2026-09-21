@@ -42,10 +42,37 @@ function QuizPage() {
                     comprobada={comprobada}
                 />
                 {/* mensaje de si es correcta o incorrecta la respuesta*/}
-                 {comprobada && (
+                {comprobada && (
                     <p>{esCorrecta} ? "Correcto!" : "Incorrecto"</p> // Es un operador ternario.
-                    )}
+                )}
 
+                {/* Solo mostramos este bloque si la respuesta ya ha sido comprobada
+                      y además la respuesta del usuario es incorrecta. */}
+                {comprobada && !esCorrecta && (
+
+                    // Si se cumplen las dos condiciones, mostramos este párrafo.
+                    <p>
+                        {/* Texto que verá el usuario. */}
+                        Respuesta correcta:{" "}
+
+                        {
+                            // Buscamos dentro del array de opciones
+                            // cuál es la opción que tiene el ID de la respuesta correcta.
+                            preguntas[0].opciones.find(
+
+                                // Recorremos cada opción del array.
+                                (opcion) =>
+
+                                    // Comprobamos si el ID de esta opción
+                                    // coincide con el ID de la respuesta correcta.
+                                    opcion.id === preguntas[0].respuestaCorrectaId
+
+                                // Cuando encuentra la opción que coincide,
+                                // .find() devuelve ese objeto de opción.
+                            )?.texto
+                        }
+                    </p>
+                )}
 
                 {/* boton que dispara el onsubmit*/}
                 <button

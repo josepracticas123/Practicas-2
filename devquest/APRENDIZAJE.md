@@ -138,7 +138,7 @@ Estas preguntas se van respondiendo conforme avanzan los retos. Completa solo el
 
 ### Reto 06 · Portal y rutas
 
-**Estado:** estructura principal implementada; pendiente registrar las pruebas de cierre y completar el repaso personal. Consulta el checklist del reto 06.
+**Estado:** terminado. La estructura de rutas, el Portal, los enlaces y la navegación están implementados y comprobados.
 
 - ¿Qué diferencia hay entre cambiar `seccionActual` y navegar a `/tareas`?
 - ¿Qué responsabilidad tienen `BrowserRouter`, `Routes`, `Route` y `Link`?
@@ -146,11 +146,19 @@ Estas preguntas se van respondiendo conforme avanzan los retos. Completa solo el
 - ¿Por qué las tareas se recuperan pero el buscador puede reiniciarse?
 - ¿Qué props recibe mi tarjeta y cómo represento una miniapp todavía no disponible?
 
-**Mi explicación:** `seccionActual` cambia la vista interna de Tareas sin cambiar la URL. Navegar a `/tareas` cambia la ruta global y hace que React Router muestre `TareasPage`. `BrowserRouter` proporciona el contexto, `Routes` agrupa las rutas, `Route` relaciona cada URL con una página y `Link` permite navegar sin recargar. El estado de Tareas vive en `TareasPage`; al salir se desmonta, pero las tareas se recuperan de `localStorage` al volver. La tarjeta recibe los datos de una miniapp por props y muestra un enlace solo cuando el objeto tiene una ruta.
+**Mi explicación:** `seccionActual` cambia la sección dentro de Tareas sin cambiar la URL. Navegar a `/tareas` cambia la ruta global y React Router muestra `TareasPage`.
+
+`BrowserRouter` proporciona el contexto de navegación. `Routes` contiene las rutas, `Route` relaciona cada URL con un componente y `Link` permite navegar sin recargar la página.
+
+El estado de las tareas vive en `TareasPage`. Cuando salgo de esa página, el estado local se desmonta, pero las tareas se recuperan desde `localStorage` cuando vuelvo.
+
+Las tareas se recuperan porque están guardadas en `localStorage`, mientras que el buscador es un estado de `TareasPage` y no se guarda, por lo que puede empezar de nuevo al volver.
+
+`MiniappCards` recibe los datos de cada miniapp mediante la prop `miniapp`. Si una miniapp todavía no tiene una ruta, la tarjeta muestra su estado informativo en lugar de crear un enlace de navegación.
 
 ### Reto 07 · Seleccionar y comprobar
 
-**Estado:** en desarrollo. Ya están implementados los datos locales, la página inicial del Quiz, la ruta `/quiz`, los enlaces del Portal/Header y la selección controlada de la primera pregunta. Todavía faltan comprobar la respuesta, mostrar resultado y explicación, desactivar las opciones, extraer el componente de pregunta y responder las preguntas de aprendizaje del 07. Recorrer el cuestionario completo corresponde al 08.
+**Estado:** terminado. Están implementados y comprobados los datos locales, la página del Quiz, la ruta `/quiz`, los enlaces del Portal/Header, la selección controlada, la comprobación de respuestas y la comunicación con el componente de pregunta. El recorrido completo y la pantalla final de resultados corresponden al Reto 08.
 
 - ¿Por qué las preguntas son datos constantes y la selección es estado?
 - ¿Qué significa controlar un input `radio` desde React?
@@ -158,9 +166,14 @@ Estas preguntas se van respondiendo conforme avanzan los retos. Completa solo el
 - ¿Por qué guardo un ID en vez de copiar la opción completa?
 - ¿Qué guardo al comprobar y qué puedo calcular? ¿Por qué no necesito un efecto?
 
-**Mi explicación y dudas:** Las preguntas son datos constantes porque están definidos en `src/data/Preguntas.js`; la selección sí cambia y se guarda en `seleccionadaId` mediante `useState`. Los radios son inputs controlados porque `checked` depende de ese estado y `onChange` lo actualiza. La lógica de comprobar la respuesta y el componente de pregunta todavía están pendientes.
+**Mi explicación:**
 
-**Aclaración para revisar:** las preguntas no necesitan estado porque no cambian durante la interacción, no por estar en otro archivo. Revisa esa frase de tu explicación y añade por qué guardas solo el ID seleccionado.
+- Las preguntas son datos constantes porque están escritos en `src/data/Preguntas.js` y no cambian durante la partida. La selección sí es estado porque cambia cuando el usuario elige una opción.
+- Un `radio` controlado significa que su atributo `checked` depende de `seleccionadaId`. Cuando el usuario elige una opción, `onChange` actualiza ese estado y React vuelve a mostrar cuál está marcada.
+- `QuizQuestions` recibe por props la pregunta, `seleccionadaId`, `comprobada` y la función `onSeleccionar`. Cuando se elige un radio, el componente llama a `onSeleccionar(opcion.id)` y `QuizPage` actualiza el estado.
+- Guardo el ID de la opción porque identifica de forma sencilla la respuesta elegida y permite compararlo con `respuestaCorrectaId`. No necesito copiar toda la opción.
+- Al comprobar, guardo en `respuestasConfirmadas` el ID de la pregunta junto con el ID de la opción elegida. A partir de esos datos puedo calcular si la respuesta es correcta, si la pregunta ya está comprobada y, en `QuizResult`, cuántas respuestas son correctas con `filter().length`.
+- No necesito un efecto porque estos valores se calculan directamente durante el renderizado a partir del estado y de los datos. Solo uso los setters para guardar los cambios que hace el usuario.
 
 ### Reto 08 · Recorrido y resultado
 
@@ -171,7 +184,16 @@ Estas preguntas se van respondiendo conforme avanzan los retos. Completa solo el
 - ¿Qué reinicio al volver a jugar y qué sucede al salir de la ruta?
 - ¿Cómo evito leer una pregunta que no existe al llegar al final?
 
-**Mi explicación y dudas:** pendiente.
+**Mi explicación:**
+
+- Para reconstruir el estado de la partida necesito guardar `indicePregunta`, que indica qué pregunta estoy viendo; `seleccionadaId`, que guarda la opción elegida en esa pregunta; y `respuestasConfirmadas`, que relaciona el ID de cada pregunta con el ID de la opción que confirmé.
+- Una pregunta no hereda la selección anterior porque `siguientePregunta` llama a `setSeleccionadaId(null)` cuando aumenta `indicePregunta`. Al mostrar la nueva pregunta, sus radios empiezan sin ninguna opción marcada y sus mensajes todavía no aparecen.
+- No puedo contar dos veces una respuesta porque `comprobada` se calcula comprobando si ya existe una respuesta para el ID de la pregunta actual. Además, `comprobarRespuesta` sale sin guardar si `comprobada` ya es verdadera y el botón de comprobar deja de mostrarse.
+- En `QuizResult`, `filter()` recorre las preguntas y conserva las que tienen en `respuestasConfirmadas` el mismo ID que `respuestaCorrectaId`. Después, `length` cuenta esas preguntas y obtiene la puntuación sin guardar otro contador.
+- `volverAJugar` reinicia `indicePregunta` a `0`, `seleccionadaId` a `null` y `respuestasConfirmadas` a `{}`. Si salgo de la ruta, `QuizPage` se desmonta y su estado desaparece; al volver se crea una partida nueva. Esto no modifica las tareas porque pertenecen a `TareasPage` y se guardan aparte en `localStorage`.
+- Para no leer una pregunta inexistente, cuando `indicePregunta` alcanza `preguntas.length`, `QuizPage` devuelve primero `QuizResult` y no intenta obtener `preguntas[indicePregunta]`. En la última pregunta, `verResultado` establece exactamente ese valor al pulsar «Ver resultado».
+
+No quedan dudas pendientes sobre este bloque.
 
 ## Comentarios explicativos en el código
 

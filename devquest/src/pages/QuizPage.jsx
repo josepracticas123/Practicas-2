@@ -10,14 +10,15 @@ function QuizPage() {
     // Estado que indica si la respuesta ya ha sido comprobada.
     const [comprobada, setComprobada] = useState(false);
 
-    const[esCorrecta, setEsCorrecta] = useState(null);
+    // Estado que guarda si la respuesta comprobada es correcta.
+    const [esCorrecta, setEsCorrecta] = useState(null);
 
     // Marca la respuesta como comprobada.
     const comprobarRespuesta = (event) => {
         event.preventDefault();
 
         // Comparamos la opción que ha seleccionado el usuario
-        // con el ID de la respuesta correcta de la pregunta.
+        // con el ID de la respuesta correcta.
         const resultado =
             seleccionadaId === preguntas[0].respuestaCorrectaId;
 
@@ -26,16 +27,18 @@ function QuizPage() {
 
         // Indicamos que la respuesta ya ha sido comprobada.
         setComprobada(true);
-
     };
+
     return (
         <section className="px-6 py-20 text-white">
             <h1 className="mb-8 text-center text-4xl font-bold">
                 Quiz de React
             </h1>
 
-            <form onSubmit={comprobarRespuesta} className="mx-auto w-full max-w-2xl px-4 sm:px-0">
-
+            <form
+                onSubmit={comprobarRespuesta}
+                className="mx-auto w-full max-w-2xl px-4 sm:px-0"
+            >
                 {/* Pasamos al componente hijo los datos y acciones que necesita para mostrar la pregunta. */}
                 <QuizQuestions
                     pregunta={preguntas[0]}
@@ -43,17 +46,28 @@ function QuizPage() {
                     onSeleccionar={setSeleccionadaId}
                     comprobada={comprobada}
                 />
-                {/* mensaje de si es correcta o incorrecta la respuesta*/}
+
+                {/* Mostramos un mensaje indicando si la respuesta es correcta o incorrecta. */}
                 {comprobada && (
-                    <p>{esCorrecta ? "Correcto!" : "Incorrecto"}</p> // Es un operador ternario.
+                    <div
+                        className={`mt-6 rounded-lg border p-4 text-center font-semibold ${
+                            esCorrecta
+                                ? "border-green-500 bg-green-500/10 text-green-400"
+                                : "border-red-500 bg-red-500/10 text-red-400"
+                        }`}
+                    >
+                        {/* Mostramos un texto diferente según el resultado. */}
+                        <p>
+                            {esCorrecta ? "¡Correcto!" : "Incorrecto"}
+                        </p>
+                    </div>
                 )}
 
                 {/* Solo mostramos este bloque si la respuesta ya ha sido comprobada
-                      y además la respuesta del usuario es incorrecta. */}
+                    y además la respuesta del usuario es incorrecta. */}
                 {comprobada && !esCorrecta && (
-
                     // Si se cumplen las dos condiciones, mostramos este párrafo.
-                    <p>
+                    <p className="mt-4">
                         {/* Texto que verá el usuario. */}
                         Respuesta correcta:{" "}
 
@@ -76,15 +90,33 @@ function QuizPage() {
                     </p>
                 )}
 
-                {/* boton que dispara el onsubmit*/}
+                {/* Mostramos la explicación después de comprobar la respuesta. */}
+                {comprobada && (
+                    <div className="mt-4 rounded-lg bg-gray-700 p-4 text-gray-200">
+                        {/* Título de la explicación. */}
+                        <p className="mb-1 font-semibold text-white">
+                            Explicación
+                        </p>
+
+                        {/* Mostramos el texto de la explicación. */}
+                        <p>
+                            {preguntas[0].explicacion}
+                        </p>
+                    </div>
+                )}
+
+                {/* Botón que dispara el onSubmit. */}
                 <button
-                    type="submit">
+                    type="submit"
+                    disabled={seleccionadaId === null || comprobada}
+                    className="mt-6 rounded-lg bg-slate-600 px-5 py-3 font-semibold text-white transition hover:bg-slate-500 disabled:cursor-not-allowed disabled:opacity-50"
+                >
                     Comprobar respuesta
                 </button>
-
             </form>
         </section>
     );
 }
 
 export default QuizPage;
+

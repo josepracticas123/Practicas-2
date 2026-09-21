@@ -12,18 +12,16 @@ function QuizPage() {
     // Respuestas que ya han sido confirmadas.
     // Cada clave es el ID de una pregunta y su valor es el ID de la opción elegida.
     const [respuestasConfirmadas, setRespuestasConfirmadas] = useState({});
-    //Obtenemos la pregunta que corresponde al indice actual.
-    const preguntaActual = preguntas[indicePregunta];
 
-    const comprobada =
-        respuestasConfirmadas[preguntaActual.id] !== undefined
-
-    const esCorrecta =
-        seleccionadaId == preguntaActual.respuestaCorrectaId;
 
     // Marca la respuesta como comprobada.
     const comprobarRespuesta = (event) => {
         event.preventDefault();
+
+        // Seguridad o protección 
+        if (seleccionadaId === null || comprobada) {
+            return;
+        }
 
         //Guardamos la opción elegida usando el ID de la pregunta
         setRespuestasConfirmadas((respuestasAnteriores) => ({
@@ -32,6 +30,48 @@ function QuizPage() {
         }));
 
     };
+
+    //Pasar preguntas, pasa entre preguntas.
+    const siguientePregunta = () => {
+        setIndicePregunta((indiceAnterior) => indiceAnterior + 1);
+        setSeleccionadaId(null);
+    }
+
+    const esUltimaPregunta = indicePregunta === preguntas.length - 1;
+
+
+    const verResultado = () => {
+        setIndicePregunta(preguntas.length);
+
+    }
+
+    const respuestasCorrectas = preguntas.filter(
+        (pregunta) =>
+            respuestasConfirmadas[pregunta.id] === pregunta.respuestaCorrectaId
+    ).length;
+
+    if (indicePregunta >= preguntas.length) {
+        return (
+            <section className="px-6 py-20 text-white">
+                <h1 className="mb-8 text-center text-4xl font-bold">
+                    Resultado
+                </h1>
+                <p className="text-center text-xl">
+                    Has acertado {respuestasCorrectas} de {preguntas.length}
+                </p>
+            </section>
+        )
+    }
+
+    //Obtenemos la pregunta que corresponde al indice actual.
+    const preguntaActual = preguntas[indicePregunta];
+    const comprobada =
+        respuestasConfirmadas[preguntaActual.id] !== undefined;
+
+    const esCorrecta =
+        seleccionadaId === preguntaActual.respuestaCorrectaId;
+
+
 
     return (
         <section className="px-6 py-20 text-white">
@@ -108,14 +148,38 @@ function QuizPage() {
                     </div>
                 )}
 
-                {/* Botón que dispara el onSubmit. */}
-                <button
-                    type="submit"
-                    disabled={seleccionadaId === null || comprobada}
-                    className="mt-6 rounded-lg bg-slate-600 px-5 py-3 font-semibold text-white transition hover:bg-slate-500 disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                    Comprobar respuesta
-                </button>
+                {!comprobada && (
+                    <button
+                        type="submit"
+                        disabled={seleccionadaId === null || comprobada}
+                        className="mt-6 rounded-lg bg-slate-600 px-5 py-3 font-semibold text-white transition hover:bg-slate-500 disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                        Comprobar respuesta
+                    </button>
+
+                )}
+                {/* Este botón se mostrará cuando se haya dado respuesta  y contestado la pregunta*/}
+                {comprobada && !esUltimaPregunta && (
+                    <button
+                        type="button"
+                        onClick={siguientePregunta}
+                        className="mt-6 rounded-lg bg-slate-600 px-5 py-3 font-semibold text-white transition hover:bg-slate-500"
+                    >
+                        Siguiente pregunta
+                    </button>
+                )}
+                {comprobada && esUltimaPregunta && (
+                    <button
+                        type="button"
+                        onClick={verResultado}
+                        className="mt-6 rounded-lg bg-slate-600 px-5 py-3 font-semibold text-white transition hover:bg-slate-500"
+                    >
+                        Ver resultado
+                    </button>
+
+
+                )}
+
             </form>
         </section>
     );

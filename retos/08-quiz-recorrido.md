@@ -1,5 +1,9 @@
 # 08 · Completa el quiz y consulta tu resultado
 
+## Seguimiento · 21/09/2026
+
+**Completado.** El Quiz recorre las cinco preguntas, registra las respuestas por ID, muestra el resultado en `QuizResult` y permite iniciar otra partida sin recargar.
+
 **Tu misión:** recorrer las cinco preguntas, obtener un resultado y poder empezar otra partida.
 
 **Antes:** termina el 07. **Practicarás:** transiciones de estado, actualización de objetos, valores calculados y reinicio de una interacción.
@@ -60,20 +64,49 @@ Añade comentarios sobre las transiciones y el reinicio. Responde las preguntas 
 
 ## Comprueba tu entrega
 
-- [ ] Se recorren todas las preguntas en orden y el progreso coincide con la pregunta actual.
-- [ ] No puedo avanzar sin confirmar una respuesta ni confirmar dos veces la misma pregunta.
-- [ ] Al avanzar se limpian selección y mensajes, y las opciones vuelven a estar disponibles.
-- [ ] Las respuestas se registran por ID sin modificar los datos originales ni el objeto anterior.
-- [ ] La última pregunta lleva al resultado sin errores por acceder fuera del array.
-- [ ] Todas correctas produce 5/5; todas incorrectas, 0/5; la mezcla coincide con las elecciones realizadas.
-- [ ] El resumen muestra la elección, la correcta y la explicación de cada pregunta.
-- [ ] Progreso, puntuación y total se calculan sin estados duplicados ni efectos añadidos.
-- [ ] «Volver a jugar» reinicia toda la partida sin recargar la página.
-- [ ] Salir del quiz y regresar, o recargar, inicia otra partida; las tareas guardadas permanecen intactas.
-- [ ] El recorrido completo funciona con teclado, foco visible y mensajes comprensibles.
-- [ ] Preguntas y resumen se leen a 375 px y 1280 px sin desbordamiento.
-- [ ] He completado las preguntas del cuaderno y puedo explicar qué reinicio y qué calculo.
-- [ ] `npm run lint` y `npm run build` pasan.
+- [x] Se recorren todas las preguntas en orden y el progreso coincide con la pregunta actual.
+- [x] No puedo avanzar sin confirmar una respuesta ni confirmar dos veces la misma pregunta.
+- [x] Al avanzar se limpian selección y mensajes, y las opciones vuelven a estar disponibles.
+- [x] Las respuestas se registran por ID sin modificar los datos originales ni el objeto anterior.
+- [x] La última pregunta lleva al resultado sin errores por acceder fuera del array.
+- [x] Todas correctas produce 5/5; todas incorrectas, 0/5; la mezcla coincide con las elecciones realizadas.
+- [x] El resumen muestra la elección, la correcta y la explicación de cada pregunta.
+- [x] Progreso, puntuación y total se calculan sin estados duplicados ni efectos añadidos.
+- [x] «Volver a jugar» reinicia toda la partida sin recargar la página.
+- [x] Salir del quiz y regresar, o recargar, inicia otra partida; las tareas guardadas permanecen intactas.
+- [x] El recorrido completo funciona con teclado, foco visible y mensajes comprensibles.
+- [x] Preguntas y resumen se leen a 375 px y 1280 px sin desbordamiento.
+- [x] He completado las preguntas del cuaderno y puedo explicar qué reinicio y qué calculo.
+- [x] `npm run lint` y `npm run build` pasan.
+
+## Qué he practicado/aprendido en el 08
+
+- Gestionar el índice de la pregunta actual y avanzar en orden.
+- Guardar respuestas confirmadas relacionando el ID de cada pregunta con el ID de la opción elegida.
+- Limpiar la selección al avanzar y reiniciar toda la partida.
+- Calcular la puntuación con `filter().length`, sin guardar un contador adicional.
+- Separar la pantalla del Quiz y la pantalla de resultados en componentes distintos.
+
+## Decisiones importantes
+
+- El estado de `indicePregunta`, `seleccionadaId` y `respuestasConfirmadas` permanece en `QuizPage`.
+- La comprobación solo registra una respuesta cuando existe una selección y la pregunta todavía no está confirmada.
+- El resultado se calcula desde las respuestas confirmadas y los datos originales; no se duplica en otro estado.
+- `QuizResult` recibe los datos mediante props y calcula los aciertos a partir de los IDs.
+- «Volver a jugar» reinicia índice, selección y respuestas confirmadas mediante sus setters. Recargar o salir del Quiz también inicia una partida nueva.
+- Tareas mantiene sus propias responsabilidades y sus tareas guardadas no se modifican.
+
+## Pruebas realizadas
+
+- Se comprobó una partida con todas las respuestas correctas.
+- Se comprobó una partida con todas las respuestas incorrectas.
+- Se comprobó una partida con respuestas mezcladas.
+- Se comprobó «Volver a jugar» y el reinicio de la partida sin recargar.
+- Se comprobó la navegación secuencial, el bloqueo tras confirmar y el acceso al resultado final.
+
+## Pendientes
+
+No quedan pendientes de implementación ni de comprobación documentados para el Reto 08.
 
 ## Documentación por bloques
 

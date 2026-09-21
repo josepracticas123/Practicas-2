@@ -161,7 +161,7 @@ Está implementado:
 - Se guarda el ID de la opción seleccionada, no el texto completo, porque los IDs son estables y permiten comparar directamente con `respuestaCorrectaId`.
 - El resultado se calcula a partir de los datos y la selección, en lugar de duplicar ese resultado como un estado independiente.
 - El estado de selección y comprobación vive en `QuizPage`; `QuizQuestions` se encarga de recibir props y comunicar la elección.
-- Solo se muestra la primera pregunta. La puntuación y la navegación a la siguiente pregunta quedan para el Reto 08.
+- Solo se muestra la primera pregunta en el alcance del Reto 07. La navegación y la puntuación se implementan en el Reto 08.
 
 ### Pruebas realizadas
 
@@ -173,6 +173,38 @@ La última ejecución disponible confirma `npm run build` con salida correcta. `
 
 - Realizar y registrar las pruebas de apertura y recarga directa de `/quiz`, respuesta correcta e incorrecta, bloqueo, teclado, recarga y tamaños de pantalla.
 - Completar la documentación específica y las preguntas del Reto 07.
+
+## Estado actual del Reto 08
+
+El Reto 08 está completado.
+
+Está implementado:
+
+- Navegación secuencial por las cinco preguntas mediante el índice de `QuizPage`.
+- Estado de la opción seleccionada y respuestas confirmadas asociadas al ID de cada pregunta.
+- Comprobación de una respuesta una sola vez, botón «Siguiente pregunta» y limpieza de la selección al avanzar.
+- Botón «Ver resultado» en la última pregunta.
+- Pantalla de resultados separada en `QuizResult`.
+- Cálculo de aciertos mediante `filter().length`, sin estado adicional para la puntuación.
+- Resumen de cada pregunta con enunciado, respuesta del usuario, respuesta correcta, resultado y explicación.
+- Botón «Volver a jugar», que reinicia índice, selección y respuestas confirmadas sin recargar.
+- Recargar o salir del Quiz comienza una partida nueva; las tareas guardadas no se modifican.
+- Indicador «Pregunta X de Y».
+- `QuizPage` y `QuizResult` están separados y comentados para facilitar la comprensión a un perfil junior.
+
+### Pruebas realizadas
+
+- Todas correctas.
+- Todas incorrectas.
+- Respuestas mezcladas.
+- «Volver a jugar».
+- Recorrido secuencial, bloqueo tras comprobar y pantalla de resultados.
+
+`npm run lint` y `npm run build` pasan correctamente.
+
+### Pendientes
+
+No quedan pendientes del Reto 08.
 
 ## 4. Componentes y funciones
 

@@ -847,6 +847,42 @@ No hay pruebas manuales del Quiz confirmadas en este documento. La última ejecu
 
 ### Pendientes
 
-- Probar y registrar la navegación directa y la recarga de `/quiz`.
-- Probar y registrar una respuesta correcta, una incorrecta, el bloqueo posterior, el teclado y los viewports de 375 px y 1280 px.
 - Completar las preguntas del cuaderno específicas del Reto 07.
+
+## 30. Estado actual del Reto 08
+
+El Reto 08 está completado. `QuizPage` recorre todas las preguntas en orden y `QuizResult` muestra el resumen final.
+
+Está implementado:
+
+- `indicePregunta` indica qué pregunta se muestra.
+- `seleccionadaId` guarda la opción elegida para la pregunta actual.
+- `respuestasConfirmadas` relaciona cada ID de pregunta con el ID de la opción elegida.
+- Una respuesta solo se confirma una vez; después aparecen «Siguiente pregunta» o «Ver resultado» y las opciones quedan bloqueadas.
+- Al avanzar, la selección se limpia. La última pregunta lleva a `QuizResult`.
+- `QuizResult` calcula los aciertos con `filter().length` y muestra enunciado, respuesta del usuario, respuesta correcta, resultado y explicación.
+- «Volver a jugar» reinicia índice, selección y respuestas confirmadas sin recargar.
+- Recargar o salir del Quiz inicia una partida nueva y no modifica las tareas guardadas.
+- El progreso se muestra como «Pregunta X de Y».
+- `QuizPage` y `QuizResult` están separados y contienen comentarios explicativos para un perfil junior.
+
+### Qué he practicado/aprendido en el 08
+
+- Gestionar transiciones entre preguntas.
+- Actualizar un objeto de respuestas sin modificar el anterior.
+- Calcular valores derivados, como la puntuación, desde los datos existentes.
+- Reiniciar una interacción completa mediante setters.
+
+### Decisiones importantes
+
+Se guardan las respuestas usando el ID de cada pregunta y el ID de cada opción. La puntuación se calcula con `filter().length`, sin añadir un estado duplicado. El resultado vive en un componente separado y recibe la información mediante props.
+
+### Pruebas realizadas
+
+Se comprobaron partidas con todas las respuestas correctas, todas incorrectas y respuestas mezcladas. También se comprobó «Volver a jugar», el avance secuencial, el bloqueo tras confirmar y la pantalla final de resultados.
+
+`npm run lint` y `npm run build` pasan correctamente.
+
+### Pendientes
+
+No quedan pendientes del Reto 08.

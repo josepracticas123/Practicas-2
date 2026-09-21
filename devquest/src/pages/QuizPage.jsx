@@ -1,6 +1,7 @@
 import preguntas from "../data/Preguntas";
 import { useState } from "react";
 import QuizQuestions from "../components/QuizQuestions";
+import QuizResult from "../components/QuizResult";
 
 function QuizPage() {
     // Índice de la pregunta que estamos mostrando.
@@ -45,22 +46,22 @@ function QuizPage() {
 
     }
 
-    const respuestasCorrectas = preguntas.filter(
-        (pregunta) =>
-            respuestasConfirmadas[pregunta.id] === pregunta.respuestaCorrectaId
-    ).length;
+    const volverAJugar = () => {
+        setIndicePregunta(0);
+        setSeleccionadaId(null);
+        setRespuestasConfirmadas({});
+
+
+    };
 
     if (indicePregunta >= preguntas.length) {
         return (
-            <section className="px-6 py-20 text-white">
-                <h1 className="mb-8 text-center text-4xl font-bold">
-                    Resultado
-                </h1>
-                <p className="text-center text-xl">
-                    Has acertado {respuestasCorrectas} de {preguntas.length}
-                </p>
-            </section>
-        )
+            <QuizResult
+                preguntas={preguntas}
+                respuestasConfirmadas={respuestasConfirmadas}
+                onVolverAJugar={volverAJugar}
+            />
+        );
     }
 
     //Obtenemos la pregunta que corresponde al indice actual.
@@ -78,6 +79,10 @@ function QuizPage() {
             <h1 className="mb-8 text-center text-4xl font-bold">
                 Quiz de React
             </h1>
+            {/* Indica la pregunta qu evas y las qu equedan*/}
+            <p className="mb-6 text-center text-lg">
+                Pregunta {indicePregunta + 1} de {preguntas.length}
+            </p>
 
             <form
                 onSubmit={comprobarRespuesta}

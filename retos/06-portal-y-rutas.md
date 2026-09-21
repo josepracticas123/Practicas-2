@@ -32,13 +32,13 @@ No hace falta extraer ahora todos los componentes repetidos ni cambiar las funci
 
 ### Comprobación previa
 
-- [ ] He completado los cuatro puntos del repaso con mi ejemplo; siguen pendientes de ampliar.
+- [x] He completado los cuatro puntos del repaso con mi ejemplo; siguen pendientes de ampliar.
 - [x] El formulario tiene `onSubmit={enviarTarea}` y el botón `type="submit"` ya no tiene `onClick` de envío.
-- [ ] He probado clic y Enter: cada envío añade exactamente una tarea y no recarga la página.
+- [x] He probado clic y Enter: cada envío añade exactamente una tarea y no recarga la página.
 - [x] El código mantiene `trim`, rechazo del texto vacío y vaciado del input tras añadir una tarea válida.
-- [ ] He revisado los comentarios para que expliquen decisiones sin repetir cada línea.
+- [x] He revisado los comentarios para que expliquen decisiones sin repetir cada línea.
 - [x] `Inicio.jsx` se utiliza desde `TareasPage` y pasa `addTareas` a `Article`.
-- [ ] He repetido las pruebas de completar, recuperar, buscar, eliminar y recargar después de la reorganización.
+- [x] He repetido las pruebas de completar, recuperar, buscar, eliminar y recargar después de la reorganización.
 - [x] `npm run lint` y `npm run build` pasan en `afb24ca`.
 
 Referencias: [el elemento form · MDN](https://developer.mozilla.org/es/docs/Web/HTML/Element/form), [preventDefault · MDN](https://developer.mozilla.org/es/docs/Web/API/Event/preventDefault) y [responder a eventos · React](https://es.react.dev/learn/responding-to-events).

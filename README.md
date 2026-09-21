@@ -16,13 +16,15 @@ No necesitas conocer todo para empezar. Trabaja en un paso, compruébalo en el n
 
 ## Seguimiento · 21/09/2026, `afb24ca`
 
-Los retos 01–05 siguen cerrados técnicamente. El 06 tiene la estructura principal implementada y pruebas de cierre pendientes de registrar. El 07 ya tiene datos, ruta, enlaces y selección controlada de la primera pregunta.
+Los retos 01–08 están cerrados técnicamente.
 
-1. **Completa el [repaso personal](devquest/resumen/REVISION-PENDIENTE.md):** siguen pendientes las cuatro explicaciones sobre tu código. No necesitas otro resumen ni rehacer los retos anteriores.
-2. **Cierra las comprobaciones del [06](retos/06-portal-y-rutas.md):** navegación, persistencia, teclado y responsive. La explicación de rutas ya está escrita; concreta también por qué se reinicia el buscador al salir y volver.
-3. **Continúa el [07](retos/07-quiz-respuestas.md):** termina el bloque 3 extrayendo el componente de pregunta y después implementa la comprobación del bloque 4. No repitas la página, la ruta ni los radios. El recorrido de las cinco preguntas corresponde al 08.
+- El 06 está terminado: Portal, React Router, rutas y separación de Tareas.
+- El 07 está terminado: datos del Quiz, selección controlada, comprobación de respuestas y componente de pregunta.
+- El 08 está terminado: recorrido completo, respuestas confirmadas, puntuación, resultado y nueva partida.
+- El cuaderno `resumen/resumen.md` está actualizado con las explicaciones de los retos 06–08.
+- Las pruebas del Quiz se han realizado, incluyendo recorrido, resultado, reinicio, responsive y teclado.
 
-Lint y build pasan en `afb24ca`. Esto valida la base actual, no cierra las interacciones que todavía faltan. Conserva pendientes las pruebas que aún no hayas realizado y los puntos de comprensión por explicar.
+`npm run lint` y `npm run build` pasan correctamente.
 
 La sección siguiente conserva la guía de instalación inicial como referencia.
 
@@ -87,11 +89,11 @@ Lee [Tu primer componente](https://es.react.dev/learn/your-first-component) y [E
 - [02 · Navega por tu aplicación de tareas](retos/02-renderizado-condicional.md): navegación y conservación de tareas; consulta sus checks de revisión.
 - [03 · Completa y recupera tus tareas](retos/03-completar-y-recuperar.md): objetos, identificadores y cambio de estado.
 - [04 · Busca y elimina tareas](retos/04-buscar-y-eliminar.md): búsqueda por sección y eliminación de una tarea concreta.
-- [05 · Tus tareas sobreviven a una recarga](retos/05-persistencia-local.md): `localStorage` y `useEffect`. **Cerrado técnicamente; pendiente comentar las decisiones con el tutor.**
+- [05 · Tus tareas sobreviven a una recarga](retos/05-persistencia-local.md): `localStorage` y `useEffect`. **Cerrado.**
 
-- [06 · Tu portal de miniapps](retos/06-portal-y-rutas.md): home, React Router y Tareas en `/tareas`. **En proceso; consulta su seguimiento.**
-- [07 · Tu primera pregunta del quiz](retos/07-quiz-respuestas.md): `/quiz`, datos locales, selección y comprobación de respuestas.
-- [08 · Completa el quiz y consulta tu resultado](retos/08-quiz-recorrido.md): progreso, respuestas confirmadas, puntuación y nueva partida.
+- [06 · Tu portal de miniapps](retos/06-portal-y-rutas.md): home, React Router y Tareas en `/tareas`. **Cerrado.**
+- [07 · Tu primera pregunta del quiz](retos/07-quiz-respuestas.md): `/quiz`, datos locales, selección y comprobación de respuestas. **Cerrado.**
+- [08 · Completa el quiz y consulta tu resultado](retos/08-quiz-recorrido.md): progreso, respuestas confirmadas, puntuación y nueva partida. **Cerrado.**
 
 Trabaja por bloques y comprueba cada uno antes de continuar.
 

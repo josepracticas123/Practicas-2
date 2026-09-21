@@ -44,7 +44,7 @@ Routes y Route → `Routes` contiene las rutas y cada `Route` relaciona una dire
 
 Link → Permite cambiar de ruta sin recargar la aplicación. Se utiliza en las tarjetas de Tareas y Quiz, la cabecera y el enlace de la página no encontrada.
 
-Quiz inicial → `QuizPage` muestra la primera pregunta de `Preguntas.js`. Sus tres opciones se generan con `map()` y se controlan con `seleccionadaId`; la comprobación de la respuesta todavía está pendiente.
+Quiz inicial → `QuizPage` muestra la primera pregunta de `Preguntas.js`. Sus tres opciones se generan con `map()` y se controlan con `seleccionadaId`. `QuizQuestions` recibe los datos y comunica la selección mediante un callback; el formulario permite comprobar una vez, bloquea las opciones y muestra el resultado y la explicación.
 
 Navegación global e interna → Las rutas cambian la pantalla según la URL. La navegación interna de Tareas cambia `seccionActual` mediante estado, sin cambiar la URL.
 

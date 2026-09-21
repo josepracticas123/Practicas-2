@@ -812,24 +812,41 @@ El envío con `onSubmit`, las rutas principales y los enlaces del portal ya est�
 
 ## 29. Estado actual del Reto 07
 
-El ejercicio 07 está en desarrollo. Ya están implementados:
+El Reto 07 está completado en su implementación. No incluye puntuación ni siguiente pregunta, porque esas partes pertenecen al Reto 08.
 
-- `src/data/Preguntas.js` con cinco preguntas locales.
-- Cada pregunta tiene `respuestaCorrectaId` y `explicacion`; sus tres opciones tienen `id` y `texto`.
-- `QuizPage.jsx` y la ruta `/quiz`.
-- Acceso al Quiz desde `PortalPage` y `Header`.
-- La primera pregunta y sus tres opciones generadas mediante `map()`.
-- Radios dentro de un `form` y un `fieldset`, con `legend` para el enunciado.
-- Selección controlada mediante `useState` y `seleccionadaId`.
-- IDs estables y `label` asociado mediante `htmlFor`.
-- Diseño con Tailwind y clases responsive.
+Está implementado:
 
-Todavía faltan:
+- `src/data/Preguntas.js` contiene cinco preguntas locales con `id`, `enunciado`, tres opciones, `respuestaCorrectaId` y `explicacion`.
+- `QuizPage.jsx`, la ruta `/quiz`, la tarjeta del portal y el enlace global de `Header`.
+- Solo se muestra la primera pregunta.
+- Los radios se generan desde los datos, tienen etiquetas asociadas, comparten `name` y usan el ID de la opción como `key`.
+- `seleccionadaId` empieza en `null`, vive en `QuizPage` y controla los radios mediante `checked`.
+- `QuizQuestions.jsx` recibe la pregunta, la selección, el estado de comprobación y el callback `onSeleccionar` mediante props.
+- La opción puede cambiarse antes de comprobar.
+- El formulario comprueba la respuesta una sola vez con `onSubmit` y `preventDefault()`.
+- Después de comprobar, los radios y el botón quedan bloqueados.
+- Se muestra el resultado correcto o incorrecto, la explicación y, si corresponde, la opción correcta.
+- Al recargar, se reinicia el estado local del Quiz.
+- El estado y la lógica del Quiz permanecen separados de Tareas.
 
-- Extraer el componente de pregunta con props y callback; el estado permanece en `QuizPage`.
+### Qué he practicado/aprendido en el 07
 
-- El botón «Comprobar respuesta».
-- La lógica que compara la selección con `respuestaCorrectaId`.
-- Mostrar el resultado y la explicación.
-- Desactivar las opciones después de comprobar.
-- Completar la documentación y el cuestionario específico del reto 07.
+- Estructurar datos de preguntas y opciones.
+- Compartir estado entre una página y un componente hijo mediante props y callbacks.
+- Controlar inputs `radio` con un ID.
+- Calcular el resultado comparando los IDs de la selección y de la respuesta correcta.
+- Representar los estados antes y después de comprobar.
+
+### Decisiones importantes
+
+Se guarda el ID seleccionado porque es estable y se puede comparar directamente con `respuestaCorrectaId`. El resultado se calcula a partir de esos datos, sin duplicar la comparación en otro estado. `QuizPage` conserva el estado y `QuizQuestions` recibe lo necesario para representar la pregunta y avisar de los cambios.
+
+### Pruebas realizadas
+
+No hay pruebas manuales del Quiz confirmadas en este documento. La última ejecución disponible confirma `npm run build` con salida correcta. `npm run lint` queda pendiente de ejecutar tras la implementación.
+
+### Pendientes
+
+- Probar y registrar la navegación directa y la recarga de `/quiz`.
+- Probar y registrar una respuesta correcta, una incorrecta, el bloqueo posterior, el teclado y los viewports de 375 px y 1280 px.
+- Completar las preguntas del cuaderno específicas del Reto 07.

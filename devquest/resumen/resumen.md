@@ -78,6 +78,8 @@ MiniappCards.jsx: recibe un objeto `miniapp` por props y muestra sus datos. Reci
 
 QuizPage.jsx: muestra la primera pregunta del Quiz y controla la opción seleccionada mediante `useState`.
 
+QuizQuestions.jsx: recibe por props los datos de la pregunta, la selección y el estado de comprobación; comunica la opción elegida mediante un callback.
+
 Preguntas.js: contiene cinco preguntas locales, cada una con tres opciones, una respuesta correcta y una explicación.
 
 Inicio.jsx: recibe `addTareas` desde `TareasPage` y muestra `Article`.
@@ -130,22 +132,47 @@ La navegación global se realiza mediante esas rutas y modifica la URL. Dentro d
 
 ## Estado actual del Reto 07
 
-El 06 tiene la estructura principal implementada; quedan las pruebas de cierre del checklist y el repaso personal. El ejercicio 07 está en desarrollo.
+El Reto 07 está completado en su implementación. No se ha añadido puntuación ni una siguiente pregunta porque pertenecen al Reto 08.
 
-Ya está implementado:
+Está implementado:
 
-- `src/data/Preguntas.js` con cinco preguntas locales.
-- Cada pregunta tiene `id`, `enunciado`, tres opciones, `respuestaCorrectaId` y `explicacion`.
-- `QuizPage.jsx`, la ruta `/quiz` y los accesos desde el Portal y el Header.
-- La primera pregunta y sus opciones generadas mediante `map()`.
-- Radios dentro de `form` y `fieldset`, con `legend` para el enunciado.
-- Selección controlada con `useState` y `seleccionadaId`.
-- IDs estables y `label` asociado mediante `htmlFor`.
-- Diseño con Tailwind y clases responsive.
+- `src/data/Preguntas.js` con cinco preguntas locales. Cada una tiene `id`, `enunciado`, tres opciones, `respuestaCorrectaId` y `explicacion`.
+- `QuizPage.jsx`, la ruta `/quiz` y los accesos desde `PortalPage` y `Header`.
+- Solo se muestra la primera pregunta del array.
+- Radios controlados, con `label` asociado mediante `htmlFor`, IDs estables y selección mediante `seleccionadaId`.
+- `QuizQuestions.jsx` recibe por props la pregunta, la selección y el estado de comprobación, y comunica los cambios mediante `onSeleccionar`.
+- El estado de selección permanece en `QuizPage` y se puede cambiar de opción antes de comprobar.
+- El formulario comprueba la respuesta una sola vez mediante `onSubmit` y `preventDefault()`.
+- Después de comprobar, las opciones quedan bloqueadas y se muestra si la respuesta es correcta o incorrecta.
+- Se muestra la explicación y, cuando la respuesta es incorrecta, también la opción correcta.
+- Al recargar, el estado local del Quiz se reinicia.
+- Las responsabilidades del Quiz se mantienen separadas de los datos, estado y lógica de Tareas.
 
-También falta extraer el componente de pregunta con props y callback, manteniendo el estado en `QuizPage`.
+### Qué he practicado/aprendido en el 07
 
-Todavía falta implementar el botón «Comprobar respuesta», la lógica de corrección, el resultado, la explicación y la desactivación de las opciones después de comprobar. También falta completar la documentación específica del ejercicio 07.
+- Modelar preguntas y opciones como datos constantes.
+- Pasar datos y funciones mediante props entre `QuizPage` y `QuizQuestions`.
+- Controlar radios con el ID seleccionado.
+- Calcular el resultado comparando `seleccionadaId` con `respuestaCorrectaId`.
+- Usar estado para distinguir una pregunta disponible de una ya comprobada.
+
+### Decisiones importantes
+
+- Se guarda el ID de la opción seleccionada, no el texto completo, porque los IDs son estables y permiten comparar directamente con `respuestaCorrectaId`.
+- El resultado se calcula a partir de los datos y la selección, en lugar de duplicar ese resultado como un estado independiente.
+- El estado de selección y comprobación vive en `QuizPage`; `QuizQuestions` se encarga de recibir props y comunicar la elección.
+- Solo se muestra la primera pregunta. La puntuación y la navegación a la siguiente pregunta quedan para el Reto 08.
+
+### Pruebas realizadas
+
+No hay pruebas manuales del Quiz confirmadas en esta documentación. La implementación permite probar la selección, la comprobación, el bloqueo, el teclado, la recarga y los tamaños de pantalla, pero no se marcan como realizadas sin registro.
+
+La última ejecución disponible confirma `npm run build` con salida correcta. `npm run lint` queda pendiente de ejecutar tras esta implementación.
+
+### Pendientes
+
+- Realizar y registrar las pruebas de apertura y recarga directa de `/quiz`, respuesta correcta e incorrecta, bloqueo, teclado, recarga y tamaños de pantalla.
+- Completar la documentación específica y las preguntas del Reto 07.
 
 ## 4. Componentes y funciones
 

@@ -14,15 +14,15 @@ No necesitas conocer todo para empezar. Trabaja en un paso, compruébalo en el n
 
 **El proyecto ya está creado. No repitas la instalación inicial ni generes otro Vite.** Para continuar, abre una terminal en `Practicas-2/devquest`, instala las dependencias con `npm install` si faltan y ejecuta `npm run dev`.
 
-## Seguimiento · 18/09/2026, `6d128da`
+## Seguimiento · 21/09/2026, `afb24ca`
 
-Los retos 01–05 siguen cerrados técnicamente. El 06 y el 07 están en proceso: ya existen portal, rutas y formulario con `onSubmit`; el Quiz tiene las cinco preguntas preparadas y su página todavía está vacía.
+Los retos 01–05 siguen cerrados técnicamente. El 06 tiene la estructura principal implementada y pruebas de cierre pendientes de registrar. El 07 ya tiene datos, ruta, enlaces y selección controlada de la primera pregunta.
 
-1. **Completa el [repaso personal](devquest/resumen/REVISION-PENDIENTE.md):** cuatro explicaciones breves sobre tu propio código. Las notas generales ya están ampliadas; no necesitas otro resumen.
-2. **Sigue el [cierre del 06](retos/06-portal-y-rutas.md):** conserva lo implementado y comprueba navegación, persistencia, teclado y responsive. Registra el resultado junto al checklist.
-3. **Continúa el [07 desde el bloque 2](retos/07-quiz-respuestas.md):** página y ruta del Quiz, primera pregunta, selección y comprobación. El 08 vendrá después.
+1. **Completa el [repaso personal](devquest/resumen/REVISION-PENDIENTE.md):** siguen pendientes las cuatro explicaciones sobre tu código. No necesitas otro resumen ni rehacer los retos anteriores.
+2. **Cierra las comprobaciones del [06](retos/06-portal-y-rutas.md):** navegación, persistencia, teclado y responsive. La explicación de rutas ya está escrita; concreta también por qué se reinicia el buscador al salir y volver.
+3. **Continúa el [07](retos/07-quiz-respuestas.md):** termina el bloque 3 extrayendo el componente de pregunta y después implementa la comprobación del bloque 4. No repitas la página, la ruta ni los radios. El recorrido de las cinco preguntas corresponde al 08.
 
-Lint y build pasan en esta revisión. Los checks de implementación no sustituyen las pruebas prácticas ni la explicación personal al tutor.
+Lint y build pasan en `afb24ca`. Esto valida la base actual, no cierra las interacciones que todavía faltan. Conserva pendientes las pruebas que aún no hayas realizado y los puntos de comprensión por explicar.
 
 La sección siguiente conserva la guía de instalación inicial como referencia.
 

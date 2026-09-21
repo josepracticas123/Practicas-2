@@ -44,7 +44,7 @@ devquest/
 │  │  ├─ PortalPage.jsx
 │  │  └─ QuizPage.jsx
 │  ├─ data/
-│  │  └─ preguntas.js
+│  │  └─ Preguntas.js
 │  ├─ index.css
 │  ├─ components/
 │  │  ├─ Header.jsx
@@ -78,7 +78,7 @@ MiniappCards.jsx: recibe un objeto `miniapp` por props y muestra sus datos. Reci
 
 QuizPage.jsx: muestra la primera pregunta del Quiz y controla la opción seleccionada mediante `useState`.
 
-preguntas.js: contiene cinco preguntas locales, cada una con tres opciones, una respuesta correcta y una explicación.
+Preguntas.js: contiene cinco preguntas locales, cada una con tres opciones, una respuesta correcta y una explicación.
 
 Inicio.jsx: recibe `addTareas` desde `TareasPage` y muestra `Article`.
 
@@ -130,11 +130,11 @@ La navegación global se realiza mediante esas rutas y modifica la URL. Dentro d
 
 ## Estado actual del Reto 07
 
-El ejercicio 06 está terminado técnicamente. El ejercicio 07 está en desarrollo.
+El 06 tiene la estructura principal implementada; quedan las pruebas de cierre del checklist y el repaso personal. El ejercicio 07 está en desarrollo.
 
 Ya está implementado:
 
-- `src/data/preguntas.js` con cinco preguntas locales.
+- `src/data/Preguntas.js` con cinco preguntas locales.
 - Cada pregunta tiene `id`, `enunciado`, tres opciones, `respuestaCorrectaId` y `explicacion`.
 - `QuizPage.jsx`, la ruta `/quiz` y los accesos desde el Portal y el Header.
 - La primera pregunta y sus opciones generadas mediante `map()`.
@@ -142,6 +142,8 @@ Ya está implementado:
 - Selección controlada con `useState` y `seleccionadaId`.
 - IDs estables y `label` asociado mediante `htmlFor`.
 - Diseño con Tailwind y clases responsive.
+
+También falta extraer el componente de pregunta con props y callback, manteniendo el estado en `QuizPage`.
 
 Todavía falta implementar el botón «Comprobar respuesta», la lógica de corrección, el resultado, la explicación y la desactivación de las opciones después de comprobar. También falta completar la documentación específica del ejercicio 07.
 

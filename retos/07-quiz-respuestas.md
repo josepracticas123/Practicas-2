@@ -1,10 +1,17 @@
 # 07 · Tu primera pregunta del quiz
 
-## Seguimiento · 18/09/2026, `6d128da`
+## Seguimiento · 21/09/2026, `afb24ca`
 
-**En proceso: datos preparados.** `src/data/Preguntas.js` contiene cinco preguntas, tres opciones por pregunta, IDs consistentes y una respuesta correcta referenciada en cada caso. `QuizPage.jsx` existe, pero está vacío; la ruta `/quiz` todavía no está conectada.
+**En proceso: página y selección implementadas.** Las cinco preguntas están en `src/data/Preguntas.js`. `/quiz` ya está conectada desde el portal y la cabecera. `QuizPage` muestra la primera pregunta con radios controlados, etiquetas y claves estables.
 
-**Siguiente bloque:** implementa el apartado 2 y muestra solo la primera pregunta. Después continúa con la selección y comprobación de los apartados 3 y 4. No hace falta rehacer las preguntas ni adelantar la puntuación del 08. Mantén también el repaso personal pendiente y las pruebas de cierre del 06.
+**Orden para continuar:**
+
+1. Termina el bloque 3: extrae el componente de pregunta. Mantén el estado en `QuizPage` y comunica la elección mediante un callback recibido por props. Comprueba que cambiar de opción sigue funcionando.
+2. Implementa el bloque 4: comprobar una sola vez, mostrar acierto/error y explicación, y bloquear opciones y botón después de comprobar. Al utilizar el formulario, centraliza el envío en `onSubmit` y evita la recarga, como hiciste en Tareas.
+3. Prueba una respuesta correcta y otra incorrecta, teclado, recarga y tamaños de pantalla. Marca cada prueba después de realizarla.
+4. Completa las preguntas del cuaderno sobre props, ID seleccionado y resultado calculado. Conserva también el repaso personal y las comprobaciones pendientes del 06.
+
+No rehagas los datos ni las rutas. No añadas puntuación ni siguiente pregunta: pertenecen al 08. Lint y build pasan en esta base; repítelos al terminar los cambios.
 
 **Tu misión:** añadir una miniapp en `/quiz` donde puedas elegir una respuesta y comprobarla con una explicación.
 
@@ -77,7 +84,8 @@ Comenta por qué guardas el ID seleccionado y por qué el resultado se calcula. 
 ## Comprueba tu entrega
 
 - [x] Hay cinco preguntas locales con estructura consistente y una respuesta correcta por pregunta (datos verificados en `6d128da`).
-- [x] `/quiz`, su tarjeta y el enlace global funcionan, también al abrir la URL directamente.
+- [x] `/quiz`, su tarjeta y el enlace global están conectados en el código.
+- [ ] He comprobado abrir y recargar directamente `/quiz` desde Vite.
 - [x] Solo se muestra la primera pregunta; no se han adelantado pasos del 08.
 - [x] Las opciones se renderizan desde los datos, con claves estables e inputs etiquetados.
 - [x] Solo se selecciona una opción; puedo cambiarla antes de comprobar.
@@ -88,7 +96,7 @@ Comenta por qué guardas el ID seleccionado y por qué el resultado se calcula. 
 - [ ] Recargar reinicia el quiz sin alterar las tareas guardadas.
 - [ ] Los enunciados y opciones largos se leen a 375 px y 1280 px sin desbordamiento.
 - [ ] He añadido comentarios sobre lo nuevo y respondido las preguntas del cuaderno.
-- [x] `npm run lint` y `npm run build` pasan al terminar la implementación del 07. **La base actual pasa; repetir tras implementar la interacción.**
+- [ ] `npm run lint` y `npm run build` pasan al terminar la implementación del 07. **La base `afb24ca` pasa; repetir tras implementar la comprobación y el componente de pregunta.**
 
 ## Documentación por bloques
 

@@ -141,7 +141,7 @@ La revisión de `3736740` confirma el ciclo de recarga y reapertura en navegador
 
 ## Cómo se mantiene actualizado el almacenamiento
 
-La implementación actual cumple el reto: cada acción crea un nuevo estado `tareas` y el efecto con `[tareas]` guarda el array completo, incluido `[]`. Buscar o navegar no cambia ese array, por lo que no necesita provocar otro guardado. Al abrir la app, la función inicializadora recupera los datos antes del primer guardado.
+La implementación actual cumple el reto: cada acción crea un nuevo estado `tareas` y el efecto con `[tareas]` guarda el array completo, incluido `[]`. Buscar o cambiar de sección interna no cambia ese array, por lo que no provoca otro guardado. Al salir de `/tareas` y volver, la página se monta de nuevo, lee las tareas guardadas y su efecto vuelve a ejecutarse. Al abrir la app, la función inicializadora recupera los datos antes del primer guardado.
 
 No necesitas intervalos, guardar desde cada botón ni un evento de cierre de página. Tampoco necesitas sincronización entre pestañas para este reto: si modificas los datos desde otra pestaña o desde las herramientas del navegador, esta instancia no los incorpora automáticamente; los vuelve a leer al recargar. Si guardar falla, la app continúa en memoria y registra el error, tal como pide el enunciado.
 

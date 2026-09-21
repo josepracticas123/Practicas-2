@@ -73,7 +73,8 @@ Añade comentarios breves sobre la identidad de la tarea y la actualización sin
 - [x] La suma de los contadores no cambia al completar o recuperar.
 - [x] Navegar conserva los datos; siguen rechazándose entradas vacías o con solo espacios.
 - [x] Los botones se pueden usar con teclado y el diseño sigue siendo legible en móvil. **El caso de texto largo está corregido en ambas vistas; revisión de `3736740`.**
-- [x] Puedes explicar los identificadores, las listas calculadas y cómo actualizas un objeto del array; has completado el cuaderno.
+- [x] Las respuestas sobre identificadores, listas calculadas y actualización de objetos están escritas en el cuaderno.
+- [ ] He concretado identidad y copias en [mi repaso personal](../devquest/resumen/REVISION-PENDIENTE.md). Completa allí el ejemplo; no necesitas otro documento.
 - [x] `npm run lint` y `npm run build` pasan desde `devquest/`.
 
 

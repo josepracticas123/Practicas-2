@@ -75,7 +75,7 @@ Los componentes actuales son:
 - `PortalPage.jsx`: página global que define los datos de las miniapps y los recorre con `map`.
 - `MiniappCards.jsx`: componente reutilizable que recibe una miniapp mediante props y muestra sus datos.
 - `QuizPage.jsx`: página del Quiz que muestra la primera pregunta y controla la opción seleccionada.
-- `preguntas.js`: datos locales de cinco preguntas, con tres opciones, respuesta correcta y explicación.
+- `Preguntas.js`: datos locales de cinco preguntas, con tres opciones, respuesta correcta y explicación.
 - `Header.jsx`: cabecera global del portal.
 - `Footer.jsx`: muestra el pie de página.
 - `Article.jsx`: muestra el campo para escribir y el botón para añadir una tarea.
@@ -718,7 +718,7 @@ Esta sección describe las instrucciones del Reto 06, no funcionalidades que ya 
 - **Rutas desconocidas:** la ruta comodín ya muestra «Página no encontrada» y un enlace al portal.
 - **Estado al desmontar y montar:** al salir de la ruta de tareas, el componente puede desmontarse y perder estados locales como la sección activa o el texto de búsqueda. Al volver a montarse, el inicializador vuelve a leer las tareas persistidas. Las tareas se conservan porque están en `localStorage`, mientras que un texto sin enviar puede reiniciarse.
 
-El formulario ya centraliza el envío en `onSubmit`. Las rutas principales y los enlaces del portal están implementados; el ejercicio 06 está terminado técnicamente.
+El formulario ya centraliza el envío en `onSubmit`. Las rutas principales y los enlaces del portal están implementados; el 06 tiene la estructura principal implementada y quedan sus comprobaciones de cierre.
 
 ## 28. Preguntas que debería saber responder
 
@@ -808,14 +808,14 @@ La aplicación conserva las tareas en el estado de React durante la sesión, per
 
 ### ¿Qué cambiará en el Reto 06?
 
-El envío con `onSubmit`, las rutas principales y los enlaces del portal ya están implementados. El ejercicio 06 está terminado técnicamente.
+El envío con `onSubmit`, las rutas principales y los enlaces del portal ya están implementados. El 06 tiene la estructura principal implementada; quedan las pruebas de cierre del checklist y el repaso personal.
 
 ## 29. Estado actual del Reto 07
 
 El ejercicio 07 está en desarrollo. Ya están implementados:
 
-- `src/data/preguntas.js` con cinco preguntas locales.
-- Tres opciones por pregunta, con `id`, `texto`, `respuestaCorrectaId` y `explicacion`.
+- `src/data/Preguntas.js` con cinco preguntas locales.
+- Cada pregunta tiene `respuestaCorrectaId` y `explicacion`; sus tres opciones tienen `id` y `texto`.
 - `QuizPage.jsx` y la ruta `/quiz`.
 - Acceso al Quiz desde `PortalPage` y `Header`.
 - La primera pregunta y sus tres opciones generadas mediante `map()`.
@@ -825,6 +825,8 @@ El ejercicio 07 está en desarrollo. Ya están implementados:
 - Diseño con Tailwind y clases responsive.
 
 Todavía faltan:
+
+- Extraer el componente de pregunta con props y callback; el estado permanece en `QuizPage`.
 
 - El botón «Comprobar respuesta».
 - La lógica que compara la selección con `respuestaCorrectaId`.

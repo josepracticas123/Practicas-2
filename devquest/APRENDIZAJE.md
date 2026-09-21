@@ -14,7 +14,7 @@ Esta revisión ordena las notas iniciales y las ajusta al código actual. Que un
 | `src/pages/TareasPage.jsx` | Mantiene el estado, las acciones, los filtros y la persistencia de la aplicación de tareas. |
 | `src/pages/PortalPage.jsx` | Define los datos de las miniapps y muestra sus tarjetas. |
 | `src/pages/QuizPage.jsx` | Muestra la primera pregunta del Quiz y controla la opción seleccionada. |
-| `src/data/preguntas.js` | Contiene las cinco preguntas locales con sus opciones, respuestas correctas y explicaciones. |
+| `src/data/Preguntas.js` | Contiene las cinco preguntas locales con sus opciones, respuestas correctas y explicaciones. |
 | `src/utils/Almacenamiento.js` | Lee y guarda las tareas en `localStorage`, comprobando que los datos tengan el formato esperado. |
 | `src/components/Header.jsx` | Muestra enlaces globales a Portal, Tareas y Quiz. |
 | `src/components/Article.jsx` | Contiene el formulario controlado para añadir tareas y llama a `addTareas`, recibida por props. |
@@ -138,7 +138,7 @@ Estas preguntas se van respondiendo conforme avanzan los retos. Completa solo el
 
 ### Reto 06 · Portal y rutas
 
-**Estado:** terminado técnicamente.
+**Estado:** estructura principal implementada; pendiente registrar las pruebas de cierre y completar el repaso personal. Consulta el checklist del reto 06.
 
 - ¿Qué diferencia hay entre cambiar `seccionActual` y navegar a `/tareas`?
 - ¿Qué responsabilidad tienen `BrowserRouter`, `Routes`, `Route` y `Link`?
@@ -150,7 +150,7 @@ Estas preguntas se van respondiendo conforme avanzan los retos. Completa solo el
 
 ### Reto 07 · Seleccionar y comprobar
 
-**Estado:** en desarrollo. Ya están implementados los datos locales, la página inicial del Quiz, la ruta `/quiz`, los enlaces del Portal/Header y la selección controlada de la primera pregunta. Todavía faltan comprobar la respuesta, mostrar resultado y explicación, desactivar las opciones y completar el cuestionario.
+**Estado:** en desarrollo. Ya están implementados los datos locales, la página inicial del Quiz, la ruta `/quiz`, los enlaces del Portal/Header y la selección controlada de la primera pregunta. Todavía faltan comprobar la respuesta, mostrar resultado y explicación, desactivar las opciones, extraer el componente de pregunta y responder las preguntas de aprendizaje del 07. Recorrer el cuestionario completo corresponde al 08.
 
 - ¿Por qué las preguntas son datos constantes y la selección es estado?
 - ¿Qué significa controlar un input `radio` desde React?
@@ -158,7 +158,9 @@ Estas preguntas se van respondiendo conforme avanzan los retos. Completa solo el
 - ¿Por qué guardo un ID en vez de copiar la opción completa?
 - ¿Qué guardo al comprobar y qué puedo calcular? ¿Por qué no necesito un efecto?
 
-**Mi explicación y dudas:** Las preguntas son datos constantes porque están definidos en `src/data/preguntas.js`; la selección sí cambia y se guarda en `seleccionadaId` mediante `useState`. Los radios son inputs controlados porque `checked` depende de ese estado y `onChange` lo actualiza. La lógica de comprobar la respuesta y el componente de pregunta todavía están pendientes.
+**Mi explicación y dudas:** Las preguntas son datos constantes porque están definidos en `src/data/Preguntas.js`; la selección sí cambia y se guarda en `seleccionadaId` mediante `useState`. Los radios son inputs controlados porque `checked` depende de ese estado y `onChange` lo actualiza. La lógica de comprobar la respuesta y el componente de pregunta todavía están pendientes.
+
+**Aclaración para revisar:** las preguntas no necesitan estado porque no cambian durante la interacción, no por estar en otro archivo. Revisa esa frase de tu explicación y añade por qué guardas solo el ID seleccionado.
 
 ### Reto 08 · Recorrido y resultado
 

@@ -15,6 +15,12 @@ function QuizPage() {
     //Obtenemos la pregunta que corresponde al indice actual.
     const preguntaActual = preguntas[indicePregunta];
 
+    const comprobada =
+        respuestasConfirmadas[preguntaActual.id] !== undefined
+
+    const esCorrecta =
+        seleccionadaId == preguntaActual.respuestaCorrectaId;
+
     // Marca la respuesta como comprobada.
     const comprobarRespuesta = (event) => {
         event.preventDefault();

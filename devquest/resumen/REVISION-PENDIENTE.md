@@ -1,6 +1,6 @@
 # Repaso de conceptos · Pendientes del resumen
 
-Revisión del 18/09/2026. Las explicaciones generales han mejorado; ahora falta concretarlas en tu propio ejemplo. El reto 06 está en proceso y se sigue en su enunciado. Este repaso se centra en lo aprendido antes: no necesitas otro documento ni copiar funciones completas.
+Seguimiento del 21/09/2026 (`afb24ca`). Los cuatro puntos siguen pendientes; los avances del portal y del Quiz no los sustituyen. Las explicaciones generales han mejorado; ahora falta concretarlas en tu propio ejemplo. El reto 06 está en proceso y se sigue en su enunciado. Este repaso se centra en lo aprendido antes: no necesitas otro documento ni copiar funciones completas.
 
 La pregunta anterior «qué ID cambia» era ambigua. La pregunta correcta es **qué tarea se modifica y cómo la identificas**: completar una tarea no cambia su ID.
 

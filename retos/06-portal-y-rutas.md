@@ -1,15 +1,15 @@
 # 06 · Tu portal de miniapps
 
-## Seguimiento · 18/09/2026, `6d128da`
+## Seguimiento · 21/09/2026, `afb24ca`
 
-**En proceso.** Están implementados el formulario con `onSubmit`, la separación de `TareasPage`, las rutas `/` y `/tareas`, la página no encontrada y las tarjetas con enlaces. No repitas esos cambios.
+**Implementación principal hecha; pendiente cerrar comprobaciones.** Están implementados el formulario con `onSubmit`, la separación de `TareasPage`, las rutas `/` y `/tareas`, la página no encontrada y las tarjetas con enlaces. No repitas esos cambios.
 
 **Orden para continuar:**
 
 1. Completa los cuatro puntos de [tu repaso personal](../devquest/resumen/REVISION-PENDIENTE.md): identidad, copias, búsqueda e inicialización. Bastan unas líneas y las funciones localizadas; no necesitas otro resumen.
-2. Revisa los comentarios que solo repiten una línea. Las notas sobre el formulario, el enlace de Tareas y la `key` del portal ya se han actualizado al código actual.
+2. Revisa los comentarios desactualizados: `Article` aún sitúa el callback en `App`, aunque vive en `TareasPage`; `MiniappCards` dice que Quiz no tiene ruta, pero ya tiene `/quiz`. Conserva comentarios que expliquen decisiones.
 3. Realiza las pruebas de navegación, persistencia, teclado y tamaños del apartado 4 y del checklist final. Anota qué probaste y el resultado antes de marcar su cierre.
-4. Continúa el 07 desde su bloque 2: los datos de las cinco preguntas ya están preparados.
+4. Continúa el 07 desde la extracción del componente de pregunta (bloque 3) y la comprobación (bloque 4). La página, la ruta y la selección ya existen.
 
 Los checks siguientes distinguen implementación comprobada por lectura de código de pruebas prácticas pendientes de verificación. Las marcas previas de pruebas sin evidencia anotada quedan pendientes de confirmación; esto no significa que se haya detectado un fallo. Lint y build pasan en esta revisión.
 
@@ -39,7 +39,7 @@ No hace falta extraer ahora todos los componentes repetidos ni cambiar las funci
 - [ ] He revisado los comentarios para que expliquen decisiones sin repetir cada línea.
 - [x] `Inicio.jsx` se utiliza desde `TareasPage` y pasa `addTareas` a `Article`.
 - [ ] He repetido las pruebas de completar, recuperar, buscar, eliminar y recargar después de la reorganización.
-- [x] `npm run lint` y `npm run build` pasan en `6d128da`.
+- [x] `npm run lint` y `npm run build` pasan en `afb24ca`.
 
 Referencias: [el elemento form · MDN](https://developer.mozilla.org/es/docs/Web/HTML/Element/form), [preventDefault · MDN](https://developer.mozilla.org/es/docs/Web/API/Event/preventDefault) y [responder a eventos · React](https://es.react.dev/learn/responding-to-events).
 
@@ -86,7 +86,7 @@ La URL decide qué página se muestra. No crees otro estado para duplicar la rut
 Muestra un título, una introducción breve y dos tarjetas:
 
 - **Tareas:** descripción de lo que hace y enlace «Abrir tareas» a `/tareas`.
-- **Quiz de React:** descripción y texto «Próximamente». Todavía no tiene enlace: lo activarás en el 07.
+- **Quiz de React:** el objetivo inicial era mostrar «Próximamente» hasta el 07. En tu versión ya está activado su enlace; consérvalo.
 
 Define sus datos en un array y renderiza las tarjetas con `map` y claves estables. Extrae un componente de tarjeta que reciba sus datos por props. Para una tarjeta sin ruta, muestra el estado informativo sin crear un enlace vacío o con `#`.
 
@@ -112,7 +112,7 @@ Añade comentarios breves sobre la responsabilidad de las rutas y dónde vive ah
 
 - [x] El proyecto sigue siendo un único Vite y tiene un solo `BrowserRouter`.
 - [x] `/` tiene `PortalPage`, tarjetas generadas desde datos y el componente reutilizable `MiniappCards`, con `key` en el `map`.
-- [x] Tareas tiene un `Link` real; Quiz muestra «Próximamente» sin un enlace roto.
+- [x] Tareas tiene un `Link` real. Quiz ya enlaza a `/quiz` como avance del 07; no vuelvas a poner «Próximamente».
 - [x] `/tareas` renderiza `TareasPage` con sus secciones internas.
 - [x] Se separan navegación global e interna sin duplicar cabecera, `main` ni pie.
 - [ ] He comprobado los enlaces con teclado y foco visible.
@@ -121,8 +121,10 @@ Añade comentarios breves sobre la responsabilidad de las rutas y dónde vive ah
 - [ ] He probado crear, completar, recuperar, buscar y eliminar en esta versión.
 - [ ] He comprobado que salir al portal y volver conserva las tareas y sus estados sin duplicarlas.
 - [ ] He probado portal y Tareas a 375 px y 1280 px, también con la URL larga del 04.
-- [ ] He completado el repaso personal y las preguntas del 06 en el cuaderno; puedo explicar una ruta frente a una sección interna.
-- [x] `npm run lint` y `npm run build` pasan (revisión del 18/09/2026, `6d128da`).
+- [x] El cuaderno describe las rutas, sus componentes, la ubicación del estado y la recuperación de tareas al volver.
+- [ ] He concretado por qué se reinicia el buscador al salir de Tareas y volver.
+- [ ] He completado los cuatro puntos del repaso personal; la explicación escrita de rutas no sustituye ese repaso.
+- [x] `npm run lint` y `npm run build` pasan (revisión del 21/09/2026, `afb24ca`).
 
 **Registro breve de pruebas:** anota aquí las acciones, el resultado y cualquier fallo encontrado. No hace falta otro archivo.
 

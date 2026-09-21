@@ -13,7 +13,7 @@ return(
     <fieldset className="rounded-xl bg-gray-800 p-6 sm:p-8">
 
         {/* Mostramos el enunciado de la pregunta. */}
-        <legend className="relative top-6 w-full text-center text-xl font-bold sm:text-2xl">
+        <legend className="relative top-10 w-full text-center text-xl font-bold sm:text-2xl">
             {pregunta.enunciado}
         </legend>
 

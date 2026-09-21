@@ -79,7 +79,7 @@ function QuizPage() {
             <h1 className="mb-8 text-center text-4xl font-bold">
                 Quiz de React
             </h1>
-            {/* Indica la pregunta qu evas y las qu equedan*/}
+            {/* Indica la pregunta que vas y las que quedan*/}
             <p className="mb-6 text-center text-lg">
                 Pregunta {indicePregunta + 1} de {preguntas.length}
             </p>

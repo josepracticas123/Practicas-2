@@ -3,30 +3,28 @@ import { useState } from "react";
 import QuizQuestions from "../components/QuizQuestions";
 
 function QuizPage() {
-    // Guardamos el id de la opción que el usuario seleccione.
-    // Empieza en null porque todavía no hay ninguna seleccionada.
+    // Índice de la pregunta que estamos mostrando.
+    const [indicePregunta, setIndicePregunta] = useState(0);
+
+    // ID de la opción seleccionada en la pregunta actual.
     const [seleccionadaId, setSeleccionadaId] = useState(null);
 
-    // Estado que indica si la respuesta ya ha sido comprobada.
-    const [comprobada, setComprobada] = useState(false);
-
-    // Estado que guarda si la respuesta comprobada es correcta.
-    const [esCorrecta, setEsCorrecta] = useState(null);
+    // Respuestas que ya han sido confirmadas.
+    // Cada clave es el ID de una pregunta y su valor es el ID de la opción elegida.
+    const [respuestasConfirmadas, setRespuestasConfirmadas] = useState({});
+    //Obtenemos la pregunta que corresponde al indice actual.
+    const preguntaActual = preguntas[indicePregunta];
 
     // Marca la respuesta como comprobada.
     const comprobarRespuesta = (event) => {
         event.preventDefault();
 
-        // Comparamos la opción que ha seleccionado el usuario
-        // con el ID de la respuesta correcta.
-        const resultado =
-            seleccionadaId === preguntas[0].respuestaCorrectaId;
+        //Guardamos la opción elegida usando el ID de la pregunta
+        setRespuestasConfirmadas((respuestasAnteriores) => ({
+            ...respuestasAnteriores, // Copiamos todas las respuestas que ya tenia el objeto.
+            [preguntaActual.id]: seleccionadaId,
+        }));
 
-        // Guardamos si la respuesta es correcta o incorrecta.
-        setEsCorrecta(resultado);
-
-        // Indicamos que la respuesta ya ha sido comprobada.
-        setComprobada(true);
     };
 
     return (
@@ -41,7 +39,7 @@ function QuizPage() {
             >
                 {/* Pasamos al componente hijo los datos y acciones que necesita para mostrar la pregunta. */}
                 <QuizQuestions
-                    pregunta={preguntas[0]}
+                    pregunta={preguntaActual}
                     seleccionadaId={seleccionadaId}
                     onSeleccionar={setSeleccionadaId}
                     comprobada={comprobada}
@@ -50,11 +48,10 @@ function QuizPage() {
                 {/* Mostramos un mensaje indicando si la respuesta es correcta o incorrecta. */}
                 {comprobada && (
                     <div
-                        className={`mt-6 rounded-lg border p-4 text-center font-semibold ${
-                            esCorrecta
-                                ? "border-green-500 bg-green-500/10 text-green-400"
-                                : "border-red-500 bg-red-500/10 text-red-400"
-                        }`}
+                        className={`mt-6 rounded-lg border p-4 text-center font-semibold ${esCorrecta
+                            ? "border-green-500 bg-green-500/10 text-green-400"
+                            : "border-red-500 bg-red-500/10 text-red-400"
+                            }`}
                     >
                         {/* Mostramos un texto diferente según el resultado. */}
                         <p>
@@ -74,14 +71,14 @@ function QuizPage() {
                         {
                             // Buscamos dentro del array de opciones
                             // cuál es la opción que tiene el ID de la respuesta correcta.
-                            preguntas[0].opciones.find(
+                            preguntaActual.opciones.find(
 
                                 // Recorremos cada opción del array.
                                 (opcion) =>
 
                                     // Comprobamos si el ID de esta opción
                                     // coincide con el ID de la respuesta correcta.
-                                    opcion.id === preguntas[0].respuestaCorrectaId
+                                    opcion.id === preguntaActual.respuestaCorrectaId
 
                                 // Cuando encuentra la opción que coincide,
                                 // .find() devuelve ese objeto de opción.
@@ -100,7 +97,7 @@ function QuizPage() {
 
                         {/* Mostramos el texto de la explicación. */}
                         <p>
-                            {preguntas[0].explicacion}
+                            {preguntaActual.explicacion}
                         </p>
                     </div>
                 )}

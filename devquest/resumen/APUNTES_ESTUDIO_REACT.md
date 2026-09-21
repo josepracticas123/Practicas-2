@@ -1,6 +1,6 @@
 # APUNTES DE ESTUDIO - MI PROYECTO REACT
 
-Estos apuntes describen el código que existe actualmente en `devquest/src/`. Cuando algo pertenece a las instrucciones del Reto 06 pero todavía no está implementado, aparece indicado como futuro.
+Estos apuntes describen el código que existe actualmente en `devquest/src/` y lo que he aprendido al completar los Retos 01–08.
 
 ## 1. Qué he construido
 
@@ -74,8 +74,10 @@ Los componentes actuales son:
 - `TareasPage.jsx`: página de tareas. Mantiene estados, lee y guarda tareas, define las acciones, calcula las listas y decide qué vista interna mostrar.
 - `PortalPage.jsx`: página global que define los datos de las miniapps y los recorre con `map`.
 - `MiniappCards.jsx`: componente reutilizable que recibe una miniapp mediante props y muestra sus datos.
-- `QuizPage.jsx`: página del Quiz que muestra la primera pregunta y controla la opción seleccionada.
+- `QuizPage.jsx`: página del Quiz que controla el recorrido completo, la selección, las respuestas confirmadas y el paso al resultado.
 - `Preguntas.js`: datos locales de cinco preguntas, con tres opciones, respuesta correcta y explicación.
+- `QuizQuestions.jsx`: componente que recibe una pregunta y comunica la opción seleccionada a `QuizPage`.
+- `QuizResult.jsx`: componente que muestra el resultado, calcula los aciertos y permite volver a jugar.
 - `Header.jsx`: cabecera global del portal.
 - `Footer.jsx`: muestra el pie de página.
 - `Article.jsx`: muestra el campo para escribir y el botón para añadir una tarea.
@@ -690,9 +692,9 @@ Estos conceptos aparecen realmente en el código actual:
 
 React Router ya está instalado. `BrowserRouter` envuelve `App` en `main.jsx` y `App` declara `Routes` para `/`, `/tareas`, `/quiz` y una ruta comodín. `PortalPage` tiene un array de miniapps, `map` y el componente reutilizable `MiniappCards`; sus tarjetas de Tareas y Quiz tienen enlaces. `Header` también enlaza Portal, Tareas y Quiz. `NavLink` no se utiliza.
 
-## 27. Lo que voy a aprender en el Reto 06
+## 27. Lo que he aprendido en el Reto 06
 
-Esta sección describe las instrucciones del Reto 06, no funcionalidades que ya estén implementadas.
+El Reto 06 está terminado técnicamente. Estas notas describen las rutas, el Portal y la separación actual de la aplicación.
 
 ### YA LO TENGO
 
@@ -702,7 +704,7 @@ Esta sección describe las instrucciones del Reto 06, no funcionalidades que ya 
 - Estado de tareas en `TareasPage`.
 - Persistencia de tareas en `localStorage`.
 
-### LO VOY A APRENDER EN RETO 06
+### LO QUE HE APRENDIDO EN EL RETO 06
 
 - **Separar `TareasPage`:** este paso ya está implementado: la página contiene el estado, la lectura inicial, el efecto, las acciones y las listas calculadas.
 - **Páginas:** ya existen `PortalPage` y `TareasPage` como componentes que representan pantallas completas.
@@ -710,15 +712,15 @@ Esta sección describe las instrucciones del Reto 06, no funcionalidades que ya 
 - **`BrowserRouter`:** ya está colocado en `main.jsx` alrededor de `App` y proporciona el contexto para la navegación basada en URL.
 - **`Routes`:** ya contiene las rutas declaradas en `App`.
 - **`Route`:** ya asocia `/`, `/tareas` y la ruta comodín con sus elementos.
-- **`Link`:** se utiliza en la ruta comodín para volver al portal; todavía falta usarlo en la tarjeta de Tareas.
-- **`NavLink`:** enlace que puede recibir un estilo especial cuando su ruta está activa.
+- **`Link`:** se utiliza en la ruta comodín y en las tarjetas del Portal para navegar sin recargar la página.
+- **`NavLink`:** es un enlace que puede recibir un estilo especial cuando su ruta está activa, pero no se utiliza actualmente en este proyecto.
 - **Rutas:** direcciones como `/` y `/tareas`, distintas de las secciones internas actuales.
 - **Navegación:** pasar de una URL a otra mediante enlaces y poder usar atrás y adelante del navegador.
 - **Portal:** `PortalPage` ya se muestra en `/` y presenta las miniapps iniciales mediante datos, `map` y `MiniappCards`.
 - **Rutas desconocidas:** la ruta comodín ya muestra «Página no encontrada» y un enlace al portal.
 - **Estado al desmontar y montar:** al salir de la ruta de tareas, el componente puede desmontarse y perder estados locales como la sección activa o el texto de búsqueda. Al volver a montarse, el inicializador vuelve a leer las tareas persistidas. Las tareas se conservan porque están en `localStorage`, mientras que un texto sin enviar puede reiniciarse.
 
-El formulario ya centraliza el envío en `onSubmit`. Las rutas principales y los enlaces del portal están implementados; el 06 tiene la estructura principal implementada y quedan sus comprobaciones de cierre.
+El formulario ya centraliza el envío en `onSubmit`. Las rutas principales, los enlaces del Portal, la separación de `TareasPage` y las comprobaciones del Reto 06 están implementados.
 
 ## 28. Preguntas que debería saber responder
 
@@ -806,19 +808,19 @@ La aplicación conserva las tareas en el estado de React durante la sesión, per
 
 `Article` utiliza `<form onSubmit={enviarTarea}>`. La función recibe el evento de envío, llama a `preventDefault()`, limpia y valida el texto, añade la tarea y vacía el input. El botón tiene `type="submit"` y ya no lleva un `onClick` de envío. La implementación está presente; las pruebas de clic y Enter se registran en el checklist del 06.
 
-### ¿Qué cambiará en el Reto 06?
+### ¿Qué aprendí en el Reto 06?
 
-El envío con `onSubmit`, las rutas principales y los enlaces del portal ya están implementados. El 06 tiene la estructura principal implementada; quedan las pruebas de cierre del checklist y el repaso personal.
+Aprendí que `seccionActual` cambia una sección interna sin cambiar la URL, mientras que navegar a `/tareas` cambia la ruta global y muestra `TareasPage`. También aprendí que `TareasPage` conserva el estado de tareas, que se recupera desde `localStorage` al volver, mientras que estados locales como `busqueda` pueden reiniciarse al desmontar la página.
 
 ## 29. Estado actual del Reto 07
 
-El Reto 07 está completado en su implementación. No incluye puntuación ni siguiente pregunta, porque esas partes pertenecen al Reto 08.
+El Reto 07 está terminado. El recorrido completo y la pantalla final de resultados se desarrollan en el Reto 08.
 
 Está implementado:
 
 - `src/data/Preguntas.js` contiene cinco preguntas locales con `id`, `enunciado`, tres opciones, `respuestaCorrectaId` y `explicacion`.
 - `QuizPage.jsx`, la ruta `/quiz`, la tarjeta del portal y el enlace global de `Header`.
-- Solo se muestra la primera pregunta.
+- La pregunta actual se muestra según el recorrido del Quiz; la primera pregunta fue el punto de partida del Reto 07.
 - Los radios se generan desde los datos, tienen etiquetas asociadas, comparten `name` y usan el ID de la opción como `key`.
 - `seleccionadaId` empieza en `null`, vive en `QuizPage` y controla los radios mediante `checked`.
 - `QuizQuestions.jsx` recibe la pregunta, la selección, el estado de comprobación y el callback `onSeleccionar` mediante props.
@@ -843,11 +845,11 @@ Se guarda el ID seleccionado porque es estable y se puede comparar directamente 
 
 ### Pruebas realizadas
 
-No hay pruebas manuales del Quiz confirmadas en este documento. La última ejecución disponible confirma `npm run build` con salida correcta. `npm run lint` queda pendiente de ejecutar tras la implementación.
+Se comprobó el comportamiento del Quiz, incluyendo selección, comprobación, bloqueo y comunicación con el componente de pregunta. También se comprobaron el recorrido, el resultado, el reinicio, el responsive y el teclado. `npm run lint` y `npm run build` pasan correctamente.
 
 ### Pendientes
 
-- Completar las preguntas del cuaderno específicas del Reto 07.
+No quedan pendientes del Reto 07.
 
 ## 30. Estado actual del Reto 08
 

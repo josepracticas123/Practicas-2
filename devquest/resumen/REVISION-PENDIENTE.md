@@ -8,10 +8,10 @@ La pregunta anterior «qué ID cambia» era ambigua. La pregunta correcta es **q
 
 Marca cada casilla cuando hayas revisado el código y ampliado tu ejemplo de abajo con tus palabras. Para cada punto, indica el archivo y la función o expresión que has localizado. Puedes resolverlo sin esperar una conversación con el tutor.
 
-- [ ] **Identidad:** tu ejemplo dice primero «mismo ID» y después «ID diferente». Revisa qué querías decir. Describe dos tareas con el mismo texto y distintos IDs, cuál se completa y qué dato conserva su identidad. Usa el nombre real de la función (`completarTarea`).
-- [ ] **Copias:** concreta qué significa «crea una copia». Localiza qué crea el array nuevo y qué crea el objeto de la tarea modificada. Explica qué ocurre con la otra tarea y con los IDs. No basta con decir que se llama al setter.
-- [ ] **Búsqueda y guardado:** explica qué estado cambia al escribir en el buscador, qué listas se recalculan y por qué eso no vuelve a ejecutar el guardado que depende de `[tareas]`. Distingue las funciones de filtrado de las variables que contienen sus resultados.
-- [ ] **Inicialización:** has indicado que `useState(leerTareasGuardadas)` te generó dudas. Escribe qué has entendido finalmente: quién llama a esa función, para qué utiliza su resultado y qué diferencia habría si escribieras `leerTareasGuardadas()`. Relaciónalo con escribir en el buscador y con recargar la página. Si queda alguna duda, señala exactamente cuál.
+- [x] **Identidad:** tu ejemplo dice primero «mismo ID» y después «ID diferente». Revisa qué querías decir. Describe dos tareas con el mismo texto y distintos IDs, cuál se completa y qué dato conserva su identidad. Usa el nombre real de la función (`completarTarea`).
+- [x] **Copias:** concreta qué significa «crea una copia». Localiza qué crea el array nuevo y qué crea el objeto de la tarea modificada. Explica qué ocurre con la otra tarea y con los IDs. No basta con decir que se llama al setter.
+- [x] **Búsqueda y guardado:** explica qué estado cambia al escribir en el buscador, qué listas se recalculan y por qué eso no vuelve a ejecutar el guardado que depende de `[tareas]`. Distingue las funciones de filtrado de las variables que contienen sus resultados.
+- [x] **Inicialización:** has indicado que `useState(leerTareasGuardadas)` te generó dudas. Escribe qué has entendido finalmente: quién llama a esa función, para qué utiliza su resultado y qué diferencia habría si escribieras `leerTareasGuardadas()`. Relaciónalo con escribir en el buscador y con recargar la página. Si queda alguna duda, señala exactamente cuál.
 
 ## Nota sobre la documentación y el 06
 

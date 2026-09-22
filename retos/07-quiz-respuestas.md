@@ -4,7 +4,7 @@
 
 **Cerrado funcionalmente.** Página, ruta, radios controlados, componente de pregunta, callback, comprobación, bloqueo y explicación están implementados. El 08 ya amplió esta base al recorrido completo: no vuelvas a limitar la aplicación a una pregunta.
 
-Se verificaron casos correctos e incorrectos, bloqueo y reinicio. El ajuste de la cabecera compartida se sigue únicamente en el 06. La explicación con el tutor se prepara en el [repaso conjunto](../devquest/REPASO-CON-TUTOR.md).
+Se verificaron casos correctos e incorrectos, bloqueo y reinicio. La cabecera compartida quedó corregida y verificada al cerrar el 06. La explicación con el tutor se prepara en el [repaso conjunto](../devquest/REPASO-CON-TUTOR.md).
 
 **Tu misión:** añadir una miniapp en `/quiz` donde puedas elegir una respuesta y comprobarla con una explicación.
 
@@ -87,7 +87,7 @@ Comenta por qué guardas el ID seleccionado y por qué el resultado se calcula. 
 - [x] El caso correcto y el incorrecto muestran un mensaje y una explicación coherentes.
 - [x] El resultado no depende solo del color y el formulario funciona con teclado.
 - [x] Recargar reinicia el quiz sin alterar las tareas guardadas.
-- [x] Los enunciados y opciones largos se leen a 375 px y 1280 px. El desbordamiento de la cabecera global se sigue en el 06.
+- [x] Los enunciados y opciones largos se leen a 375 px y 1280 px. La cabecera global también está corregida y verificada.
 - [x] He añadido comentarios sobre lo nuevo y respondido las preguntas del cuaderno.
 - [x] `npm run lint` y `npm run build` pasan al terminar la implementación del 07. **Verificado en `4d4b688`, incluido el recorrido del 08.**
 

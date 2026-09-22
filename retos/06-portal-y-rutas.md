@@ -1,12 +1,12 @@
 # 06 · Tu portal de miniapps
 
-## Seguimiento · 22/09/2026, `4d4b688`
+## Seguimiento · 22/09/2026, `f5cb81c`
 
-**Funcionalidad completada; queda un ajuste de cabecera en móvil.** Rutas, formulario, navegación y persistencia están implementados y revisados. El repaso escrito y las respuestas del cuaderno están completos.
+**Cerrado funcionalmente, incluida la cabecera móvil.** Rutas, formulario, navegación y persistencia están implementados y revisados. El repaso escrito y las respuestas del cuaderno están completos.
 
-**Único pendiente técnico:** en `src/components/Header.jsx`, separa los enlaces Portal, Tareas y Quiz y adapta su tamaño o distribución. A 375 px la cabecera alcanza unos 378 px de ancho. Comprueba todas las rutas, porque comparten cabecera. No ocultes el desbordamiento con `overflow-x-hidden`: ajusta el contenido.
+**Corrección verificada:** `Header` genera enlaces desde datos con `NavLink`, separa los elementos, reduce el tamaño del texto y muestra la ruta activa y el foco de teclado. Portal, Tareas y Quiz se comprobaron a 375 px y 1280 px sin desbordamiento horizontal. Lint y build pasan en `f5cb81c`.
 
-El checklist de abajo conserva un único punto abierto. La conversación de comprensión se registra por separado en [Repaso con el tutor](../devquest/REPASO-CON-TUTOR.md). Los apartados del enunciado son referencia del trabajo realizado.
+El checklist técnico queda completo. La conversación de comprensión se registra por separado en [Repaso con el tutor](../devquest/REPASO-CON-TUTOR.md). Los apartados del enunciado son referencia del trabajo realizado.
 
 **Tu misión:** convertir el inicio del proyecto en un portal desde el que abrir tus miniapps. La aplicación de tareas seguirá funcionando en `/tareas`.
 
@@ -115,8 +115,8 @@ Añade comentarios breves sobre la responsabilidad de las rutas y dónde vive ah
 - [x] Existe una ruta comodín con mensaje de página no encontrada y enlace al portal.
 - [x] He probado crear, completar, recuperar, buscar y eliminar en esta versión.
 - [x] He comprobado que salir al portal y volver conserva las tareas y sus estados sin duplicarlas.
-- [x] Se ha revisado la presentación en móvil y escritorio; se localizó el desbordamiento en la cabecera compartida.
-- [ ] He ajustado la cabecera: enlaces separados, legibles y utilizables con teclado; Portal, Tareas y Quiz no tienen desplazamiento horizontal a 375 px y siguen viéndose bien a 1280 px.
+- [x] Se ha revisado la presentación en móvil y escritorio; el desbordamiento de la cabecera compartida quedó corregido.
+- [x] He ajustado la cabecera: enlaces separados, legibles y utilizables con teclado; Portal, Tareas y Quiz no tienen desplazamiento horizontal a 375 px y siguen viéndose bien a 1280 px.
 - [x] El cuaderno describe las rutas, sus componentes, la ubicación del estado y la recuperación de tareas al volver.
 - [x] He concretado por qué se reinicia el buscador al salir de Tareas y volver.
 - [x] He completado los cuatro puntos del repaso personal; la explicación escrita de rutas no sustituye ese repaso.
@@ -124,7 +124,7 @@ Añade comentarios breves sobre la responsabilidad de las rutas y dónde vive ah
 
 **Registro breve de pruebas:** anota aquí las acciones, el resultado y cualquier fallo encontrado. No hace falta otro archivo.
 
-Revisión funcional sobre `4d4b688`: altas con Enter, tareas duplicadas independientes, completar, búsqueda sin coincidencias, recuperar, eliminar y recargar; conservación al cambiar entre apps; ruta desconocida y navegación de vuelta. Lint y build pasan. El Quiz produjo 5/5, 0/5 y 3/5 y reinició correctamente. A 375 px se detectó el desbordamiento de cabecera descrito arriba; el ajuste aún debe realizarse.
+Revisión funcional sobre `4d4b688`: altas con Enter, tareas duplicadas independientes, completar, búsqueda sin coincidencias, recuperar, eliminar y recargar; conservación al cambiar entre apps; ruta desconocida y navegación de vuelta. Lint y build pasan. El Quiz produjo 5/5, 0/5 y 3/5 y reinició correctamente. En aquella revisión se detectó el desbordamiento de cabecera. Cierre sobre `f5cb81c`: corregido en las tres rutas a 375 px y 1280 px; enlaces operativos con teclado, foco visible y solo la ruta correspondiente marcada activa. Lint y build vuelven a pasar.
 
 ## Documentación por bloques
 

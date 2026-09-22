@@ -2,7 +2,7 @@
 
 Seguimiento del 22/09/2026 (`4d4b688`).
 
-Los cuatro puntos del repaso personal están completados y contrastados con el código de `devquest`. El Reto 06 conserva un ajuste de cabecera móvil en su checklist. La conversación se registra en [Repaso con el tutor](../REPASO-CON-TUTOR.md).
+Los cuatro puntos del repaso personal están completados y contrastados con el código de `devquest`. El Reto 06 está cerrado, incluida la cabecera móvil. La conversación se registra en [Repaso con el tutor](../REPASO-CON-TUTOR.md).
 
 Este repaso se centra en lo aprendido antes: identidad, copias, búsqueda e inicialización. No es necesario añadir otro documento ni copiar funciones completas.
 

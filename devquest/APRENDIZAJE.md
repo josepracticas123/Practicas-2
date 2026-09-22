@@ -138,7 +138,7 @@ Estas preguntas se van respondiendo conforme avanzan los retos. Completa solo el
 
 ### Reto 06 · Portal y rutas
 
-**Estado:** funcionalidad completada. Queda únicamente el ajuste de cabecera móvil del checklist del 06. La conversación de comprensión se registra en [Repaso con el tutor](REPASO-CON-TUTOR.md).
+**Estado:** cerrado funcionalmente, incluido el ajuste de cabecera móvil verificado en `f5cb81c`. La conversación de comprensión se registra en [Repaso con el tutor](REPASO-CON-TUTOR.md).
 
 - ¿Qué diferencia hay entre cambiar `seccionActual` y navegar a `/tareas`?
 - ¿Qué responsabilidad tienen `BrowserRouter`, `Routes`, `Route` y `Link`?
@@ -194,6 +194,19 @@ Las tareas se recuperan porque están guardadas en `localStorage`, mientras que 
 - Para no leer una pregunta inexistente, cuando `indicePregunta` alcanza `preguntas.length`, `QuizPage` devuelve primero `QuizResult` y no intenta obtener `preguntas[indicePregunta]`. En la última pregunta, `verResultado` establece exactamente ese valor al pulsar «Ver resultado».
 
 No quedan dudas pendientes sobre este bloque.
+
+## Reto 09 · Primeras llamadas a una API
+
+**Estado:** por empezar. Completa estas respuestas conforme avances; no es necesario escribir otro resumen.
+
+- ¿Qué diferencia hay entre `response`, el resultado de `response.json()` y `datos.products`?
+- ¿Qué espera cada `await`? ¿Qué ve el usuario mientras espera?
+- ¿Por qué un error HTTP necesita comprobar `response.ok` aunque haya `try/catch`?
+- ¿Por qué esta petición se realiza desde el botón y no desde `useEffect`?
+- ¿Cómo diferencias la pantalla inicial de una respuesta con una lista vacía?
+- ¿Qué reinicias al reintentar y por qué sustituyes los productos en lugar de añadirlos a los anteriores?
+
+**Mi explicación y dudas:** pendiente.
 
 ## Comentarios explicativos en el código
 

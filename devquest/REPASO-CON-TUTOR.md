@@ -1,6 +1,8 @@
 # Repaso breve · Retos 01–08
 
-Preparación para comentar con el tutor. La funcionalidad está revisada en `4d4b688`; solo queda el ajuste visual de la cabecera del reto 06. Este repaso sirve para comprobar comprensión, no para repetir las tareas ni escribir otro resumen.
+Preparación para comentar con el tutor. La funcionalidad de los retos 01–08 está revisada y la cabecera del 06 quedó verificada en `f5cb81c`. Este repaso sirve para comprobar comprensión, no para repetir las tareas ni escribir otro resumen.
+
+Primero lee [APUNTES_ESTUDIO_REACT](resumen/APUNTES_ESTUDIO_REACT.md), localiza sus ejemplos y anota las dudas concretas. Después comenta estos puntos con el tutor; al terminar ese repaso podrás continuar con el 09.
 
 Abre tu aplicación y tu código. Para cada punto, muestra el archivo, explica el recorrido con tus palabras y haz la pequeña demostración. Si no sabes algo, anota la duda. Reserva unos 15–20 minutos; puedes consultar tus apuntes.
 

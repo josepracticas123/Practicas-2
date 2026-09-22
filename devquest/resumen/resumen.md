@@ -169,7 +169,7 @@ Revisión sobre `4d4b688`: partidas de 5/5, 0/5 y 3/5, bloqueo de opciones, rein
 
 ### Seguimiento
 
-El 07 está cerrado funcionalmente y sus preguntas están respondidas. La cabecera compartida tiene un ajuste móvil registrado únicamente en el 06. La conversación se registra en [Repaso con el tutor](../REPASO-CON-TUTOR.md).
+El 07 está cerrado funcionalmente y sus preguntas están respondidas. La cabecera compartida está corregida; el cierre se registra en el 06. La conversación se registra en [Repaso con el tutor](../REPASO-CON-TUTOR.md).
 
 ## Estado actual del Reto 08
 

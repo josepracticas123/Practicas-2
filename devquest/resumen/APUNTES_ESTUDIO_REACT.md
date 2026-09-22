@@ -1,5 +1,13 @@
 # APUNTES DE ESTUDIO - MI PROYECTO REACT
 
+## Cómo usar estos apuntes antes del 09
+
+- Lee por bloques y abre el archivo del proyecto que se menciona.
+- Intenta explicar el ejemplo antes de seguir; no necesitas memorizarlo ni escribir otro resumen.
+- Anota solo lo que no entiendas, con el archivo y la expresión concreta.
+- Después comenta el [repaso con el tutor](../REPASO-CON-TUTOR.md). El 09 empieza después de esa conversación.
+
+
 Estos apuntes describen el código que existe actualmente en `devquest/src/` y lo que he aprendido al completar los Retos 01–08.
 
 ## 1. Qué he construido
@@ -693,11 +701,11 @@ Estos conceptos aparecen realmente en el código actual:
 - Manejo de errores con `try/catch`.
 - Clases Tailwind y diseño responsive.
 
-React Router ya está instalado. `BrowserRouter` envuelve `App` en `main.jsx` y `App` declara `Routes` para `/`, `/tareas`, `/quiz` y una ruta comodín. `PortalPage` tiene un array de miniapps, `map` y el componente reutilizable `MiniappCards`; sus tarjetas de Tareas y Quiz tienen enlaces. `Header` también enlaza Portal, Tareas y Quiz. `NavLink` no se utiliza.
+React Router ya está instalado. `BrowserRouter` envuelve `App` en `main.jsx` y `App` declara `Routes` para `/`, `/tareas`, `/quiz` y una ruta comodín. `PortalPage` tiene un array de miniapps, `map` y el componente reutilizable `MiniappCards`; sus tarjetas de Tareas y Quiz tienen enlaces. `Header` también enlaza Portal, Tareas y Quiz. `Header` utiliza `NavLink` para distinguir la ruta activa.
 
 ## 27. Lo que he aprendido en el Reto 06
 
-La funcionalidad del Reto 06 está completada; queda el ajuste de cabecera móvil indicado en su checklist. Estas notas describen las rutas, el Portal y la separación actual de la aplicación.
+El Reto 06 está cerrado funcionalmente, incluida la cabecera móvil verificada en `f5cb81c`. Estas notas describen las rutas, el Portal y la separación actual de la aplicación.
 
 ### YA LO TENGO
 
@@ -716,7 +724,7 @@ La funcionalidad del Reto 06 está completada; queda el ajuste de cabecera móvi
 - **`Routes`:** ya contiene las rutas declaradas en `App`.
 - **`Route`:** ya asocia `/`, `/tareas` y la ruta comodín con sus elementos.
 - **`Link`:** se utiliza en la ruta comodín y en las tarjetas del Portal para navegar sin recargar la página.
-- **`NavLink`:** es un enlace que puede recibir un estilo especial cuando su ruta está activa, pero no se utiliza actualmente en este proyecto.
+- **`NavLink`:** se utiliza en `Header`. La función de `className` recibe `isActive` y añade un borde al enlace activo. `end={link.to === "/"}` expresa la coincidencia exacta para Portal. React Router también indica el enlace activo mediante `aria-current="page"`.
 - **Rutas:** direcciones como `/` y `/tareas`, distintas de las secciones internas actuales.
 - **Navegación:** pasar de una URL a otra mediante enlaces y poder usar atrás y adelante del navegador.
 - **Portal:** `PortalPage` ya se muestra en `/` y presenta las miniapps iniciales mediante datos, `map` y `MiniappCards`.

@@ -42,7 +42,7 @@ BrowserRouter → Proporciona el contexto para que React Router gestione la nave
 
 Routes y Route → `Routes` contiene las rutas y cada `Route` relaciona una dirección, como `/`, `/tareas` o `/quiz`, con el componente que debe mostrarse.
 
-Link → Permite cambiar de ruta sin recargar la aplicación. Se utiliza en las tarjetas de Tareas y Quiz, la cabecera y el enlace de la página no encontrada.
+Link → Permite cambiar de ruta sin recargar la aplicación. Se utiliza en las tarjetas de Tareas y Quiz y en el enlace de la página no encontrada. La cabecera utiliza `NavLink` para señalar la ruta activa.
 
 Quiz inicial → `QuizPage` muestra la primera pregunta de `Preguntas.js`. Sus tres opciones se generan con `map()` y se controlan con `seleccionadaId`. `QuizQuestions` recibe los datos y comunica la selección mediante un callback; el formulario permite comprobar una vez, bloquea las opciones y muestra el resultado y la explicación.
 

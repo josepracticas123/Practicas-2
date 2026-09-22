@@ -106,7 +106,7 @@ Añade comentarios sobre las transiciones y el reinicio. Responde las preguntas 
 
 ## Pendientes
 
-El recorrido del 08 está cerrado funcionalmente, con partidas verificadas de 5/5, 0/5 y 3/5. El ajuste de cabecera compartida se registra únicamente en el 06. La conversación de comprensión queda en [Repaso con el tutor](../devquest/REPASO-CON-TUTOR.md).
+El recorrido del 08 está cerrado funcionalmente, con partidas verificadas de 5/5, 0/5 y 3/5. La cabecera compartida quedó corregida al cerrar el 06. La conversación de comprensión queda en [Repaso con el tutor](../devquest/REPASO-CON-TUTOR.md).
 
 ## Documentación por bloques
 
@@ -117,4 +117,4 @@ El recorrido del 08 está cerrado funcionalmente, con partidas verificadas de 5/
 
 **Demostración al tutor:** completa una partida con errores y aciertos, explica de dónde sale la puntuación y comienza otra. Muestra que la primera pregunta no conserva datos de la partida anterior.
 
-[Volver a la guía](../README.md)
+[Volver a la guía](../README.md) · [Reto 09](09-primeras-llamadas-api.md)

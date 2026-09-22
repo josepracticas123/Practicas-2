@@ -1,6 +1,6 @@
 # Resumen de mi primer proyecto React
 
-Revisión documental del 18/09/2026: se han corregido formato y ejemplos, y retirado las observaciones ya incorporadas. Los pendientes prácticos están en [REVISION-PENDIENTE.md](REVISION-PENDIENTE.md).
+Revisión documental del 18/09/2026: se han corregido formato y ejemplos, y retirado las observaciones ya incorporadas. El repaso escrito está completado en [REVISION-PENDIENTE.md](REVISION-PENDIENTE.md). La conversación se prepara en [Repaso con el tutor](../REPASO-CON-TUTOR.md).
 
 ## 1. Qué es este proyecto
 
@@ -165,14 +165,11 @@ Está implementado:
 
 ### Pruebas realizadas
 
-No hay pruebas manuales del Quiz confirmadas en esta documentación. La implementación permite probar la selección, la comprobación, el bloqueo, el teclado, la recarga y los tamaños de pantalla, pero no se marcan como realizadas sin registro.
+Revisión sobre `4d4b688`: partidas de 5/5, 0/5 y 3/5, bloqueo de opciones, reinicio, recarga directa y conservación de Tareas. Se comprobó selección y envío con teclado y presentación a 375 px y 1280 px. Lint y build pasan.
 
-La última ejecución disponible confirma `npm run build` con salida correcta. `npm run lint` queda pendiente de ejecutar tras esta implementación.
+### Seguimiento
 
-### Pendientes
-
-- Realizar y registrar las pruebas de apertura y recarga directa de `/quiz`, respuesta correcta e incorrecta, bloqueo, teclado, recarga y tamaños de pantalla.
-- Completar la documentación específica y las preguntas del Reto 07.
+El 07 está cerrado funcionalmente y sus preguntas están respondidas. La cabecera compartida tiene un ajuste móvil registrado únicamente en el 06. La conversación se registra en [Repaso con el tutor](../REPASO-CON-TUTOR.md).
 
 ## Estado actual del Reto 08
 

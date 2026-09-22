@@ -14,17 +14,16 @@ No necesitas conocer todo para empezar. Trabaja en un paso, compruébalo en el n
 
 **El proyecto ya está creado. No repitas la instalación inicial ni generes otro Vite.** Para continuar, abre una terminal en `Practicas-2/devquest`, instala las dependencias con `npm install` si faltan y ejecuta `npm run dev`.
 
-## Seguimiento · 21/09/2026, `afb24ca`
+## Seguimiento · 22/09/2026, `4d4b688`
 
-Los retos 01–08 están cerrados técnicamente.
+Los retos 01–05, 07 y 08 están cerrados funcionalmente. El 06 tiene toda la funcionalidad completada y un único pendiente visual: ajustar la cabecera global a 375 px, donde sus enlaces se juntan y provocan un pequeño desbordamiento.
 
-- El 06 está terminado: Portal, React Router, rutas y separación de Tareas.
-- El 07 está terminado: datos del Quiz, selección controlada, comprobación de respuestas y componente de pregunta.
-- El 08 está terminado: recorrido completo, respuestas confirmadas, puntuación, resultado y nueva partida.
-- El cuaderno `resumen/resumen.md` está actualizado con las explicaciones de los retos 06–08.
-- Las pruebas del Quiz se han realizado, incluyendo recorrido, resultado, reinicio, responsive y teclado.
+- Tareas conserva su funcionamiento y persistencia.
+- Quiz tiene selección, comprobación, recorrido completo, resultado y nueva partida. Se verificaron partidas de 5/5, 0/5 y 3/5, bloqueo, reinicio y separación de Tareas.
+- `npm run lint` y `npm run build` pasan en la versión revisada.
+- Las explicaciones del cuaderno y el repaso escrito están completadas. La conversación para comprobar comprensión se prepara en [Repaso con el tutor](devquest/REPASO-CON-TUTOR.md); sus checks son independientes del cierre funcional.
 
-`npm run lint` y `npm run build` pasan correctamente.
+**Ahora:** resuelve el único check pendiente del [06](retos/06-portal-y-rutas.md) y prepara ese repaso breve. No necesitas otro resumen ni rehacer funcionalidades.
 
 La sección siguiente conserva la guía de instalación inicial como referencia.
 
@@ -91,7 +90,7 @@ Lee [Tu primer componente](https://es.react.dev/learn/your-first-component) y [E
 - [04 · Busca y elimina tareas](retos/04-buscar-y-eliminar.md): búsqueda por sección y eliminación de una tarea concreta.
 - [05 · Tus tareas sobreviven a una recarga](retos/05-persistencia-local.md): `localStorage` y `useEffect`. **Cerrado.**
 
-- [06 · Tu portal de miniapps](retos/06-portal-y-rutas.md): home, React Router y Tareas en `/tareas`. **Cerrado.**
+- [06 · Tu portal de miniapps](retos/06-portal-y-rutas.md): home, React Router y Tareas en `/tareas`. **Funcionalidad cerrada; queda ajustar la cabecera móvil.**
 - [07 · Tu primera pregunta del quiz](retos/07-quiz-respuestas.md): `/quiz`, datos locales, selección y comprobación de respuestas. **Cerrado.**
 - [08 · Completa el quiz y consulta tu resultado](retos/08-quiz-recorrido.md): progreso, respuestas confirmadas, puntuación y nueva partida. **Cerrado.**
 

@@ -1,6 +1,6 @@
 # 05 · Tus tareas sobreviven a una recarga
 
-**Estado: cerrado técnicamente en la revisión del 17/09/2026 sobre `3736740`. Pendiente explicación en directo con el tutor.**
+**Estado: cerrado técnicamente en la revisión del 17/09/2026 sobre `3736740`. La conversación se registra por separado en el repaso conjunto.**
 
 Los retos 01–04 están cerrados técnicamente, incluido el desbordamiento con textos largos. La persistencia está implementada y las comprobaciones realizadas pasan. Los pasos siguientes quedan como referencia; no necesitas rehacerlos.
 
@@ -124,7 +124,7 @@ La revisión de `3736740` confirma el ciclo de recarga y reapertura en navegador
 
 - [x] Revisión técnica de los retos anteriores realizada el 17/09/2026 sobre `96de975`.
 - [x] El desbordamiento del 04 está corregido y verificado en la revisión técnica.
-- [ ] He explicado al tutor la corrección y las decisiones del reto 05. **Pendiente de confirmación del tutor.**
+La explicación al tutor se registra en el [repaso conjunto](../devquest/REPASO-CON-TUTOR.md); no se marca aquí como realizada.
 - [x] Se guarda el array completo en `devquest.tareas.v1`, con sus identificadores originales.
 - [x] Crear, completar, recuperar y eliminar persisten después de recargar.
 - [x] Dos tareas iguales siguen siendo independientes tras recuperarlas.
@@ -145,15 +145,9 @@ La implementación actual cumple el reto: cada acción crea un nuevo estado `tar
 
 No necesitas intervalos, guardar desde cada botón ni un evento de cierre de página. Tampoco necesitas sincronización entre pestañas para este reto: si modificas los datos desde otra pestaña o desde las herramientas del navegador, esta instancia no los incorpora automáticamente; los vuelve a leer al recargar. Si guardar falla, la app continúa en memoria y registra el error, tal como pide el enunciado.
 
-### Pendiente · Explicación al tutor
+### Conversación con el tutor
 
-El código está cerrado técnicamente. Estos puntos quedan pendientes hasta que los expliques con tus palabras al tutor:
-
-- [ ] Explicar por qué pasas `leerTareasGuardadas` sin ejecutarla a `useState` y cómo evita leer en cada renderizado.
-- [ ] Explicar cómo utilizas `Set` para detectar identificadores repetidos y qué ocurre si los datos no son válidos.
-- [ ] Explicar por qué el efecto depende de `[tareas]`, cuándo vuelve a guardar y por qué buscar no necesita otro efecto. Incluye qué ocurre al eliminar la última tarea.
-
-No necesitas añadir funcionalidades para completar esta explicación. Si al prepararla detectas un comentario poco claro, mejóralo para explicar la decisión; no hace falta comentar cada línea. El tutor confirmará estos checks después de la conversación.
+El código y las explicaciones escritas están completados. Los temas de inicialización, `Set`, `[tareas]` y guardado de `[]` se reúnen en [Repaso con el tutor](../devquest/REPASO-CON-TUTOR.md). Marca allí la conversación cuando ocurra; no hace falta duplicar respuestas ni añadir funcionalidades.
 
 ## Documentación oficial
 

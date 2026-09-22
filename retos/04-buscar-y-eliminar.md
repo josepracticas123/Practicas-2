@@ -91,7 +91,7 @@ La versión anterior desbordaba a 375 px hasta alcanzar 570 px de contenido. En 
 
 - [x] La tarea larga se lee entera, sin solaparse con los botones ni provocar desplazamiento horizontal en ambas vistas.
 - [x] El comportamiento sigue siendo correcto con tareas cortas y al cambiar de tamaño.
-- [ ] He mostrado la corrección al tutor y explicado por qué eliminar por identificador no afecta a otras tareas con el mismo texto.
+La demostración y explicación al tutor se registran en el [repaso conjunto](../devquest/REPASO-CON-TUTOR.md), sin reabrir el cierre técnico de este reto.
 
 **Reto cerrado técnicamente.** La demostración y explicación personal quedan para el tutor. El 05 también está implementado y revisado; no repitas estas correcciones. Las mejoras de mantenimiento de abajo pueden trabajarse gradualmente.
 

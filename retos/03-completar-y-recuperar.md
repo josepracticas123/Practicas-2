@@ -74,7 +74,7 @@ Añade comentarios breves sobre la identidad de la tarea y la actualización sin
 - [x] Navegar conserva los datos; siguen rechazándose entradas vacías o con solo espacios.
 - [x] Los botones se pueden usar con teclado y el diseño sigue siendo legible en móvil. **El caso de texto largo está corregido en ambas vistas; revisión de `3736740`.**
 - [x] Las respuestas sobre identificadores, listas calculadas y actualización de objetos están escritas en el cuaderno.
-- [ ] He concretado identidad y copias en [mi repaso personal](../devquest/resumen/REVISION-PENDIENTE.md). Completa allí el ejemplo; no necesitas otro documento.
+- [x] He concretado identidad y copias en [mi repaso personal](../devquest/resumen/REVISION-PENDIENTE.md). La conversación se registra en el [repaso con el tutor](../devquest/REPASO-CON-TUTOR.md).
 - [x] `npm run lint` y `npm run build` pasan desde `devquest/`.
 
 

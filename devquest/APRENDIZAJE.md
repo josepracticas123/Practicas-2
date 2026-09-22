@@ -138,7 +138,7 @@ Estas preguntas se van respondiendo conforme avanzan los retos. Completa solo el
 
 ### Reto 06 · Portal y rutas
 
-**Estado:** terminado. La estructura de rutas, el Portal, los enlaces y la navegación están implementados y comprobados.
+**Estado:** funcionalidad completada. Queda únicamente el ajuste de cabecera móvil del checklist del 06. La conversación de comprensión se registra en [Repaso con el tutor](REPASO-CON-TUTOR.md).
 
 - ¿Qué diferencia hay entre cambiar `seccionActual` y navegar a `/tareas`?
 - ¿Qué responsabilidad tienen `BrowserRouter`, `Routes`, `Route` y `Link`?

@@ -1,6 +1,6 @@
 # Recordatorio de conceptos
 
-Pendientes prácticos: [lista de revisión](REVISION-PENDIENTE.md).
+Repaso escrito completado: [lista de revisión](REVISION-PENDIENTE.md). Para la conversación: [repaso con el tutor](../REPASO-CON-TUTOR.md).
 
 App → Mantiene la estructura global: cabecera, contenido principal y pie de página.
 

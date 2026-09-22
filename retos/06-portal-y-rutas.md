@@ -1,17 +1,12 @@
 # 06 · Tu portal de miniapps
 
-## Seguimiento · 21/09/2026, `afb24ca`
+## Seguimiento · 22/09/2026, `4d4b688`
 
-**Implementación principal hecha; pendiente cerrar comprobaciones.** Están implementados el formulario con `onSubmit`, la separación de `TareasPage`, las rutas `/` y `/tareas`, la página no encontrada y las tarjetas con enlaces. No repitas esos cambios.
+**Funcionalidad completada; queda un ajuste de cabecera en móvil.** Rutas, formulario, navegación y persistencia están implementados y revisados. El repaso escrito y las respuestas del cuaderno están completos.
 
-**Orden para continuar:**
+**Único pendiente técnico:** en `src/components/Header.jsx`, separa los enlaces Portal, Tareas y Quiz y adapta su tamaño o distribución. A 375 px la cabecera alcanza unos 378 px de ancho. Comprueba todas las rutas, porque comparten cabecera. No ocultes el desbordamiento con `overflow-x-hidden`: ajusta el contenido.
 
-1. Completa los cuatro puntos de [tu repaso personal](../devquest/resumen/REVISION-PENDIENTE.md): identidad, copias, búsqueda e inicialización. Bastan unas líneas y las funciones localizadas; no necesitas otro resumen.
-2. Revisa los comentarios desactualizados: `Article` aún sitúa el callback en `App`, aunque vive en `TareasPage`; `MiniappCards` dice que Quiz no tiene ruta, pero ya tiene `/quiz`. Conserva comentarios que expliquen decisiones.
-3. Realiza las pruebas de navegación, persistencia, teclado y tamaños del apartado 4 y del checklist final. Anota qué probaste y el resultado antes de marcar su cierre.
-4. Continúa el 07 desde la extracción del componente de pregunta (bloque 3) y la comprobación (bloque 4). La página, la ruta y la selección ya existen.
-
-Los checks siguientes distinguen implementación comprobada por lectura de código de pruebas prácticas pendientes de verificación. Las marcas previas de pruebas sin evidencia anotada quedan pendientes de confirmación; esto no significa que se haya detectado un fallo. Lint y build pasan en esta revisión.
+El checklist de abajo conserva un único punto abierto. La conversación de comprensión se registra por separado en [Repaso con el tutor](../devquest/REPASO-CON-TUTOR.md). Los apartados del enunciado son referencia del trabajo realizado.
 
 **Tu misión:** convertir el inicio del proyecto en un portal desde el que abrir tus miniapps. La aplicación de tareas seguirá funcionando en `/tareas`.
 
@@ -32,14 +27,14 @@ No hace falta extraer ahora todos los componentes repetidos ni cambiar las funci
 
 ### Comprobación previa
 
-- [x] He completado los cuatro puntos del repaso con mi ejemplo; siguen pendientes de ampliar.
+- [x] He completado los cuatro puntos del repaso escrito con mi ejemplo.
 - [x] El formulario tiene `onSubmit={enviarTarea}` y el botón `type="submit"` ya no tiene `onClick` de envío.
 - [x] He probado clic y Enter: cada envío añade exactamente una tarea y no recarga la página.
 - [x] El código mantiene `trim`, rechazo del texto vacío y vaciado del input tras añadir una tarea válida.
 - [x] He revisado los comentarios para que expliquen decisiones sin repetir cada línea.
 - [x] `Inicio.jsx` se utiliza desde `TareasPage` y pasa `addTareas` a `Article`.
 - [x] He repetido las pruebas de completar, recuperar, buscar, eliminar y recargar después de la reorganización.
-- [x] `npm run lint` y `npm run build` pasan en `afb24ca`.
+- [x] `npm run lint` y `npm run build` pasan en `4d4b688`.
 
 Referencias: [el elemento form · MDN](https://developer.mozilla.org/es/docs/Web/HTML/Element/form), [preventDefault · MDN](https://developer.mozilla.org/es/docs/Web/API/Event/preventDefault) y [responder a eventos · React](https://es.react.dev/learn/responding-to-events).
 
@@ -120,15 +115,16 @@ Añade comentarios breves sobre la responsabilidad de las rutas y dónde vive ah
 - [x] Existe una ruta comodín con mensaje de página no encontrada y enlace al portal.
 - [x] He probado crear, completar, recuperar, buscar y eliminar en esta versión.
 - [x] He comprobado que salir al portal y volver conserva las tareas y sus estados sin duplicarlas.
-- [x] He probado portal y Tareas a 375 px y 1280 px, también con la URL larga del 04.
+- [x] Se ha revisado la presentación en móvil y escritorio; se localizó el desbordamiento en la cabecera compartida.
+- [ ] He ajustado la cabecera: enlaces separados, legibles y utilizables con teclado; Portal, Tareas y Quiz no tienen desplazamiento horizontal a 375 px y siguen viéndose bien a 1280 px.
 - [x] El cuaderno describe las rutas, sus componentes, la ubicación del estado y la recuperación de tareas al volver.
 - [x] He concretado por qué se reinicia el buscador al salir de Tareas y volver.
 - [x] He completado los cuatro puntos del repaso personal; la explicación escrita de rutas no sustituye ese repaso.
-- [x] `npm run lint` y `npm run build` pasan (revisión del 21/09/2026, `afb24ca`).
+- [x] `npm run lint` y `npm run build` pasan (revisión del 22/09/2026, `4d4b688`).
 
 **Registro breve de pruebas:** anota aquí las acciones, el resultado y cualquier fallo encontrado. No hace falta otro archivo.
 
-_Pendiente de completar._
+Revisión funcional sobre `4d4b688`: altas con Enter, tareas duplicadas independientes, completar, búsqueda sin coincidencias, recuperar, eliminar y recargar; conservación al cambiar entre apps; ruta desconocida y navegación de vuelta. Lint y build pasan. El Quiz produjo 5/5, 0/5 y 3/5 y reinició correctamente. A 375 px se detectó el desbordamiento de cabecera descrito arriba; el ajuste aún debe realizarse.
 
 ## Documentación por bloques
 

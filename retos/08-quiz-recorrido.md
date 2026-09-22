@@ -1,6 +1,6 @@
 # 08 · Completa el quiz y consulta tu resultado
 
-## Seguimiento · 21/09/2026
+## Seguimiento · 22/09/2026, `4d4b688`
 
 **Completado.** El Quiz recorre las cinco preguntas, registra las respuestas por ID, muestra el resultado en `QuizResult` y permite iniciar otra partida sin recargar.
 
@@ -76,7 +76,7 @@ Añade comentarios sobre las transiciones y el reinicio. Responde las preguntas 
 - [x] Salir del quiz y regresar, o recargar, inicia otra partida; las tareas guardadas permanecen intactas.
 - [x] El recorrido completo funciona con teclado, foco visible y mensajes comprensibles.
 - [x] Preguntas y resumen se leen a 375 px y 1280 px sin desbordamiento.
-- [x] He completado las preguntas del cuaderno y puedo explicar qué reinicio y qué calculo.
+- [x] He completado las preguntas del cuaderno sobre qué reinicio y qué calculo. La explicación en directo se registra en el repaso conjunto.
 - [x] `npm run lint` y `npm run build` pasan.
 
 ## Qué he practicado/aprendido en el 08
@@ -106,7 +106,7 @@ Añade comentarios sobre las transiciones y el reinicio. Responde las preguntas 
 
 ## Pendientes
 
-No quedan pendientes de implementación ni de comprobación documentados para el Reto 08.
+El recorrido del 08 está cerrado funcionalmente, con partidas verificadas de 5/5, 0/5 y 3/5. El ajuste de cabecera compartida se registra únicamente en el 06. La conversación de comprensión queda en [Repaso con el tutor](../devquest/REPASO-CON-TUTOR.md).
 
 ## Documentación por bloques
 

@@ -1,14 +1,14 @@
-# Repaso de conceptos · Pendientes del resumen
+# Repaso de conceptos · Revisión escrita completada
 
-Seguimiento del 21/09/2026 (`afb24ca`).
+Seguimiento del 22/09/2026 (`4d4b688`).
 
-Los cuatro puntos del repaso personal están completados y contrastados con el código de `devquest`. El Reto 06 también tiene completadas las comprobaciones prácticas.
+Los cuatro puntos del repaso personal están completados y contrastados con el código de `devquest`. El Reto 06 conserva un ajuste de cabecera móvil en su checklist. La conversación se registra en [Repaso con el tutor](../REPASO-CON-TUTOR.md).
 
 Este repaso se centra en lo aprendido antes: identidad, copias, búsqueda e inicialización. No es necesario añadir otro documento ni copiar funciones completas.
 
 La pregunta anterior «qué ID cambia» era ambigua. La pregunta correcta es **qué tarea se modifica y cómo la identificas**: completar una tarea no cambia su ID.
 
-## Cuatro puntos para completar
+## Cuatro puntos completados
 
 - [x] **Identidad:** dos tareas pueden tener el mismo texto y distintos IDs. `completarTarea(id)` identifica la tarea mediante su `id` y cambia `completada`, no el `id`.
 

@@ -697,7 +697,7 @@ React Router ya está instalado. `BrowserRouter` envuelve `App` en `main.jsx` y 
 
 ## 27. Lo que he aprendido en el Reto 06
 
-El Reto 06 está terminado técnicamente. Estas notas describen las rutas, el Portal y la separación actual de la aplicación.
+La funcionalidad del Reto 06 está completada; queda el ajuste de cabecera móvil indicado en su checklist. Estas notas describen las rutas, el Portal y la separación actual de la aplicación.
 
 ### YA LO TENGO
 

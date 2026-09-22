@@ -30,7 +30,7 @@ export function leerTareasGuardadas() {
       ) {
         return false;
       }
-
+      // validamos que los id no estén duplicados.
       if (ids.has(tarea.id)) {
         return false;
       }

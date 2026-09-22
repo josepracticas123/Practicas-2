@@ -1,4 +1,5 @@
-// Finalizadas recibe los datos y acciones que necesita mediante props.
+// Finalizadas es hijo de TareasPage. Recibe por props la lista real de
+// finalizadas, el resultado visible de la búsqueda y callbacks del padre.
 function Finalizadas({
     tareasFinalizadas,
     tareasFinalizadasFiltradas,
@@ -19,17 +20,21 @@ function Finalizadas({
                     Buscar tareas
                 </label>
 
+                {/* busqueda controla únicamente el texto del filtro en el padre.
+                    Escribir aquí no cambia la lista principal tareas. */}
                 <input
                     id="buscar-finalizadas"
                     type="text"
                     value={busqueda}
-                    onChange={(e) => setBusqueda(e.target.value)} // Actualiza la búsqueda al escribir.
+                    onChange={(e) => setBusqueda(e.target.value)} // Recalcula la lista visible.
                     placeholder="Buscar tareas"
                     className="w-full min-w-0 rounded-md border border-white bg-white px-3 py-1.5 text-sm text-black outline-none focus:ring-2 focus:ring-gray-400 sm:w-64"
                 />
                 <button
                     type="button"
-                    onClick={() => setBusqueda("")} // Limpia el filtro.
+                    // Al limpiar busqueda, el filtro queda vacío y vuelven a
+                    // mostrarse todas las finalizadas que existen en el estado.
+                    onClick={() => setBusqueda("")}
                     className="w-full rounded-lg px-3 py-1.5 text-white bg-gray-500 sm:w-auto"
                 >
                     Limpiar búsqueda
@@ -37,7 +42,8 @@ function Finalizadas({
 
 
             </div>
-
+             {/* Esta es la lista de tareas que se muestra en pantalla. La lista
+                 filtrada no se guarda como si fuera la lista principal. */}
             <p>Total: {tareasFinalizadas.length}</p><br />
 
             {tareasFinalizadas.length === 0 ? (
@@ -70,14 +76,18 @@ function Finalizadas({
                                         <button
                                             type="button"
                                             className="w-full rounded-lg bg-green-500 px-4 py-2 text-white sm:ml-4 sm:w-auto"
-                                            onClick={() => recuperarTarea(tarea.id)} // Devuelve la tarea a pendientes.
+                                            // El hijo avisa al padre con el ID; el
+                                            // padre cambia completada a false.
+                                            onClick={() => recuperarTarea(tarea.id)}
                                         >
                                             Recuperar
                                         </button>
                                         <button
                                             type="button"
                                             className="w-full rounded-lg bg-gray-500 px-4 py-2 text-white sm:ml-2 sm:w-auto"
-                                            onClick={() => eliminarTarea(tarea.id)} // Elimina por id.
+                                            // El ID identifica esta tarea aunque
+                                            // su texto sea igual al de otra.
+                                            onClick={() => eliminarTarea(tarea.id)}
                                         >
                                             Eliminar
                                         </button>

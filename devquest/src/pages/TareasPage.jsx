@@ -14,41 +14,54 @@ function TareasPage() {
 
 
   const [seccionActual, setSeccionActual] = useState("inicio"); // Guarda la sección visible.
-  /* React usa la función "const [tareas, setTareas] = useState(leerTareasGuardadas);" 
-   para obtener el valor inicial, osea se usa la función como inicializadora por no tener el (),
-   con el () ejecuta la función y despues pasa el resutado. 
-   Esto evita leer localStorage en cada renderizado.*/
-  const [tareas, setTareas] = useState(leerTareasGuardadas); // Guarda tareas y las recupera al iniciar.
-  const [busqueda, setBusqueda] = useState(""); // Guarda el texto que se busca.
 
-  // Guarda las tareas cuando cambia el estado tareas.
+  // tareas es la lista real y el estado principal de este componente padre.
+  // Se pasa la función leerTareasGuardadas, sin paréntesis, para que React la
+  // use como inicializadora al preparar el estado. Con () se ejecutaría de
+  // inmediato y se pasaría su resultado a useState.
+  const [tareas, setTareas] = useState(leerTareasGuardadas);
+
+  // Guarda en localStorage la lista real cada vez que cambia tareas.
+  // Este efecto depende de [tareas], por eso no se ejecuta solo al escribir o
+  // limpiar una búsqueda. No guardamos listas filtradas: la búsqueda solo
+  // decide qué se muestra y nunca sustituye el estado principal.
   useEffect(() => {
     guardarTareas(tareas);
   }, [tareas]);
 
 
-  // Limpia el texto y evita crear tareas vacías.
+  // Es el callback que recibe Article a través de Inicio.
+  // Article (hijo) lo ejecuta al enviar el formulario; aquí, en TareasPage
+  // (padre), se crea la tarea y se modifica el estado tareas.
   const addTareas = (tarea) => {
+    // Se vuelve a limpiar el texto en el padre para proteger el estado aunque
+    // otra parte de la aplicación llamara a este callback directamente.
     const tareaLimpia = tarea.trim();
 
     if (tareaLimpia !== "") {
-      // Cada tarea recibe su identidad una sola vez al crearse.
+      // Cada tarea recibe un ID único al crearse. El texto puede repetirse,
+      // pero el ID permite distinguir dos tareas como "Estudiar".
       const nuevaTarea = {
         id: crypto.randomUUID(),
         texto: tareaLimpia,
         completada: false
       };
 
-      setTareas([...tareas, nuevaTarea]); // Crea un array nuevo copiando las tareas qu eya teniamos y añade la nueva al final.
+      // Creamos un array nuevo: no modificamos directamente el array anterior.
+      setTareas([...tareas, nuevaTarea]);
     }
   };
 
-  // Se encarga de meter de la lista de tareas , la seleccioanda a finalizadas
+  // Cambia a completada solo la tarea cuyo ID recibe la vista Pendientes.
   const completarTarea = (id) => {
-    // map crea una lista nueva y conserva las demás tareas de tareas.
+    // map crea un array nuevo. Para la tarea coincidente se crea también un
+    // objeto nuevo; las tareas que no coinciden se devuelven tal cual y
+    // conservan su misma referencia/identidad.
     const nuevasTareas = tareas.map((tarea) => {
       if (tarea.id === id) {
-        // Copiamos el objeto para no modificar directamente el estado anterior.
+        // Se busca por ID, no por texto. Así, si dos tareas dicen "Estudiar"
+        // y tienen IDs 1 y 2, completar la ID 1 solo cambia la primera.
+        // La copia evita modificar directamente el objeto del estado anterior.
         return { ...tarea, completada: true };
       }
 
@@ -58,9 +71,10 @@ function TareasPage() {
     setTareas(nuevasTareas);
   };
 
-  // Cambia a false solo la tarea cuyo id recibe.
+  // Cambia a pendiente solo la tarea cuyo ID recibe la vista Finalizadas.
   const recuperarTarea = (id) => {
-    // map devuelve otra lista con la tarea actualizada.
+    // Igual que completarTarea, map crea otro array y solo crea otro objeto
+    // para la tarea que coincide; las demás conservan su identidad.
     const nuevasTareas = tareas.map((tarea) => {
       if (tarea.id === id) {
         return { ...tarea, completada: false };
@@ -72,27 +86,45 @@ function TareasPage() {
     setTareas(nuevasTareas);
   };
 
-  // filter elimina la tarea indicada y conserva las demás.
+  // Elimina de la lista real la tarea identificada por id.
   const eliminarTarea = (id) => {
+    // filter crea un array nuevo y conserva las tareas cuyo ID no coincide.
+    // La tarea cuyo ID coincide queda fuera del resultado. Funciona aunque la
+    // vista estuviera filtrada por texto porque el botón pasa el ID real de la
+    // tarea visible; el texto puede repetirse, pero el ID identifica una sola.
     const nuevasTareas = tareas.filter((tarea) => tarea.id !== id);
     setTareas(nuevasTareas);
   };
+
+  // Cada estado de búsqueda pertenece a su vista. Guarda solo el texto escrito
+  // por el usuario, no una copia de las tareas ni una lista nueva para guardar.
+  const [busquedaPendientes, setBusquedaPendientes] = useState(""); // Guarda el texto que se busca.
+  const [busquedaFinalizadas, setBusquedaFinalizadas] = useState(""); // Guarda el texto que se busca.
+
+  // Estas listas separan la lista real según completada. Se recalculan para
+  // mostrar pendientes y finalizadas, pero no reemplazan tareas.
   const tareasPendientes = tareas.filter((tarea) => !tarea.completada);
   const tareasFinalizadas = tareas.filter((tarea) => tarea.completada);
 
-  const textoBusqueda = busqueda.trim().toLowerCase();
+  // Normalizamos la búsqueda para ignorar espacios exteriores y diferencias
+  // entre mayúsculas y minúsculas.
+  const textoBusquedaPendientes = busquedaPendientes.trim().toLowerCase();
+  const textoBusquedaFinalizadas = busquedaFinalizadas.trim().toLowerCase();
 
+  // Estas listas son resultados calculados para mostrar. Cuando cambia busqueda,
+  // React vuelve a renderizar y se calculan de nuevo; tareas sigue intacta.
+  // Buscar no significa guardar una nueva lista.
   const tareasPendientesFiltradas = tareasPendientes.filter((tarea) =>
-    tarea.texto.toLowerCase().includes(textoBusqueda)
+    tarea.texto.toLowerCase().includes(textoBusquedaPendientes)
   );
 
   const tareasFinalizadasFiltradas = tareasFinalizadas.filter((tarea) =>
-    tarea.texto.toLowerCase().includes(textoBusqueda)
+    tarea.texto.toLowerCase().includes(textoBusquedaFinalizadas)
   );
-  
+
   return (
     <>
-      {/*Navegador de botones*/}
+      {/* El cambio de sección modifica solo seccionActual. */}
       <nav className="flex justify-center space-x-4 text-white py-4">
         {secciones.map((seccion) => { // map crea un botón por cada sección.
           const estaActiva = seccion.id === seccionActual;
@@ -117,30 +149,32 @@ function TareasPage() {
         })}
       </nav>
 
-      {/* Vista Inicio */}
+      {/* TareasPage pasa addTareas a Inicio; Inicio lo pasa después a Article. */}
       {seccionActual === "inicio" && (
         <Inicio addTareas={addTareas} />
       )}
 
-      {/* Vista Pendientes */}
+        {/* Pendientes recibe datos visibles y callbacks del padre. Sus botones
+          ejecutan completarTarea o eliminarTarea pasando el ID de cada tarea. */}
       {seccionActual === "pendientes" && (
         <Pendientes
           tareasPendientes={tareasPendientes}
           tareasPendientesFiltradas={tareasPendientesFiltradas}
-          busqueda={busqueda}
-          setBusqueda={setBusqueda}
+          busqueda={busquedaPendientes}
+          setBusqueda={setBusquedaPendientes}
           completarTarea={completarTarea}
           eliminarTarea={eliminarTarea}
         />
       )}
 
-      {/* Vista Finalizadas */}
+        {/* Finalizadas recibe la lista correspondiente y los callbacks para
+          recuperar o eliminar una tarea concreta mediante su ID. */}
       {seccionActual === "finalizadas" && (
         <Finalizadas
           tareasFinalizadas={tareasFinalizadas}
           tareasFinalizadasFiltradas={tareasFinalizadasFiltradas}
-          busqueda={busqueda}
-          setBusqueda={setBusqueda}
+          busqueda={busquedaFinalizadas}
+          setBusqueda={setBusquedaFinalizadas}
           recuperarTarea={recuperarTarea}
           eliminarTarea={eliminarTarea}
         />

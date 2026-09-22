@@ -1,8 +1,11 @@
-// Muestra el resultado final del quiz y permite volver a empezar.
-// Recibe las preguntas, las respuestas guardadas y la función para reiniciar.
+// QuizResult es hijo de QuizPage y se muestra cuando el padre termina el quiz.
+// QuizQuestions es su hermano: QuizPage decide cuál de los dos renderiza.
+// Este componente recibe por props las preguntas, las respuestas confirmadas
+// y una función del padre para volver a empezar.
 function QuizResult({ preguntas, respuestasConfirmadas, onVolverAJugar }) {
-    // filter conserva las preguntas respondidas correctamente.
-    // length cuenta cuántas hay para mostrar el total de aciertos.
+    // Recorremos todas las preguntas y comparamos la respuesta guardada del
+    // usuario con la respuesta correcta. filter conserva solo las coincidencias
+    // y length cuenta cuántas respuestas correctas hay.
     const respuestasCorrectas = preguntas.filter(
         (pregunta) =>
             respuestasConfirmadas[pregunta.id] === pregunta.respuestaCorrectaId
@@ -19,30 +22,34 @@ function QuizResult({ preguntas, respuestasConfirmadas, onVolverAJugar }) {
             </p>
 
             <div className="mx-auto w-full max-w-2xl space-y-6">
-                {/* Creamos un bloque de resultado para cada pregunta. */}
+                {/* Creamos un bloque de resultado para cada pregunta y mostramos
+                    la respuesta guardada, la correcta y su explicación. */}
                 {preguntas.map((pregunta) => {
-                    // Recuperamos la opción que el usuario guardó para esta pregunta.
+                    // Obtenemos el ID de la respuesta que QuizPage guardó para
+                    // esta pregunta dentro de respuestasConfirmadas.
                     const respuestaUsuarioId =
                         respuestasConfirmadas[pregunta.id];
 
-                    // find busca la opción cuyo ID coincide con la respuesta del usuario.
+                    // find busca en las opciones la que coincide con la respuesta
+                    // elegida por el usuario para poder mostrar su texto.
                     const respuestaUsuario = pregunta.opciones.find(
                         (opcion) => opcion.id === respuestaUsuarioId
                     );
 
-                    // Buscamos en los datos la opción que era correcta.
+                    // Buscamos la opción correcta para mostrar su texto.
                     const respuestaCorrecta = pregunta.opciones.find(
                         (opcion) =>
                             opcion.id === pregunta.respuestaCorrectaId
                     );
 
-                    // Comparamos los IDs para saber si la respuesta fue correcta.
+                    // Comparamos el ID elegido con el ID correcto para saber si
+                    // esta respuesta fue correcta o incorrecta.
                     const esCorrecta =
                         respuestaUsuarioId === pregunta.respuestaCorrectaId;
 
                     return (
                         <article
-                            // El ID estable identifica cada bloque de pregunta en el map.
+                            // El ID estable identifica cada bloque creado por map.
                             key={pregunta.id}
                             className="rounded-lg bg-gray-800 p-6"
                         >
@@ -51,7 +58,8 @@ function QuizResult({ preguntas, respuestasConfirmadas, onVolverAJugar }) {
                                 {pregunta.enunciado}
                             </p>
 
-                            {/* El operador ?. evita un error si no se encuentra una opción. */}
+                            {/* ?. permite acceder al texto sin provocar un error
+                                si no se encuentra una opción para ese ID. */}
                             <p>
                                 <strong>Tu respuesta:</strong>{" "}
                                 {respuestaUsuario?.texto}
@@ -62,7 +70,8 @@ function QuizResult({ preguntas, respuestasConfirmadas, onVolverAJugar }) {
                                 {respuestaCorrecta?.texto}
                             </p>
 
-                            {/* El ternario muestra un texto distinto según el resultado. */}
+                            {/* El ternario muestra "Correcta" o "Incorrecta"
+                                según el valor de esCorrecta. */}
                             <p
                                 className={`mt-2 font-semibold ${esCorrecta
                                     ? "text-green-400"
@@ -72,7 +81,8 @@ function QuizResult({ preguntas, respuestasConfirmadas, onVolverAJugar }) {
                                 {esCorrecta ? "Correcta" : "Incorrecta"}
                             </p>
 
-                            {/* Cada pregunta muestra la explicación guardada en sus datos. */}
+                            {/* Cada pregunta muestra la explicación que viene en
+                                los datos recibidos por el componente. */}
                             <div className="mt-4 rounded-lg bg-gray-700 p-4">
                                 <p className="mb-1 font-semibold">
                                     Explicación
@@ -88,7 +98,10 @@ function QuizResult({ preguntas, respuestasConfirmadas, onVolverAJugar }) {
             </div>
 
             <div className="mt-8 text-center">
-                {/* Al pulsar, ejecutamos la función recibida para reiniciar el quiz. */}
+                {/* Este botón está en el hijo. Al pulsarlo ejecuta la función
+                    recibida por props; esa función es realmente volverAJugar,
+                    que pertenece al padre QuizPage. El padre limpia sus estados
+                    y deja el quiz en su estado inicial. */}
                 <button
                     type="button"
                     onClick={onVolverAJugar}

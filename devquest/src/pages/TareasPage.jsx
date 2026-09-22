@@ -43,9 +43,9 @@ function TareasPage() {
     }
   };
 
-  // Cambia a true solo la tarea cuyo id recibe.
+  // Se encarga de meter de la lista de tareas , la seleccioanda a finalizadas
   const completarTarea = (id) => {
-    // map crea una lista nueva y conserva las demás tareas.
+    // map crea una lista nueva y conserva las demás tareas de tareas.
     const nuevasTareas = tareas.map((tarea) => {
       if (tarea.id === id) {
         // Copiamos el objeto para no modificar directamente el estado anterior.

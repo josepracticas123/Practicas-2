@@ -10,8 +10,12 @@ function Article({ addTareas }) {
     const tareaLimpia = textoTarea.trim();
     if (tareaLimpia !== "") {
       addTareas(tareaLimpia); 
-      setTextoTarea("");
-    };
+      
+    }else{
+      alert("No se pueden quedar tareas sin contenido")
+    }
+
+    setTextoTarea("");
   }
   
   return (

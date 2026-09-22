@@ -4,6 +4,7 @@ import TareasPage from './pages/TareasPage' // Importa el contenido ahora.
 import { Routes, Route, Link } from 'react-router';
 import PortalPage from './pages/PortalPage'
 import QuizPage from './pages/QuizPage';
+import CatalogoPage from './pages/CatalogoPages';
 
 // App organiza las rutas y la estructura común de la aplicación.
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<PortalPage/>} />
           <Route path="/tareas" element={<TareasPage/>} />
           <Route path="/quiz" element={<QuizPage/>}/>
+          
           <Route
             path="*"
             element={

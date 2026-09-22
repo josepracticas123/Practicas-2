@@ -18,6 +18,9 @@ Cada tarea se guarda como un objeto con esta forma general:
 
 ```js
 {
+
+
+  
   id: "identificador-unico",
   texto: "Leer React",
   completada: false

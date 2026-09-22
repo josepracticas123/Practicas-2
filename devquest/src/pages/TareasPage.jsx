@@ -93,7 +93,7 @@ function TareasPage() {
   return (
     <>
       {/*Navegador de botones*/}
-      <nav className="flex justify-center space-x-4 bg-gray-800 text-white py-4">
+      <nav className="flex justify-center space-x-4 text-white py-4">
         {secciones.map((seccion) => { // map crea un botón por cada sección.
           const estaActiva = seccion.id === seccionActual;
 

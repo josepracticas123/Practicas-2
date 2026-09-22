@@ -17,9 +17,9 @@ Las casillas se marcan después de comentarlo con el tutor. Tener la respuesta e
 
 ## Nota breve tras la conversación
 
-- Fecha:
-- Algo que pude explicar y mostrar:
-- Duda o concepto para practicar:
-- Próximo paso acordado:
+- Fecha: 22/09/2026
+- Algo que pude explicar y mostrar: Algo breve del flujo de algunas funciones y demás.
+- Duda o concepto para practicar: flujos de padres higos, desestructuración, props, llamadas, funciones de inicialización y estados, key, etc...
+- Próximo paso acordado: Revisar el punto  del recorrido del quiz
 
 Si quieres mejorar la legibilidad mientras preparas el repaso, simplifica comentarios que solo narran la línea siguiente. Conserva los que expliquen decisiones; no es un requisito para reabrir los retos cerrados.

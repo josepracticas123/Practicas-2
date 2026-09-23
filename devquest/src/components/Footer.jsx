@@ -3,7 +3,7 @@ function Footer() {
   return (
     <footer className="bg-gray-800 text-white py-4">
       <div className="container mx-auto text-center"> {/* Tailwind centra el contenido. */}
-        <p>&copy; 2026. Practicas en nadunet.</p>
+        <p>&copy; 2026. Prácticas en nadunet "José Luis".</p>
       </div>
     </footer>
   );

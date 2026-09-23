@@ -134,13 +134,19 @@ function TareasPage() {
               type="button"
               aria-pressed={estaActiva}
               key={seccion.id}
-              onClick={() => setSeccionActual(seccion.id)} // Cambia la sección al pulsar.
+              onClick={() => setSeccionActual(seccion.id)}
               className={[
-                "pb-1 border-b border-transparent transition-colors duration-200", // Clases de Tailwind para el estilo.
-                "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-1 focus-visible:ring-offset-gray-800",
+                "px-3 py-2 rounded-lg font-semibold transition",
+                "hover:bg-gray-700 hover:text-amber-300 hover:scale-105",
+                "focus:outline-none",
+                "focus-visible:ring-2",
+                "focus-visible:ring-amber-400",
+                "focus-visible:ring-offset-2",
+                "focus-visible:ring-offset-gray-800",
+
                 estaActiva
-                  ? "border-white/90 text-white"
-                  : "text-gray-300 hover:border-gray-500 hover:text-white",
+                  ? "border-b-4 border-amber-500 text-amber-500"
+                  : "text-gray-300",
               ].join(" ")}
             >
               {seccion.nombre}
@@ -154,7 +160,7 @@ function TareasPage() {
         <Inicio addTareas={addTareas} />
       )}
 
-        {/* Pendientes recibe datos visibles y callbacks del padre. Sus botones
+      {/* Pendientes recibe datos visibles y callbacks del padre. Sus botones
           ejecutan completarTarea o eliminarTarea pasando el ID de cada tarea. */}
       {seccionActual === "pendientes" && (
         <Pendientes
@@ -167,7 +173,7 @@ function TareasPage() {
         />
       )}
 
-        {/* Finalizadas recibe la lista correspondiente y los callbacks para
+      {/* Finalizadas recibe la lista correspondiente y los callbacks para
           recuperar o eliminar una tarea concreta mediante su ID. */}
       {seccionActual === "finalizadas" && (
         <Finalizadas

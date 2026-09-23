@@ -29,9 +29,9 @@ https://dummyjson.com/products?limit=12
 ## 2. Añade la página del catálogo
 
 - [ ] Crea `pages/CatalogoPage.jsx` y conecta `/catalogo` desde `App`.
-- [ ] Añade una tarjeta al portal reutilizando `MiniappCards` y un enlace en la navegación global.
-- [ ] Muestra un título, una descripción breve y el botón «Cargar productos».
-- [ ] Al entrar, muestra «Pulsa Cargar productos para consultar el catálogo».
+- [x] Añade una tarjeta al portal reutilizando `MiniappCards` y un enlace en la navegación global.
+- [x] Muestra un título, una descripción breve y el botón «Cargar productos».
+- [x] Al entrar, muestra «Pulsa Cargar productos para consultar el catálogo».
 - [ ] Comprueba la cabecera con el nuevo enlace a 375 px y 1280 px.
 
 **Parada:** puedes entrar y salir del catálogo y todavía no se hace ninguna petición automáticamente.
@@ -40,14 +40,14 @@ https://dummyjson.com/products?limit=12
 
 Mantén los datos y el estado de la petición en `CatalogoPage`. Una estructura sencilla es un array `productos`, un estado `estadoPeticion` (`inicial`, `cargando`, `exito` o `error`) y un texto `mensajeError`. El número de productos se calcula desde el array.
 
-- [ ] Prepara una función asíncrona para cargar los productos al pulsar el botón.
-- [ ] Antes de pedirlos, cambia a `cargando`, limpia el error y vacía los resultados anteriores para esta versión sencilla.
-- [ ] Usa `fetch` con la URL del bloque 1 y espera la respuesta con `await`.
-- [ ] Comprueba `response.ok`. Si es falso, lanza un error para tratarlo en `catch`.
-- [ ] Espera `response.json()` y comprueba que `datos.products` es un array con `Array.isArray`.
-- [ ] Guarda ese array y cambia a `exito`.
+- [x] Prepara una función asíncrona para cargar los productos al pulsar el botón.
+- [x] Antes de pedirlos, cambia a `cargando`, limpia el error y vacía los resultados anteriores para esta versión sencilla.
+- [x] Usa `fetch` con la URL del bloque 1 y espera la respuesta con `await`.
+- [x] Comprueba `response.ok`. Si es falso, lanza un error para tratarlo en `catch`.
+- [x] Espera `response.json()` y comprueba que `datos.products` es un array con `Array.isArray`.
+- [x] Guarda ese array y cambia a `exito`.
 - [ ] Captura los fallos con `try/catch`: muestra un mensaje comprensible y cambia a `error`, para que no quede cargando indefinidamente.
-- [ ] Deshabilita el botón mientras cargas y evita iniciar otra petición si la función se invoca estando en `cargando`.
+- [x] Deshabilita el botón mientras cargas y evita iniciar otra petición si la función se invoca estando en `cargando`.
 
 **Pista:** una respuesta HTTP con error, como 404, no hace que `fetch` entre por sí solo en `catch`; por eso revisas `response.ok`. Consulta [Uso de Fetch · MDN](https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Using_Fetch).
 
@@ -57,12 +57,12 @@ Mantén los datos y el estado de la petición en `CatalogoPage`. Una estructura 
 
 ## 4. Muestra cada situación con claridad
 
-- [ ] **Inicial:** invitación a cargar y botón disponible.
+- [x] **Inicial:** invitación a cargar y botón disponible.
 - [ ] **Cargando:** texto «Cargando productos…» y botón deshabilitado. Puedes usar `role="status"` para el mensaje.
 - [ ] **Éxito:** tarjetas y número de productos recibidos. Si el array está vacío, muestra «No hay productos disponibles».
 - [ ] **Error:** mensaje visible y botón «Reintentar» que utilice la misma función de carga.
 - [ ] Después de un éxito, permite repetir la petición con «Volver a cargar». Sustituye la lista; no acumules duplicados.
-- [ ] Renderiza los productos con `map` y `key={producto.id}`.
+- [x] Renderiza los productos con `map` y `key={producto.id}`.
 - [ ] Extrae una tarjeta que reciba el producto por props y muestre título, descripción, precio e imagen con texto alternativo.
 - [ ] Comprueba que los textos e imágenes se ajustan en móvil. Para el precio, usa un formato consistente; no necesitas implementar conversiones de moneda.
 
@@ -97,7 +97,7 @@ Responde en el bloque 09 de `APRENDIZAJE.md`, con ejemplos de tu código. Añade
 
 ## Comprueba tu entrega
 
-- [ ] `/catalogo` está integrado en el portal y la navegación.
+- [x] `/catalogo` está integrado en el portal y la navegación.
 - [ ] Los productos proceden de una petición real y se muestran mediante un componente con props.
 - [ ] Se distinguen los estados inicial, carga, éxito, lista vacía y error.
 - [ ] Se puede repetir y reintentar sin solicitudes simultáneas desde el botón ni productos duplicados.

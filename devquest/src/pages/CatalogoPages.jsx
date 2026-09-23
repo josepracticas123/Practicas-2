@@ -27,10 +27,10 @@ function CatalogoPage() {
             }
             const datos = await respuesta.json(); // Espera que la respuesta se convierta en JSON
 
-            if (!Array.isArray(datos.producto)) { // Comprobamos que realmente datos es una lista de productos
+            if (!Array.isArray(datos.products)) { // Comprobamos que realmente datos es una lista de productos
                 throw new Error("La respuesta no contiene una lista de productos.");
             }
-            setProductos(datos.producto); //Aquí react nos guarda los datos recibidos en nuestro estado
+            setProductos(datos.products); //Aquí react nos guarda los datos recibidos en nuestro estado
             setEstadoPeticion("exito");
 
         } catch (error) {

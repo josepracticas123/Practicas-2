@@ -5,7 +5,7 @@ function PortalPage() {
     const miniapps = [
         {
             id: "tareas",
-            titulo: "Tareas",
+            titulo: "Guardar tareas",
             descripcion: "Organiza tus tareas, complétas y recupera las que necesites.",
             accion: "Abrir tareas",
             ruta: "/tareas",

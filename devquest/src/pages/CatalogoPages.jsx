@@ -1,3 +1,4 @@
+import Productocard from "../components/Productocard";
 import { useState } from "react";
 function CatalogoPage() {
 
@@ -26,10 +27,10 @@ function CatalogoPage() {
             }
             const datos = await respuesta.json(); // Espera que la respuesta se convierta en JSON
 
-            if (!Array.isArray(datos.products)) { // Comprobamos que realmente datos es una lista de productos
+            if (!Array.isArray(datos.producto)) { // Comprobamos que realmente datos es una lista de productos
                 throw new Error("La respuesta no contiene una lista de productos.");
             }
-            setProductos(datos.products); //Aquí react nos guarda los datos recibidos en nuestro estado
+            setProductos(datos.producto); //Aquí react nos guarda los datos recibidos en nuestro estado
             setEstadoPeticion("exito");
 
         } catch (error) {
@@ -51,45 +52,61 @@ function CatalogoPage() {
                 <p className="mb-6 text-lg text-gray-300">
                     Consulta productos obtenidos desde una API.
                 </p>
-                {/* El botón se desactiva mientras los datos se están cargando */}
+                {/* El botón se desactiva mientras se cargan los datos y evita peticiones simultáneas */}
                 <button
                     type="button"
                     onClick={cargarProductos}
                     disabled={estadoPeticion === "cargando"}
                     className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-gray-900 transition hover:bg-amber-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                 >
-                    Cargar productos
+                    {estadoPeticion === "exito"
+                        ? "Volver a cargar"
+                        : "Cargar productos"}
                 </button>
-                <p>
-                    Productos recibidos: {productos.length}
-                </p><br/>
-
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                    {productos.map((producto) => (
-                        <div
-                            key={producto.id}
-                            className="flex min-w-0 h-full flex-col rounded-xl border border-gray-400 bg-gray-300 p-4 text-gray-900 shadow-lg"
+                {estadoPeticion === "cargando" && (
+                    <p role="status" className="mt-4">
+                        Cargando productos...
+                    </p>
+                )}
+                {estadoPeticion === "error" && (
+                    <div className="mt-4 rounded-lg border border-red-400 bg-red-900/40 p-4">
+                        <p className="mb-3">
+                            {mensajeError}
+                        </p>
+                        <button
+                            type="button"
+                            onClick={cargarProductos}
+                            className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-gray-900 transition hover:bg-amber-400"
                         >
-                            <img
-                                src={producto.thumbnail}
-                                alt={producto.title}
-                                className="mb-4 h-48 w-full rounded-lg object-cover"
-                            />
+                            Reintentar
+                        </button>
+                    </div>
+                )}
 
-                            <h2 className="mb-2 wrap-break-words text-xl font-semibold">
-                                {producto.title}
-                            </h2>
 
-                            <p className="mb-4 wrap-break-words text-gray-700">
-                                {producto.description}
+
+                {estadoPeticion === "exito" && (
+                    <>
+                        <p className="mt-4 mb-6">
+                            Productos recibidos: {productos.length}
+                        </p>
+
+                        {productos.length === 0 ? (
+                            <p className="rounded-lg bg-gray-700 p-4">
+                                No hay productos disponibles.
                             </p>
-
-                            <p className="mt-auto font-bold">
-                                {producto.price} €
-                            </p>
-                        </div>
-                    ))}
-                </div>
+                        ) : (
+                            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                                {productos.map((producto) => (
+                                    <Productocard
+                                        key={producto.id}
+                                        producto={producto}
+                                    />
+                                ))}
+                            </div>
+                        )}
+                    </>
+                )}
                 <p>
                     Pulsa cargar productos para consultar el catálogo
                 </p>

@@ -197,7 +197,7 @@ No quedan dudas pendientes sobre este bloque.
 
 ## Reto 09 · Primeras llamadas a una API
 
-**Estado:** por empezar. Completa estas respuestas conforme avances; no es necesario escribir otro resumen.
+**Estado:** realizado. La miniapp del catálogo ya está integrada en la ruta `/catalogo` y carga productos desde DummyJSON con `fetch` al pulsar el botón.
 
 - ¿Qué diferencia hay entre `response`, el resultado de `response.json()` y `datos.products`?
 - ¿Qué espera cada `await`? ¿Qué ve el usuario mientras espera?
@@ -206,7 +206,22 @@ No quedan dudas pendientes sobre este bloque.
 - ¿Cómo diferencias la pantalla inicial de una respuesta con una lista vacía?
 - ¿Qué reinicias al reintentar y por qué sustituyes los productos en lugar de añadirlos a los anteriores?
 
-**Mi explicación y dudas:** pendiente.
+**Mi explicación:**
+
+- `response` es el objeto que devuelve `fetch()`. Contiene la información HTTP de la petición, como el estado de la respuesta y `response.ok`, pero aún no tiene el contenido del catálogo como datos JavaScript.
+- `response.json()` convierte el cuerpo de la respuesta en un objeto JavaScript. En este caso, ese objeto tiene una propiedad `products` con el array de productos. Por eso `datos.products` es la lista que se renderiza en pantalla.
+- El primer `await` espera a que termine la petición HTTP. El segundo `await` espera a que el cuerpo se convierta en JSON. Mientras eso sucede, el estado cambia a `"cargando"` y el usuario ve un mensaje como «Cargando productos…».
+- `response.ok` se comprueba porque una respuesta HTTP con error, como un 404, no lanza automáticamente un error en `fetch()`. Si `response.ok` es falso, se lanza un error para que lo capture `catch` y así mostrar el mensaje de error. La comprobación y el `try/catch` trabajan juntos.
+- La petición se dispara desde el botón: se ejecuta al pulsar «Cargar productos», no al montar el componente. Por eso no hace falta `useEffect`; la acción depende de la interacción del usuario.
+- Al reintentar, primero se vuelve a poner el estado en `"cargando"`, se limpia el error y se vacía el array antes de pedir de nuevo. Después se sustituye el contenido del estado con `setProductos(datos.products)`, evitando acumular productos antiguos y duplicados.
+- El botón se desactiva mientras la solicitud está en curso para no lanzar varias peticiones simultáneas. Si la respuesta llega con un array vacío, se distingue la situación de una respuesta con lista vacía y se puede mostrar un mensaje adecuado.
+
+**Pruebas registradas:**
+- Se comprobó la ruta `/catalogo` y la navegación desde el portal.
+- Se verificó la carga manual de productos desde DummyJSON.
+- Se revisó la gestión de estados inicial, cargando, éxito y error.
+- Se probó el reintento y la sustitución de la lista sin duplicados.
+- La comprobación final de la app en `npm run build` tuvo resultado correcto.
 
 ## Comentarios explicativos en el código
 

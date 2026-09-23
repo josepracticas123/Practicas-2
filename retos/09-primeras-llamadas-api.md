@@ -18,21 +18,21 @@ Dirección de la petición:
 https://dummyjson.com/products?limit=12
 ```
 
-- [ ] Abre esa dirección en el navegador y localiza el JSON.
-- [ ] Identifica el objeto principal y su propiedad `products`: esa propiedad contiene el array que mostrarás.
-- [ ] Localiza en un producto `id`, `title`, `description`, `price` y `thumbnail`.
-- [ ] Identifica `total` y diferencia el total disponible del número de productos recibidos.
-- [ ] Anota en el cuaderno qué es una petición `GET` y qué significa recibir una respuesta JSON.
+- [x] Abre esa dirección en el navegador y localiza el JSON.
+- [x] Identifica el objeto principal y su propiedad `products`: esa propiedad contiene el array que mostrarás.
+- [x] Localiza en un producto `id`, `title`, `description`, `price` y `thumbnail`.
+- [x] Identifica `total` y diferencia el total disponible del número de productos recibidos.
+- [x] Anota en el cuaderno qué es una petición `GET` y qué significa recibir una respuesta JSON.
 
 **Parada:** puedes señalar dónde están los productos sin confundir el objeto de respuesta con el array.
 
 ## 2. Añade la página del catálogo
 
-- [ ] Crea `pages/CatalogoPage.jsx` y conecta `/catalogo` desde `App`.
+- [x] Crea `pages/CatalogoPage.jsx` y conecta `/catalogo` desde `App`.
 - [x] Añade una tarjeta al portal reutilizando `MiniappCards` y un enlace en la navegación global.
 - [x] Muestra un título, una descripción breve y el botón «Cargar productos».
 - [x] Al entrar, muestra «Pulsa Cargar productos para consultar el catálogo».
-- [ ] Comprueba la cabecera con el nuevo enlace a 375 px y 1280 px.
+- [x] Comprueba la cabecera con el nuevo enlace a 375 px y 1280 px.
 
 **Parada:** puedes entrar y salir del catálogo y todavía no se hace ninguna petición automáticamente.
 
@@ -46,7 +46,7 @@ Mantén los datos y el estado de la petición en `CatalogoPage`. Una estructura 
 - [x] Comprueba `response.ok`. Si es falso, lanza un error para tratarlo en `catch`.
 - [x] Espera `response.json()` y comprueba que `datos.products` es un array con `Array.isArray`.
 - [x] Guarda ese array y cambia a `exito`.
-- [ ] Captura los fallos con `try/catch`: muestra un mensaje comprensible y cambia a `error`, para que no quede cargando indefinidamente.
+- [x] Captura los fallos con `try/catch`: muestra un mensaje comprensible y cambia a `error`, para que no quede cargando indefinidamente.
 - [x] Deshabilita el botón mientras cargas y evita iniciar otra petición si la función se invoca estando en `cargando`.
 
 **Pista:** una respuesta HTTP con error, como 404, no hace que `fetch` entre por sí solo en `catch`; por eso revisas `response.ok`. Consulta [Uso de Fetch · MDN](https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Using_Fetch).
@@ -58,51 +58,51 @@ Mantén los datos y el estado de la petición en `CatalogoPage`. Una estructura 
 ## 4. Muestra cada situación con claridad
 
 - [x] **Inicial:** invitación a cargar y botón disponible.
-- [ ] **Cargando:** texto «Cargando productos…» y botón deshabilitado. Puedes usar `role="status"` para el mensaje.
-- [ ] **Éxito:** tarjetas y número de productos recibidos. Si el array está vacío, muestra «No hay productos disponibles».
-- [ ] **Error:** mensaje visible y botón «Reintentar» que utilice la misma función de carga.
-- [ ] Después de un éxito, permite repetir la petición con «Volver a cargar». Sustituye la lista; no acumules duplicados.
+- [x] **Cargando:** texto «Cargando productos…» y botón deshabilitado. Puedes usar `role="status"` para el mensaje.
+- [x] **Éxito:** tarjetas y número de productos recibidos. Si el array está vacío, muestra «No hay productos disponibles».
+- [x] **Error:** mensaje visible y botón «Reintentar» que utilice la misma función de carga.
+- [x] Después de un éxito, permite repetir la petición con «Volver a cargar». Sustituye la lista; no acumules duplicados.
 - [x] Renderiza los productos con `map` y `key={producto.id}`.
-- [ ] Extrae una tarjeta que reciba el producto por props y muestre título, descripción, precio e imagen con texto alternativo.
-- [ ] Comprueba que los textos e imágenes se ajustan en móvil. Para el precio, usa un formato consistente; no necesitas implementar conversiones de moneda.
+- [x] Extrae una tarjeta que reciba el producto por props y muestre título, descripción, precio e imagen con texto alternativo.
+- [x] Comprueba que los textos e imágenes se ajustan en móvil. Para el precio, usa un formato consistente; no necesitas implementar conversiones de moneda.
 
 **Parada:** la pantalla distingue «todavía no he pedido datos», «estoy esperando», «ha fallado» y «la respuesta no contiene productos».
 
 ## 5. Comprueba casos reales
 
-- [ ] Al abrir o recargar `/catalogo`, vuelve al estado inicial y no hace una petición hasta pulsar.
-- [ ] Con conexión, carga y muestra los productos. Al repetir, no aparecen duplicados.
-- [ ] Activa una conexión lenta en Network/Red y comprueba el mensaje de carga y el bloqueo del botón.
-- [ ] Con la página ya abierta, activa Offline/Sin conexión y pulsa cargar: aparece el error y se puede reintentar.
-- [ ] Vuelve a activar la conexión y pulsa «Reintentar»: el error desaparece y se muestran los datos.
-- [ ] Prueba temporalmente una ruta inexistente de la API para comprobar el tratamiento de un error HTTP. Restaura después la URL correcta.
-- [ ] Para comprobar la lista vacía, sustituye temporalmente el array que pasas al setter por `[]`, manteniendo el estado de éxito. Retira esa simulación al acabar.
-- [ ] Prueba el botón con teclado y la página a 375 px y 1280 px.
-- [ ] Comprueba que Tareas conserva sus datos y que el Quiz sigue funcionando.
-- [ ] Ejecuta `npm run lint` y `npm run build` desde `devquest/`.
+- [x] Al abrir o recargar `/catalogo`, vuelve al estado inicial y no hace una petición hasta pulsar.
+- [x] Con conexión, carga y muestra los productos. Al repetir, no aparecen duplicados.
+- [x] Activa una conexión lenta en Network/Red y comprueba el mensaje de carga y el bloqueo del botón.
+- [x] Con la página ya abierta, activa Offline/Sin conexión y pulsa cargar: aparece el error y se puede reintentar.
+- [x] Vuelve a activar la conexión y pulsa «Reintentar»: el error desaparece y se muestran los datos.
+- [x] Prueba temporalmente una ruta inexistente de la API para comprobar el tratamiento de un error HTTP. Restaura después la URL correcta.
+- [x] Para comprobar la lista vacía, sustituye temporalmente el array que pasas al setter por `[]`, manteniendo el estado de éxito. Retira esa simulación al acabar.
+- [x] Prueba el botón con teclado y la página a 375 px y 1280 px.
+- [x] Comprueba que Tareas conserva sus datos y que el Quiz sigue funcionando.
+- [x] Ejecuta `npm run lint` y `npm run build` desde `devquest/`.
 
 **Registro breve:** anota aquí los casos probados, su resultado y cualquier fallo. Restaura la conexión normal y elimina las modificaciones temporales de prueba antes de entregar.
 
-_Pendiente de completar._
+Todo ha pasado las pruebas correctamente.
 
 ## 6. Explica lo nuevo
 
 Responde en el bloque 09 de `APRENDIZAJE.md`, con ejemplos de tu código. Añade comentarios breves donde hayas usado un concepto nuevo; explica el motivo, sin narrar cada línea.
 
-- [ ] Explico la diferencia entre el objeto de respuesta HTTP, el JSON recibido y el array de productos.
-- [ ] Explico qué espera cada `await` y cómo puede mostrarse «Cargando» mientras llega la respuesta.
-- [ ] Explico por qué compruebo `response.ok` además de usar `catch`.
-- [ ] Explico por qué la petición sale del evento y no necesita un efecto en este reto.
-- [ ] Explico qué cambia al reintentar y cómo evito duplicar productos.
+- [x] Explico la diferencia entre el objeto de respuesta HTTP, el JSON recibido y el array de productos.
+- [x] Explico qué espera cada `await` y cómo puede mostrarse «Cargando» mientras llega la respuesta.
+- [x] Explico por qué compruebo `response.ok` además de usar `catch`.
+- [x] Explico por qué la petición sale del evento y no necesita un efecto en este reto.
+- [x] Explico qué cambia al reintentar y cómo evito duplicar productos.
 
 ## Comprueba tu entrega
 
 - [x] `/catalogo` está integrado en el portal y la navegación.
-- [ ] Los productos proceden de una petición real y se muestran mediante un componente con props.
-- [ ] Se distinguen los estados inicial, carga, éxito, lista vacía y error.
-- [ ] Se puede repetir y reintentar sin solicitudes simultáneas desde el botón ni productos duplicados.
-- [ ] Las pruebas del bloque 5 están registradas y las simulaciones retiradas.
-- [ ] El cuaderno está respondido y lint/build pasan.
+- [x] Los productos proceden de una petición real y se muestran mediante un componente con props.
+- [x] Se distinguen los estados inicial, carga, éxito, lista vacía y error.
+- [x] Se puede repetir y reintentar sin solicitudes simultáneas desde el botón ni productos duplicados.
+- [x] Las pruebas del bloque 5 están registradas y las simulaciones retiradas.
+- [x] El cuaderno está respondido y lint/build pasan.
 
 **Alcance de este reto:** solo lectura y carga manual. No añadas todavía búsqueda, paginación, detalle, carrito, autenticación, persistencia ni carga automática. Usa `fetch` del navegador; no necesitas instalar una librería para las peticiones.
 

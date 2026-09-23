@@ -98,7 +98,7 @@ Lee [Tu primer componente](https://es.react.dev/learn/your-first-component) y [E
 - [07 · Tu primera pregunta del quiz](retos/07-quiz-respuestas.md): `/quiz`, datos locales, selección y comprobación de respuestas. **Cerrado.**
 - [08 · Completa el quiz y consulta tu resultado](retos/08-quiz-recorrido.md): progreso, respuestas confirmadas, puntuación y nueva partida. **Cerrado.**
 
-- [09 · Un catálogo que trae datos de una API](retos/09-primeras-llamadas-api.md): carga manual de productos, estados de carga/error y reintento. **Por empezar.**
+- [09 · Un catálogo que trae datos de una API](retos/09-primeras-llamadas-api.md): carga manual de productos, estados de carga/error y reintento. **Cerrado.**
 
 Trabaja por bloques y comprueba cada uno antes de continuar.
 

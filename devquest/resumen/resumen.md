@@ -203,6 +203,21 @@ Está implementado:
 
 No quedan pendientes del Reto 08.
 
+## Estado actual del Reto 09
+
+El Reto 09 está implementado.
+
+Está hecho:
+
+- Ruta `/catalogo` integrada desde el portal y la navegación global.
+- Petición `fetch` a DummyJSON para consultar productos con `limit=12`.
+- Estados inicial, cargando, éxito, lista vacía y error.
+- Reintento y vuelta a cargar sin duplicar productos.
+- Bloqueo del botón mientras la petición está en curso para evitar solicitudes simultáneas.
+- Sustitución del array de productos en cada carga nueva en lugar de añadirlos a la lista anterior.
+
+La lógica principal se mantiene en `CatalogoPage` y usa `response.ok`, `await response.json()` y comprobaciones de tipo para validar la respuesta real antes de renderizar los productos.
+
 ## 4. Componentes y funciones
 
 Un componente es una función que devuelve JSX:

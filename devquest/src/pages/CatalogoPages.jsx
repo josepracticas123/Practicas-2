@@ -41,7 +41,6 @@ function CatalogoPage() {
 
     }
 
-
     return (
         <section className="px-6 py-10 text-white">
             <div className="mx-auto max-w-4xl">
@@ -82,9 +81,6 @@ function CatalogoPage() {
                         </button>
                     </div>
                 )}
-
-
-
                 {estadoPeticion === "exito" && (
                     <>
                         <p className="mt-4 mb-6">

@@ -1,4 +1,4 @@
-import Productocard from "../components/Productocard";
+import Productocard from "../components/ProductoCard";
 import { useState } from "react";
 function CatalogoPage() {
 
@@ -25,18 +25,22 @@ function CatalogoPage() {
                 throw new Error("No se pudo obtener el catálogo.");// Preparamos el error al catch.
 
             }
-            const datos = await respuesta.json(); // Espera que la respuesta se convierta en JSON
+            const datos = await respuesta.json();
+            // Lee el cuerpo JSON y lo interpreta como datos JavaScript
 
-            if (!Array.isArray(datos.products)) { // Comprobamos que realmente datos es una lista de productos
+            if (!Array.isArray(datos.products)) {
+                // Comprobamos que products sea realmente una lista de productos
                 throw new Error("La respuesta no contiene una lista de productos.");
             }
             setProductos(datos.products); //Aquí react nos guarda los datos recibidos en nuestro estado
             setEstadoPeticion("exito");
 
         } catch (error) {
-            setMensajeError(error.message); // Guarda el mensaje que se le muestra al usuario
-            setEstadoPeticion("error"); // Indica que la petición terminó en un error
-
+            console.error(error);
+            setMensajeError(
+                "No se pudo cargar el catálogo. Comprueba tu conexión y vuelve a intentarlo."
+            );
+            setEstadoPeticion("error");
         }
 
     }
@@ -103,9 +107,11 @@ function CatalogoPage() {
                         )}
                     </>
                 )}
-                <p>
-                    Pulsa cargar productos para consultar el catálogo
-                </p>
+                {estadoPeticion === "inicial" && (
+                    <p>
+                        Pulsa cargar productos para consultar el catálogo
+                    </p>
+                )}
             </div>
         </section>
     );

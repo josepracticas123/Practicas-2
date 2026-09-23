@@ -6,10 +6,10 @@
 
 La carga real de 12 productos, la repetición sin duplicados y el reinicio al recargar están comprobados. Lint y build pasan en el entorno local. Los checks anteriores describen la entrega del alumno; esta lista concreta lo que falta ajustar.
 
-- [ ] **Iguala el import al nombre del archivo:** en `CatalogoPages.jsx` se importa `Productocard`, pero el archivo es `ProductoCard.jsx`. Respeta todas las mayúsculas y utiliza `ProductoCard` de forma consistente en el import y el JSX. Que funcione en un equipo no garantiza que funcione en uno sensible a mayúsculas.
-- [ ] **Muestra el mensaje inicial solo al inicio:** «Pulsa cargar productos…» debe depender de `estadoPeticion === "inicial"`. Comprueba que desaparece durante carga, éxito, lista vacía y error.
-- [ ] **Prepara un error comprensible:** ante un fallo de red, presenta un mensaje en español como «No se pudo cargar el catálogo. Comprueba tu conexión y vuelve a intentarlo». Conserva el detalle técnico en consola; no muestres directamente `Failed to fetch` al usuario.
-- [ ] **Ajusta la explicación de JSON:** `respuesta.json()` lee el cuerpo JSON y lo interpreta como datos JavaScript; no convierte esos datos en JSON. Revisa esa frase en el cuaderno y el comentario junto al segundo `await`.
+- [x] **Iguala el import al nombre del archivo:** en `CatalogoPages.jsx` se importa `Productocard`, pero el archivo es `ProductoCard.jsx`. Respeta todas las mayúsculas y utiliza `ProductoCard` de forma consistente en el import y el JSX. Que funcione en un equipo no garantiza que funcione en uno sensible a mayúsculas.
+- [x] **Muestra el mensaje inicial solo al inicio:** «Pulsa cargar productos…» debe depender de `estadoPeticion === "inicial"`. Comprueba que desaparece durante carga, éxito, lista vacía y error.
+- [x] **Prepara un error comprensible:** ante un fallo de red, presenta un mensaje en español como «No se pudo cargar el catálogo. Comprueba tu conexión y vuelve a intentarlo». Conserva el detalle técnico en consola; no muestres directamente `Failed to fetch` al usuario.
+- [x] **Ajusta la explicación de JSON:** `respuesta.json()` lee el cuerpo JSON y lo interpreta como datos JavaScript; no convierte esos datos en JSON. Revisa esa frase en el cuaderno y el comentario junto al segundo `await`.
 - [ ] **Concreta el registro de pruebas:** sustituye «Todo ha pasado» por los casos y resultados observados, especialmente error de red, reintento, error HTTP y lista vacía. Las simulaciones de la función durante la revisión no sustituyen tus pruebas de la interfaz.
 - [ ] **Verifica el cierre:** repite carga, recarga de productos, fallo y reintento tras los ajustes; ejecuta lint/build y marca estas mejoras al comprobarlas.
 

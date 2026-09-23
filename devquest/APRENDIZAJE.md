@@ -194,7 +194,6 @@ Las tareas se recuperan porque están guardadas en `localStorage`, mientras que 
 - Para no leer una pregunta inexistente, cuando `indicePregunta` alcanza `preguntas.length`, `QuizPage` devuelve primero `QuizResult` y no intenta obtener `preguntas[indicePregunta]`. En la última pregunta, `verResultado` establece exactamente ese valor al pulsar «Ver resultado».
 
 No quedan dudas pendientes sobre este bloque.
-
 ## Reto 09 · Primeras llamadas a una API
 
 **Estado:** base implementada; pendientes las mejoras de la revisión del 09. La miniapp del catálogo ya está integrada en la ruta `/catalogo` y carga productos desde DummyJSON con `fetch` al pulsar el botón.
@@ -209,7 +208,7 @@ No quedan dudas pendientes sobre este bloque.
 **Mi explicación:**
 
 - `response` es el objeto que devuelve `fetch()`. Contiene la información HTTP de la petición, como el estado de la respuesta y `response.ok`, pero aún no tiene el contenido del catálogo como datos JavaScript.
-- `response.json()` convierte el cuerpo de la respuesta en un objeto JavaScript. En este caso, ese objeto tiene una propiedad `products` con el array de productos. Por eso `datos.products` es la lista que se renderiza en pantalla.
+- `response.json()` lee el cuerpo de la respuesta y lo interpreta como datos JavaScript. En este caso, esos datos tienen una propiedad `products` con el array de productos.
 - El primer `await` espera a que termine la petición HTTP. El segundo `await` espera a que el cuerpo se convierta en JSON. Mientras eso sucede, el estado cambia a `"cargando"` y el usuario ve un mensaje como «Cargando productos…».
 - `response.ok` se comprueba porque una respuesta HTTP con error, como un 404, no lanza automáticamente un error en `fetch()`. Si `response.ok` es falso, se lanza un error para que lo capture `catch` y así mostrar el mensaje de error. La comprobación y el `try/catch` trabajan juntos.
 - La petición se dispara desde el botón: se ejecuta al pulsar «Cargar productos», no al montar el componente. Por eso no hace falta `useEffect`; la acción depende de la interacción del usuario.

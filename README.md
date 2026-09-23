@@ -14,7 +14,7 @@ No necesitas conocer todo para empezar. Trabaja en un paso, compruébalo en el n
 
 **El proyecto ya está creado. No repitas la instalación inicial ni generes otro Vite.** Para continuar, abre una terminal en `Practicas-2/devquest`, instala las dependencias con `npm install` si faltan y ejecuta `npm run dev`.
 
-## Seguimiento · 22/09/2026, `f5cb81c`
+## Seguimiento · 23/09/2026, `e4ed86d`
 
 Los retos 01–08 están cerrados funcionalmente. La cabecera del 06 está corregida y comprobada en Portal, Tareas y Quiz a 375 px y 1280 px, con navegación por teclado y foco visible.
 
@@ -27,7 +27,9 @@ Los retos 01–08 están cerrados funcionalmente. La cabecera del 06 está corre
 
 - Lee [APUNTES_ESTUDIO_REACT](devquest/resumen/APUNTES_ESTUDIO_REACT.md) y localiza sus ejemplos en tu código; anota solo las dudas concretas.
 - Comenta el [repaso con el tutor](devquest/REPASO-CON-TUTOR.md). Sus casillas siguen pendientes hasta la conversación.
-- Después empieza el [09 · Primeras llamadas a una API](retos/09-primeras-llamadas-api.md), organizado en bloques con casillas. No necesitas otro resumen ni rehacer funcionalidades.
+- Completa la lista de mejoras del [09](retos/09-primeras-llamadas-api.md): la petición ya funciona, quedan ajustes pequeños de import, mensajes y documentación.
+- Continúa con el [10 · Búsqueda y filtros en servidor](retos/10-busqueda-y-filtros-api.md).
+- Después practica [11 · POST, PUT y DELETE](retos/11-crear-editar-eliminar-api.md). DummyJSON simula las escrituras; sigue las reglas del enunciado para distinguirlas de datos persistidos.
 
 La sección siguiente conserva la guía de instalación inicial como referencia.
 
@@ -100,6 +102,9 @@ Lee [Tu primer componente](https://es.react.dev/learn/your-first-component) y [E
 
 - [09 · Un catálogo que trae datos de una API](retos/09-primeras-llamadas-api.md): carga manual de productos, estados de carga/error y reintento. **Cerrado.**
 
+- [10 · Busca productos en el servidor](retos/10-busqueda-y-filtros-api.md): GET, búsqueda por texto, categorías y consulta aplicada. **Por empezar.**
+- [11 · Crea, edita y elimina mediante peticiones](retos/11-crear-editar-eliminar-api.md): POST, GET por ID, PUT y DELETE con respuestas simuladas. **Por empezar.**
+
 Trabaja por bloques y comprueba cada uno antes de continuar.
 
 ## Cómo trabajar el reto
@@ -140,7 +145,9 @@ Practicas-2/
 │   ├── 06-portal-y-rutas.md
 │   ├── 07-quiz-respuestas.md
 │   ├── 08-quiz-recorrido.md
-│   └── 09-primeras-llamadas-api.md
+│   ├── 09-primeras-llamadas-api.md
+│   ├── 10-busqueda-y-filtros-api.md
+│   └── 11-crear-editar-eliminar-api.md
 └── devquest/
     ├── APRENDIZAJE.md
     ├── package.json

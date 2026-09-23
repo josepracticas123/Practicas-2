@@ -197,7 +197,7 @@ No quedan dudas pendientes sobre este bloque.
 
 ## Reto 09 · Primeras llamadas a una API
 
-**Estado:** realizado. La miniapp del catálogo ya está integrada en la ruta `/catalogo` y carga productos desde DummyJSON con `fetch` al pulsar el botón.
+**Estado:** base implementada; pendientes las mejoras de la revisión del 09. La miniapp del catálogo ya está integrada en la ruta `/catalogo` y carga productos desde DummyJSON con `fetch` al pulsar el botón.
 
 - ¿Qué diferencia hay entre `response`, el resultado de `response.json()` y `datos.products`?
 - ¿Qué espera cada `await`? ¿Qué ve el usuario mientras espera?
@@ -222,6 +222,32 @@ No quedan dudas pendientes sobre este bloque.
 - Se revisó la gestión de estados inicial, cargando, éxito y error.
 - Se probó el reintento y la sustitución de la lista sin duplicados.
 - La comprobación final de la app en `npm run build` tuvo resultado correcto.
+
+## Reto 10 · GET, búsqueda y categorías
+
+**Estado:** por empezar. Responde conforme completes cada bloque.
+
+- ¿Qué diferencia hay entre filtrar los productos descargados y enviar una búsqueda al servidor?
+- ¿Cómo construyes la URL y qué ocurre si el texto contiene espacios o `&`?
+- ¿Por qué el array de categorías se procesa de forma distinta a la respuesta de productos?
+- ¿Qué diferencia hay entre los campos del formulario y la consulta aplicada? ¿Cuál usas al reintentar?
+- ¿Qué representan `total` y `productos.length`?
+
+**Mi explicación y dudas:** pendiente.
+
+## Reto 11 · POST, PUT y DELETE
+
+**Estado:** por empezar. Responde conforme completes cada bloque.
+
+- ¿Qué método, URL, cabecera y cuerpo utilizas para crear, leer, editar y eliminar?
+- ¿Por qué `JSON.stringify` al enviar y `respuesta.json()` al recibir?
+- ¿Por qué un campo de precio vacío necesita validación antes de convertirlo a número?
+- ¿Qué cambia en la pantalla cuando la petición tiene éxito y qué conservas cuando falla?
+- ¿Cómo evitas modificar la tarjeta mientras escribes su borrador?
+- ¿Por qué un alta simulada no se usa después como recurso para GET, PUT o DELETE?
+- ¿Por qué reaparece un producto borrado o su título anterior al consultar de nuevo DummyJSON?
+
+**Mi explicación y dudas:** pendiente.
 
 ## Comentarios explicativos en el código
 

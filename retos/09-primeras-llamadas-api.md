@@ -1,6 +1,20 @@
 # 09 · Un catálogo que trae datos de una API
 
-**Estado:** por empezar.
+**Estado:** implementación principal realizada; pendientes de mejora antes del cierre.
+
+## Revisión · 23/09/2026, `e4ed86d`
+
+La carga real de 12 productos, la repetición sin duplicados y el reinicio al recargar están comprobados. Lint y build pasan en el entorno local. Los checks anteriores describen la entrega del alumno; esta lista concreta lo que falta ajustar.
+
+- [ ] **Iguala el import al nombre del archivo:** en `CatalogoPages.jsx` se importa `Productocard`, pero el archivo es `ProductoCard.jsx`. Respeta todas las mayúsculas y utiliza `ProductoCard` de forma consistente en el import y el JSX. Que funcione en un equipo no garantiza que funcione en uno sensible a mayúsculas.
+- [ ] **Muestra el mensaje inicial solo al inicio:** «Pulsa cargar productos…» debe depender de `estadoPeticion === "inicial"`. Comprueba que desaparece durante carga, éxito, lista vacía y error.
+- [ ] **Prepara un error comprensible:** ante un fallo de red, presenta un mensaje en español como «No se pudo cargar el catálogo. Comprueba tu conexión y vuelve a intentarlo». Conserva el detalle técnico en consola; no muestres directamente `Failed to fetch` al usuario.
+- [ ] **Ajusta la explicación de JSON:** `respuesta.json()` lee el cuerpo JSON y lo interpreta como datos JavaScript; no convierte esos datos en JSON. Revisa esa frase en el cuaderno y el comentario junto al segundo `await`.
+- [ ] **Concreta el registro de pruebas:** sustituye «Todo ha pasado» por los casos y resultados observados, especialmente error de red, reintento, error HTTP y lista vacía. Las simulaciones de la función durante la revisión no sustituyen tus pruebas de la interfaz.
+- [ ] **Verifica el cierre:** repite carga, recarga de productos, fallo y reintento tras los ajustes; ejecuta lint/build y marca estas mejoras al comprobarlas.
+
+No necesitas rehacer la petición ni añadir un efecto. Cuando completes esta lista, continúa con el [reto 10](10-busqueda-y-filtros-api.md).
+
 
 **Tu misión:** añadir una miniapp en `/catalogo` que muestre productos recibidos de una API cuando pulses «Cargar productos».
 
@@ -108,4 +122,4 @@ Responde en el bloque 09 de `APRENDIZAJE.md`, con ejemplos de tu código. Añade
 
 **Demostración al tutor:** abre el catálogo, carga los productos, provoca un fallo de conexión y recupérate con «Reintentar». Muestra en Network la petición y explica cómo pasa la respuesta a las tarjetas.
 
-[Volver a la guía](../README.md) · [Reto 08](08-quiz-recorrido.md)
+[Volver a la guía](../README.md) · [Reto 08](08-quiz-recorrido.md) · [Reto 10](10-busqueda-y-filtros-api.md)

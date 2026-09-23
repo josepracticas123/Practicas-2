@@ -11,8 +11,8 @@ function Article({ addTareas }) {
   // Usamos onSubmit porque el botón pertenece al formulario y así el mismo flujo
   // funciona tanto con el botón como con la tecla ENTER.
   const enviarTarea = (event) => {
-   // Evita la recarga o navegación que el navegador haría por defecto al enviar
-   // un formulario. La aplicación puede gestionar el envío con React.
+    // Evita la recarga o navegación que el navegador haría por defecto al enviar
+    // un formulario. La aplicación puede gestionar el envío con React.
     event.preventDefault();
 
     // trim elimina los espacios del principio y del final.
@@ -27,17 +27,19 @@ function Article({ addTareas }) {
       // Esta función pertenece al padre TareasPage, aunque se ejecuta aquí.
       // El padre recibe el texto, crea la tarea y actualiza su estado tareas.
       addTareas(tareaLimpia);
-    }else{
+    } else {
       alert("No se pueden quedar tareas sin contenido")
     }
 
     // Después de intentar enviar, dejamos el formulario preparado para otra tarea.
     setTextoTarea("");
   }
-  
+
   return (
-    <form onSubmit={enviarTarea} className="mx-auto flex w-full max-w-xs flex-col gap-2 rounded-lg border border-gray-400 bg-white p-4 text-center shadow-sm">
-      <h2>Añadir tarea</h2>
+    <form
+      onSubmit={enviarTarea}
+       className="mx-auto flex w-full max-w-md flex-col gap-3 rounded-lg border border-gray-400 bg-white p-6 text-center shadow-sm">
+      <h2 className="text-xl font-bold">Añadir tarea</h2>
       <label htmlFor="nueva-tarea">Nueva tarea</label>
       <input id="nueva-tarea"
         type="text" placeholder="Añadir tarea"

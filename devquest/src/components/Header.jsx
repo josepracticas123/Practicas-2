@@ -16,6 +16,10 @@ function Header() {
       to: "/quiz",
       text: "Quiz",
     },
+    {
+      to: "/catalogo",
+      text: "Catálogo",
+    },
   ];
 
   return (

@@ -216,23 +216,51 @@ No quedan dudas pendientes sobre este bloque.
 - El botón se desactiva mientras la solicitud está en curso para no lanzar varias peticiones simultáneas. Si la respuesta llega con un array vacío, se distingue la situación de una respuesta con lista vacía y se puede mostrar un mensaje adecuado.
 
 **Pruebas registradas:**
-- Se comprobó la ruta `/catalogo` y la navegación desde el portal.
-- Se verificó la carga manual de productos desde DummyJSON.
-- Se revisó la gestión de estados inicial, cargando, éxito y error.
-- Se probó el reintento y la sustitución de la lista sin duplicados.
-- La comprobación final de la app en `npm run build` tuvo resultado correcto.
+
+- Se comprobó la ruta `/catalogo` y la navegación desde el portal. Al entrar no se realiza ninguna petición hasta pulsar «Cargar productos». Resultado: correcto.
+
+- Se verificó la carga manual de productos desde DummyJSON. Al pulsar el botón se realizó la petición y se recibieron 12 productos. Resultado: correcto.
+
+- Se probó una carga lenta. Mientras esperaba la respuesta apareció «Cargando productos…» y el botón quedó deshabilitado. Resultado: correcto.
+
+- Se probó un error de red sin conexión. Se mostró el mensaje de error y se pudo utilizar «Reintentar». Resultado: correcto.
+
+- Se recuperó la conexión y se utilizó «Reintentar». La petición volvió a realizarse y los productos se mostraron correctamente. Resultado: correcto.
+
+- Se probó temporalmente una ruta inexistente para provocar un error HTTP. `response.ok` permitió detectar el error y se mostró el estado de error. Resultado: correcto.
+
+- Se comprobó una respuesta con un array `products` vacío. Se mostró «No hay productos disponibles» sin tratarlo como un error de conexión. Resultado: correcto.
+
+- Se probó volver a cargar los productos. La lista anterior se sustituyó y no aparecieron duplicados. Resultado: correcto.
+
+- Se comprobó el uso con teclado y los tamaños de 375 px y 1280 px. Resultado: correcto.
+
+- Se ejecutó `npm run lint` y terminó correctamente.
+
+- Se ejecutó `npm run build` y terminó correctamente.
 
 ## Reto 10 · GET, búsqueda y categorías
 
-**Estado:** por empezar. Responde conforme completes cada bloque.
+**Estado:** en progreso. Bloque 1 en revisión.
 
 - ¿Qué diferencia hay entre filtrar los productos descargados y enviar una búsqueda al servidor?
+
 - ¿Cómo construyes la URL y qué ocurre si el texto contiene espacios o `&`?
+
 - ¿Por qué el array de categorías se procesa de forma distinta a la respuesta de productos?
+
 - ¿Qué diferencia hay entre los campos del formulario y la consulta aplicada? ¿Cuál usas al reintentar?
+
 - ¿Qué representan `total` y `productos.length`?
 
-**Mi explicación y dudas:** pendiente.
+**Mi explicación y dudas:**
+
+- `total` representa el número total de resultados que existen en el servidor para la consulta realizada.
+- `products.length` representa el número de productos que ha devuelto realmente esa petición.
+- Por ejemplo, una consulta con `limit=12` puede devolver 12 productos aunque `total` sea 194. Esto ocurre porque `limit` limita la cantidad de productos recibidos, no el número total de resultados disponibles.
+
+
+
 
 ## Reto 11 · POST, PUT y DELETE
 

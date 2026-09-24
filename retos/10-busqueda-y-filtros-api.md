@@ -17,7 +17,7 @@ Base: `https://dummyjson.com`. Consulta [Productos · DummyJSON](https://dummyjs
 | Categorías disponibles | `GET /products/category-list` | Array de textos |
 | Una categoría | `GET /products/category/smartphones?limit=12` | `products` y `total` |
 
-- [ ] Inspecciona una respuesta de cada tipo y localiza dónde está el array.
+- [x] Inspecciona una respuesta de cada tipo y localiza dónde está el array.
 - [ ] Explica por qué `total` puede ser mayor que `products.length`.
 - [ ] Localiza en Network/Red la URL, el método y el estado HTTP.
 

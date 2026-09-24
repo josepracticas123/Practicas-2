@@ -10,8 +10,8 @@ La carga real de 12 productos, la repetición sin duplicados y el reinicio al re
 - [x] **Muestra el mensaje inicial solo al inicio:** «Pulsa cargar productos…» debe depender de `estadoPeticion === "inicial"`. Comprueba que desaparece durante carga, éxito, lista vacía y error.
 - [x] **Prepara un error comprensible:** ante un fallo de red, presenta un mensaje en español como «No se pudo cargar el catálogo. Comprueba tu conexión y vuelve a intentarlo». Conserva el detalle técnico en consola; no muestres directamente `Failed to fetch` al usuario.
 - [x] **Ajusta la explicación de JSON:** `respuesta.json()` lee el cuerpo JSON y lo interpreta como datos JavaScript; no convierte esos datos en JSON. Revisa esa frase en el cuaderno y el comentario junto al segundo `await`.
-- [ ] **Concreta el registro de pruebas:** sustituye «Todo ha pasado» por los casos y resultados observados, especialmente error de red, reintento, error HTTP y lista vacía. Las simulaciones de la función durante la revisión no sustituyen tus pruebas de la interfaz.
-- [ ] **Verifica el cierre:** repite carga, recarga de productos, fallo y reintento tras los ajustes; ejecuta lint/build y marca estas mejoras al comprobarlas.
+- [x] **Concreta el registro de pruebas:** sustituye «Todo ha pasado» por los casos y resultados observados, especialmente error de red, reintento, error HTTP y lista vacía. Las simulaciones de la función durante la revisión no sustituyen tus pruebas de la interfaz.
+- [x] **Verifica el cierre:** repite carga, recarga de productos, fallo y reintento tras los ajustes; ejecuta lint/build y marca estas mejoras al comprobarlas.
 
 No necesitas rehacer la petición ni añadir un efecto. Cuando completes esta lista, continúa con el [reto 10](10-busqueda-y-filtros-api.md).
 
@@ -96,8 +96,30 @@ Mantén los datos y el estado de la petición en `CatalogoPage`. Una estructura 
 - [x] Ejecuta `npm run lint` y `npm run build` desde `devquest/`.
 
 **Registro breve:** anota aquí los casos probados, su resultado y cualquier fallo. Restaura la conexión normal y elimina las modificaciones temporales de prueba antes de entregar.
+**Pruebas registradas:**
 
-Todo ha pasado las pruebas correctamente.
+- Se comprobó la ruta `/catalogo` y la navegación desde el portal. Al entrar no se realiza ninguna petición hasta pulsar «Cargar productos». Resultado: correcto.
+
+- Se verificó la carga manual de productos desde DummyJSON. Al pulsar el botón se realizó la petición y se recibieron 12 productos. Resultado: correcto.
+
+- Se probó una carga lenta. Mientras esperaba la respuesta apareció «Cargando productos…» y el botón quedó deshabilitado. Resultado: correcto.
+
+- Se probó un error de red sin conexión. Se mostró el mensaje de error y se pudo utilizar «Reintentar». Resultado: correcto.
+
+- Se recuperó la conexión y se utilizó «Reintentar». La petición volvió a realizarse y los productos se mostraron correctamente. Resultado: correcto.
+
+- Se probó temporalmente una ruta inexistente para provocar un error HTTP. `response.ok` permitió detectar el error y se mostró el estado de error. Resultado: correcto.
+
+- Se comprobó una respuesta con un array `products` vacío. Se mostró «No hay productos disponibles» sin tratarlo como un error de conexión. Resultado: correcto.
+
+- Se probó volver a cargar los productos. La lista anterior se sustituyó y no aparecieron duplicados. Resultado: correcto.
+
+- Se comprobó el uso con teclado y los tamaños de 375 px y 1280 px. Resultado: correcto.
+
+- Se ejecutó `npm run lint` y terminó correctamente.
+
+- Se ejecutó `npm run build` y terminó correctamente.
+
 
 ## 6. Explica lo nuevo
 

@@ -8,7 +8,7 @@
 - Después comenta el [repaso con el tutor](../REPASO-CON-TUTOR.md). El 09 empieza después de esa conversación.
 
 
-Estos apuntes describen el código que existe actualmente en `devquest/src/` y lo que he aprendido al completar los Retos 01–08.
+Estos apuntes describen el código que existe actualmente en `devquest/src/` y lo que he aprendido al completar los Retos 01–10.
 
 ## 1. Qué he construido
 
@@ -96,6 +96,10 @@ Los componentes actuales son:
 - `Pendientes.jsx`: muestra, busca, completa y elimina las tareas pendientes.
 - `Finalizadas.jsx`: muestra, busca, recupera y elimina las tareas finalizadas.
 - `Almacenamiento.js`: contiene las funciones que leen y guardan tareas en `localStorage`. No es un componente.
+- `CatalogoPages.jsx`: coordina las consultas de productos, sus estados, la consulta aplicada, el reintento y «Mostrar todos».
+- `CatalogoForm.jsx`: muestra el formulario y los controles de los modos Todos, Texto y Categoría.
+- `ListaProductos.jsx`: muestra la consulta aplicada, el número de productos recibidos, el total y la lista vacía cuando corresponde.
+- `ProductoCard.jsx`: muestra la información visual de un producto recibido de la API.
 
 ### Relación padre e hijo
 
@@ -899,3 +903,55 @@ Se comprobaron partidas con todas las respuestas correctas, todas incorrectas y 
 ### Pendientes
 
 No quedan pendientes del Reto 08.
+
+## 31. Estado actual del Reto 10: consultas de productos
+
+La ruta `/catalogo` consulta productos en DummyJSON. La consulta solo comienza al enviar el formulario o al pulsar «Mostrar todos»; escribir o cambiar el modo no hace peticiones automáticamente.
+
+### Estados del catálogo
+
+`CatalogoPages.jsx` separa los estados de productos y categorías:
+
+- `productos`: array recibido desde `datos.products`.
+- `totalResultados`: total que devuelve la API.
+- `estadoPeticion`: estado inicial, carga, éxito o error de la consulta de productos.
+- `mensajeError`: mensaje de error de productos.
+- `categorias`: array recibido desde `/products/category-list`.
+- `estadoCategorias`: estado propio de la carga de categorías.
+- `modoConsulta`, `textoBusqueda` y `categoriaSeleccionada`: valores actuales del formulario.
+- `consultaAplicada`: URL, descripción, tipo y valor de la última consulta enviada.
+- `puedeReintentar`: indica si el error procede de una petición que se puede repetir.
+
+### URLs y codificación
+
+Los modos construyen estas consultas:
+
+```text
+Todos      -> https://dummyjson.com/products?limit=12
+Texto      -> https://dummyjson.com/products/search?q=...&limit=12
+Categoría  -> https://dummyjson.com/products/category/<categoria>?limit=12
+```
+
+El texto se limpia con `trim()` y se convierte en parámetros mediante `URLSearchParams`. Así un texto con espacios o `&` se envía como un único valor de `q`. La categoría se coloca en el segmento de la URL después de aplicar `encodeURIComponent`.
+
+Las categorías se solicitan con `GET /products/category-list` y no se mezclan con `productos`. La respuesta se valida con `Array.isArray` antes de guardarla.
+
+### Consulta aplicada y formulario
+
+Los campos del formulario representan lo que se está preparando. `consultaAplicada` representa lo que se envió y explica los resultados visibles. Si el usuario edita el formulario sin pulsar «Consultar», la lista y su descripción permanecen asociadas a la consulta anterior.
+
+Al fallar `fetch`, se conserva el texto y la categoría. «Reintentar» llama a `cargarProductos(consultaAplicada)`, por lo que reutiliza la URL y la información guardadas aunque el formulario haya cambiado después.
+
+«Mostrar todos» crea una consulta general con `https://dummyjson.com/products?limit=12`, limpia el texto y la categoría y llama a la carga con esa consulta. De este modo no depende de leer un estado inmediatamente después de actualizarlo.
+
+### Presentación y errores
+
+`ListaProductos.jsx` muestra `productos.length` frente a `totalResultados`. El total representa los resultados existentes en el servidor y puede ser mayor que los 12 productos recibidos por el límite de la petición. Si `productos.length` es cero, se muestra «No se encontraron productos para esta consulta» y no un error de conexión.
+
+Si `response.ok` es falso, falla la lectura JSON o `products` no es un array, la página muestra un error y permite reintentar. El formulario de categorías tiene su propia carga y sus propios datos.
+
+`CatalogoForm.jsx` contiene un `<form onSubmit>`, un selector de modo, el input de texto, el selector de categorías, «Cargar categorías», «Consultar» y «Mostrar todos». `ProductoCard.jsx` muestra la imagen, el título, la descripción y el precio.
+
+Las clases responsive de Tailwind cambian la cuadrícula del catálogo entre una, dos y tres columnas. Los inputs, selects y botones son controles nativos y se pueden utilizar con teclado.
+
+El Reto 11 todavía no tiene implementación en `src/`: no existen operaciones POST, PUT ni DELETE para productos.

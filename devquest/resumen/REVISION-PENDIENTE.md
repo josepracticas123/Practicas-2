@@ -90,3 +90,15 @@ Función localizada:
 No tengo dudas concretas pendientes sobre este apartado.
 
 Ya entiendo que `useState(leerTareasGuardadas)` utiliza esa función para obtener las tareas guardadas como valor inicial del estado.
+
+## Catálogo actual
+
+La aplicación también tiene la ruta `/catalogo`, que mantiene las consultas de productos separadas de las tareas y el Quiz.
+
+`CatalogoPages.jsx` coordina las peticiones a DummyJSON. `CatalogoForm.jsx` contiene el formulario y los controles; `ListaProductos.jsx` muestra la consulta aplicada, el número de productos recibidos, el total y el mensaje de lista vacía; `ProductoCard.jsx` presenta cada producto.
+
+El catálogo permite consultar todos los productos, buscar por texto mediante `q` y filtrar por categoría. Utiliza `URLSearchParams` para codificar los parámetros de texto y `encodeURIComponent` para la categoría. Las categorías se mantienen en estados separados de los productos.
+
+La consulta aplicada guarda la URL, descripción, tipo y valor de la última petición. Los valores actuales del formulario pueden cambiar sin cambiar los resultados ya mostrados. Si una petición falla, `Reintentar` utiliza la consulta guardada, mientras que `Mostrar todos` limpia el texto y la categoría y ejecuta directamente la consulta general.
+
+La respuesta se valida con `response.ok`, `response.json()` y `Array.isArray(datos.products)`. La interfaz distingue carga, éxito, error y cero resultados. `npm run lint` y `npm run build` pasan actualmente ejecutados desde `devquest`.

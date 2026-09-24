@@ -44,11 +44,40 @@ Routes y Route → `Routes` contiene las rutas y cada `Route` relaciona una dire
 
 Link → Permite cambiar de ruta sin recargar la aplicación. Se utiliza en las tarjetas de Tareas y Quiz y en el enlace de la página no encontrada. La cabecera utiliza `NavLink` para señalar la ruta activa.
 
-Quiz inicial → `QuizPage` muestra la primera pregunta de `Preguntas.js`. Sus tres opciones se generan con `map()` y se controlan con `seleccionadaId`. `QuizQuestions` recibe los datos y comunica la selección mediante un callback; el formulario permite comprobar una vez, bloquea las opciones y muestra el resultado y la explicación.
+Quiz → `QuizPage` recorre las preguntas de `Preguntas.js`. Sus opciones se generan con `map()` y se controlan con `seleccionadaId`. `QuizQuestions` recibe los datos y comunica la selección mediante un callback; el formulario permite comprobar una vez, bloquea las opciones y muestra el resultado y la explicación. `QuizResult` muestra el resumen final y permite volver a jugar.
 
 Navegación global e interna → Las rutas cambian la pantalla según la URL. La navegación interna de Tareas cambia `seccionActual` mediante estado, sin cambiar la URL.
 
 Tailwind → Sus clases controlan el diseño, los tamaños, los espacios y la adaptación a diferentes tamaños de pantalla.
+
+## Catálogo de productos actual
+
+`CatalogoPages.jsx` coordina las consultas a DummyJSON. El formulario no consulta automáticamente: la petición de productos comienza al enviar `CatalogoForm`.
+
+Los modos disponibles son:
+
+- Todos: `https://dummyjson.com/products?limit=12`.
+- Texto: `https://dummyjson.com/products/search?q=...&limit=12`.
+- Categoría: `https://dummyjson.com/products/category/<categoria>?limit=12`.
+
+Para el texto se utiliza `URLSearchParams`:
+
+```jsx
+const parametros = new URLSearchParams({
+	q: textoBusqueda.trim(),
+	limit: "12",
+});
+```
+
+Esto permite que los espacios y caracteres como `&` se envíen correctamente dentro de un único valor de `q`. Para el nombre de la categoría se utiliza `encodeURIComponent`.
+
+`consultaAplicada` conserva la URL, la descripción, el tipo y el valor de la última consulta. El formulario puede cambiar sin que cambien los resultados ya mostrados. Si la petición falla, `Reintentar` llama de nuevo a `cargarProductos(consultaAplicada)`, por lo que repite la consulta guardada.
+
+`Mostrar todos` limpia el texto y la categoría y pasa directamente la URL general a `cargarProductos`. No depende de leer inmediatamente el estado después de llamar a `setModoConsulta`.
+
+`CatalogoForm` muestra los controles; `ListaProductos` muestra la consulta aplicada, los productos recibidos, el total de la API y el mensaje de cero resultados; `ProductoCard` muestra la imagen, el título, la descripción y el precio.
+
+La interfaz utiliza estados inicial, carga, éxito y error. Las categorías se mantienen en estados separados de los productos. Tailwind aporta las clases responsive y los controles nativos permiten utilizar el formulario con teclado.
 
 ## Preguntas con respuestas
 

@@ -173,6 +173,9 @@ function CatalogoPage() {
                 <p className="mb-6 text-lg text-gray-300">
                     Consulta productos obtenidos desde una API.
                 </p>
+                <p className="mb-4 rounded-lg bg-red-900/20 p-3 text-sm text-amber-200">
+                    Modo de prácticas: los cambios no se guardaran en el servidor
+                </p>
                 <CatalogoForm
                     modoConsulta={modoConsulta}
                     setModoConsulta={setModoConsulta}

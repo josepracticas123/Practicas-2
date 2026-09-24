@@ -50,6 +50,9 @@ devquest/
 │  │  ├─ Header.jsx
 │  │  ├─ Article.jsx
 │  │  ├─ MiniappCards.jsx
+│  │  ├─ CatalogoForm.jsx
+│  │  ├─ ListaProductos.jsx
+│  │  ├─ ProductoCard.jsx
 │  │  └─ Footer.jsx
 │  ├─ views/
 │  │  ├─ Inicio.jsx
@@ -64,7 +67,7 @@ devquest/
 
 main.jsx: inicia React y muestra App dentro de `BrowserRouter` y del elemento root. Las rutas se declaran en `App.jsx`.
 
-App.jsx: mantiene la estructura global con Header, TareasPage y Footer.
+App.jsx: mantiene la estructura global con Header y Footer, y declara las rutas para PortalPage, TareasPage, QuizPage y CatalogoPage.
 
 TareasPage.jsx: guarda el estado, modifica las tareas, calcula las listas y decide qué vista interna mostrar.
 
@@ -76,7 +79,7 @@ PortalPage.jsx: define el array de miniapps y lo recorre con `map`.
 
 MiniappCards.jsx: recibe un objeto `miniapp` por props y muestra sus datos. Recibe el objeto desde `PortalPage` para separar los datos de la presentación y poder reutilizar la tarjeta.
 
-QuizPage.jsx: muestra la primera pregunta del Quiz y controla la opción seleccionada mediante `useState`.
+QuizPage.jsx: controla el recorrido completo del Quiz, la opción seleccionada, las respuestas confirmadas y el resultado.
 
 QuizQuestions.jsx: recibe por props los datos de la pregunta, la selección y el estado de comprobación; comunica la opción elegida mediante un callback.
 
@@ -91,6 +94,14 @@ Finalizadas.jsx: muestra, busca, recupera y elimina tareas finalizadas.
 Footer.jsx: muestra el pie de página.
 
 Almacenamiento.js: lee y guarda tareas en localStorage.
+
+CatalogoPages.jsx: coordina el estado del catálogo, las consultas a DummyJSON, los estados de carga y error, la consulta aplicada y las acciones de reintento y «Mostrar todos».
+
+CatalogoForm.jsx: muestra el selector de modo, el campo de texto, el selector de categorías, «Consultar», «Cargar categorías» y «Mostrar todos». Recibe los estados y las funciones mediante props.
+
+ListaProductos.jsx: muestra la descripción de la consulta aplicada, los productos recibidos frente al total y el mensaje cuando la lista está vacía.
+
+ProductoCard.jsx: muestra la imagen, el título, la descripción y el precio de cada producto.
 
 index.css: carga Tailwind CSS.
 
@@ -217,6 +228,37 @@ Está hecho:
 - Sustitución del array de productos en cada carga nueva en lugar de añadirlos a la lista anterior.
 
 La lógica principal se mantiene en `CatalogoPage` y usa `response.ok`, `await response.json()` y comprobaciones de tipo para validar la respuesta real antes de renderizar los productos.
+
+## Estado actual del Reto 10
+
+El Reto 10 está implementado en `/catalogo`. La carga sigue siendo manual: cambiar los campos no consulta hasta enviar el formulario.
+
+### Consultas disponibles
+
+- Todos: `GET https://dummyjson.com/products?limit=12`.
+- Texto: `GET https://dummyjson.com/products/search?q=...&limit=12`.
+- Lista de categorías: `GET https://dummyjson.com/products/category-list`.
+- Categoría: `GET https://dummyjson.com/products/category/<categoria>?limit=12`.
+
+
+La consulta de texto crea los parámetros con `URLSearchParams`, por lo que espacios y caracteres como `&` se codifican correctamente en `q`. El segmento de categoría se codifica con `encodeURIComponent`.
+
+`CatalogoPages.jsx` mantiene por separado los campos actuales del formulario y `consultaAplicada`. La última consulta guarda su URL, descripción, tipo y valor. Por eso cambiar el texto o la categoría sin enviar no cambia la descripción de los resultados visibles. Si una petición falla, «Reintentar» usa la consulta guardada, no los valores modificados después.
+
+El botón «Mostrar todos» limpia el texto y la categoría y pasa directamente una consulta general a la función de carga. Así no depende de que el cambio de modo se haya aplicado inmediatamente.
+
+La respuesta se acepta solo si `response.ok` es verdadero y `products` es un array. La interfaz sustituye los productos anteriores, guarda `total`, muestra `productos.length` frente a ese total y distingue una búsqueda sin coincidencias de un error de conexión. Las categorías tienen estados y datos independientes.
+
+### Organización del catálogo
+
+- `CatalogoPages.jsx` contiene la lógica y el estado.
+- `CatalogoForm.jsx` contiene los controles y el formulario.
+- `ListaProductos.jsx` muestra el resumen y decide si renderiza tarjetas o el mensaje de lista vacía.
+- `ProductoCard.jsx` presenta cada producto.
+
+Las clases de Tailwind organizan las tarjetas en una columna, dos o tres según el ancho disponible. Los controles son elementos HTML interactivos y se pueden recorrer con el teclado.
+
+El Reto 11 está documentado como siguiente paso, pero todavía no hay código actual para crear, editar o eliminar productos.
 
 ## 4. Componentes y funciones
 

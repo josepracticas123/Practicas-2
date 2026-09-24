@@ -1,4 +1,4 @@
-import Productocard from "../ProductoCard";
+import Productocard from "./ProductoCard";
 
 function ListaProductos({
     consultaAplicada,

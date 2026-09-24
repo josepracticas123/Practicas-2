@@ -8,6 +8,7 @@ function CatalogoForm({
     categorias,
     estadoCategorias,
     cargarCategorias,
+    mostrarTodos,
     onSubmit,
     estadoPeticion,
 }) {
@@ -112,6 +113,17 @@ function CatalogoForm({
                     className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-gray-900"
                 >
                     Consultar
+                </button>
+
+                <button
+                type="button"
+                onClick={mostrarTodos}
+                disabled = {
+                    estadoPeticion === "cargando" ||
+                    estadoCategorias === "cargando"
+                } className="rounded-lg bg-gray-600 px-4 py-2 font-semibold text-white"
+                >
+                  Mostrar todos
                 </button>
             </div>
         </form>

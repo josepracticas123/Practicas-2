@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CatalogoForm from "../components/CatalogoForm";
-import ListaProductos from "../components/ListadoProductos";
+import ListaProductos from "../components/ListaProductos";
 function CatalogoPage() {
 
     //Estados 
@@ -11,10 +11,11 @@ function CatalogoPage() {
     const [textoBusqueda, setTextoBusqueda] = useState("");
     const [categorias, setCategorias] = useState([]);
     const [estadoCategorias, setEstadoCategorias] = useState("inicial");
-    const [mensajeErrorCategorias, setMensajeErrorCategorias] = useState("");
+    const [,setMensajeErrorCategorias] = useState("");
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("")
     const [totalResultados, setTotalResultados] = useState(0);
     const [consultaAplicada, setConsultaAplicada] = useState(null)
+    const [puedeReintentar, setPuedeReintentar] = useState(false);
 
 
     async function cargarProductos(consultaGuardada = null) {
@@ -25,6 +26,7 @@ function CatalogoPage() {
         setEstadoPeticion("cargando");
         setMensajeError("");
         setProductos([]);
+        setPuedeReintentar(false);
 
         try {
             let url = "https://dummyjson.com/products?limit=12";
@@ -97,6 +99,7 @@ function CatalogoPage() {
                 "No se pudo cargar el catálogo. Comprueba tu conexión y vuelve a intentarlo."
             );
             setEstadoPeticion("error");
+            setPuedeReintentar(true);
         }
 
     }
@@ -146,6 +149,20 @@ function CatalogoPage() {
 
     }
 
+    function mostrarTodos(){
+        const consultaGeneral = {
+            url: "https://dummyjson.com/products?limit=12",
+            descripcion: "Todos los productos",
+            tipo: "todos",
+            valor: "",
+        };
+        setTextoBusqueda("");
+        setCategoriaSeleccionada(""),
+        setModoConsulta("todos");
+
+        cargarProductos(consultaGeneral);
+    }
+
     return (
         <section className="px-6 py-10 text-white">
             <div className="mx-auto max-w-4xl">
@@ -166,6 +183,7 @@ function CatalogoPage() {
                     categorias={categorias}
                     estadoCategorias={estadoCategorias}
                     cargarCategorias={cargarCategorias}
+                    mostrarTodos={mostrarTodos}
                     onSubmit={(evento) => {
                         evento.preventDefault();
 
@@ -176,6 +194,7 @@ function CatalogoPage() {
                             if (textoLimpio === "") {
                                 setMensajeError("Escribe un texto para buscar.");
                                 setEstadoPeticion("error");
+                                setPuedeReintentar(false);
                                 return;
                             }
                         }
@@ -203,13 +222,17 @@ function CatalogoPage() {
                             {mensajeError}
                         </p>
 
-                        <button
+                        {puedeReintentar && (
+                           <button
                             type="button"
                             onClick={() => cargarProductos(consultaAplicada)}
                             className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-gray-900 transition hover:bg-amber-400"
                         >
                             Reintentar
                         </button>
+                        )}
+
+                       
                     </div>
                 )}
                 {estadoPeticion === "exito" && (

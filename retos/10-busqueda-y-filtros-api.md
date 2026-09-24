@@ -50,33 +50,52 @@ Base: `https://dummyjson.com`. Consulta [Productos · DummyJSON](https://dummyjs
 
 - [x] Conserva la última consulta enviada, por ejemplo su URL y una descripción. Utilízala para identificar los resultados visibles.
 - [x] Si escribes otro texto sin enviar, los resultados siguen identificados con la consulta anterior.
-- [ ] «Reintentar» repite la consulta que falló, aunque hayas cambiado el formulario después.
-- [ ] «Mostrar todos» limpia los campos y realiza la consulta general. No uses accidentalmente el valor anterior del estado recién actualizado.
+- [x] «Reintentar» repite la consulta que falló, aunque hayas cambiado el formulario después.
+- [x] «Mostrar todos» limpia los campos y realiza la consulta general. No uses accidentalmente el valor anterior del estado recién actualizado.
 - [x] Conserva la selección y el texto cuando falle una petición, para que el usuario pueda corregir o repetir.
 
 ## 5. Comprueba tu entrega
 
-- [ ] Buscar `phone` genera una petición con `q=phone`, visible en Network.
-- [ ] Un texto sin coincidencias muestra cero resultados sin tratarlo como fallo.
-- [ ] Una búsqueda con espacios o `&` llega codificada como un único valor de `q`.
-- [ ] El filtro por categoría envía su GET y muestra productos de esa categoría.
-- [ ] Una segunda consulta sustituye la lista y actualiza su descripción y total.
-- [ ] Editar el formulario sin enviar no cambia la descripción de los resultados anteriores.
-- [ ] Sin conexión aparece un error; al recuperar la conexión, reintentar repite la consulta fallida.
-- [ ] «Mostrar todos» recupera el listado general sin conservar un filtro anterior.
-- [ ] Los controles funcionan con teclado y se ajustan a 375 px y 1280 px.
-- [ ] Tareas y Quiz siguen funcionando; lint y build pasan.
-- [ ] He respondido el bloque 10 del cuaderno con ejemplos de mi código.
+- [x] Buscar `phone` genera una petición con `q=phone`, visible en Network.
+- [x] Un texto sin coincidencias muestra cero resultados sin tratarlo como fallo.
+- [x] Una búsqueda con espacios o `&` llega codificada como un único valor de `q`.
+- [x] El filtro por categoría envía su GET y muestra productos de esa categoría.
+- [x] Una segunda consulta sustituye la lista y actualiza su descripción y total.
+- [x] Editar el formulario sin enviar no cambia la descripción de los resultados anteriores.
+- [x] Sin conexión aparece un error; al recuperar la conexión, reintentar repite la consulta fallida.
+- [x] «Mostrar todos» recupera el listado general sin conservar un filtro anterior.
+- [x] Los controles funcionan con teclado y se ajustan a 375 px y 1280 px.
+- [x] Tareas y Quiz siguen funcionando; lint y build pasan.
+- [x] He respondido el bloque 10 del cuaderno con ejemplos de mi código.
 
-**Registro de pruebas:** anota consulta, resultado esperado y observado. No basta con «todo funciona».
+### Registro de pruebas
 
-_Pendiente de completar._
+- **Buscar `phone`:** Esperaba que se hiciera una petición al servidor buscando `phone`. En Network comprobé que la petición llevaba `q=phone&limit=12` y aparecieron los productos.
+- **Buscar un texto que no existe:** Probé con `zzzzzz999999`. Esperaba que salieran 0 resultados sin considerarlo un error. La aplicación mostró 0 resultados y el mensaje de que no se encontraron productos.
+- **Buscar `phone & tablet`:** Comprobé que los espacios y el símbolo `&` se codificaban correctamente. En Network apareció `q=phone+%26+tablet`, por lo que todo el texto se envió como un único valor de búsqueda.
+- **Buscar por categoría:** Seleccioné `tablets` y pulsé Consultar. Se hizo una petición a `/products/category/tablets?limit=12` y aparecieron productos de esa categoría.
+- **Hacer otra consulta:** Hice una consulta y después otra diferente. Los resultados anteriores se sustituyeron por los nuevos y también se actualizaron la descripción y el total.
+- **Cambiar el formulario sin consultar:** Después de hacer una búsqueda cambié el texto del formulario sin pulsar Consultar. Los resultados anteriores no cambiaron y siguieron mostrando la consulta que ya había enviado.
+- **Probar sin conexión:** Puse la conexión en Offline e hice una consulta. Apareció el mensaje de error y el botón Reintentar. Después recuperé la conexión y Reintentar volvió a cargar la consulta que había fallado.
+- **Mostrar todos:** Después de aplicar un filtro pulsé Mostrar todos. Los campos quedaron vacíos y se volvió a cargar el listado general.
+- **Teclado y tamaños:** Probé los controles con el teclado y comprobé la página a 375 px y 1280 px. Los controles funcionaron y la página se adaptó correctamente.
+- **Lint y build:** Ejecuté `npm run lint` y `npm run build`. Después de corregir una variable que no se estaba usando, los dos comandos terminaron correctamente.
 
 ## Para explicar al tutor
 
-- ¿Por qué filtrar el array recibido no equivale a buscar en el servidor?
-- ¿Qué diferencia hay entre los campos del formulario y la consulta aplicada?
-- ¿Qué repites al reintentar y qué significa el total que devuelve la API?
+**¿Por qué filtrar el array recibido no equivale a buscar en el servidor?**
+
+Porque si filtro el array en JavaScript solo estoy buscando entre los productos que ya me ha enviado la API. No estoy haciendo una búsqueda nueva en el servidor. En mi proyecto envío el texto mediante el parámetro `q` en la URL y hago un `fetch` de esa URL, por lo que la búsqueda la realiza la API.
+
+**¿Qué diferencia hay entre los campos del formulario y la consulta aplicada?**
+
+Los campos del formulario son los valores que estoy escribiendo o seleccionando antes de enviar una consulta. La consulta aplicada es la que realmente se ha enviado al servidor y corresponde a los resultados que aparecen en pantalla. Por eso puedo cambiar el formulario sin que cambien los resultados hasta pulsar Consultar.
+
+**¿Qué repites al reintentar y qué significa el total que devuelve la API?**
+
+Al pulsar Reintentar repito la misma consulta que había fallado, utilizando la consulta que había guardado anteriormente, aunque después haya cambiado el formulario.
+
+El total que devuelve la API indica cuántos resultados existen para esa consulta en el servidor. No tiene por qué coincidir con los productos que estoy mostrando, porque la petición puede tener un límite. Por ejemplo, puede haber 50 resultados y recibir solamente 12 si la petición lleva `limit=12`.
 
 Referencias: [Productos · DummyJSON](https://dummyjson.com/docs/products), [URLSearchParams · MDN](https://developer.mozilla.org/es/docs/Web/API/URLSearchParams).
 

@@ -1,5 +1,6 @@
-import Productocard from "../components/ProductoCard";
 import { useState } from "react";
+import CatalogoForm from "../components/CatalogoForm";
+import ListaProductos from "../components/ListadoProductos";
 function CatalogoPage() {
 
     //Estados 
@@ -12,9 +13,11 @@ function CatalogoPage() {
     const [estadoCategorias, setEstadoCategorias] = useState("inicial");
     const [mensajeErrorCategorias, setMensajeErrorCategorias] = useState("");
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("")
-    const [totalResultados, setTotalresultados] = useState(0);
+    const [totalResultados, setTotalResultados] = useState(0);
+    const [consultaAplicada, setConsultaAplicada] = useState(null)
 
-    async function cargarProductos() {
+
+    async function cargarProductos(consultaGuardada = null) {
         if (estadoPeticion === "cargando") {
             return;
         }
@@ -26,16 +29,50 @@ function CatalogoPage() {
         try {
             let url = "https://dummyjson.com/products?limit=12";
 
-            if (modoConsulta === "texto") {
-                const parametros = new URLSearchParams({
-                    q: textoBusqueda.trim(),
-                    limit: "12",
-                });
-                url = `https://dummyjson.com/products/search?${parametros}`;
+            if (consultaGuardada) {
+                url = consultaGuardada.url;
+            } else {
+                if (modoConsulta === "texto") {
+                    const parametros = new URLSearchParams({
+                        q: textoBusqueda.trim(),
+                        limit: "12",
+                    });
+                    url = `https://dummyjson.com/products/search?${parametros}`;
+                }
+
+                if (modoConsulta === "categoria") {
+                    url = `https://dummyjson.com/products/category/${encodeURIComponent(categoriaSeleccionada)}?limit=12`;
+                }
             }
-            if (modoConsulta === "categoria") {
-                url = `https://dummyjson.com/products/category/${encodeURIComponent(categoriaSeleccionada)}?limit=12`;
+            let descripcionConsulta = "Todos los productos";
+            let tipoConsulta = "todos";
+            let valorConsulta = "";
+
+            if (consultaGuardada) {
+                descripcionConsulta = consultaGuardada.descripcion;
+                tipoConsulta = consultaGuardada.tipo;
+                valorConsulta = consultaGuardada.valor;
+            } else {
+                if (modoConsulta === "texto") {
+                    descripcionConsulta = `Busqueda: "${textoBusqueda.trim()}"`;
+                    tipoConsulta = "texto";
+                    valorConsulta = textoBusqueda.trim();
+                }
+
+                if (modoConsulta === "categoria") {
+                    descripcionConsulta = `Categoria: "${categoriaSeleccionada}"`;
+                    tipoConsulta = "categoria";
+                    valorConsulta = categoriaSeleccionada;
+                }
             }
+
+            setConsultaAplicada({
+                url,
+                descripcion: descripcionConsulta,
+                tipo: tipoConsulta,
+                valor: valorConsulta,
+            });
+
             const respuesta = await fetch(url)
 
 
@@ -51,7 +88,7 @@ function CatalogoPage() {
                 throw new Error("La respuesta no contiene una lista de productos.");
             }
             setProductos(datos.products); //Aquí react nos guarda los datos recibidos en nuestro estado
-            setTotalresultados(datos.total);
+            setTotalResultados(datos.total);
             setEstadoPeticion("exito");
 
         } catch (error) {
@@ -119,144 +156,69 @@ function CatalogoPage() {
                 <p className="mb-6 text-lg text-gray-300">
                     Consulta productos obtenidos desde una API.
                 </p>
-                <form
+                <CatalogoForm
+                    modoConsulta={modoConsulta}
+                    setModoConsulta={setModoConsulta}
+                    textoBusqueda={textoBusqueda}
+                    setTextoBusqueda={setTextoBusqueda}
+                    categoriaSeleccionada={categoriaSeleccionada}
+                    setCategoriaSeleccionada={setCategoriaSeleccionada}
+                    categorias={categorias}
+                    estadoCategorias={estadoCategorias}
+                    cargarCategorias={cargarCategorias}
                     onSubmit={(evento) => {
                         evento.preventDefault();
+
+                        // Comprobamos que el texto no esté vacío.
                         if (modoConsulta === "texto") {
                             const textoLimpio = textoBusqueda.trim();
 
                             if (textoLimpio === "") {
-                                setMensajeError("Escribe un texto para buscar.")
-                                setEstadoPeticion("error")
+                                setMensajeError("Escribe un texto para buscar.");
+                                setEstadoPeticion("error");
                                 return;
                             }
                         }
 
-                        if (modoConsulta === "categoria" && categoriaSeleccionada === "") {
-                            setMensajeError("Selecciona una categoría para continuar.");
+                        // Comprobamos que haya una categoría seleccionada.
+                        if (
+                            modoConsulta === "categoria" &&
+                            categoriaSeleccionada === ""
+                        ) {
+                            setMensajeError(
+                                "Selecciona una categoría para continuar."
+                            );
                             setEstadoPeticion("error");
                             return;
                         }
+
+                        // Si todo está correcto, hacemos la consulta.
                         cargarProductos();
                     }}
-                    className="mb-6"
-                >
-                    <label htmlFor="modo-consulta" className="mb-2 block">
-                        Modo de consulta
-                    </label>
-
-                    <select
-                        id="modo-consulta"
-                        value={modoConsulta}
-                        onChange={(evento) => setModoConsulta(evento.target.value)}
-                        className="mr-3 rounded-lg bg-white px-3 py-2 text-gray-900"
-                    >
-                        <option value="todos">Todos</option>
-                        <option value="texto">Texto</option>
-                        <option value="categoria">Categoría</option>
-                    </select>
-                    {modoConsulta === "texto" && (
-                        <div className="mt-4">
-                            <label
-                                htmlFor="texto-busqueda"
-                                className="mb-2 block"
-                            >
-                                Buscar producto
-                            </label>
-
-                            <input
-                                id="texto-busqueda"
-                                type="text"
-                                value={textoBusqueda}
-                                onChange={(evento) => setTextoBusqueda(evento.target.value)}
-                                placeholder="Ejemplo: phone"
-                                className="w-full rounded-lg bg-white px-3 py-2 text-gray-900"
-                            />
-                        </div>
-                    )}
-                    <div className="mt-4 flex flex-col items-start gap-3">
-                        {modoConsulta === "categoria" && (
-                            <button
-                                type="button"
-                                onClick={cargarCategorias}
-                                disabled={estadoPeticion === "cargando" || estadoCategorias === "cargando"}
-                                className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-gray-900"
-                            >
-                                Cargar categorías
-                            </button>
-                        )}
-                        {modoConsulta === "categoria" && estadoCategorias === "exito" && (
-                            <select
-                                id="categoria"
-                                value={categoriaSeleccionada}
-                                onChange={(evento) => setCategoriaSeleccionada(evento.target.value)}
-                                className="rounded-lg bg-white px-3 py-2 text-gray-900"
-                            >
-                                <option value="" disabled>
-                                    Selecciona una categoría
-                                </option>
-
-                                {categorias.map((categoria) => (
-                                    <option key={categoria} value={categoria}>
-                                        {categoria}
-                                    </option>
-                                ))}
-                            </select>
-                        )}
+                    estadoPeticion={estadoPeticion}
+                />
+                {estadoPeticion === "error" && (
+                    <div className="mt-4 rounded-lg border border-red-400 bg-red-900/40 p-4">
+                        <p className="mb-3">
+                            {mensajeError}
+                        </p>
 
                         <button
-                            type="submit"
-                            disabled={estadoPeticion === "cargando" || estadoCategorias === "cargando"}
-                            className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-gray-900"
+                            type="button"
+                            onClick={() => cargarProductos(consultaAplicada)}
+                            className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-gray-900 transition hover:bg-amber-400"
                         >
-                            Consultar
+                            Reintentar
                         </button>
                     </div>
-
-
-
-
-                    {
-                        estadoPeticion === "error" && (
-                            <div className="mt-4 rounded-lg border border-red-400 bg-red-900/40 p-4">
-                                <p className="mb-3">
-                                    {mensajeError}
-                                </p>
-                                <button
-                                    type="button"
-                                    onClick={cargarProductos}
-                                    className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-gray-900 transition hover:bg-amber-400"
-                                >
-                                    Reintentar
-                                </button>
-                            </div>
-                        )
-                    }
-                </form>
-                {
-                    estadoPeticion === "exito" && (
-                        <>
-                            <p className="mt-4 mb-6">
-                                Recibidos: {productos.length} de {totalResultados} resultados del servidor
-                            </p>
-
-                            {productos.length === 0 ? (
-                                <p className="rounded-lg bg-gray-700 p-4">
-                                    No se encontraron productos para esta consulta.
-                                </p>
-                            ) : (
-                                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                                    {productos.map((producto) => (
-                                        <Productocard
-                                            key={producto.id}
-                                            producto={producto}
-                                        />
-                                    ))}
-                                </div>
-                            )}
-                        </>
-                    )
-                }
+                )}
+                {estadoPeticion === "exito" && (
+                    <ListaProductos
+                        consultaAplicada={consultaAplicada}
+                        productos={productos}
+                        totalResultados={totalResultados}
+                    />
+                )}
                 {
                     estadoPeticion === "inicial" && (
                         <p>

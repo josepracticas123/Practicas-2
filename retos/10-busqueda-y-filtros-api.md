@@ -18,41 +18,41 @@ Base: `https://dummyjson.com`. Consulta [Productos · DummyJSON](https://dummyjs
 | Una categoría | `GET /products/category/smartphones?limit=12` | `products` y `total` |
 
 - [x] Inspecciona una respuesta de cada tipo y localiza dónde está el array.
-- [ ] Explica por qué `total` puede ser mayor que `products.length`.
-- [ ] Localiza en Network/Red la URL, el método y el estado HTTP.
+- [x] Explica por qué `total` puede ser mayor que `products.length`.
+- [x] Localiza en Network/Red la URL, el método y el estado HTTP.
 
 **Regla de alcance:** los modos «Todos», «Texto» y «Categoría» son excluyentes. No combines texto y categoría en una misma petición ni inventes parámetros que la API no documenta.
 
 ## 2. Prepara un formulario de consulta
 
-- [ ] Añade un selector de modo y un botón «Consultar» dentro de un formulario con `onSubmit`.
-- [ ] En «Texto», muestra un input con etiqueta. Aplica `trim()` y rechaza una búsqueda vacía con un mensaje.
-- [ ] En «Categoría», muestra un selector y un botón «Cargar categorías». Ese botón hace su propio GET y tiene `type="button"`.
-- [ ] Distingue carga, error y reintento de categorías de la consulta de productos. No pongas las categorías en `productos`.
-- [ ] Impide consultar una categoría hasta tener una selección válida.
-- [ ] Cambiar el modo o escribir modifica solo el formulario; no hace peticiones todavía.
+- [x] Añade un selector de modo y un botón «Consultar» dentro de un formulario con `onSubmit`.
+- [x] En «Texto», muestra un input con etiqueta. Aplica `trim()` y rechaza una búsqueda vacía con un mensaje.
+- [x] En «Categoría», muestra un selector y un botón «Cargar categorías». Ese botón hace su propio GET y tiene `type="button"`.
+- [x] Distingue carga, error y reintento de categorías de la consulta de productos. No pongas las categorías en `productos`.
+- [x] Impide consultar una categoría hasta tener una selección válida.
+- [x] Cambiar el modo o escribir modifica solo el formulario; no hace peticiones todavía.
 
 **Parada:** el formulario permite preparar una consulta sin confundir sus campos con la lista que ya se está mostrando.
 
 ## 3. Consulta según el modo elegido
 
-- [ ] Al enviar, construye la URL correspondiente al modo y a los valores del formulario.
-- [ ] Utiliza `URLSearchParams` para parámetros como `q` y `limit`; para el segmento de categoría utiliza `encodeURIComponent`.
-- [ ] Conserva `response.ok`, la lectura JSON, validación del array y los estados de carga/error del 09.
-- [ ] Sustituye los productos al recibir la respuesta; no los acumules.
-- [ ] Guarda el `total` recibido y muestra «Recibidos X de Y resultados del servidor». Explica que esta versión muestra como máximo 12.
-- [ ] Si no hay coincidencias, muestra un mensaje de búsqueda vacía, no un error de conexión.
-- [ ] Mientras se consulta, bloquea el formulario y las acciones que iniciarían otra consulta. Conserva también la comprobación al inicio del manejador.
+- [x] Al enviar, construye la URL correspondiente al modo y a los valores del formulario.
+- [x] Utiliza `URLSearchParams` para parámetros como `q` y `limit`; para el segmento de categoría utiliza `encodeURIComponent`.
+- [x] Conserva `response.ok`, la lectura JSON, validación del array y los estados de carga/error del 09.
+- [x] Sustituye los productos al recibir la respuesta; no los acumules.
+- [x] Guarda el `total` recibido y muestra «Recibidos X de Y resultados del servidor». Explica que esta versión muestra como máximo 12.
+- [x] Si no hay coincidencias, muestra un mensaje de búsqueda vacía, no un error de conexión.
+- [x] Mientras se consulta, bloquea el formulario y las acciones que iniciarían otra consulta. Conserva también la comprobación al inicio del manejador.
 
 **Pista:** cambiar un estado y leerlo inmediatamente dentro del mismo evento no garantiza obtener el valor nuevo. Construye la consulta con los valores del formulario disponibles en ese evento.
 
 ## 4. Distingue lo escrito de lo aplicado
 
-- [ ] Conserva la última consulta enviada, por ejemplo su URL y una descripción. Utilízala para identificar los resultados visibles.
-- [ ] Si escribes otro texto sin enviar, los resultados siguen identificados con la consulta anterior.
+- [x] Conserva la última consulta enviada, por ejemplo su URL y una descripción. Utilízala para identificar los resultados visibles.
+- [x] Si escribes otro texto sin enviar, los resultados siguen identificados con la consulta anterior.
 - [ ] «Reintentar» repite la consulta que falló, aunque hayas cambiado el formulario después.
 - [ ] «Mostrar todos» limpia los campos y realiza la consulta general. No uses accidentalmente el valor anterior del estado recién actualizado.
-- [ ] Conserva la selección y el texto cuando falle una petición, para que el usuario pueda corregir o repetir.
+- [x] Conserva la selección y el texto cuando falle una petición, para que el usuario pueda corregir o repetir.
 
 ## 5. Comprueba tu entrega
 

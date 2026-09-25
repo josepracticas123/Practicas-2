@@ -1,8 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-function EditarProductosForm() {
+function EditarProductosForm({producto, onGuardado}) {
 
-    const [idProducto, setIdProducto] = useState(""); // Guardará el ID del producto que queremos editar.
     const [titulo, setTitulo] = useState(""); // Para el título que queremso ponerle.
     const [descripcion, setDescripcion] = useState(""); // Será al nueva descripción.
     const [precio, setPrecio] = useState("");
@@ -11,15 +10,18 @@ function EditarProductosForm() {
     const [mensajeError, setMensajeError] = useState(""); // Guardaremos el mensaje del texto de error que queremos mostrar
     const [productoEditado, setProductoEditado] = useState(null)
 
+    useEffect(() =>{
+        if(producto){
+            setTitulo(producto.title);
+            setDescripcion(producto.description);
+            setPrecio(String(producto.price));
+        }
+    }, [producto]);
+
     //
     async function editarProducto(evento) {
         evento.preventDefault();
-        // Comprobamos qu eel id del producto no quede o pueda estar vacío.
-        if (idProducto.trim() === "") {
-            setMensajeError("El ID del producto no puede estar vacío.");
-            setEstadoEdicion("error");
-            return;
-        }
+        
         if (titulo.trim() === "") {
             setMensajeError("El título no puede estar vacío.");
             setEstadoEdicion("error");
@@ -59,7 +61,7 @@ function EditarProductosForm() {
         try {
             //Peticion para modificar producto
             const respuesta = await fetch(
-                `https://dummyjson.com/products/${idProducto}`,
+                `https://dummyjson.com/products/${producto.id}`,
 
                 {
                     method: "PUT",
@@ -79,10 +81,10 @@ function EditarProductosForm() {
             const productoDevuelto = await respuesta.json();
 
             setProductoEditado(productoDevuelto); // Guardaremos la respuesta
+            onGuardado(productoDevuelto);
             setEstadoEdicion("exito");
 
             //Con esto limpiaremso los campos. Si el PUT ha funcionado.
-            setIdProducto("");
             setTitulo("");
             setDescripcion("");
             setPrecio("");
@@ -103,24 +105,6 @@ function EditarProductosForm() {
             </h2>
 
             <form onSubmit={editarProducto} className="space-y-5">
-
-                <div>
-                    {/* El htmlFor relaciona el label con el input */}
-                    <label
-                        htmlFor="idProducto"
-                        className="mb-2 block font-semibold text-white"
-                    >
-                        ID del producto
-                    </label>
-
-                    <input
-                        id="idProducto"
-                        type="number"
-                        value={idProducto}
-                        onChange={(evento) => setIdProducto(evento.target.value)}
-                        className="box-border w-full min-w-0 rounded-lg border border-gray-600 bg-gray-700 px-4 py-2 text-white outline-none focus:border-amber-500"
-                    />
-                </div>
 
                 <div>
                     {/* El htmlFor relaciona el label con el input */}

@@ -4,6 +4,7 @@ function ListaProductos({
     consultaAplicada,
     productos,
     totalResultados,
+    onEditar,
 }) {
     return (
         <>
@@ -32,6 +33,7 @@ function ListaProductos({
                         <Productocard
                             key={producto.id}
                             producto={producto}
+                            onEditar={onEditar}
                         />
                     ))}
                 </div>

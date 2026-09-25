@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CatalogoForm from "../components/CatalogoForm";
 import ListaProductos from "../components/ListaProductos";
+import EditarProductosForm from "../components/EditarProductosForm";
 import { Link } from "react-router";
 function CatalogoPage() {
 
@@ -17,6 +18,9 @@ function CatalogoPage() {
     const [totalResultados, setTotalResultados] = useState(0);
     const [consultaAplicada, setConsultaAplicada] = useState(null)
     const [puedeReintentar, setPuedeReintentar] = useState(false);
+    const [productoEdicion, setProductoEdicion] = useState(null);
+    const [estadoEdicion, setEstadoEdicion] = useState("inicial");
+    const [mensajeErrorEdicion, setMensajeErrorEdicion] = useState("");
 
 
     async function cargarProductos(consultaGuardada = null) {
@@ -150,6 +154,65 @@ function CatalogoPage() {
 
     }
 
+    async function editarProducto(id) {
+        if (estadoEdicion === "cargando") {
+            return;
+        }
+        setEstadoEdicion("cargando"); // cargando el producto
+        setMensajeErrorEdicion(""); // limpia cualquier error
+        setProductoEdicion(null);// Quitamos el producto que pudiera estar seleccionado anteriormente
+
+
+        try {
+            const respuesta = await fetch(
+                `https://dummyjson.com/products/${id}`
+            );
+
+            if (!respuesta.ok) {
+                throw new Error("No se pudo obtener el producto");
+            }
+            const producto = await respuesta.json();
+
+            setProductoEdicion(producto);
+            setEstadoEdicion("exito");
+
+
+
+
+
+        } catch (error) {
+            console.error(error);
+            setMensajeErrorEdicion(
+                "Nose pudo cargar el producto para editar."
+            );
+            setEstadoEdicion("error");
+
+        }
+
+
+
+
+    }
+
+    function guardarProductoEditado(productoActualizado) {
+        setProductos((productosActuales) =>
+            productosActuales.map((producto) =>
+                producto.id === productoActualizado.id
+                    ? productoActualizado
+                    : producto
+            )
+        );
+
+        setProductoEdicion(null);
+        setEstadoEdicion("inicial");
+    }
+    function cancelarEdicion() {
+        setProductoEdicion(null);
+        setEstadoEdicion("inicial");
+        setMensajeErrorEdicion("");
+    }
+
+
     function mostrarTodos() {
         const consultaGeneral = {
             url: "https://dummyjson.com/products?limit=12",
@@ -181,13 +244,6 @@ function CatalogoPage() {
                         className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-gray-900 transition hover:bg-amber-400"
                     >
                         Crear producto
-                    </Link>
-
-                    <Link
-                        to="/editar-producto"
-                        className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-gray-900 transition hover:bg-amber-400"
-                    >
-                        Editar producto
                     </Link>
 
                 </div>
@@ -237,6 +293,32 @@ function CatalogoPage() {
                     }}
                     estadoPeticion={estadoPeticion}
                 />
+
+                {estadoEdicion === "cargando" && (
+                    <p className="mt-4"> Cargando producto para editar...</p>
+                )}
+                {estadoEdicion === "error" && (
+                    <p className="mt-4 text-red-400">
+                        {mensajeErrorEdicion}
+                    </p>
+                )}
+                {estadoEdicion === "exito" && productoEdicion && (
+                    <EditarProductosForm
+                        producto={productoEdicion}
+                        onGuardado={guardarProductoEditado}
+                        onCancelar={cancelarEdicion}
+                    />
+                )}
+
+
+
+
+
+
+
+
+
+
                 {estadoPeticion === "error" && (
                     <div className="mt-4 rounded-lg border border-red-400 bg-red-900/40 p-4">
                         <p className="mb-3">
@@ -261,6 +343,7 @@ function CatalogoPage() {
                         consultaAplicada={consultaAplicada}
                         productos={productos}
                         totalResultados={totalResultados}
+                        onEditar={editarProducto}
                     />
                 )}
                 {

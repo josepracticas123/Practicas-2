@@ -5,6 +5,7 @@ function ListaProductos({
     productos,
     totalResultados,
     onEditar,
+    onEliminar,
 }) {
     return (
         <>
@@ -34,6 +35,7 @@ function ListaProductos({
                             key={producto.id}
                             producto={producto}
                             onEditar={onEditar}
+                            onEliminar={onEliminar}
                         />
                     ))}
                 </div>

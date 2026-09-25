@@ -63,7 +63,7 @@ function Pendientes({
 
                             <ul className="mx-auto max-w-3xl space-y-3">
                                 {tareasPendientesFiltradas.map((tarea, index) => ( // Dibuja cada tarea visible.
-                                    <li key={tarea.id} className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:justify-center">
+                                    <li key={tarea.id} className="mx-2 flex min-w-0 flex-col items-stretch gap-2 rounded-lg border border-gray-600 bg-gray-800 p-3 sm:mx-0 sm:flex-row sm:items-center sm:justify-center">
                                         <span className="w-full min-w-0 wrap-break-words sm:w-72">
                                             {index + 1}. {tarea.texto}
                                         </span>

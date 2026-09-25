@@ -1,4 +1,4 @@
-function Productocard({ producto, onEditar }) {
+function Productocard({ producto, onEditar, onEliminar}) {
     return (
         <div className="flex min-w-0 h-full flex-col rounded-xl border border-gray-400 bg-gray-300 p-4 text-gray-900 shadow-lg">
 
@@ -24,6 +24,13 @@ function Productocard({ producto, onEditar }) {
             >
                 Editar
             </button>
+            <button
+             type="button"
+             onClick={() => onEliminar (producto.id)}
+              className="mt-4 rounded-lg bg-red-600 px-4 py-2 font-semibold text-white transition hover:bg-red-500"
+              >
+                Eliminar
+              </button>
 
         </div>
     )

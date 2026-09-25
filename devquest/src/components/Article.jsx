@@ -38,7 +38,7 @@ function Article({ addTareas }) {
   return (
     <form
       onSubmit={enviarTarea}
-       className="mx-auto flex w-full max-w-md flex-col gap-3 rounded-lg border border-gray-400 bg-white p-6 text-center shadow-sm">
+      className="mx-4 flex w-[calc(100%-2rem)] max-w-md flex-col gap-3 rounded-lg border border-gray-400 bg-white p-4 text-center shadow-sm sm:mx-auto sm:w-full sm:p-6">
       <h2 className="text-xl font-bold">Añadir tarea</h2>
       <label htmlFor="nueva-tarea">Nueva tarea</label>
       <input id="nueva-tarea"
@@ -46,8 +46,8 @@ function Article({ addTareas }) {
         value={textoTarea}
         // Cada cambio del input actualiza el estado local del formulario.
         onChange={(e) => setTextoTarea(e.target.value)}
-        className="rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none" />
-      <button type="submit" className="rounded-lg  bg-slate-600 px-4 py-2 text-white hover:bg-gray-700">
+        className="w-full min-w-0 rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none" />
+      <button type="submit" className="w-full rounded-lg bg-slate-600 px-4 py-2 text-white hover:bg-gray-700 sm:w-auto">
         Añadir tarea
       </button>
     </form>

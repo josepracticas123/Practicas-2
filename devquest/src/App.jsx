@@ -5,6 +5,9 @@ import { Routes, Route, Link } from 'react-router';
 import PortalPage from './pages/PortalPage'
 import QuizPage from './pages/QuizPage';
 import CatalogoPage from './pages/CatalogoPages';
+import CrearProductoPage from './pages/CrearProductoPage';
+import EditarProductoPage from './pages/EditarProductoPage';
+
 
 // App organiza las rutas y la estructura común de la aplicación.
 function App() {
@@ -16,11 +19,13 @@ function App() {
 
       <main className="flex-1">
         <Routes>
-          <Route path="/" element={<PortalPage/>} />
-          <Route path="/tareas" element={<TareasPage/>} />
-          <Route path="/quiz" element={<QuizPage/>}/>
-          <Route path="/catalogo" element={<CatalogoPage/>}/>
-          
+          <Route path="/" element={<PortalPage />} />
+          <Route path="/tareas" element={<TareasPage />} />
+          <Route path="/quiz" element={<QuizPage />} />
+          <Route path="/catalogo" element={<CatalogoPage />} />
+          <Route path="/crear-producto" element={<CrearProductoPage />} />
+          <Route path="/editar-producto" element={<EditarProductoPage />} />
+
           <Route
             path="*"
             element={

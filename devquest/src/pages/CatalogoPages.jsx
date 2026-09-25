@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CatalogoForm from "../components/CatalogoForm";
 import ListaProductos from "../components/ListaProductos";
+import { Link } from "react-router";
 function CatalogoPage() {
 
     //Estados 
@@ -11,7 +12,7 @@ function CatalogoPage() {
     const [textoBusqueda, setTextoBusqueda] = useState("");
     const [categorias, setCategorias] = useState([]);
     const [estadoCategorias, setEstadoCategorias] = useState("inicial");
-    const [,setMensajeErrorCategorias] = useState("");
+    const [, setMensajeErrorCategorias] = useState("");
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("")
     const [totalResultados, setTotalResultados] = useState(0);
     const [consultaAplicada, setConsultaAplicada] = useState(null)
@@ -149,7 +150,7 @@ function CatalogoPage() {
 
     }
 
-    function mostrarTodos(){
+    function mostrarTodos() {
         const consultaGeneral = {
             url: "https://dummyjson.com/products?limit=12",
             descripcion: "Todos los productos",
@@ -158,7 +159,7 @@ function CatalogoPage() {
         };
         setTextoBusqueda("");
         setCategoriaSeleccionada(""),
-        setModoConsulta("todos");
+            setModoConsulta("todos");
 
         cargarProductos(consultaGeneral);
     }
@@ -173,6 +174,23 @@ function CatalogoPage() {
                 <p className="mb-6 text-lg text-gray-300">
                     Consulta productos obtenidos desde una API.
                 </p>
+                <div className="mb-6 flex flex-wrap gap-3">
+
+                    <Link
+                        to="/crear-producto"
+                        className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-gray-900 transition hover:bg-amber-400"
+                    >
+                        Crear producto
+                    </Link>
+
+                    <Link
+                        to="/editar-producto"
+                        className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-gray-900 transition hover:bg-amber-400"
+                    >
+                        Editar producto
+                    </Link>
+
+                </div>
                 <p className="mb-4 rounded-lg bg-red-900/20 p-3 text-sm text-amber-200">
                     Modo de prácticas: los cambios no se guardaran en el servidor
                 </p>
@@ -226,16 +244,16 @@ function CatalogoPage() {
                         </p>
 
                         {puedeReintentar && (
-                           <button
-                            type="button"
-                            onClick={() => cargarProductos(consultaAplicada)}
-                            className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-gray-900 transition hover:bg-amber-400"
-                        >
-                            Reintentar
-                        </button>
+                            <button
+                                type="button"
+                                onClick={() => cargarProductos(consultaAplicada)}
+                                className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-gray-900 transition hover:bg-amber-400"
+                            >
+                                Reintentar
+                            </button>
                         )}
 
-                       
+
                     </div>
                 )}
                 {estadoPeticion === "exito" && (
@@ -254,6 +272,7 @@ function CatalogoPage() {
                         </p>
                     )
                 }
+
             </div >
         </section >
     );

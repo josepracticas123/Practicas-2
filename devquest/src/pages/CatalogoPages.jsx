@@ -189,9 +189,6 @@ function CatalogoPage() {
 
         }
 
-
-
-
     }
 
     function guardarProductoEditado(productoActualizado) {
@@ -309,15 +306,6 @@ function CatalogoPage() {
                         onCancelar={cancelarEdicion}
                     />
                 )}
-
-
-
-
-
-
-
-
-
 
                 {estadoPeticion === "error" && (
                     <div className="mt-4 rounded-lg border border-red-400 bg-red-900/40 p-4">

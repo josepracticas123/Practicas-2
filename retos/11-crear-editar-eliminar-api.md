@@ -17,45 +17,45 @@ DummyJSON simula las escrituras: responde, pero no conserva esos cambios. Consul
 
 - [ ] Muestra en el catálogo una nota breve: «Modo de práctica: los cambios no se guardan en el servidor».
 - [ ] Para POST, muestra solo la última alta recibida en un panel separado «Última creación simulada». No la añadas al listado del servidor.
-- [ ] Para PUT y DELETE, usa exclusivamente IDs de productos obtenidos mediante GET. No utilices el ID de un alta simulada: no crea un recurso que puedas consultar o editar después.
-- [ ] Mantén los datos de práctica en memoria. No añadas `localStorage`, backend propio ni una biblioteca de peticiones.
+- [x] Para PUT y DELETE, usa exclusivamente IDs de productos obtenidos mediante GET. No utilices el ID de un alta simulada: no crea un recurso que puedas consultar o editar después.
+- [x] Mantén los datos de práctica en memoria. No añadas `localStorage`, backend propio ni una biblioteca de peticiones.
 
 Esta separación evita mezclar resultados del servidor con altas que no existen allí ni depender de que varias altas simuladas devuelvan IDs distintos.
 
 ## 2. Crea un producto con POST
 
-- [ ] Prepara un formulario controlado con título, descripción y precio; utiliza etiquetas visibles.
-- [ ] Rechaza título o descripción vacíos después de `trim()`.
-- [ ] Comprueba que el precio no esté vacío y, tras convertirlo a número, sea finito y mayor que cero. No confíes solo en `type="number"`.
-- [ ] Al enviar, prepara únicamente los campos necesarios: `title`, `description` y `price`.
-- [ ] Configura `method: "POST"`, cabecera `Content-Type: application/json` y cuerpo con `JSON.stringify`.
-- [ ] Revisa `response.ok`, lee la respuesta y muestra el producto e ID recibidos en el panel de última creación.
-- [ ] Muestra «Creando…» durante la petición. Limpia el formulario solo después de un éxito.
-- [ ] Si falla, muestra un mensaje comprensible, conserva los campos y permite volver a enviar.
+- [x] Prepara un formulario controlado con título, descripción y precio; utiliza etiquetas visibles.
+- [x] Rechaza título o descripción vacíos después de `trim()`.
+- [x] Comprueba que el precio no esté vacío y, tras convertirlo a número, sea finito y mayor que cero. No confíes solo en `type="number"`.
+- [x] Al enviar, prepara únicamente los campos necesarios: `title`, `description` y `price`.
+- [x] Configura `method: "POST"`, cabecera `Content-Type: application/json` y cuerpo con `JSON.stringify`.
+- [x] Revisa `response.ok`, lee la respuesta y muestra el producto e ID recibidos en el panel de última creación.
+- [x] Muestra «Creando…» durante la petición. Limpia el formulario solo después de un éxito.
+- [x] Si falla, muestra un mensaje comprensible, conserva los campos y permite volver a enviar.
 
 **Parada:** en Network ves POST, el JSON enviado y la respuesta. El producto creado no tiene botones de editar o eliminar.
 
 ## 3. Lee un producto y edítalo con PUT
 
-- [ ] Añade «Editar» a las tarjetas de productos recibidos del servidor; pasa un callback a la tarjeta.
-- [ ] Al pulsarlo, haz un GET del producto por ID. Muestra carga o error antes de abrir el formulario con los datos recibidos.
-- [ ] Guarda por separado el borrador del formulario. Escribir no debe modificar directamente el objeto de la tarjeta.
-- [ ] Edita los mismos tres campos del bloque anterior, con las mismas validaciones.
-- [ ] «Cancelar» descarta el borrador sin enviar PUT.
-- [ ] «Guardar» envía PUT al ID seleccionado, con cabecera y cuerpo JSON.
-- [ ] Tras el éxito, actualiza únicamente la tarjeta correspondiente usando el producto devuelto y un array nuevo. No hagas un GET automático inmediatamente después: recuperaría la versión original del servidor.
-- [ ] Si falla, conserva la tarjeta anterior y el borrador; no muestres un éxito ni cierres el formulario.
+- [x] Añade «Editar» a las tarjetas de productos recibidos del servidor; pasa un callback a la tarjeta.
+- [x] Al pulsarlo, haz un GET del producto por ID. Muestra carga o error antes de abrir el formulario con los datos recibidos.
+- [x] Guarda por separado el borrador del formulario. Escribir no debe modificar directamente el objeto de la tarjeta.
+- [x] Edita los mismos tres campos del bloque anterior, con las mismas validaciones.
+- [x] «Cancelar» descarta el borrador sin enviar PUT.
+- [x] «Guardar» envía PUT al ID seleccionado, con cabecera y cuerpo JSON.
+- [x] Tras el éxito, actualiza únicamente la tarjeta correspondiente usando el producto devuelto y un array nuevo. No hagas un GET automático inmediatamente después: recuperaría la versión original del servidor.
+- [x] Si falla, conserva la tarjeta anterior y el borrador; no muestres un éxito ni cierres el formulario.
 
 **Matiz de HTTP:** este ejercicio usa el PUT que documenta DummyJSON y su comportamiento simulado. No deduzcas que todas las APIs aceptan campos parciales con PUT; el contrato de cada API importa.
 
 ## 4. Elimina con DELETE
 
-- [ ] Añade «Eliminar» a las tarjetas del servidor, identificando siempre el producto por su ID.
-- [ ] Muestra una confirmación sencilla con el título: «Eliminar» y «Cancelar». Puedes usar un bloque inline; no necesitas construir un modal.
-- [ ] Cancelar no hace ninguna petición.
-- [ ] Confirmar envía DELETE al ID elegido, sin cuerpo JSON innecesario.
-- [ ] Comprueba el estado HTTP y la respuesta de esta API, que incluye `id` e `isDeleted`.
-- [ ] Retira la tarjeta con `filter` solo después de una respuesta correcta. Si falla, mantenla visible y permite reintentar.
+- [x] Añade «Eliminar» a las tarjetas del servidor, identificando siempre el producto por su ID.
+- [x] Muestra una confirmación sencilla con el título: «Eliminar» y «Cancelar». Puedes usar un bloque inline; no necesitas construir un modal.
+- [x] Cancelar no hace ninguna petición.
+- [x] Confirmar envía DELETE al ID elegido, sin cuerpo JSON innecesario.
+- [x] Comprueba el estado HTTP y la respuesta de esta API, que incluye `id` e `isDeleted`.
+- [x] Retira la tarjeta con `filter` solo después de una respuesta correcta. Si falla, mantenla visible y permite reintentar.
 
 ## 5. Mantén coherente la pantalla
 
@@ -65,7 +65,7 @@ Esta separación evita mezclar resultados del servidor con altas que no existen 
 - [ ] Muestra los mensajes junto al formulario o producto al que pertenecen.
 - [ ] Después de una edición o eliminación local, distingue «Tarjetas visibles» del «Total del servidor en la última consulta». No cambies el total del servidor fingiendo que persistió una escritura.
 - [ ] Una nueva consulta sustituye el listado por el resultado real del servidor y descarta los cambios simulados sobre esas tarjetas. Cierra cualquier editor o confirmación anterior.
-- [ ] El panel de última creación sigue siendo independiente de las consultas; una nueva creación lo sustituye y recargar la página lo limpia.
+- [x] El panel de última creación sigue siendo independiente de las consultas; una nueva creación lo sustituye y recargar la página lo limpia.
 - [ ] Si editas un título bajo un filtro, conserva la tarjeta hasta la próxima consulta. No implementes un filtro local para fingir cómo respondería el servidor a ese cambio.
 
 ## 6. Comprueba tu entrega

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-function EditarProductosForm({producto, onGuardado}) {
+function EditarProductosForm({ producto, onGuardado, onCancelar, onEstadoGuardado }) {
 
     const [titulo, setTitulo] = useState(""); // Para el título que queremso ponerle.
     const [descripcion, setDescripcion] = useState(""); // Será al nueva descripción.
@@ -10,8 +10,8 @@ function EditarProductosForm({producto, onGuardado}) {
     const [mensajeError, setMensajeError] = useState(""); // Guardaremos el mensaje del texto de error que queremos mostrar
     const [productoEditado, setProductoEditado] = useState(null)
 
-    useEffect(() =>{
-        if(producto){
+    useEffect(() => {
+        if (producto) {
             setTitulo(producto.title);
             setDescripcion(producto.description);
             setPrecio(String(producto.price));
@@ -21,7 +21,11 @@ function EditarProductosForm({producto, onGuardado}) {
     //
     async function editarProducto(evento) {
         evento.preventDefault();
-        
+        if (estadoEdicion === "editando") {
+            return;
+        }
+       
+
         if (titulo.trim() === "") {
             setMensajeError("El título no puede estar vacío.");
             setEstadoEdicion("error");
@@ -56,6 +60,7 @@ function EditarProductosForm({producto, onGuardado}) {
         }
         setEstadoEdicion("editando");
         setMensajeError("");
+        onEstadoGuardado("editando");
 
 
         try {
@@ -83,6 +88,7 @@ function EditarProductosForm({producto, onGuardado}) {
             setProductoEditado(productoDevuelto); // Guardaremos la respuesta
             onGuardado(productoDevuelto);
             setEstadoEdicion("exito");
+            onEstadoGuardado("exito");
 
             //Con esto limpiaremso los campos. Si el PUT ha funcionado.
             setTitulo("");
@@ -92,6 +98,7 @@ function EditarProductosForm({producto, onGuardado}) {
         } catch (error) { // Cuando el servidor no puede comunicarse con fecth salt a catch.
             setMensajeError(error.message);// Guardamos el error que editamos en Throw new error arriba
             setEstadoEdicion("error");
+            onEstadoGuardado("error");
 
         }
 
@@ -169,6 +176,15 @@ function EditarProductosForm({producto, onGuardado}) {
                         ? "Editando..."
                         : "Editar producto"}
                 </button>
+
+                <button
+                    type="button"
+                    onClick={onCancelar}
+                    className="ml-2 w-full rounded-lg bg-gray-600 px-5 py-2.5 font-semibold text-white transition hover:bg-gray-500 sm:w-auto"
+                >
+                    Cancelar
+                </button>
+
 
             </form>
 

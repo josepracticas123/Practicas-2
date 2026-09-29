@@ -8,7 +8,7 @@
 - Después comenta el [repaso con el tutor](../REPASO-CON-TUTOR.md). El 09 empieza después de esa conversación.
 
 
-Estos apuntes describen el código que existe actualmente en `devquest/src/` y lo aprendido en los Retos 01–11. El Reto 11 está implementado parcialmente y sus comprobaciones completas siguen pendientes.
+Estos apuntes describen el código que existe actualmente en `devquest/src/` y lo aprendido en los Retos 01–11. El Reto 11 está cerrado funcionalmente en `84a2a01`; la conversación con el tutor sigue pendiente.
 
 ## 1. Qué he construido
 
@@ -954,7 +954,7 @@ Si `response.ok` es falso, falla la lectura JSON o `products` no es un array, la
 
 Las clases responsive de Tailwind cambian la cuadrícula del catálogo entre una, dos y tres columnas. Los inputs, selects y botones son controles nativos y se pueden utilizar con teclado.
 
-El Reto 11 ya tiene operaciones POST, GET por ID, PUT y DELETE simuladas. La verificación completa del reto sigue pendiente.
+El Reto 11 ya tiene operaciones POST, GET por ID, PUT y DELETE simuladas. El cierre funcional está registrado en `84a2a01`.
 
 ## 32. Estado actual del Reto 11: operaciones simuladas
 
@@ -969,15 +969,17 @@ Las peticiones de escritura utilizan Fetch contra DummyJSON. La API devuelve res
 - La edición empieza con GET por ID. Los inputs controlados editan un borrador separado del producto original.
 - PUT exitoso reemplaza en memoria solo la tarjeta correspondiente mediante un array nuevo. No se hace otro GET automático. Si falla, se conserva el borrador y la tarjeta.
 - DELETE se confirma antes de enviar. La tarjeta se retira solo tras una respuesta exitosa válida.
-- El estado de consulta es distinto de los estados de edición/guardado y eliminación. Hay guardas en handlers y controles, pero no se ha comprobado toda la matriz de operaciones incompatibles y sus transiciones.
+- El estado de consulta es distinto de los estados de edición/guardado y eliminación. Las guardas y controles de los bloqueos y cancelaciones del checklist están corregidos y revisados.
 - La interfaz distingue las tarjetas visibles del total obtenido en la última consulta; una nueva consulta vuelve a mostrar los datos reales de DummyJSON.
 
-### Verificación y pendientes
+### Revisión de cierre · `84a2a01`
 
-- [x] Prueba de navegador con respuestas de Fetch interceptadas: POST exitoso, seguido de POST fallido; la creación anterior permanece visible y se conservan los campos del segundo intento.
-- [x] Estado `Creando...`, botón deshabilitado y ausencia de una tercera petición al intentar enviar de nuevo durante la espera.
-- [ ] Validaciones POST y revisión de Network; sucesión de dos POST exitosos.
-- [ ] Pruebas de GET/PUT/DELETE, errores de red, IDs inexistentes y consulta posterior a escrituras.
-- [ ] Matriz completa de bloqueos, accesibilidad, 375 px/1280 px, Tareas y Quiz, y demostración al tutor.
+El reto 11 está cerrado funcionalmente. El [registro de cierre del reto](../../retos/11-crear-editar-eliminar-api.md#registro-de-cierre) distingue las pruebas de navegador, las simulaciones aisladas y las comprobaciones declaradas por el alumno. Puedes continuar con el [reto 12](../../retos/12-deploy-vercel-y-ramas.md).
 
-Las pruebas completadas aquí usaron respuestas simuladas del navegador; no demuestran que DummyJSON persista los cambios. El checklist del Reto 11 sigue pendiente de cierre.
+- En navegador contra DummyJSON: POST, GET + PUT, cancelar edición, Escape antes de DELETE, confirmar DELETE y recuperar los datos originales con otra consulta; ruta retirada con página no encontrada.
+- Con los manejadores reales y respuestas simuladas: bloqueos durante PUT, DELETE pendiente y cancelación, errores y reintentos de PUT/DELETE, conservación del borrador y error de categorías.
+- Lint y build pasan. Las pruebas manuales de red lenta, teclado, tamaños y regresión de Tareas/Quiz figuran marcadas por el alumno; no se repitieron íntegramente en esta revisión.
+
+La simulación aislada permite comprobar transiciones concretas, pero no equivale a una prueba completa de navegador sin conexión. No se afirma una auditoría exhaustiva de accesibilidad ni de todas las combinaciones de acciones.
+
+- [ ] Conversación con el tutor sobre los conceptos de los retos 09–11. Tener las respuestas escritas no marca esta conversación como realizada.

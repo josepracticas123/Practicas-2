@@ -316,7 +316,7 @@ Cuando pido `https://dummyjson.com/products?limit=12` recibo un objeto como este
 
 ## Reto 11 · POST, PUT y DELETE
 
-**Estado:** implementado y explicado en el cuaderno. El checklist de cierre del reto sigue abierto: faltan las pruebas manuales de red/teclado, revisar la sección 6 y la demostración al tutor. La conversación con el tutor no está hecha todavía.
+**Estado:** Cerrado funcionalmente tras revisar `84a2a01`. Puedes continuar con el reto 12. La conversación de comprensión con el tutor se registra por separado y sigue pendiente. Consulta el [registro de cierre](../retos/11-crear-editar-eliminar-api.md#registro-de-cierre).
 
 ### ¿Qué método, URL, cabecera y cuerpo utilizas para crear, leer, editar y eliminar?
 

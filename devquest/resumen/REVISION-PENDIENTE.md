@@ -105,22 +105,38 @@ La respuesta se valida con `response.ok`, `response.json()` y `Array.isArray(dat
 
 ## Revisión del Reto 11
 
-El código actual implementa POST, GET por ID, PUT y DELETE contra DummyJSON. Las escrituras son simuladas y no persisten en el servidor. Esta revisión no cierra el reto: el checklist original de la sección 6 continúa pendiente.
+El código implementa POST, GET por ID, PUT y DELETE contra DummyJSON, además de los bloqueos para que dos operaciones no se interfieran. Las escrituras son simuladas y no persisten en el servidor.
 
-### Comprobado en navegador
+### Implementación hecha (el código ya existe)
+
+- [x] POST en `/products/add` con cabecera y cuerpo JSON, validaciones y estado `Creando...`.
+- [x] GET por ID antes de editar, con un borrador separado del producto de la tarjeta.
+- [x] PUT al ID seleccionado; tras el éxito se reemplaza solo esa tarjeta y no se hace un GET automático después.
+- [x] DELETE con confirmación; la tarjeta se retira solo tras una respuesta válida.
+- [x] Bloqueo mientras se guarda (PUT) o se elimina (DELETE), en controles y manejadores. Escape no cierra la confirmación durante el DELETE y «Cancelar»/`cancelarEdicion` no cancelan durante el PUT.
+- [x] Mensaje de error de categorías junto al selector y mensaje «Cargando productos...» durante la consulta.
+- [x] Ruta `/editar-producto` retirada: entrar en ella muestra «Página no encontrada».
+
+### Pruebas realizadas
 
 - [x] Un POST exitoso muestra los datos recibidos y limpia el formulario.
 - [x] Un POST posterior fallido conserva visible la creación anterior y mantiene los campos del intento fallido.
 - [x] Durante POST se muestra `Creando...`, el botón queda deshabilitado y un nuevo intento de envío no crea otra petición concurrente.
+- [x] `npm run lint` y `npm run build` pasan en el estado actual.
 
-Estas pruebas usaron respuestas de Fetch interceptadas; no fueron escrituras reales en DummyJSON.
+Las pruebas de POST usaron respuestas de Fetch interceptadas; no fueron escrituras reales en DummyJSON. Las de PUT y DELETE todavía no se han hecho en la interfaz.
 
 ### Pendiente de comprobar
 
-- [ ] Validaciones de POST y contenido de URL, headers y body en Network.
+- [ ] Validaciones de POST y contenido de URL, headers y body en Network con escrituras reales.
 - [ ] Reemplazo del panel tras otro POST exitoso.
-- [ ] GET antes de editar, cancelar sin PUT, éxito y fallo de PUT.
+- [ ] GET antes de editar, cancelar sin PUT, éxito y fallo reales de PUT.
 - [ ] Confirmación y cancelación de DELETE, éxito y fallo con la tarjeta correspondiente.
 - [ ] Casos de ID inexistente, consulta posterior a PUT/DELETE y matriz completa de operaciones concurrentes.
-- [ ] Accesibilidad, teclado, tamaños 375 px/1280 px, Tareas, Quiz y demostración al tutor.
-- [ ] Repetir `npm run build` en el estado actual. La última ejecución registrada de `npm run lint` terminó correctamente.
+- [ ] PUT lento: editar otro producto y cancelar; DELETE lento: Escape, error y reintento.
+- [ ] Error de categorías sin conexión y mensaje de carga con conexión lenta.
+- [ ] Accesibilidad, teclado, tamaños 375 px/1280 px, Tareas y Quiz.
+
+### Conversación con el tutor
+
+- [ ] Comprobar con el tutor la comprensión de los retos 09–11. La conversación no está hecha; no se marca por tener el código escrito.

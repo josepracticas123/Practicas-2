@@ -13,7 +13,7 @@ function CatalogoPage() {
   const [textoBusqueda, setTextoBusqueda] = useState("");
   const [categorias, setCategorias] = useState([]);
   const [estadoCategorias, setEstadoCategorias] = useState("inicial");
-  const [, setMensajeErrorCategorias] = useState("");
+  const [mensajeErrorCategorias, setMensajeErrorCategorias] = useState("");
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
   const [totalResultados, setTotalResultados] = useState(0);
   const [consultaAplicada, setConsultaAplicada] = useState(null);
@@ -169,7 +169,9 @@ function CatalogoPage() {
   }
 
   async function editarProducto(id) {
-    if (estadoPeticion === "cargando" || estadoEdicion === "cargando" || estadoEdicion === "editando" || estadoEliminacion === "cargando") {
+    // Si hay otra operación en curso no abro una edición nueva: así el GET de
+    // otro producto no cierra el formulario mientras se está guardando (PUT).
+    if (estadoPeticion === "cargando" || estadoEdicion === "cargando" || estadoGuardado === "editando" || estadoEliminacion === "cargando") {
       return;
     }
 
@@ -203,6 +205,7 @@ function CatalogoPage() {
 
     setProductoEdicion(null);
     setEstadoEdicion("inicial");
+    setEstadoGuardado("inicial");
   }
 
   function confirmarEliminacion(producto) {
@@ -226,6 +229,11 @@ function CatalogoPage() {
 
   }
   function cancelarEliminacion() {
+    // Mientras el DELETE está en curso no dejo cerrar la confirmación:
+    // la petición seguiría viva y la tarjeta podría quedar sin retirar.
+    if (estadoEliminacion === "cargando") {
+      return;
+    }
     setProductoEliminar(null);
     setEstadoEliminacion("inicial");
     setMensajeErrorEliminacion("");
@@ -249,7 +257,7 @@ function CatalogoPage() {
         throw new Error("No se puede eliminar el producto");
       }
       const datos = await respuesta.json();
-      
+
       // Nos confirma que la respuesta fue correcta. de no ser así nos masnda un error
       if (!datos.id || datos.isDeleted !== true) {
         throw new Error("La respuesta de eliminación no es válida");
@@ -270,6 +278,11 @@ function CatalogoPage() {
   }
 
   function cancelarEdicion() {
+    // Mientras se guarda no dejo cancelar: el formulario se cerraría antes
+    // de recibir la respuesta del PUT.
+    if (estadoGuardado === "editando") {
+      return;
+    }
     setProductoEdicion(null);
     setEstadoEdicion("inicial");
     setMensajeErrorEdicion("");
@@ -287,6 +300,13 @@ function CatalogoPage() {
 
     cargarProductos(consultaGeneral);
   }
+  // Bloquea los controles cuando hay una lectura o una escritura en curso
+  // (cargar, editar, guardar o eliminar) para que dos acciones no se pisen.
+  const operacionesBloqueadas =
+    estadoEdicion === "cargando" ||
+    estadoGuardado === "editando" ||
+    estadoEdicion === "exito" ||
+    estadoEliminacion === "cargando";
 
   return (
     <section className="px-6 py-10 text-white">
@@ -316,15 +336,10 @@ function CatalogoPage() {
           setCategoriaSeleccionada={setCategoriaSeleccionada}
           categorias={categorias}
           estadoCategorias={estadoCategorias}
+          mensajeErrorCategorias={mensajeErrorCategorias}
           cargarCategorias={cargarCategorias}
           mostrarTodos={mostrarTodos}
-          operacionesBloqueadas={
-            estadoEdicion === "cargando" ||
-            estadoEdicion === "editando" ||
-            estadoGuardado === "editando" ||
-            estadoEdicion === "exito" ||
-            estadoEliminacion === "cargando"
-          }
+          operacionesBloqueadas={operacionesBloqueadas}
           onSubmit={(evento) => {
             evento.preventDefault();
 
@@ -353,6 +368,9 @@ function CatalogoPage() {
           estadoPeticion={estadoPeticion}
         />
 
+        {estadoPeticion === "cargando" && (
+          <p className="mt-4">Cargando productos...</p>
+        )}
         {estadoEdicion === "cargando" && (
           <p className="mt-4"> Cargando producto para editar...</p>
         )}
@@ -391,6 +409,7 @@ function CatalogoPage() {
             totalResultados={totalResultados}
             onEditar={editarProducto}
             onEliminar={confirmarEliminacion}
+            operacionesBloqueadas={operacionesBloqueadas}
           />
         )}
         {productoEliminar && (

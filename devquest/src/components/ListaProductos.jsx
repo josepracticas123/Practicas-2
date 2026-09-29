@@ -6,6 +6,7 @@ function ListaProductos({
   totalResultados,
   onEditar,
   onEliminar,
+  operacionesBloqueadas,
 }) {
   return (
     <>
@@ -37,6 +38,7 @@ function ListaProductos({
               producto={producto}
               onEditar={onEditar}
               onEliminar={onEliminar}
+              operacionesBloqueadas={operacionesBloqueadas}
             />
           ))}
         </div>

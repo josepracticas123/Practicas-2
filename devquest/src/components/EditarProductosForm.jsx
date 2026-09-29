@@ -173,7 +173,8 @@ function EditarProductosForm({ producto, onGuardado, onCancelar, onEstadoGuardad
                 <button
                     type="button"
                     onClick={onCancelar}
-                    className="ml-2 w-full rounded-lg bg-gray-600 px-5 py-2.5 font-semibold text-white transition hover:bg-gray-500 sm:w-auto"
+                    disabled={estadoEdicion === "editando"}
+                    className="ml-2 w-full rounded-lg bg-gray-600 px-5 py-2.5 font-semibold text-white transition hover:bg-gray-500 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
                 >
                     Cancelar
                 </button>

@@ -58,17 +58,17 @@ El catálogo incluye operaciones de escritura mediante Fetch. DummyJSON devuelve
 
 En navegador, con Fetch interceptado, se comprobó una creación exitosa seguida de un POST fallido. El panel anterior permaneció visible durante la segunda petición y tras el error; los campos se conservaron. El botón mostró `Creando...`, quedó deshabilitado y un envío adicional no inició otra petición. La prueba no envió escrituras reales a DummyJSON.
 
-Siguen pendientes las pruebas completas de GET, PUT y DELETE, los fallos de red de cada operación, la matriz completa de acciones concurrentes, la revisión integral de la sección 6 y la demostración al tutor. El checklist de `retos/11-crear-editar-eliminar-api.md` no se actualizó en esta revisión.
+Siguen pendientes las pruebas completas de GET, PUT y DELETE, los fallos de red de cada operación, la matriz completa de acciones concurrentes, la revisión integral de la sección 6 y la demostración al tutor. Los bloques A, B, C y D del checklist de `retos/11-crear-editar-eliminar-api.md` ya están resueltos y el bloque E deja la documentación al día; quedan el bloque F (pruebas de cierre) y la conversación con el tutor.
 
 ## Organización del código
 
 - `src/main.jsx`: monta React, `StrictMode`, `BrowserRouter` y `App`.
-- `src/App.jsx`: define las rutas `/`, `/tareas`, `/quiz`, `/catalogo`, `/crear-producto` y `/editar-producto`, además de la ruta de página no encontrada.
+- `src/App.jsx`: define las rutas `/`, `/tareas`, `/quiz`, `/catalogo` y `/crear-producto`, además de la ruta de página no encontrada.
 - `src/pages/TareasPage.jsx`: coordina el estado y las operaciones de las tareas.
 - `src/pages/QuizPage.jsx`: controla el recorrido del Quiz y sus respuestas.
 - `src/pages/CatalogoPages.jsx`: mantiene el estado del catálogo, construye las URLs, ejecuta las consultas, valida las respuestas y controla `Reintentar` y `Mostrar todos`.
 - `src/pages/CrearProductoPage.jsx` y `src/components/CrearProductosForm.jsx`: aíslan el formulario POST y el panel de la última creación simulada del listado del catálogo.
-- `src/components/EditarProductosForm.jsx` y `src/components/EliminarProducto.jsx`: contienen los formularios y la confirmación de PUT y DELETE.
+- `src/components/EditarProductosForm.jsx` y `src/components/EliminarProducto.jsx`: contienen el formulario de PUT y la confirmación de DELETE.
 - `src/components/CatalogoForm.jsx`: representa el formulario del catálogo y comunica sus acciones mediante props.
 - `src/components/ListaProductos.jsx`: muestra la consulta aplicada, el número recibido, el total y la lista o el mensaje de cero resultados.
 - `src/components/ProductoCard.jsx`: muestra la imagen, el título, la descripción y el precio de un producto.
@@ -97,4 +97,4 @@ npm run lint
 npm run build
 ```
 
-La última ejecución registrada de `npm run lint` finalizó correctamente. `npm run build` pasó en una revisión previa, pero no se repitió sobre el estado actual durante esta actualización documental.
+`npm run lint` y `npm run build` pasan en el estado actual (última comprobación tras resolver los bloques A–E del checklist de cierre).

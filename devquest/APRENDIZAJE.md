@@ -196,7 +196,7 @@ Las tareas se recuperan porque están guardadas en `localStorage`, mientras que 
 No quedan dudas pendientes sobre este bloque.
 ## Reto 09 · Primeras llamadas a una API
 
-**Estado:** base implementada; pendientes las mejoras de la revisión del 09. La miniapp del catálogo ya está integrada en la ruta `/catalogo` y carga productos desde DummyJSON con `fetch` al pulsar el botón.
+**Estado:** terminado en implementación y con las pruebas registradas abajo. La miniapp del catálogo está integrada en la ruta `/catalogo` y carga productos desde DummyJSON con `fetch` al pulsar el botón. Queda comentar la explicación con el tutor; la conversación no está hecha todavía.
 
 - ¿Qué diferencia hay entre `response`, el resultado de `response.json()` y `datos.products`?
 - ¿Qué espera cada `await`? ¿Qué ve el usuario mientras espera?
@@ -209,11 +209,34 @@ No quedan dudas pendientes sobre este bloque.
 
 - `response` es el objeto que devuelve `fetch()`. Contiene la información HTTP de la petición, como el estado de la respuesta y `response.ok`, pero aún no tiene el contenido del catálogo como datos JavaScript.
 - `response.json()` lee el cuerpo de la respuesta y lo interpreta como datos JavaScript. En este caso, esos datos tienen una propiedad `products` con el array de productos.
-- El primer `await` espera a que termine la petición HTTP. El segundo `await` espera a que el cuerpo se convierta en JSON. Mientras eso sucede, el estado cambia a `"cargando"` y el usuario ve un mensaje como «Cargando productos…».
+- El primer `await` espera a que termine la petición HTTP, es decir, a que llegue la respuesta del servidor. El segundo `await` espera a que `respuesta.json()` acabe de leer el cuerpo de la respuesta y lo interprete como datos JavaScript. No convierto los datos en JSON: al revés, `respuesta.json()` coge el texto JSON y me devuelve objetos de JavaScript que puedo usar en React. Mientras eso sucede, el estado cambia a `"cargando"` y el usuario ve un mensaje como «Cargando productos…».
 - `response.ok` se comprueba porque una respuesta HTTP con error, como un 404, no lanza automáticamente un error en `fetch()`. Si `response.ok` es falso, se lanza un error para que lo capture `catch` y así mostrar el mensaje de error. La comprobación y el `try/catch` trabajan juntos.
 - La petición se dispara desde el botón: se ejecuta al pulsar «Cargar productos», no al montar el componente. Por eso no hace falta `useEffect`; la acción depende de la interacción del usuario.
 - Al reintentar, primero se vuelve a poner el estado en `"cargando"`, se limpia el error y se vacía el array antes de pedir de nuevo. Después se sustituye el contenido del estado con `setProductos(datos.products)`, evitando acumular productos antiguos y duplicados.
 - El botón se desactiva mientras la solicitud está en curso para no lanzar varias peticiones simultáneas. Si la respuesta llega con un array vacío, se distingue la situación de una respuesta con lista vacía y se puede mostrar un mensaje adecuado.
+
+**Ejemplo de la respuesta de productos:**
+
+Cuando pido `https://dummyjson.com/products?limit=12` recibo un objeto como este (lo abrevio para no copiarlo entero):
+
+```json
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Essence Mascara Lash Princess",
+      "description": "The Essence Mascara Lash Princess...",
+      "price": 9.99,
+      "thumbnail": "https://cdn.dummyjson.com/..."
+    }
+  ],
+  "total": 194,
+  "skip": 0,
+  "limit": 12
+}
+```
+
+`products` es el array con los productos que muestro en las tarjetas, y `total` es el número total que hay en el servidor. En mi código uso `setProductos(datos.products)` y `setTotalResultados(datos.total)`.
 
 **Pruebas registradas:**
 
@@ -241,7 +264,7 @@ No quedan dudas pendientes sobre este bloque.
 
 ## Reto 10 · GET, búsqueda y categorías
 
-**Estado:** en progreso. Bloque 1 en revisión.
+**Estado:** implementado y respondido en el cuaderno. Pendiente la prueba de cierre y comentarlo con el tutor (la conversación no está hecha).
 
 - ¿Qué diferencia hay entre filtrar los productos descargados y enviar una búsqueda al servidor?
 
@@ -255,16 +278,45 @@ No quedan dudas pendientes sobre este bloque.
 
 **Mi explicación y dudas:**
 
-- `total` representa el número total de resultados que existen en el servidor para la consulta realizada.
-- `products.length` representa el número de productos que ha devuelto realmente esa petición.
-- Por ejemplo, una consulta con `limit=12` puede devolver 12 productos aunque `total` sea 194. Esto ocurre porque `limit` limita la cantidad de productos recibidos, no el número total de resultados disponibles.
+- **Filtrar en el cliente o buscar en el servidor.** Si me descargo todos los productos y luego los filtro con `filter()` en el navegador, solo puedo buscar entre los que ya tengo (por ejemplo, los 12 que devuelve `limit=12`). Si la búsqueda la hace el servidor, le mando el texto con `q` y me devuelve los productos que coinciden en toda su base de datos. Yo uso la segunda porque así la búsqueda es sobre todos los productos, no solo sobre los que ya me he descargado.
+
+- **Cómo construyo la URL.** Para el texto uso `URLSearchParams`:
+  ```js
+  const parametros = new URLSearchParams({
+    q: textoBusqueda.trim(),
+    limit: "12",
+  });
+  url = `https://dummyjson.com/products/search?${parametros}`;
+  ```
+  Si el texto lleva espacios o `&`, `URLSearchParams` los codifica solo (los espacios se convierten en `+` y `&` en `%26`), así que todo el texto viaja como un único valor de `q` y la URL no se rompe. Para la categoría uso `encodeURIComponent(categoriaSeleccionada)` porque va dentro de la ruta, no como parámetro.
+
+- **Por qué las categorías se procesan distinto.** La respuesta de categorías es directamente un array de textos (`["beauty", "fragrances", "groceries", ...]`), mientras que la de productos es un objeto con `products`, `total`, `skip` y `limit`. Por eso compruebo cosas diferentes:
+  ```js
+  if (!Array.isArray(datos)) {
+    throw new Error("La respuesta no contiene una lista de categorias");
+  }
+  setCategorias(datos);
+  ```
+  ```js
+  if (!Array.isArray(datos.products)) {
+    throw new Error("La respuesta no contiene una lista de productos.");
+  }
+  setProductos(datos.products);
+  ```
+
+- **Campos del formulario y consulta aplicada.** Los campos (`modoConsulta`, `textoBusqueda`, `categoriaSeleccionada`) son lo que el usuario está escribiendo en ese momento. La consulta aplicada (`consultaAplicada`) guarda la URL, la descripción, el tipo y el valor de la última petición que sí se hizo. Así puedo cambiar los campos sin que cambien los resultados que ya están en pantalla. Al pulsar «Reintentar» uso `consultaAplicada`, no los campos, para repetir exactamente la misma búsqueda que falló:
+  ```js
+  onClick={() => cargarProductos(consultaAplicada)}
+  ```
+
+- **Qué representan `total` y `products.length`.** `total` es el número de resultados que existen en el servidor para esa consulta y `products.length` es el número de productos que me ha devuelto realmente esa petición. Por ejemplo, con `limit=12` puedo recibir 12 productos aunque `total` sea 194, porque `limit` limita cuántos me traigo, no cuántos hay. `total` no cambia al editar o eliminar en local; solo cambia con una nueva consulta.
 
 
 
 
 ## Reto 11 · POST, PUT y DELETE
 
-**Estado:** completado.
+**Estado:** implementado y explicado en el cuaderno. El checklist de cierre del reto sigue abierto: faltan las pruebas manuales de red/teclado, revisar la sección 6 y la demostración al tutor. La conversación con el tutor no está hecha todavía.
 
 ### ¿Qué método, URL, cabecera y cuerpo utilizas para crear, leer, editar y eliminar?
 

@@ -6,7 +6,6 @@ import PortalPage from './pages/PortalPage'
 import QuizPage from './pages/QuizPage';
 import CatalogoPage from './pages/CatalogoPages';
 import CrearProductoPage from './pages/CrearProductoPage';
-import EditarProductoPage from './pages/EditarProductoPage';
 
 
 // App organiza las rutas y la estructura común de la aplicación.
@@ -24,8 +23,6 @@ function App() {
           <Route path="/quiz" element={<QuizPage />} />
           <Route path="/catalogo" element={<CatalogoPage />} />
           <Route path="/crear-producto" element={<CrearProductoPage />} />
-          <Route path="/editar-producto" element={<EditarProductoPage />} />
-
           <Route
             path="*"
             element={

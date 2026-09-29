@@ -6,7 +6,9 @@ function EliminarProducto({ producto, onCancelar, onConfirmar, mensajeError, est
 
     useEffect(() => {
         function manejarEscape(evento) {
-            if (evento.key === "Escape") {
+            // Bloqueo Escape durante el DELETE para que la confirmación no se
+            // cierre a mitad de la petición y podamos ver si falla.
+            if (evento.key === "Escape" && estadoEliminacion !== "cargando") {
                 onCancelar();
             }
         }
@@ -16,7 +18,7 @@ function EliminarProducto({ producto, onCancelar, onConfirmar, mensajeError, est
         return () => {
             document.removeEventListener("keydown", manejarEscape);
         };
-    }, [onCancelar]);
+    }, [onCancelar, estadoEliminacion]);
     
     useEffect(() => {
         botonCancelarRef.current?.focus();

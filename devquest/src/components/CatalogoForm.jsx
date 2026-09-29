@@ -12,6 +12,7 @@ function CatalogoForm({
     onSubmit,
     estadoPeticion,
     operacionesBloqueadas,
+    mensajeErrorCategorias,
 }) {
     return (
         <form onSubmit={onSubmit} className="mb-6">
@@ -76,6 +77,16 @@ function CatalogoForm({
                     >
                         Cargar categorías
                     </button>
+                )}
+
+                {/* Mensaje de error al cargar categorías */}
+                {modoConsulta === "categoria" && mensajeErrorCategorias && (
+                    <p
+                        role="alert"
+                        className="rounded-lg bg-red-100 p-3 text-red-700"
+                    >
+                        {mensajeErrorCategorias}
+                    </p>
                 )}
 
                 {/* Mensaje mientras cargamos categorías */}

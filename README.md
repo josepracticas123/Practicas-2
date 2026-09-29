@@ -29,12 +29,12 @@ El catálogo tiene implementadas las operaciones principales. En la revisión se
 
 **Siguiente paso:** completa el [checklist de cierre del reto 11](retos/11-crear-editar-eliminar-api.md#checklist-de-cierre--empieza-aquí), en orden:
 
-1. Bloqueos durante PUT y cancelaciones durante PUT/DELETE.
-2. Ruta de edición incompleta.
-3. Mensajes de categorías y de carga de productos.
-4. Cuaderno, documentación y comprobaciones finales.
+1. Bloqueos durante PUT y cancelaciones durante PUT/DELETE. **Hecho** (bloques A y B).
+2. Ruta de edición incompleta. **Hecho** (bloque C).
+3. Mensajes de categorías y de carga de productos. **Hecho** (bloque D).
+4. Cuaderno, documentación y comprobaciones finales. **Documentación hecha** (bloque E); faltan las pruebas manuales (bloque F).
 
-El reto 11 sigue pendiente de cierre. El checklist también recoge los detalles pendientes del 09 y del 10; conserva lo que ya funciona y marca cada paso después de probarlo. El [repaso con el tutor](devquest/REPASO-CON-TUTOR.md) registra por separado las conversaciones realizadas.
+El reto 11 sigue pendiente de cierre: falta el bloque F y la demostración al tutor. El checklist también recoge los detalles pendientes del 09 y del 10; conserva lo que ya funciona y marca cada paso después de probarlo. El [repaso con el tutor](devquest/REPASO-CON-TUTOR.md) registra por separado las conversaciones realizadas.
 
 La sección siguiente conserva la guía de instalación inicial como referencia.
 

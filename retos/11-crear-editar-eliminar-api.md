@@ -15,8 +15,8 @@ DummyJSON simula las escrituras: responde, pero no conserva esos cambios. Consul
 | Editar uno existente | `PUT /products/{id}` |
 | Eliminar uno existente | `DELETE /products/{id}` |
 
-- [ ] Muestra en el catálogo una nota breve: «Modo de práctica: los cambios no se guardan en el servidor».
-- [ ] Para POST, muestra solo la última alta recibida en un panel separado «Última creación simulada». No la añadas al listado del servidor.
+- [x] Muestra en el catálogo una nota breve: «Modo de práctica: los cambios no se guardan en el servidor».
+- [x] Para POST, muestra solo la última alta recibida en un panel separado «Última creación simulada». No la añadas al listado del servidor.
 - [x] Para PUT y DELETE, usa exclusivamente IDs de productos obtenidos mediante GET. No utilices el ID de un alta simulada: no crea un recurso que puedas consultar o editar después.
 - [x] Mantén los datos de práctica en memoria. No añadas `localStorage`, backend propio ni una biblioteca de peticiones.
 
@@ -59,28 +59,28 @@ Esta separación evita mezclar resultados del servidor con altas que no existen 
 
 ## 5. Mantén coherente la pantalla
 
-- [ ] Guarda el estado de la operación de escritura separado del estado de consulta del 10; utiliza nombres claros como «guardando» o «eliminando».
-- [ ] Mientras haya una petición en curso, bloquea las acciones incompatibles: consultar, editar otro producto, enviar dos veces o eliminar a la vez. Comprueba el bloqueo también en los manejadores.
-- [ ] Al completar o fallar, vuelve a permitir las acciones. Los errores no deben dejar botones bloqueados indefinidamente.
-- [ ] Muestra los mensajes junto al formulario o producto al que pertenecen.
-- [ ] Después de una edición o eliminación local, distingue «Tarjetas visibles» del «Total del servidor en la última consulta». No cambies el total del servidor fingiendo que persistió una escritura.
-- [ ] Una nueva consulta sustituye el listado por el resultado real del servidor y descarta los cambios simulados sobre esas tarjetas. Cierra cualquier editor o confirmación anterior.
+- [x] Guarda el estado de la operación de escritura separado del estado de consulta del 10; utiliza nombres claros como «guardando» o «eliminando».
+- [x] Mientras haya una petición en curso, bloquea las acciones incompatibles: consultar, editar otro producto, enviar dos veces o eliminar a la vez. Comprueba el bloqueo también en los manejadores.
+- [x] Al completar o fallar, vuelve a permitir las acciones. Los errores no deben dejar botones bloqueados indefinidamente.
+- [x] Muestra los mensajes junto al formulario o producto al que pertenecen.
+- [x] Después de una edición o eliminación local, distingue «Tarjetas visibles» del «Total del servidor en la última consulta». No cambies el total del servidor fingiendo que persistió una escritura.
+- [x] Una nueva consulta sustituye el listado por el resultado real del servidor y descarta los cambios simulados sobre esas tarjetas. Cierra cualquier editor o confirmación anterior.
 - [x] El panel de última creación sigue siendo independiente de las consultas; una nueva creación lo sustituye y recargar la página lo limpia.
-- [ ] Si editas un título bajo un filtro, conserva la tarjeta hasta la próxima consulta. No implementes un filtro local para fingir cómo respondería el servidor a ese cambio.
+- [x] Si editas un título bajo un filtro, conserva la tarjeta hasta la próxima consulta. No implementes un filtro local para fingir cómo respondería el servidor a ese cambio.
 
 ## 6. Comprueba tu entrega
 
-- [ ] POST válido muestra los datos recibidos; campos vacíos o precio inválido no envían peticiones.
-- [ ] Un segundo POST sustituye el panel anterior sin duplicar tarjetas ni claves.
-- [ ] Editar realiza GET del ID correcto; cancelar no envía PUT.
-- [ ] PUT cambia solo el producto seleccionado después del éxito.
-- [ ] Cancelar la eliminación no envía DELETE; confirmarla elimina solo la tarjeta elegida después del éxito.
-- [ ] Pruebo un fallo de red en cada escritura: no hay éxito falso, no pierdo el formulario y no desaparece la tarjeta.
-- [ ] Pruebo temporalmente un ID inexistente para GET, PUT y DELETE y verifico un error comprensible. Restauro el código de prueba.
+- [x] POST válido muestra los datos recibidos; campos vacíos o precio inválido no envían peticiones.
+- [x] Un segundo POST sustituye el panel anterior sin duplicar tarjetas ni claves.
+- [x] Editar realiza GET del ID correcto; cancelar no envía PUT.
+- [x] PUT cambia solo el producto seleccionado después del éxito.
+- [x] Cancelar la eliminación no envía DELETE; confirmarla elimina solo la tarjeta elegida después del éxito.
+- [x] Pruebo un fallo de red en cada escritura: no hay éxito falso, no pierdo el formulario y no desaparece la tarjeta.
+- [x] Pruebo temporalmente un ID inexistente para GET, PUT y DELETE y verifico un error comprensible. Restauro el código de prueba.
 - [ ] Tras editar o eliminar, vuelvo a consultar: reaparece el dato original y sé explicar por qué. No es un fallo de mi estado.
 - [ ] Reviso en Network método, URL, cuerpo, estado HTTP y respuesta de cada operación.
-- [ ] La interfaz funciona con teclado y a 375 px y 1280 px; Tareas y Quiz siguen funcionando.
-- [ ] Lint y build pasan y he respondido las preguntas del bloque 11 del cuaderno.
+- [x] La interfaz funciona con teclado y a 375 px y 1280 px; Tareas y Quiz siguen funcionando.
+- [x] Lint y build pasan y he respondido las preguntas del bloque 11 del cuaderno.
 
 **Registro:** anota una prueba correcta y una fallida por método, y lo observado al volver a consultar.
 

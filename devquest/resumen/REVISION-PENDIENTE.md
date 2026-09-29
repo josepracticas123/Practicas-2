@@ -101,4 +101,26 @@ El catálogo permite consultar todos los productos, buscar por texto mediante `q
 
 La consulta aplicada guarda la URL, descripción, tipo y valor de la última petición. Los valores actuales del formulario pueden cambiar sin cambiar los resultados ya mostrados. Si una petición falla, `Reintentar` utiliza la consulta guardada, mientras que `Mostrar todos` limpia el texto y la categoría y ejecuta directamente la consulta general.
 
-La respuesta se valida con `response.ok`, `response.json()` y `Array.isArray(datos.products)`. La interfaz distingue carga, éxito, error y cero resultados. `npm run lint` y `npm run build` pasan actualmente ejecutados desde `devquest`.
+La respuesta se valida con `response.ok`, `response.json()` y `Array.isArray(datos.products)`. La interfaz distingue carga, éxito, error y cero resultados.
+
+## Revisión del Reto 11
+
+El código actual implementa POST, GET por ID, PUT y DELETE contra DummyJSON. Las escrituras son simuladas y no persisten en el servidor. Esta revisión no cierra el reto: el checklist original de la sección 6 continúa pendiente.
+
+### Comprobado en navegador
+
+- [x] Un POST exitoso muestra los datos recibidos y limpia el formulario.
+- [x] Un POST posterior fallido conserva visible la creación anterior y mantiene los campos del intento fallido.
+- [x] Durante POST se muestra `Creando...`, el botón queda deshabilitado y un nuevo intento de envío no crea otra petición concurrente.
+
+Estas pruebas usaron respuestas de Fetch interceptadas; no fueron escrituras reales en DummyJSON.
+
+### Pendiente de comprobar
+
+- [ ] Validaciones de POST y contenido de URL, headers y body en Network.
+- [ ] Reemplazo del panel tras otro POST exitoso.
+- [ ] GET antes de editar, cancelar sin PUT, éxito y fallo de PUT.
+- [ ] Confirmación y cancelación de DELETE, éxito y fallo con la tarjeta correspondiente.
+- [ ] Casos de ID inexistente, consulta posterior a PUT/DELETE y matriz completa de operaciones concurrentes.
+- [ ] Accesibilidad, teclado, tamaños 375 px/1280 px, Tareas, Quiz y demostración al tutor.
+- [ ] Repetir `npm run build` en el estado actual. La última ejecución registrada de `npm run lint` terminó correctamente.

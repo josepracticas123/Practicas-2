@@ -44,15 +44,31 @@ El formulario y la consulta aplicada son conceptos distintos. Se pueden cambiar 
 
 Los controles usan formularios, botones y campos nativos, por lo que se pueden manejar con teclado. Las clases responsive de Tailwind organizan el catálogo y las tarjetas en distintos tamaños de pantalla.
 
-El Reto 11 todavía no está implementado: no hay peticiones `POST`, `PUT` ni `DELETE` en el código actual.
+### Reto 11: escrituras simuladas
+
+El catálogo incluye operaciones de escritura mediante Fetch. DummyJSON devuelve respuestas de práctica y no persiste esos cambios.
+
+- **POST:** `/crear-producto` contiene un formulario controlado para título, descripción y precio. Valida los campos, muestra `Creando...`, conserva los valores si falla y los limpia tras éxito. La respuesta se guarda en `ultimaCreacion`, fuera del estado del catálogo, y se presenta en «Última creación simulada». El panel depende de que haya una creación exitosa guardada, no del estado de la petición: permanece visible durante un POST posterior y si este falla; un nuevo éxito lo reemplaza.
+- **GET + PUT:** desde una tarjeta se consulta primero `GET /products/{id}`. El formulario mantiene un borrador separado. Un PUT exitoso reemplaza solo la tarjeta seleccionada en el estado local; no se consulta de nuevo automáticamente. Si falla, se conservan la tarjeta y el borrador.
+- **DELETE:** una tarjeta abre una confirmación. Se valida la respuesta y solo se retira la tarjeta tras el éxito.
+- **Coherencia:** los estados de consulta, GET de edición, PUT y DELETE son independientes. El catálogo muestra tarjetas visibles y total de la última consulta por separado. Hay guardas en handlers y controles, pero falta comprobar la matriz completa de acciones incompatibles y sus transiciones.
+- Las altas POST se muestran en una ruta y estado propios; no se incorporan a la lista de productos obtenida por GET. Las tareas mantienen su persistencia existente en `localStorage`, independiente del Reto 11.
+
+#### Verificación registrada
+
+En navegador, con Fetch interceptado, se comprobó una creación exitosa seguida de un POST fallido. El panel anterior permaneció visible durante la segunda petición y tras el error; los campos se conservaron. El botón mostró `Creando...`, quedó deshabilitado y un envío adicional no inició otra petición. La prueba no envió escrituras reales a DummyJSON.
+
+Siguen pendientes las pruebas completas de GET, PUT y DELETE, los fallos de red de cada operación, la matriz completa de acciones concurrentes, la revisión integral de la sección 6 y la demostración al tutor. El checklist de `retos/11-crear-editar-eliminar-api.md` no se actualizó en esta revisión.
 
 ## Organización del código
 
 - `src/main.jsx`: monta React, `StrictMode`, `BrowserRouter` y `App`.
-- `src/App.jsx`: define las rutas `/`, `/tareas`, `/quiz` y `/catalogo`, además de la ruta de página no encontrada.
+- `src/App.jsx`: define las rutas `/`, `/tareas`, `/quiz`, `/catalogo`, `/crear-producto` y `/editar-producto`, además de la ruta de página no encontrada.
 - `src/pages/TareasPage.jsx`: coordina el estado y las operaciones de las tareas.
 - `src/pages/QuizPage.jsx`: controla el recorrido del Quiz y sus respuestas.
 - `src/pages/CatalogoPages.jsx`: mantiene el estado del catálogo, construye las URLs, ejecuta las consultas, valida las respuestas y controla `Reintentar` y `Mostrar todos`.
+- `src/pages/CrearProductoPage.jsx` y `src/components/CrearProductosForm.jsx`: aíslan el formulario POST y el panel de la última creación simulada del listado del catálogo.
+- `src/components/EditarProductosForm.jsx` y `src/components/EliminarProducto.jsx`: contienen los formularios y la confirmación de PUT y DELETE.
 - `src/components/CatalogoForm.jsx`: representa el formulario del catálogo y comunica sus acciones mediante props.
 - `src/components/ListaProductos.jsx`: muestra la consulta aplicada, el número recibido, el total y la lista o el mensaje de cero resultados.
 - `src/components/ProductoCard.jsx`: muestra la imagen, el título, la descripción y el precio de un producto.
@@ -81,4 +97,4 @@ npm run lint
 npm run build
 ```
 
-Ambos comandos pasan en el estado actual del proyecto.
+La última ejecución registrada de `npm run lint` finalizó correctamente. `npm run build` pasó en una revisión previa, pero no se repitió sobre el estado actual durante esta actualización documental.

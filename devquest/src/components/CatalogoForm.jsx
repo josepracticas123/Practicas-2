@@ -11,6 +11,7 @@ function CatalogoForm({
     mostrarTodos,
     onSubmit,
     estadoPeticion,
+    operacionesBloqueadas,
 }) {
     return (
         <form onSubmit={onSubmit} className="mb-6">
@@ -23,7 +24,9 @@ function CatalogoForm({
                 id="modo-consulta"
                 value={modoConsulta}
                 onChange={(evento) => setModoConsulta(evento.target.value)}
-                disabled={estadoPeticion === "cargando"}
+                disabled={estadoPeticion === "cargando" ||
+                    operacionesBloqueadas
+                }
                 className="mr-3 rounded-lg bg-white px-3 py-2 text-gray-900"
             >
                 <option value="todos">Todos</option>
@@ -49,7 +52,10 @@ function CatalogoForm({
                             setTextoBusqueda(evento.target.value)
                         }
                         placeholder="Ejemplo: phone"
-                        disabled={estadoPeticion === "cargando"}
+                        disabled={
+                            estadoPeticion === "cargando" ||
+                            operacionesBloqueadas
+                        }
                         className="w-full rounded-lg bg-white px-3 py-2 text-gray-900"
                     />
                 </div>
@@ -63,7 +69,8 @@ function CatalogoForm({
                         onClick={cargarCategorias}
                         disabled={
                             estadoPeticion === "cargando" ||
-                            estadoCategorias === "cargando"
+                            estadoCategorias === "cargando"||
+                            operacionesBloqueadas
                         }
                         className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-gray-900"
                     >
@@ -88,7 +95,9 @@ function CatalogoForm({
                             onChange={(evento) =>
                                 setCategoriaSeleccionada(evento.target.value)
                             }
-                            disabled={estadoPeticion === "cargando"}
+                            disabled={estadoPeticion === "cargando" ||
+                                operacionesBloqueadas
+                            }
                             className="rounded-lg bg-white px-3 py-2 text-gray-900"
                         >
                             <option value="" disabled>
@@ -108,7 +117,8 @@ function CatalogoForm({
                     type="submit"
                     disabled={
                         estadoPeticion === "cargando" ||
-                        estadoCategorias === "cargando"
+                        estadoCategorias === "cargando" ||
+                        operacionesBloqueadas
                     }
                     className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-gray-900"
                 >
@@ -116,14 +126,15 @@ function CatalogoForm({
                 </button>
 
                 <button
-                type="button"
-                onClick={mostrarTodos}
-                disabled = {
-                    estadoPeticion === "cargando" ||
-                    estadoCategorias === "cargando"
-                } className="rounded-lg bg-gray-600 px-4 py-2 font-semibold text-white"
+                    type="button"
+                    onClick={mostrarTodos}
+                    disabled={
+                        estadoPeticion === "cargando" ||
+                        estadoCategorias === "cargando" ||
+                        operacionesBloqueadas
+                    } className="rounded-lg bg-gray-600 px-4 py-2 font-semibold text-white"
                 >
-                  Mostrar todos
+                    Mostrar todos
                 </button>
             </div>
         </form>

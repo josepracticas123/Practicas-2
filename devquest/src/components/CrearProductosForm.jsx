@@ -183,7 +183,7 @@ export default function CrearProductosForm() {
             )}
 
             {/* Esta sección solo la mostraremos cuando el POST se haya terminado correctamente y tengamos una respuesta guardada */}
-            {estadoCreacion === "exito" && ultimaCreacion && (
+            {ultimaCreacion && (
                 <div className="mt-6 min-w-0 wrap-break-word rounded-lg bg-gray-700 p-4 text-white">
                     <h3 className="mb-4 text-xl font-bold">
                         Última creación simulada

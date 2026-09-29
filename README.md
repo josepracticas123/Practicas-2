@@ -23,6 +23,17 @@ Los retos 01–08 están cerrados funcionalmente. La cabecera del 06 está corre
 - `npm run lint` y `npm run build` pasan en la versión revisada.
 - Las explicaciones del cuaderno y el repaso escrito están completadas. La conversación para comprobar comprensión se prepara en [Repaso con el tutor](devquest/REPASO-CON-TUTOR.md); sus checks son independientes del cierre funcional.
 
+## Seguimiento · 28/09/2026 · Reto 11
+
+El catálogo ya implementa las operaciones simuladas de creación, edición y eliminación con DummyJSON. El panel de «Última creación simulada» conserva la última respuesta exitosa: un POST posterior pendiente o fallido no lo oculta, y solo un nuevo éxito reemplaza sus datos.
+
+- POST usa un formulario controlado, valida título, descripción y precio, muestra `Creando...`, conserva los campos si falla y los limpia tras éxito.
+- GET por ID carga el producto antes de abrir el formulario; PUT actualiza localmente la tarjeta seleccionada y DELETE pide confirmación.
+- El catálogo diferencia tarjetas visibles del total de la última consulta e informa que DummyJSON no persiste las escrituras.
+- El código separa estados de consulta y escritura e incluye guardas para operaciones incompatibles; falta verificar la matriz completa de concurrencia y los flujos GET, PUT y DELETE.
+- Se comprobó en navegador con Fetch interceptado: POST exitoso seguido de POST fallido. El panel anterior permaneció visible durante la petición y tras el error; se conservaron los campos, el botón mostró `Creando...` y no se inició un envío simultáneo adicional.
+- La secuencia anterior usó respuestas simuladas en el navegador; no verifica una escritura real en DummyJSON. Las demás pruebas de la sección 6 del reto siguen pendientes.
+
 **Orden para continuar:**
 
 - Lee [APUNTES_ESTUDIO_REACT](devquest/resumen/APUNTES_ESTUDIO_REACT.md) y localiza sus ejemplos en tu código; anota solo las dudas concretas.
@@ -102,8 +113,8 @@ Lee [Tu primer componente](https://es.react.dev/learn/your-first-component) y [E
 
 - [09 · Un catálogo que trae datos de una API](retos/09-primeras-llamadas-api.md): carga manual de productos, estados de carga/error y reintento. **Cerrado.**
 
-- [10 · Busca productos en el servidor](retos/10-busqueda-y-filtros-api.md): GET, búsqueda por texto, categorías y consulta aplicada. **Por empezar.**
-- [11 · Crea, edita y elimina mediante peticiones](retos/11-crear-editar-eliminar-api.md): POST, GET por ID, PUT y DELETE con respuestas simuladas. **Por empezar.**
+- [10 · Busca productos en el servidor](retos/10-busqueda-y-filtros-api.md): GET, búsqueda por texto, categorías y consulta aplicada. **Implementado; revisión del checklist pendiente.**
+- [11 · Crea, edita y elimina mediante peticiones](retos/11-crear-editar-eliminar-api.md): POST, GET por ID, PUT y DELETE con respuestas simuladas. **Implementado parcialmente; POST comprobado, faltan las demás pruebas y el cierre del reto.**
 
 Trabaja por bloques y comprueba cada uno antes de continuar.
 

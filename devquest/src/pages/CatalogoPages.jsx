@@ -169,7 +169,7 @@ function CatalogoPage() {
   }
 
   async function editarProducto(id) {
-    if (estadoEdicion === "cargando") {
+    if (estadoPeticion === "cargando" || estadoEdicion === "cargando" || estadoEdicion === "editando" || estadoEliminacion === "cargando") {
       return;
     }
 
@@ -206,10 +206,16 @@ function CatalogoPage() {
   }
 
   function confirmarEliminacion(producto) {
+    if (estadoPeticion === "cargando") {
+      return;
+    }
     if (estadoEliminacion === "cargando") {
       return;
     }
     if (estadoEdicion === "cargando") {
+      return;
+    }
+    if (estadoEdicion === "exito") {
       return;
     }
     if (estadoGuardado === "editando") {
@@ -234,7 +240,6 @@ function CatalogoPage() {
     setEstadoEliminacion("cargando");
     setMensajeErrorEliminacion("");
 
-
     try {
       const respuesta = await fetch(
         `https://dummyjson.com/products/${productoEliminar.id}`,
@@ -244,6 +249,7 @@ function CatalogoPage() {
         throw new Error("No se puede eliminar el producto");
       }
       const datos = await respuesta.json();
+      
       // Nos confirma que la respuesta fue correcta. de no ser así nos masnda un error
       if (!datos.id || datos.isDeleted !== true) {
         throw new Error("La respuesta de eliminación no es válida");
@@ -312,6 +318,13 @@ function CatalogoPage() {
           estadoCategorias={estadoCategorias}
           cargarCategorias={cargarCategorias}
           mostrarTodos={mostrarTodos}
+          operacionesBloqueadas={
+            estadoEdicion === "cargando" ||
+            estadoEdicion === "editando" ||
+            estadoGuardado === "editando" ||
+            estadoEdicion === "exito" ||
+            estadoEliminacion === "cargando"
+          }
           onSubmit={(evento) => {
             evento.preventDefault();
 
@@ -346,8 +359,9 @@ function CatalogoPage() {
         {estadoEdicion === "error" && (
           <p className="mt-4 text-red-400">{mensajeErrorEdicion}</p>
         )}
-        {estadoEdicion === "exito" && productoEdicion && (
+        {productoEdicion && (
           <EditarProductosForm
+            key={productoEdicion.id}
             producto={productoEdicion}
             onGuardado={guardarProductoEditado}
             onCancelar={cancelarEdicion}
@@ -385,6 +399,7 @@ function CatalogoPage() {
             onCancelar={cancelarEliminacion}
             onConfirmar={eliminarProducto}
             mensajeError={mensajeErrorEliminacion}
+            estadoEliminacion={estadoEliminacion}
           />
         )}
         {estadoPeticion === "inicial" && (

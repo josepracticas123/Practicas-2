@@ -1,30 +1,23 @@
-import { useEffect, useState } from "react"
-
+import { useState } from "react"
 function EditarProductosForm({ producto, onGuardado, onCancelar, onEstadoGuardado }) {
 
-    const [titulo, setTitulo] = useState(""); // Para el título que queremso ponerle.
-    const [descripcion, setDescripcion] = useState(""); // Será al nueva descripción.
-    const [precio, setPrecio] = useState("");
+    const [titulo, setTitulo] = useState(producto?.title ?? "");
+    const [descripcion, setDescripcion] = useState(producto?.description ?? "");
+    const [precio, setPrecio] = useState(
+        producto?.price !== undefined ? String(producto.price) : ""
+    );
 
     const [estadoEdicion, setEstadoEdicion] = useState("inicial");// Para utilizar los diferentes estados y valores
     const [mensajeError, setMensajeError] = useState(""); // Guardaremos el mensaje del texto de error que queremos mostrar
     const [productoEditado, setProductoEditado] = useState(null)
 
-    useEffect(() => {
-        if (producto) {
-            setTitulo(producto.title);
-            setDescripcion(producto.description);
-            setPrecio(String(producto.price));
-        }
-    }, [producto]);
 
-    //
     async function editarProducto(evento) {
         evento.preventDefault();
         if (estadoEdicion === "editando") {
             return;
         }
-       
+
 
         if (titulo.trim() === "") {
             setMensajeError("El título no puede estar vacío.");
@@ -62,11 +55,11 @@ function EditarProductosForm({ producto, onGuardado, onCancelar, onEstadoGuardad
         setMensajeError("");
         onEstadoGuardado("editando");
 
-
+ //${producto.id}
         try {
             //Peticion para modificar producto
             const respuesta = await fetch(
-                `https://dummyjson.com/products/${producto.id}`,
+                `https://dummyjson.com/products/333`,
 
                 {
                     method: "PUT",

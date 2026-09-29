@@ -95,13 +95,17 @@ Footer.jsx: muestra el pie de página.
 
 Almacenamiento.js: lee y guarda tareas en localStorage.
 
-CatalogoPages.jsx: coordina el estado del catálogo, las consultas a DummyJSON, los estados de carga y error, la consulta aplicada y las acciones de reintento y «Mostrar todos».
+CatalogoPages.jsx: coordina el estado del catálogo, las consultas a DummyJSON, los estados de carga y error, la consulta aplicada y las operaciones GET por ID, PUT y DELETE.
 
 CatalogoForm.jsx: muestra el selector de modo, el campo de texto, el selector de categorías, «Consultar», «Cargar categorías» y «Mostrar todos». Recibe los estados y las funciones mediante props.
 
 ListaProductos.jsx: muestra la descripción de la consulta aplicada, los productos recibidos frente al total y el mensaje cuando la lista está vacía.
 
 ProductoCard.jsx: muestra la imagen, el título, la descripción y el precio de cada producto.
+
+CrearProductosForm.jsx: mantiene los campos controlados del POST, valida los datos, informa carga/error y muestra la última creación simulada sin agregarla al catálogo.
+
+EditarProductosForm.jsx y EliminarProducto.jsx: mantienen el borrador de edición y la confirmación de eliminación, respectivamente.
 
 index.css: carga Tailwind CSS.
 
@@ -258,7 +262,36 @@ La respuesta se acepta solo si `response.ok` es verdadero y `products` es un arr
 
 Las clases de Tailwind organizan las tarjetas en una columna, dos o tres según el ancho disponible. Los controles son elementos HTML interactivos y se pueden recorrer con el teclado.
 
-El Reto 11 está documentado como siguiente paso, pero todavía no hay código actual para crear, editar o eliminar productos.
+El Reto 11 está implementado parcialmente y aún no está cerrado: el código incluye POST, GET por ID, PUT y DELETE simulados; sus pruebas completas siguen pendientes.
+
+## Estado actual del Reto 11: escrituras simuladas
+
+DummyJSON responde a POST, PUT y DELETE para practicar, pero no persiste esas escrituras. El catálogo conserva sus resultados GET en memoria y presenta por separado los cambios locales; «Tarjetas visibles» no sustituye al total devuelto por el servidor.
+
+### POST
+
+- `CrearProductosForm.jsx` usa campos controlados para título, descripción y precio. Valida título y descripción con `trim()` y exige un precio numérico finito mayor que cero.
+- Envía `POST /products/add` con JSON mediante Fetch. Comprueba `response.ok`, muestra `Creando...`, mantiene los campos si falla y los limpia después de una respuesta exitosa.
+- `ultimaCreacion` contiene la última respuesta exitosa. El panel se renderiza según exista ese dato, no según el estado de la petición: un POST posterior pendiente o fallido no oculta la creación anterior; un éxito nuevo la reemplaza.
+- El formulario POST tiene una ruta propia y no agrega la alta simulada al array consultado por GET.
+
+### GET, PUT y DELETE
+
+- «Editar» consulta primero el producto por ID. `EditarProductosForm.jsx` inicializa un borrador controlado separado del producto mostrado.
+- PUT envía el borrador validado al ID seleccionado. Al tener éxito, `CatalogoPages.jsx` reemplaza solo la tarjeta correspondiente con un array nuevo; no hace un GET automático. Si falla, la tarjeta original y el borrador se conservan.
+- «Eliminar» abre una confirmación. DELETE no necesita body y la tarjeta se retira únicamente tras comprobar una respuesta exitosa válida con `id` e `isDeleted`.
+- Los estados de consulta, edición/guardado y eliminación están separados. Hay guardas en handlers y controles; todavía falta comprobar la matriz completa de operaciones incompatibles y sus transiciones.
+
+### Comprobaciones
+
+- [x] En navegador con Fetch interceptado: un POST exitoso muestra la respuesta y limpia los campos; un segundo POST fallido deja visible la respuesta anterior y conserva los campos del intento fallido.
+- [x] Durante el POST se muestra `Creando...`, el botón queda deshabilitado y un envío adicional no inicia otra petición.
+- [ ] Verificar POST con valores inválidos y examinar URL, headers y body en Network.
+- [ ] Verificar GET por ID, cancelar sin PUT, éxitos/fallos de PUT y retención del borrador.
+- [ ] Verificar cancelar/confirmar DELETE, respuesta y retención de la tarjeta ante error.
+- [ ] Completar la matriz de operaciones concurrentes, los casos de ID inexistente, la consulta posterior a escrituras, responsive, teclado, Tareas/Quiz y la demostración al tutor.
+
+Las pruebas marcadas se hicieron con respuestas de Fetch interceptadas; no prueban persistencia ni una escritura real en DummyJSON. El checklist original de la sección 6 se conserva pendiente.
 
 ## 4. Componentes y funciones
 

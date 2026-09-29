@@ -4,6 +4,7 @@ import ListaProductos from "../components/ListaProductos";
 import EditarProductosForm from "../components/EditarProductosForm";
 import { Link } from "react-router";
 import EliminarProducto from "../components/EliminarProducto";
+import { MemoryRouter } from "react-router";
 function CatalogoPage() {
   //Estados
   const [productos, setProductos] = useState([]); // inicia vacio

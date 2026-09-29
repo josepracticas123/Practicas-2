@@ -264,17 +264,60 @@ No quedan dudas pendientes sobre este bloque.
 
 ## Reto 11 · POST, PUT y DELETE
 
-**Estado:** por empezar. Responde conforme completes cada bloque.
+**Estado:** completado.
 
-- ¿Qué método, URL, cabecera y cuerpo utilizas para crear, leer, editar y eliminar?
-- ¿Por qué `JSON.stringify` al enviar y `respuesta.json()` al recibir?
-- ¿Por qué un campo de precio vacío necesita validación antes de convertirlo a número?
-- ¿Qué cambia en la pantalla cuando la petición tiene éxito y qué conservas cuando falla?
-- ¿Cómo evitas modificar la tarjeta mientras escribes su borrador?
-- ¿Por qué un alta simulada no se usa después como recurso para GET, PUT o DELETE?
-- ¿Por qué reaparece un producto borrado o su título anterior al consultar de nuevo DummyJSON?
+### ¿Qué método, URL, cabecera y cuerpo utilizas para crear, leer, editar y eliminar?
 
-**Mi explicación y dudas:** pendiente.
+- **Crear:** utilizo `POST` en `/products/add`, con la cabecera `Content-Type: application/json` y un cuerpo JSON con `title`, `description` y `price`.
+- **Leer:** utilizo `GET` en `/products/{id}`. No necesita cuerpo.
+- **Editar:** utilizo `PUT` en `/products/{id}`, con la cabecera `Content-Type: application/json` y un cuerpo JSON con los datos que quiero modificar.
+- **Eliminar:** utilizo `DELETE` en `/products/{id}`. No necesito enviar un cuerpo.
+
+### ¿Por qué `JSON.stringify` al enviar y `respuesta.json()` al recibir?
+
+Utilizo `JSON.stringify` porque necesito convertir el objeto JavaScript a texto en formato JSON para enviarlo en el `body` de la petición.
+
+Cuando recibo la respuesta utilizo `respuesta.json()` para convertir el JSON que devuelve el servidor en un objeto JavaScript que pueda utilizar en React.
+
+### ¿Por qué un campo de precio vacío necesita validación antes de convertirlo a número?
+
+Porque si convierto directamente un campo vacío con `Number("")`, JavaScript devuelve `0`.
+
+Por eso primero compruebo que el campo no esté vacío y después convierto el valor a número. También compruebo que sea un número finito y mayor que cero.
+
+### ¿Qué cambia en la pantalla cuando la petición tiene éxito y qué conservas cuando falla?
+
+Cuando la petición tiene éxito, actualizo la interfaz con la información que devuelve el servidor.
+
+Por ejemplo, después de un `PUT` actualizo la tarjeta del producto y después de un `DELETE` retiro la tarjeta de la pantalla.
+
+Si la petición falla, mantengo la tarjeta o los datos del formulario y muestro un mensaje de error para que el usuario pueda volver a intentarlo.
+
+### ¿Cómo evitas modificar la tarjeta mientras escribes su borrador?
+
+Utilizo estados separados para los datos del formulario, como `titulo`, `descripcion` y `precio`.
+
+Cuando escribo en el formulario modifico esos estados y no directamente el objeto del producto que aparece en la tarjeta.
+
+Solo cuando el `PUT` responde correctamente actualizo la tarjeta con el producto que devuelve la API.
+
+### ¿Por qué un alta simulada no se usa después como recurso para GET, PUT o DELETE?
+
+Porque DummyJSON simula la creación y no guarda realmente el producto.
+
+Aunque el `POST` devuelva un producto con un ID, ese producto no se crea realmente como un recurso permanente en el servidor.
+
+Por eso, para editar o eliminar utilizo productos que ya existen y cuyos IDs he obtenido mediante un `GET`.
+
+### ¿Por qué reaparece un producto borrado o su título anterior al consultar de nuevo DummyJSON?
+
+Porque DummyJSON simula las operaciones de escritura.
+
+El `PUT` y el `DELETE` responden correctamente, pero los cambios no se guardan realmente en el servidor.
+
+Por eso React puede mostrar temporalmente el producto editado o eliminarlo de la pantalla, pero cuando hago un nuevo `GET`, el servidor devuelve los datos originales.
+
+No es un problema del estado de React, sino del funcionamiento de la API de práctica.
 
 ## Reto 12 · Deploy en Vercel y ramas
 

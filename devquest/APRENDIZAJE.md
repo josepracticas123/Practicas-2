@@ -2,6 +2,8 @@
 
 Esta revisión ordena las notas iniciales y las ajusta al código actual. Que un concepto aparezca en el proyecto significa que lo has utilizado; explica con tus palabras cómo funciona antes de marcarlo como comprendido.
 
+Reparto de la documentación: [README del proyecto](README.md) (uso, estructura y comandos) · [resumen del proyecto](resumen/resumen.md) (mapa e índice) · [apuntes de estudio](resumen/APUNTES_ESTUDIO_REACT.md) (teoría con ejemplos) · [recordatorio de conceptos](resumen/A-tener-en-cuenta.md) (definiciones cortas y pruebas). Este archivo es el cuaderno: mis respuestas a las preguntas de cada reto y mi registro.
+
 ## Archivos que ya he encontrado
 
 | Archivo o carpeta | Para qué sirve en este proyecto |
@@ -141,19 +143,14 @@ Estas preguntas se van respondiendo conforme avanzan los retos. Completa solo el
 **Estado:** cerrado funcionalmente, incluido el ajuste de cabecera móvil verificado en `f5cb81c`. La conversación de comprensión se registra en [Repaso con el tutor](REPASO-CON-TUTOR.md).
 
 - ¿Qué diferencia hay entre cambiar `seccionActual` y navegar a `/tareas`?
+`seccionActual` cambia la sección dentro de Tareas sin cambiar la URL. Navegar a `/tareas` cambia la ruta global y React Router muestra `TareasPage`.
 - ¿Qué responsabilidad tienen `BrowserRouter`, `Routes`, `Route` y `Link`?
-- ¿Dónde vive ahora el estado de Tareas? ¿Qué sucede al salir de esa página y volver?
-- ¿Por qué las tareas se recuperan pero el buscador puede reiniciarse?
-- ¿Qué props recibe mi tarjeta y cómo represento una miniapp todavía no disponible?
-
-**Mi explicación:** `seccionActual` cambia la sección dentro de Tareas sin cambiar la URL. Navegar a `/tareas` cambia la ruta global y React Router muestra `TareasPage`.
-
 `BrowserRouter` proporciona el contexto de navegación. `Routes` contiene las rutas, `Route` relaciona cada URL con un componente y `Link` permite navegar sin recargar la página.
-
+- ¿Dónde vive ahora el estado de Tareas? ¿Qué sucede al salir de esa página y volver?
 El estado de las tareas vive en `TareasPage`. Cuando salgo de esa página, el estado local se desmonta, pero las tareas se recuperan desde `localStorage` cuando vuelvo.
-
+- ¿Por qué las tareas se recuperan pero el buscador puede reiniciarse?
 Las tareas se recuperan porque están guardadas en `localStorage`, mientras que el buscador es un estado de `TareasPage` y no se guarda, por lo que puede empezar de nuevo al volver.
-
+- ¿Qué props recibe mi tarjeta y cómo represento una miniapp todavía no disponible?
 `MiniappCards` recibe los datos de cada miniapp mediante la prop `miniapp`. Si una miniapp todavía no tiene una ruta, la tarjeta muestra su estado informativo en lugar de crear un enlace de navegación.
 
 ### Reto 07 · Seleccionar y comprobar
@@ -161,59 +158,49 @@ Las tareas se recuperan porque están guardadas en `localStorage`, mientras que 
 **Estado:** terminado. Están implementados y comprobados los datos locales, la página del Quiz, la ruta `/quiz`, los enlaces del Portal/Header, la selección controlada, la comprobación de respuestas y la comunicación con el componente de pregunta. El recorrido completo y la pantalla final de resultados corresponden al Reto 08.
 
 - ¿Por qué las preguntas son datos constantes y la selección es estado?
+Las preguntas son datos constantes porque están escritos en `src/data/Preguntas.js` y no cambian durante la partida. La selección sí es estado porque cambia cuando el usuario elige una opción.
 - ¿Qué significa controlar un input `radio` desde React?
+Un `radio` controlado significa que su atributo `checked` depende de `seleccionadaId`. Cuando el usuario elige una opción, `onChange` actualiza ese estado y React vuelve a mostrar cuál está marcada.
 - ¿Cómo comunica el componente de pregunta una elección a la página?
+`QuizQuestions` recibe por props la pregunta, `seleccionadaId`, `comprobada` y la función `onSeleccionar`. Cuando se elige un radio, el componente llama a `onSeleccionar(opcion.id)` y `QuizPage` actualiza el estado.
 - ¿Por qué guardo un ID en vez de copiar la opción completa?
+Guardo el ID de la opción porque identifica de forma sencilla la respuesta elegida y permite compararlo con `respuestaCorrectaId`. No necesito copiar toda la opción.
 - ¿Qué guardo al comprobar y qué puedo calcular? ¿Por qué no necesito un efecto?
-
-**Mi explicación:**
-
-- Las preguntas son datos constantes porque están escritos en `src/data/Preguntas.js` y no cambian durante la partida. La selección sí es estado porque cambia cuando el usuario elige una opción.
-- Un `radio` controlado significa que su atributo `checked` depende de `seleccionadaId`. Cuando el usuario elige una opción, `onChange` actualiza ese estado y React vuelve a mostrar cuál está marcada.
-- `QuizQuestions` recibe por props la pregunta, `seleccionadaId`, `comprobada` y la función `onSeleccionar`. Cuando se elige un radio, el componente llama a `onSeleccionar(opcion.id)` y `QuizPage` actualiza el estado.
-- Guardo el ID de la opción porque identifica de forma sencilla la respuesta elegida y permite compararlo con `respuestaCorrectaId`. No necesito copiar toda la opción.
-- Al comprobar, guardo en `respuestasConfirmadas` el ID de la pregunta junto con el ID de la opción elegida. A partir de esos datos puedo calcular si la respuesta es correcta, si la pregunta ya está comprobada y, en `QuizResult`, cuántas respuestas son correctas con `filter().length`.
-- No necesito un efecto porque estos valores se calculan directamente durante el renderizado a partir del estado y de los datos. Solo uso los setters para guardar los cambios que hace el usuario.
+Al comprobar, guardo en `respuestasConfirmadas` el ID de la pregunta junto con el ID de la opción elegida. A partir de esos datos puedo calcular si la respuesta es correcta, si la pregunta ya está comprobada y, en `QuizResult`, cuántas respuestas son correctas con `filter().length`. No necesito un efecto porque estos valores se calculan directamente durante el renderizado a partir del estado y de los datos. Solo uso los setters para guardar los cambios que hace el usuario.
 
 ### Reto 08 · Recorrido y resultado
 
 - ¿Qué datos necesito guardar para reconstruir el estado de la partida?
+Para reconstruir el estado de la partida necesito guardar `indicePregunta`, que indica qué pregunta estoy viendo; `seleccionadaId`, que guarda la opción elegida en esa pregunta; y `respuestasConfirmadas`, que relaciona el ID de cada pregunta con el ID de la opción que confirmé.
 - ¿Cómo evito que una pregunta herede la selección de la anterior?
+Una pregunta no hereda la selección anterior porque `siguientePregunta` llama a `setSeleccionadaId(null)` cuando aumenta `indicePregunta`. Al mostrar la nueva pregunta, sus radios empiezan sin ninguna opción marcada y sus mensajes todavía no aparecen.
 - ¿Cómo impido contar dos veces una misma respuesta?
+No puedo contar dos veces una respuesta porque `comprobada` se calcula comprobando si ya existe una respuesta para el ID de la pregunta actual. Además, `comprobarRespuesta` sale sin guardar si `comprobada` ya es verdadera y el botón de comprobar deja de mostrarse.
 - ¿Cómo calculo la puntuación a partir de las respuestas confirmadas?
+En `QuizResult`, `filter()` recorre las preguntas y conserva las que tienen en `respuestasConfirmadas` el mismo ID que `respuestaCorrectaId`. Después, `length` cuenta esas preguntas y obtiene la puntuación sin guardar otro contador.
 - ¿Qué reinicio al volver a jugar y qué sucede al salir de la ruta?
+`volverAJugar` reinicia `indicePregunta` a `0`, `seleccionadaId` a `null` y `respuestasConfirmadas` a `{}`. Si salgo de la ruta, `QuizPage` se desmonta y su estado desaparece; al volver se crea una partida nueva. Esto no modifica las tareas porque pertenecen a `TareasPage` y se guardan aparte en `localStorage`.
 - ¿Cómo evito leer una pregunta que no existe al llegar al final?
-
-**Mi explicación:**
-
-- Para reconstruir el estado de la partida necesito guardar `indicePregunta`, que indica qué pregunta estoy viendo; `seleccionadaId`, que guarda la opción elegida en esa pregunta; y `respuestasConfirmadas`, que relaciona el ID de cada pregunta con el ID de la opción que confirmé.
-- Una pregunta no hereda la selección anterior porque `siguientePregunta` llama a `setSeleccionadaId(null)` cuando aumenta `indicePregunta`. Al mostrar la nueva pregunta, sus radios empiezan sin ninguna opción marcada y sus mensajes todavía no aparecen.
-- No puedo contar dos veces una respuesta porque `comprobada` se calcula comprobando si ya existe una respuesta para el ID de la pregunta actual. Además, `comprobarRespuesta` sale sin guardar si `comprobada` ya es verdadera y el botón de comprobar deja de mostrarse.
-- En `QuizResult`, `filter()` recorre las preguntas y conserva las que tienen en `respuestasConfirmadas` el mismo ID que `respuestaCorrectaId`. Después, `length` cuenta esas preguntas y obtiene la puntuación sin guardar otro contador.
-- `volverAJugar` reinicia `indicePregunta` a `0`, `seleccionadaId` a `null` y `respuestasConfirmadas` a `{}`. Si salgo de la ruta, `QuizPage` se desmonta y su estado desaparece; al volver se crea una partida nueva. Esto no modifica las tareas porque pertenecen a `TareasPage` y se guardan aparte en `localStorage`.
-- Para no leer una pregunta inexistente, cuando `indicePregunta` alcanza `preguntas.length`, `QuizPage` devuelve primero `QuizResult` y no intenta obtener `preguntas[indicePregunta]`. En la última pregunta, `verResultado` establece exactamente ese valor al pulsar «Ver resultado».
+Para no leer una pregunta inexistente, cuando `indicePregunta` alcanza `preguntas.length`, `QuizPage` devuelve primero `QuizResult` y no intenta obtener `preguntas[indicePregunta]`. En la última pregunta, `verResultado` establece exactamente ese valor al pulsar «Ver resultado».
 
 No quedan dudas pendientes sobre este bloque.
+
 ## Reto 09 · Primeras llamadas a una API
 
 **Estado:** terminado en implementación y con las pruebas registradas abajo. La miniapp del catálogo está integrada en la ruta `/catalogo` y carga productos desde DummyJSON con `fetch` al pulsar el botón. Queda comentar la explicación con el tutor; la conversación no está hecha todavía.
 
 - ¿Qué diferencia hay entre `response`, el resultado de `response.json()` y `datos.products`?
+`response` es el objeto que devuelve `fetch()`. Contiene la información HTTP de la petición, como el estado de la respuesta y `response.ok`, pero aún no tiene el contenido del catálogo como datos JavaScript. `response.json()` lee el cuerpo de la respuesta y lo interpreta como datos JavaScript. En este caso, esos datos tienen una propiedad `products` con el array de productos.
 - ¿Qué espera cada `await`? ¿Qué ve el usuario mientras espera?
+El primer `await` espera a que termine la petición HTTP, es decir, a que llegue la respuesta del servidor. El segundo `await` espera a que `respuesta.json()` acabe de leer el cuerpo de la respuesta y lo interprete como datos JavaScript. No convierto los datos en JSON: al revés, `respuesta.json()` coge el texto JSON y me devuelve objetos de JavaScript que puedo usar en React. Mientras eso sucede, el estado cambia a `"cargando"` y el usuario ve un mensaje como «Cargando productos…».
 - ¿Por qué un error HTTP necesita comprobar `response.ok` aunque haya `try/catch`?
+`response.ok` se comprueba porque una respuesta HTTP con error, como un 404, no lanza automáticamente un error en `fetch()`. Si `response.ok` es falso, se lanza un error para que lo capture `catch` y así mostrar el mensaje de error. La comprobación y el `try/catch` trabajan juntos.
 - ¿Por qué esta petición se realiza desde el botón y no desde `useEffect`?
+La petición se dispara desde el botón: se ejecuta al pulsar «Cargar productos», no al montar el componente. Por eso no hace falta `useEffect`; la acción depende de la interacción del usuario.
 - ¿Cómo diferencias la pantalla inicial de una respuesta con una lista vacía?
+Si la respuesta llega con un array vacío, se distingue la situación de una respuesta con lista vacía y se puede mostrar un mensaje adecuado.
 - ¿Qué reinicias al reintentar y por qué sustituyes los productos en lugar de añadirlos a los anteriores?
-
-**Mi explicación:**
-
-- `response` es el objeto que devuelve `fetch()`. Contiene la información HTTP de la petición, como el estado de la respuesta y `response.ok`, pero aún no tiene el contenido del catálogo como datos JavaScript.
-- `response.json()` lee el cuerpo de la respuesta y lo interpreta como datos JavaScript. En este caso, esos datos tienen una propiedad `products` con el array de productos.
-- El primer `await` espera a que termine la petición HTTP, es decir, a que llegue la respuesta del servidor. El segundo `await` espera a que `respuesta.json()` acabe de leer el cuerpo de la respuesta y lo interprete como datos JavaScript. No convierto los datos en JSON: al revés, `respuesta.json()` coge el texto JSON y me devuelve objetos de JavaScript que puedo usar en React. Mientras eso sucede, el estado cambia a `"cargando"` y el usuario ve un mensaje como «Cargando productos…».
-- `response.ok` se comprueba porque una respuesta HTTP con error, como un 404, no lanza automáticamente un error en `fetch()`. Si `response.ok` es falso, se lanza un error para que lo capture `catch` y así mostrar el mensaje de error. La comprobación y el `try/catch` trabajan juntos.
-- La petición se dispara desde el botón: se ejecuta al pulsar «Cargar productos», no al montar el componente. Por eso no hace falta `useEffect`; la acción depende de la interacción del usuario.
-- Al reintentar, primero se vuelve a poner el estado en `"cargando"`, se limpia el error y se vacía el array antes de pedir de nuevo. Después se sustituye el contenido del estado con `setProductos(datos.products)`, evitando acumular productos antiguos y duplicados.
-- El botón se desactiva mientras la solicitud está en curso para no lanzar varias peticiones simultáneas. Si la respuesta llega con un array vacío, se distingue la situación de una respuesta con lista vacía y se puede mostrar un mensaje adecuado.
+Al reintentar, primero se vuelve a poner el estado en `"cargando"`, se limpia el error y se vacía el array antes de pedir de nuevo. Después se sustituye el contenido del estado con `setProductos(datos.products)`, evitando acumular productos antiguos y duplicados. El botón se desactiva mientras la solicitud está en curso para no lanzar varias peticiones simultáneas.
 
 **Ejemplo de la respuesta de productos:**
 
@@ -267,20 +254,9 @@ Cuando pido `https://dummyjson.com/products?limit=12` recibo un objeto como este
 **Estado:** implementado y respondido en el cuaderno. Pendiente la prueba de cierre y comentarlo con el tutor (la conversación no está hecha).
 
 - ¿Qué diferencia hay entre filtrar los productos descargados y enviar una búsqueda al servidor?
-
+**Filtrar en el cliente o buscar en el servidor.** Si me descargo todos los productos y luego los filtro con `filter()` en el navegador, solo puedo buscar entre los que ya tengo (por ejemplo, los 12 que devuelve `limit=12`). Si la búsqueda la hace el servidor, le mando el texto con `q` y me devuelve los productos que coinciden en toda su base de datos. Yo uso la segunda porque así la búsqueda es sobre todos los productos, no solo sobre los que ya me he descargado.
 - ¿Cómo construyes la URL y qué ocurre si el texto contiene espacios o `&`?
-
-- ¿Por qué el array de categorías se procesa de forma distinta a la respuesta de productos?
-
-- ¿Qué diferencia hay entre los campos del formulario y la consulta aplicada? ¿Cuál usas al reintentar?
-
-- ¿Qué representan `total` y `productos.length`?
-
-**Mi explicación y dudas:**
-
-- **Filtrar en el cliente o buscar en el servidor.** Si me descargo todos los productos y luego los filtro con `filter()` en el navegador, solo puedo buscar entre los que ya tengo (por ejemplo, los 12 que devuelve `limit=12`). Si la búsqueda la hace el servidor, le mando el texto con `q` y me devuelve los productos que coinciden en toda su base de datos. Yo uso la segunda porque así la búsqueda es sobre todos los productos, no solo sobre los que ya me he descargado.
-
-- **Cómo construyo la URL.** Para el texto uso `URLSearchParams`:
+**Cómo construyo la URL.** Para el texto uso `URLSearchParams`:
   ```js
   const parametros = new URLSearchParams({
     q: textoBusqueda.trim(),
@@ -289,8 +265,8 @@ Cuando pido `https://dummyjson.com/products?limit=12` recibo un objeto como este
   url = `https://dummyjson.com/products/search?${parametros}`;
   ```
   Si el texto lleva espacios o `&`, `URLSearchParams` los codifica solo (los espacios se convierten en `+` y `&` en `%26`), así que todo el texto viaja como un único valor de `q` y la URL no se rompe. Para la categoría uso `encodeURIComponent(categoriaSeleccionada)` porque va dentro de la ruta, no como parámetro.
-
-- **Por qué las categorías se procesan distinto.** La respuesta de categorías es directamente un array de textos (`["beauty", "fragrances", "groceries", ...]`), mientras que la de productos es un objeto con `products`, `total`, `skip` y `limit`. Por eso compruebo cosas diferentes:
+- ¿Por qué el array de categorías se procesa de forma distinta a la respuesta de productos?
+**Por qué las categorías se procesan distinto.** La respuesta de categorías es directamente un array de textos (`["beauty", "fragrances", "groceries", ...]`), mientras que la de productos es un objeto con `products`, `total`, `skip` y `limit`. Por eso compruebo cosas diferentes:
   ```js
   if (!Array.isArray(datos)) {
     throw new Error("La respuesta no contiene una lista de categorias");
@@ -303,16 +279,13 @@ Cuando pido `https://dummyjson.com/products?limit=12` recibo un objeto como este
   }
   setProductos(datos.products);
   ```
-
-- **Campos del formulario y consulta aplicada.** Los campos (`modoConsulta`, `textoBusqueda`, `categoriaSeleccionada`) son lo que el usuario está escribiendo en ese momento. La consulta aplicada (`consultaAplicada`) guarda la URL, la descripción, el tipo y el valor de la última petición que sí se hizo. Así puedo cambiar los campos sin que cambien los resultados que ya están en pantalla. Al pulsar «Reintentar» uso `consultaAplicada`, no los campos, para repetir exactamente la misma búsqueda que falló:
+- ¿Qué diferencia hay entre los campos del formulario y la consulta aplicada? ¿Cuál usas al reintentar?
+**Campos del formulario y consulta aplicada.** Los campos (`modoConsulta`, `textoBusqueda`, `categoriaSeleccionada`) son lo que el usuario está escribiendo en ese momento. La consulta aplicada (`consultaAplicada`) guarda la URL, la descripción, el tipo y el valor de la última petición que sí se hizo. Así puedo cambiar los campos sin que cambien los resultados que ya están en pantalla. Al pulsar «Reintentar» uso `consultaAplicada`, no los campos, para repetir exactamente la misma búsqueda que falló:
   ```js
   onClick={() => cargarProductos(consultaAplicada)}
   ```
-
-- **Qué representan `total` y `products.length`.** `total` es el número de resultados que existen en el servidor para esa consulta y `products.length` es el número de productos que me ha devuelto realmente esa petición. Por ejemplo, con `limit=12` puedo recibir 12 productos aunque `total` sea 194, porque `limit` limita cuántos me traigo, no cuántos hay. `total` no cambia al editar o eliminar en local; solo cambia con una nueva consulta.
-
-
-
+- ¿Qué representan `total` y `productos.length`?
+**Qué representan `total` y `products.length`.** `total` es el número de resultados que existen en el servidor para esa consulta y `products.length` es el número de productos que me ha devuelto realmente esa petición. Por ejemplo, con `limit=12` puedo recibir 12 productos aunque `total` sea 194, porque `limit` limita cuántos me traigo, no cuántos hay. `total` no cambia al editar o eliminar en local; solo cambia con una nueva consulta.
 
 ## Reto 11 · POST, PUT y DELETE
 

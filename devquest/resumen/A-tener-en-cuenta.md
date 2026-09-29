@@ -50,112 +50,17 @@ Navegación global e interna → Las rutas cambian la pantalla según la URL. La
 
 Tailwind → Sus clases controlan el diseño, los tamaños, los espacios y la adaptación a diferentes tamaños de pantalla.
 
-## Catálogo de productos actual
+## Catálogo de productos
 
-`CatalogoPages.jsx` coordina las consultas a DummyJSON. El formulario no consulta automáticamente: la petición de productos comienza al enviar `CatalogoForm`.
+`CatalogoPages.jsx` coordina las consultas a DummyJSON; el formulario no consulta hasta que se envía. Los modos y las URLs están en la sección «Catálogo de productos» del [README del proyecto](../README.md#catálogo-de-productos), y los estados, la consulta aplicada y la validación de la respuesta, en [Apuntes § 31](APUNTES_ESTUDIO_REACT.md#31-catálogo-consultas-a-la-api).
 
-Los modos disponibles son:
+## Preguntas
 
-- Todos: `https://dummyjson.com/products?limit=12`.
-- Texto: `https://dummyjson.com/products/search?q=...&limit=12`.
-- Categoría: `https://dummyjson.com/products/category/<categoria>?limit=12`.
-
-Para el texto se utiliza `URLSearchParams`:
-
-```jsx
-const parametros = new URLSearchParams({
-	q: textoBusqueda.trim(),
-	limit: "12",
-});
-```
-
-Esto permite que los espacios y caracteres como `&` se envíen correctamente dentro de un único valor de `q`. Para el nombre de la categoría se utiliza `encodeURIComponent`.
-
-`consultaAplicada` conserva la URL, la descripción, el tipo y el valor de la última consulta. El formulario puede cambiar sin que cambien los resultados ya mostrados. Si la petición falla, `Reintentar` llama de nuevo a `cargarProductos(consultaAplicada)`, por lo que repite la consulta guardada.
-
-`Mostrar todos` limpia el texto y la categoría y pasa directamente la URL general a `cargarProductos`. No depende de leer inmediatamente el estado después de llamar a `setModoConsulta`.
-
-`CatalogoForm` muestra los controles; `ListaProductos` muestra la consulta aplicada, los productos recibidos, el total de la API y el mensaje de cero resultados; `ProductoCard` muestra la imagen, el título, la descripción y el precio.
-
-La interfaz utiliza estados inicial, carga, éxito y error. Las categorías se mantienen en estados separados de los productos. Tailwind aporta las clases responsive y los controles nativos permiten utilizar el formulario con teclado.
-
-## Preguntas con respuestas
-
-### ¿Por qué "setTareas" y no modificar directamente "tareas"?
-
-Porque el estado no debe modificarse directamente. Si modificamos el array original, podemos mantener la misma referencia y React no tiene una nueva referencia de estado que utilizar para detectar correctamente el cambio. Por eso creamos un nuevo array y lo pasamos a "setTareas".
-
-### ¿Qué hace "[...tareas]"?
-
-Crea un nuevo array copiando los elementos del array "tareas".
-
-### ¿"[...tareas]" copia también los objetos que hay dentro?
-
-No. Hace una copia superficial: crea un nuevo array, pero los objetos interiores siguen siendo las mismas referencias. Si necesitamos modificar una tarea concreta sin modificar el objeto original, también debemos crear un nuevo objeto para esa tarea, por ejemplo mediante "{ ...tarea, ...cambios }".
-
-### ¿Por qué usamos "useEffect" para "localStorage"?
-
-Porque queremos guardar las tareas cuando cambia el estado "tareas". El efecto se ejecuta al montar el componente y posteriormente cada vez que cambia "tareas".
-
-### ¿Cómo funciona el buscador?
-
-Cuando cambia "busqueda", React vuelve a renderizar. En ese renderizado, "filter" crea una lista temporal con las tareas cuyo texto coincide con la búsqueda. Esa lista solo se utiliza para mostrar los resultados: no modifica "tareas" ni se guarda en "localStorage".
-
-Por eso cambiar el buscador puede producir un renderizado sin que se ejecute de nuevo el efecto que depende de "[tareas]".
-
-### ¿Por qué "useState(leerTareasGuardadas)" y no "useState(leerTareasGuardadas())"?
-
-Con "useState(leerTareasGuardadas)" paso la función como inicializador para que React obtenga el valor inicial del estado mediante esa función.
-
-Con "useState(leerTareasGuardadas())", la función se ejecutaría directamente antes de pasar su resultado a "useState".
-
-La primera forma permite que React utilice esa función como inicializador perezoso, en lugar de ejecutar "leerTareasGuardadas()" directamente durante la evaluación del componente.
-
-En desarrollo, "StrictMode" puede repetir la inicialización para detectar problemas, por lo que no debe entenderse como una ejecución garantizada exactamente una sola vez.
-
-### ¿Qué pasa al eliminar la última tarea?
-
-"setTareas" establece "tareas" como un array vacío "[]". Como "tareas" ha cambiado, el "useEffect" detecta el cambio y guarda el array vacío en "localStorage". Al recargar, la aplicación puede recuperar correctamente que no quedan tareas.
-
-### ¿Para qué sirve "every"?
-
-Comprueba que todos los elementos del array cumplen una condición.
-
-### ¿Para qué sirven "ids.has" e "ids.add"?
-
-"ids.has(id)" comprueba si ese ID ya está dentro del "Set".
-
-"ids.add(id)" añade el ID al "Set".
-
-Si hay dos tareas con el mismo ID, cuando se procesa la segunda, "ids.has(id)" devuelve "true", por lo que la validación falla y se rechaza toda la lista.
-
-### ¿Qué diferencia hay entre JSON inválido y una estructura incorrecta?
-
-El contenido `hola` sin comillas JSON es inválido: `JSON.parse` falla. El contenido `"hola"` con comillas JSON sí representa una cadena válida, pero tampoco es un array de tareas.
-
-"{}" → JSON válido, pero puede tener una estructura incorrecta para lo que espera la aplicación.
-
-### ¿Qué significa "sm:flex-row"?
-
-Desde el breakpoint "sm", que en Tailwind es de 640 px por defecto, se aplica "flex-row".
-
-Por debajo de 640 px se mantiene la clase base. Si la clase base es "flex-col", los elementos permanecen organizados en columna.
-
-### ¿Qué ocurre actualmente al enviar el formulario?
-
-`Article` utiliza `<form onSubmit={enviarTarea}>`. La función recibe el evento de envío, llama a `preventDefault()`, limpia y valida el texto, añade la tarea y vacía el input. El botón tiene `type="submit"` y ya no lleva un `onClick` de envío. La implementación está presente; las pruebas de clic y Enter se registran en el checklist del 06.
-
-El formulario centraliza el envío en `onSubmit`; no hay que repetir esa modificación.
+Las preguntas de repaso con respuesta están en [Preguntas.md](Preguntas.md).
 
 ## Funcionamiento del guardado en `localStorage`
 
-Cuando añadimos una tarea, generamos un array nuevo copiando las tareas que ya teníamos y colocando la nueva al final. Después utilizamos "setTareas" para actualizar el estado.
-
-React vuelve a renderizar y el "useEffect" detecta que "tareas" ha cambiado. Entonces se llama a "guardarTareas", que convierte las tareas mediante "JSON.stringify" y las guarda en "localStorage".
-
-Si cambiamos solamente el texto de búsqueda, cambia "busqueda" y se produce otro renderizado, pero "tareas" no cambia. Por ello el efecto cuya dependencia es "[tareas]" no vuelve a guardar las tareas en "localStorage".
-
-Si eliminamos la última tarea, "tareas" pasa a ser "[]" y el efecto guarda ese array vacío.
+Al añadir, completar, recuperar o eliminar tareas se crea una lista nueva con `setTareas`, y el `useEffect` que depende de `[tareas]` la guarda con `JSON.stringify`. Cambiar la búsqueda no cambia `tareas`, así que no vuelve a guardar; al eliminar la última tarea se guarda `[]`. El recorrido completo está en [Apuntes § 16–19](APUNTES_ESTUDIO_REACT.md#16-localstorage).
 
 ## Registro breve de pruebas
 

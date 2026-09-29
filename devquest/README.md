@@ -1,12 +1,3 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-
-## React Compiler
-
 # DevQuest
 
 DevQuest es una aplicación educativa creada con React y Vite. Reúne una aplicación de tareas, un Quiz y un catálogo de productos consultado mediante la API de DummyJSON.
@@ -38,27 +29,17 @@ La ruta `/catalogo` consulta productos en `https://dummyjson.com` cuando se env�
 
 La búsqueda de texto utiliza `URLSearchParams`, por lo que espacios y caracteres como `&` se envían codificados como parte de un único valor de `q`. Las categorías utilizan `encodeURIComponent` para el segmento de la URL.
 
-El catálogo muestra estados inicial, carga, éxito y error. Comprueba `response.ok`, procesa el JSON y valida que `products` sea un array. Guarda los productos recibidos, el `total` devuelto por la API y la consulta aplicada. La interfaz muestra cuántos productos se han recibido frente al total del servidor y muestra un mensaje específico cuando no hay coincidencias.
+Distingue estados inicial, carga, éxito y error, y separa los campos del formulario de la consulta aplicada: cambiar los campos no altera los resultados hasta pulsar «Consultar», «Reintentar» repite la consulta que falló y «Mostrar todos» lanza la consulta general. La explicación de los estados, la codificación y la validación de la respuesta está en [Apuntes § 31](resumen/APUNTES_ESTUDIO_REACT.md#31-catálogo-consultas-a-la-api).
 
-El formulario y la consulta aplicada son conceptos distintos. Se pueden cambiar sus campos sin modificar los resultados visibles hasta pulsar `Consultar`. `Reintentar` vuelve a utilizar la URL de la consulta que falló. `Mostrar todos` limpia el texto y la categoría y lanza la consulta general.
+Los controles son elementos nativos y se manejan con teclado; las clases responsive de Tailwind reparten las tarjetas según el ancho de la pantalla.
 
-Los controles usan formularios, botones y campos nativos, por lo que se pueden manejar con teclado. Las clases responsive de Tailwind organizan el catálogo y las tarjetas en distintos tamaños de pantalla.
+### Escrituras simuladas
 
-### Reto 11: escrituras simuladas
+El catálogo permite crear productos, consultar uno por ID, editarlo y eliminarlo mediante Fetch. La respuesta de POST se muestra aparte del listado, la edición usa un borrador y la eliminación pide confirmación. DummyJSON no persiste estas escrituras: un nuevo GET devuelve los datos originales, y las tareas guardadas no se ven afectadas. Los estados, los bloqueos y el comportamiento del borrador están explicados en [Apuntes § 32](resumen/APUNTES_ESTUDIO_REACT.md#32-escrituras-simuladas-post-put-y-delete).
 
-El catálogo incluye operaciones de escritura mediante Fetch. DummyJSON devuelve respuestas de práctica y no persiste esos cambios.
+**Estado:** cerrado funcionalmente en `84a2a01`. El alcance de las comprobaciones está en el [registro de cierre del reto](../retos/11-crear-editar-eliminar-api.md#registro-de-cierre).
 
-- **POST:** `/crear-producto` contiene un formulario controlado para título, descripción y precio. Valida los campos, muestra `Creando...`, conserva los valores si falla y los limpia tras éxito. La respuesta se guarda en `ultimaCreacion`, fuera del estado del catálogo, y se presenta en «Última creación simulada». El panel depende de que haya una creación exitosa guardada, no del estado de la petición: permanece visible durante un POST posterior y si este falla; un nuevo éxito lo reemplaza.
-- **GET + PUT:** desde una tarjeta se consulta primero `GET /products/{id}`. El formulario mantiene un borrador separado. Un PUT exitoso reemplaza solo la tarjeta seleccionada en el estado local; no se consulta de nuevo automáticamente. Si falla, se conservan la tarjeta y el borrador.
-- **DELETE:** una tarjeta abre una confirmación. Se valida la respuesta y solo se retira la tarjeta tras el éxito.
-- **Coherencia:** los estados de consulta, GET de edición, PUT y DELETE son independientes. El catálogo muestra tarjetas visibles y total de la última consulta por separado. Hay guardas en manejadores y controles; los bloqueos y cancelaciones del checklist están corregidos y revisados.
-- Las altas POST se muestran en una ruta y estado propios; no se incorporan a la lista de productos obtenida por GET. Las tareas mantienen su persistencia existente en `localStorage`, independiente del Reto 11.
-
-#### Cierre funcional · `84a2a01`
-
-El reto 11 está cerrado funcionalmente. Se comprobaron los recorridos principales en navegador y los bloqueos, errores y reintentos con pruebas aisladas de los manejadores. Lint y build pasan. El [registro de cierre](../retos/11-crear-editar-eliminar-api.md#registro-de-cierre) detalla el alcance y distingue las comprobaciones declaradas por el alumno.
-
-Continúa con el [reto 12 · Vercel y ramas](../retos/12-deploy-vercel-y-ramas.md). La conversación de comprensión con el tutor sigue pendiente por separado.
+Continúa con el [reto 12 · Vercel y ramas](../retos/12-deploy-vercel-y-ramas.md).
 
 ## Organización del código
 
@@ -98,3 +79,13 @@ npm run build
 ```
 
 `npm run lint` y `npm run build` pasan en el estado actual (última comprobación tras resolver los bloques A–E del checklist de cierre).
+
+## Dónde está cada cosa
+
+- **Este README:** qué hace la aplicación, cómo se ejecuta y cómo está organizado el código.
+- **[Resumen del proyecto](resumen/resumen.md):** mapa de la estructura, índice de conceptos y reglas para recordar.
+- **[Apuntes de estudio](resumen/APUNTES_ESTUDIO_REACT.md):** teoría con ejemplos del código del proyecto.
+- **[Preguntas de repaso](resumen/Preguntas.md):** preguntas del proyecto con su respuesta.
+- **[Recordatorio de conceptos](resumen/A-tener-en-cuenta.md):** definiciones cortas, preguntas breves y registro de pruebas.
+- **[Cuaderno](APRENDIZAJE.md):** mis respuestas a las preguntas de cada reto.
+- **[Repaso con el tutor](REPASO-CON-TUTOR.md)** y **[revisión escrita](resumen/REVISION-PENDIENTE.md):** seguimiento de las conversaciones de comprensión.

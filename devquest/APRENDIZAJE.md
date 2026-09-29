@@ -276,6 +276,19 @@ No quedan dudas pendientes sobre este bloque.
 
 **Mi explicación y dudas:** pendiente.
 
+## Reto 12 · Deploy en Vercel y ramas
+
+**Estado:** por empezar. [Enunciado y checklist](../retos/12-deploy-vercel-y-ramas.md).
+
+- ¿Qué diferencia hay entre un commit, un push, una pull request y un despliegue? Localiza un ejemplo de cada uno en esta entrega.
+- ¿Para qué utilizo `develop` y `main`? ¿Qué comprobé en Preview antes de integrar el cambio?
+- ¿Por qué Root Directory es `devquest` y Output Directory es `dist`? ¿Qué hace el build?
+- ¿Qué resuelve `vercel.json` cuando abro o recargo `/catalogo` directamente?
+- ¿Por qué no aparecen en producción las tareas que guardé en localhost?
+- ¿Cómo identifico el commit publicado y cómo preparo una corrección si detecto un fallo?
+
+**Mi explicación y dudas:** pendiente.
+
 ## Comentarios explicativos en el código
 
 Cuando utilices algo por primera vez, escribe un comentario breve con tus palabras junto a esa parte: qué guarda un estado, por qué haces una comprobación o por qué un dato vive en el padre. No comentes cada línea. Usa este archivo para explicaciones largas y actualiza los comentarios si cambia el código.

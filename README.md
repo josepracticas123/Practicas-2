@@ -23,24 +23,18 @@ Los retos 01–08 están cerrados funcionalmente. La cabecera del 06 está corre
 - `npm run lint` y `npm run build` pasan en la versión revisada.
 - Las explicaciones del cuaderno y el repaso escrito están completadas. La conversación para comprobar comprensión se prepara en [Repaso con el tutor](devquest/REPASO-CON-TUTOR.md); sus checks son independientes del cierre funcional.
 
-## Seguimiento · 28/09/2026 · Reto 11
+## Seguimiento · 29/09/2026 · `fce6a5d`
 
-El catálogo ya implementa las operaciones simuladas de creación, edición y eliminación con DummyJSON. El panel de «Última creación simulada» conserva la última respuesta exitosa: un POST posterior pendiente o fallido no lo oculta, y solo un nuevo éxito reemplaza sus datos.
+El catálogo tiene implementadas las operaciones principales. En la revisión se comprobaron edición con GET + PUT, cancelación y confirmación de DELETE, actualización de tarjetas y recuperación de los datos originales al consultar de nuevo. `npm run lint` y `npm run build` pasan en esta versión.
 
-- POST usa un formulario controlado, valida título, descripción y precio, muestra `Creando...`, conserva los campos si falla y los limpia tras éxito.
-- GET por ID carga el producto antes de abrir el formulario; PUT actualiza localmente la tarjeta seleccionada y DELETE pide confirmación.
-- El catálogo diferencia tarjetas visibles del total de la última consulta e informa que DummyJSON no persiste las escrituras.
-- El código separa estados de consulta y escritura e incluye guardas para operaciones incompatibles; falta verificar la matriz completa de concurrencia y los flujos GET, PUT y DELETE.
-- Se comprobó en navegador con Fetch interceptado: POST exitoso seguido de POST fallido. El panel anterior permaneció visible durante la petición y tras el error; se conservaron los campos, el botón mostró `Creando...` y no se inició un envío simultáneo adicional.
-- La secuencia anterior usó respuestas simuladas en el navegador; no verifica una escritura real en DummyJSON. Las demás pruebas de la sección 6 del reto siguen pendientes.
+**Siguiente paso:** completa el [checklist de cierre del reto 11](retos/11-crear-editar-eliminar-api.md#checklist-de-cierre--empieza-aquí), en orden:
 
-**Orden para continuar:**
+1. Bloqueos durante PUT y cancelaciones durante PUT/DELETE.
+2. Ruta de edición incompleta.
+3. Mensajes de categorías y de carga de productos.
+4. Cuaderno, documentación y comprobaciones finales.
 
-- Lee [APUNTES_ESTUDIO_REACT](devquest/resumen/APUNTES_ESTUDIO_REACT.md) y localiza sus ejemplos en tu código; anota solo las dudas concretas.
-- Comenta el [repaso con el tutor](devquest/REPASO-CON-TUTOR.md). Sus casillas siguen pendientes hasta la conversación.
-- Completa la lista de mejoras del [09](retos/09-primeras-llamadas-api.md): la petición ya funciona, quedan ajustes pequeños de import, mensajes y documentación.
-- Continúa con el [10 · Búsqueda y filtros en servidor](retos/10-busqueda-y-filtros-api.md).
-- Después practica [11 · POST, PUT y DELETE](retos/11-crear-editar-eliminar-api.md). DummyJSON simula las escrituras; sigue las reglas del enunciado para distinguirlas de datos persistidos.
+El reto 11 sigue pendiente de cierre. El checklist también recoge los detalles pendientes del 09 y del 10; conserva lo que ya funciona y marca cada paso después de probarlo. El [repaso con el tutor](devquest/REPASO-CON-TUTOR.md) registra por separado las conversaciones realizadas.
 
 La sección siguiente conserva la guía de instalación inicial como referencia.
 
@@ -99,6 +93,8 @@ Lee [Tu primer componente](https://es.react.dev/learn/your-first-component) y [E
 
 **Listo para empezar:** puedes arrancar la app, cambiar un texto y explicar dónde lo has cambiado.
 
+Tras cerrar el 11, continúa con el [12 · Deploy en Vercel y ramas](retos/12-deploy-vercel-y-ramas.md): trabajo en `develop`, Preview y publicación desde `main`.
+
 ## Retos definidos
 
 - [01 · Mi panel](retos/01-panel-visual.md): enunciado inicial de la estructura visual.
@@ -115,6 +111,7 @@ Lee [Tu primer componente](https://es.react.dev/learn/your-first-component) y [E
 
 - [10 · Busca productos en el servidor](retos/10-busqueda-y-filtros-api.md): GET, búsqueda por texto, categorías y consulta aplicada. **Implementado; revisión del checklist pendiente.**
 - [11 · Crea, edita y elimina mediante peticiones](retos/11-crear-editar-eliminar-api.md): POST, GET por ID, PUT y DELETE con respuestas simuladas. **Implementado parcialmente; POST comprobado, faltan las demás pruebas y el cierre del reto.**
+- [12 · Publica DevQuest con Vercel y trabaja en develop](retos/12-deploy-vercel-y-ramas.md): despliegue, rutas SPA y recorrido de Preview a Production mediante pull request. **Por empezar, después del cierre del 11.**
 
 Trabaja por bloques y comprueba cada uno antes de continuar.
 
@@ -158,7 +155,8 @@ Practicas-2/
 │   ├── 08-quiz-recorrido.md
 │   ├── 09-primeras-llamadas-api.md
 │   ├── 10-busqueda-y-filtros-api.md
-│   └── 11-crear-editar-eliminar-api.md
+│   ├── 11-crear-editar-eliminar-api.md
+│   └── 12-deploy-vercel-y-ramas.md
 └── devquest/
     ├── APRENDIZAJE.md
     ├── package.json

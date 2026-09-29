@@ -1,8 +1,73 @@
 # 11 · Crea, edita y elimina mediante peticiones
 
-**Estado:** por empezar. **Antes:** termina el 10. Haz un bloque cada vez: POST, después GET + PUT y finalmente DELETE.
+**Estado:** operaciones principales implementadas; pendiente de cierre tras la revisión del 29/09/2026 (`fce6a5d`). Empieza por el checklist siguiente.
 
 **Tu misión:** añadir operaciones de escritura al catálogo, practicando formularios, método HTTP, cabeceras, cuerpo JSON y actualización de la interfaz después de una respuesta correcta.
+
+## Checklist de cierre · empieza aquí
+
+Ya funcionan los recorridos principales de creación, edición y eliminación. En la revisión se comprobaron GET + PUT, cancelar/confirmar DELETE y recuperar los datos originales al consultar de nuevo. Lint y build pasan en la versión revisada. Conserva ese trabajo y resuelve estos bloques en orden; marca cada casilla después de comprobarla.
+
+### A. Impide que dos operaciones se interfieran
+
+Archivos: `CatalogoPages.jsx`, `ProductoCard.jsx`, `ListaProductos.jsx` y `EditarProductosForm.jsx`.
+
+- [ ] Localiza qué representa `estadoEdicion` en la página y qué representa `estadoGuardado`. Revisa la guarda de `editarProducto(id)`: durante PUT debe comprobar el estado que realmente indica que se está guardando.
+- [ ] Mientras se guarda, bloquea editar otro producto, eliminar, consultar y enviar otra vez. Aplica el bloqueo tanto a los controles como a sus manejadores; pasa las props necesarias hasta las tarjetas.
+- [ ] Deshabilita «Cancelar» durante PUT y protege también `cancelarEdicion`. Antes de enviar, cancelar debe seguir descartando el borrador sin hacer ninguna petición.
+- [ ] Comprueba que, después de un éxito o un error, se puede continuar: guardar otra vez, cancelar el borrador o realizar una nueva consulta.
+- [ ] **Prueba con conexión lenta:** guarda el producto A e intenta editar B o cancelar mientras espera. No debe iniciarse otro GET ni cerrarse el editor. Tras terminar, abre B y comprueba que una respuesta anterior no modifica ni cierra su formulario.
+
+### B. Haz coherente la cancelación de DELETE
+
+Archivos: `EliminarProducto.jsx` y `CatalogoPages.jsx`.
+
+- [ ] Antes de confirmar, «Cancelar» y Escape cierran la confirmación sin enviar DELETE.
+- [ ] Durante DELETE, bloquea también Escape y protege `cancelarEliminacion`; ahora el botón está bloqueado, pero el teclado permite cerrar la confirmación.
+- [ ] **Prueba con conexión lenta:** confirma, pulsa Escape y comprueba que la confirmación permanece hasta que termina la petición. Si falla, conserva la tarjeta y permite reintentar o cancelar.
+
+Cerrar un formulario o un modal no cancela una petición enviada. Para este cierre basta con impedir esas cancelaciones mientras se espera; no necesitas añadir un sistema de cancelación de peticiones.
+
+### C. Resuelve la ruta de edición incompleta
+
+Archivos: `App.jsx` y `EditarProductoPage.jsx`.
+
+- [ ] Mantén un único recorrido funcional. Como ya editas dentro del catálogo, puedes retirar la ruta `/editar-producto`, su import y la página que quede sin uso. Si decides conservarla, necesita recibir un producto y todos sus callbacks antes de permitir guardar.
+- [ ] **Prueba:** entra directamente en `/editar-producto`. Debe mostrar una pantalla coherente (por ejemplo, la página no encontrada si retiraste la ruta), nunca un formulario vacío que falla al enviar. Editar desde una tarjeta debe seguir funcionando.
+
+### D. Recupera los mensajes pendientes del 09 y del 10
+
+Archivos: `CatalogoPages.jsx` y `CatalogoForm.jsx`.
+
+- [ ] Conserva y muestra el valor de `mensajeErrorCategorias`: actualmente se guarda el error, pero se descarta su lectura. Colócalo junto al selector y permite repetir «Cargar categorías».
+- [ ] Muestra «Cargando productos…» mientras `estadoPeticion` sea `"cargando"`; desaparece al terminar, tanto en éxito como en error.
+- [ ] **Prueba:** sin conexión, carga categorías y comprueba el mensaje. Recupera la conexión y repite. Después consulta productos con conexión lenta y comprueba el mensaje de carga y el bloqueo de controles. Restaura la conexión normal al acabar.
+
+### E. Deja los documentos de acuerdo con lo que has comprobado
+
+- [ ] En el bloque 09 de [APRENDIZAJE](../devquest/APRENDIZAJE.md), corrige la frase sobre el segundo `await`: `respuesta.json()` lee el cuerpo JSON y lo interpreta como datos JavaScript. Añade un ejemplo de tu respuesta de productos.
+- [ ] Completa las respuestas que faltan en los bloques 10 y 11 del cuaderno con ejemplos de tu código. Puedes aprovechar tus explicaciones del reto 10 sin escribir otro resumen nuevo.
+- [ ] Actualiza los estados y pendientes de los resúmenes y guías: distingue implementación, pruebas realizadas y conversación con el tutor. No marques una prueba o conversación solo porque el código ya existe.
+- [ ] Añade un comentario breve con tus palabras donde introduzcas una comprobación nueva: explica qué problema evita. No hace falta comentar cada línea.
+
+### F. Comprueba el cierre
+
+- [ ] Repite crear, editar, cancelar, eliminar y consultar de nuevo. Comprueba que las tarjetas solo cambian tras una respuesta correcta.
+- [ ] Prueba errores de red en POST, PUT y DELETE: conserva los campos o la tarjeta, muestra un mensaje comprensible y permite recuperarte.
+- [ ] Comprueba los controles con teclado y a 375 px y 1280 px. Revisa también que Tareas y Quiz siguen funcionando.
+- [ ] Ejecuta `npm run lint` y `npm run build` desde `devquest/` después de los cambios.
+- [ ] Registra debajo los resultados y revisa las casillas reabiertas de las secciones 5 y 6. Si algo falla, déjalo pendiente con una frase que explique cómo reproducirlo.
+
+| Prueba de cierre | Resultado observado |
+| --- | --- |
+| PUT lento: editar otro producto y cancelar | Pendiente |
+| DELETE lento: Escape; error y reintento | Pendiente |
+| Acceso directo a la ruta de edición | Pendiente |
+| Error de categorías y carga de productos | Pendiente |
+| Operaciones, teclado, tamaños, Tareas y Quiz | Pendiente |
+| Lint y build tras las correcciones | Pendiente |
+
+Los checks del enunciado que sigue conservan tu progreso. Los puntos reabiertos necesitan una nueva comprobación; el reto se cierra cuando este checklist está resuelto.
 
 ## 1. Entiende la simulación
 
@@ -60,8 +125,8 @@ Esta separación evita mezclar resultados del servidor con altas que no existen 
 ## 5. Mantén coherente la pantalla
 
 - [x] Guarda el estado de la operación de escritura separado del estado de consulta del 10; utiliza nombres claros como «guardando» o «eliminando».
-- [x] Mientras haya una petición en curso, bloquea las acciones incompatibles: consultar, editar otro producto, enviar dos veces o eliminar a la vez. Comprueba el bloqueo también en los manejadores.
-- [x] Al completar o fallar, vuelve a permitir las acciones. Los errores no deben dejar botones bloqueados indefinidamente.
+- [ ] Mientras haya una petición en curso, bloquea las acciones incompatibles: consultar, editar otro producto, enviar dos veces o eliminar a la vez. Comprueba el bloqueo también en los manejadores.
+- [ ] Al completar o fallar, vuelve a permitir las acciones. Los errores no deben dejar botones bloqueados indefinidamente.
 - [x] Muestra los mensajes junto al formulario o producto al que pertenecen.
 - [x] Después de una edición o eliminación local, distingue «Tarjetas visibles» del «Total del servidor en la última consulta». No cambies el total del servidor fingiendo que persistió una escritura.
 - [x] Una nueva consulta sustituye el listado por el resultado real del servidor y descarta los cambios simulados sobre esas tarjetas. Cierra cualquier editor o confirmación anterior.
@@ -80,7 +145,7 @@ Esta separación evita mezclar resultados del servidor con altas que no existen 
 - [x] Tras editar o eliminar, vuelvo a consultar: reaparece el dato original y sé explicar por qué. No es un fallo de mi estado.
 - [x] Reviso en Network método, URL, cuerpo, estado HTTP y respuesta de cada operación.
 - [x] La interfaz funciona con teclado y a 375 px y 1280 px; Tareas y Quiz siguen funcionando.
-- [x] Lint y build pasan y he respondido las preguntas del bloque 11 del cuaderno.
+- [ ] Lint y build pasan y he respondido las preguntas del bloque 11 del cuaderno.
 
 **Registro:** anota una prueba correcta y una fallida por método, y lo observado al volver a consultar.
 
@@ -119,3 +184,5 @@ Conclusión: las peticiones se realizan correctamente. El hecho de que los datos
 Referencias: [Productos · DummyJSON](https://dummyjson.com/docs/products), [Uso de Fetch · MDN](https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Using_Fetch).
 
 [Volver a la guía](../README.md) · [Reto 10](10-busqueda-y-filtros-api.md)
+
+**Después del cierre:** [12 · Deploy en Vercel y trabajo en develop](12-deploy-vercel-y-ramas.md).

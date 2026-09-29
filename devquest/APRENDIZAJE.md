@@ -373,7 +373,7 @@ No es un problema del estado de React, sino del funcionamiento de la API de prá
 
 ## Reto 12 · Deploy en Vercel y ramas
 
-**Estado:** por empezar. [Enunciado y checklist](../retos/12-deploy-vercel-y-ramas.md).
+**Estado:** en curso. Ya está publicado en Vercel y el trabajo diario vive en `develop`. Hecho: ramas `develop` y `main`, `devquest/vercel.json`, primera integración `develop → main` y la mejora del portal en `develop` (`636e800`) con su Preview generada. Pendiente: la pull request del cambio visible, su merge y las comprobaciones en el navegador. [Enunciado y checklist](../retos/12-deploy-vercel-y-ramas.md).
 
 - ¿Qué diferencia hay entre un commit, un push, una pull request y un despliegue? Localiza un ejemplo de cada uno en esta entrega.
 - ¿Para qué utilizo `develop` y `main`? ¿Qué comprobé en Preview antes de integrar el cambio?
@@ -382,7 +382,18 @@ No es un problema del estado de React, sino del funcionamiento de la API de prá
 - ¿Por qué no aparecen en producción las tareas que guardé en localhost?
 - ¿Cómo identifico el commit publicado y cómo preparo una corrección si detecto un fallo?
 
-**Mi explicación y dudas:** pendiente.
+**Mi explicación y dudas:**
+
+- **`develop` y `main`:** `develop` es donde trabajo a diario y cada `push` ahí genera una **Preview** en Vercel, una URL de prueba. `main` guarda solo lo que ya está comprobado y es la rama que Vercel publica en **Production**. Un cambio en `develop` no toca la web publicada porque Vercel construye cada rama por separado.
+- **Commit, push, pull request y despliegue:** un commit guarda el cambio en mi ordenador (`2e271b7`, `636e800`); el `push` lo sube a GitHub (mi `develop` pasó a `636e800`); la pull request propone pasar esos commits de `develop` a `main` (así se hizo con la PR #1 y la PR #3, merge `c22d4da`); y el despliegue es Vercel construyendo un commit y publicándolo (Preview de `636e800`, Production de `c22d4da`).
+- **Preview frente a Production:** es la misma aplicación, pero distinto commit y distinto origen. La Preview me deja probar el cambio antes de integrarlo y en Production solo aparece cuando se hace merge en `main`.
+- **GitHub con Vercel:** al importar el repositorio, Vercel se conecta a GitHub y despliega solo. Los despliegues aparecen en GitHub creados por `vercel[bot]`: uno de **Preview** por cada `push` a `develop` y uno de **Production** cada vez que `main` recibe un merge.
+- **Root Directory `devquest`:** la aplicación no está en la raíz del repositorio, sino dentro de `devquest/`, que es donde están `package.json`, `vercel.json` y `src/`. Vercel tiene que construir desde esa carpeta, y por eso el `vercel.json` va junto a ese `package.json`. El **build** (`npm run build`) compila React y Tailwind y deja el resultado en `dist/`, que es el Output Directory.
+- **`vercel.json`:** como uso `BrowserRouter`, si abro o recargo `/catalogo` Vercel no encuentra ese archivo en el servidor. El rewrite `"/(.*)"` hacia `/index.html` hace que el servidor entregue siempre `index.html` y que sea React quien decida la pantalla. Lo he comprobado: `/tareas`, `/quiz`, `/catalogo`, `/crear-producto` y una ruta inventada devuelven el `index.html` y no dan un 404 de Vercel.
+- **`npm ci`, `lint`, `build` y `preview`:** `npm ci` instala exactamente las versiones de `package-lock.json` (es lo que ejecuta Vercel). `npm run lint` revisa el código sin ejecutarlo y ahora pasa sin errores, porque `2e271b7` quitó un import que no se usaba. `npm run build` genera la carpeta `dist/`. `npm run preview` sirve esa compilación en local para revisarla; no publica nada en Internet.
+- **Flujo de trabajo:** `develop → Preview → pull request → main → Production`. La pull request es el momento de revisar qué va a entrar en producción y, después del merge, vuelvo a sincronizar `develop` con `main` para seguir trabajando.
+- **`-u` en el primer push:** `git push -u origin develop` sube la rama y la deja enlazada con `origin/develop`, así los siguientes `push` y `pull` no necesitan indicar el remoto ni la rama.
+- **Dudas y pendientes:** falta abrir la pull request `develop → main` con el cambio visible (`636e800`) y, después del merge, comprobar Production. También quedan por hacer las comprobaciones en el navegador (Portal, Tareas, Quiz y Catálogo, imágenes y estilos, búsqueda del catálogo, tarea guardada que se conserva al recargar y los tamaños de móvil y escritorio) y anotar la versión de Node de Vercel; en local uso Node `v24.21.0` con npm `11.19.0`. La Preview del commit `636e800` todavía pide iniciar sesión en Vercel, así que hay que revisar cómo enseñársela al tutor.
 
 ## Comentarios explicativos en el código
 

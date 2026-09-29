@@ -27,9 +27,18 @@ Los retos 01–08 están cerrados funcionalmente. La cabecera del 06 está corre
 
 El reto 11 está cerrado funcionalmente: creación, edición, eliminación, bloqueos y cancelaciones revisados. Lint y build pasan. Consulta el [registro de cierre](retos/11-crear-editar-eliminar-api.md#registro-de-cierre) para ver el alcance de las comprobaciones.
 
-**Siguiente paso:** [12 · Deploy en Vercel y ramas](retos/12-deploy-vercel-y-ramas.md). Trabaja en `develop`, prueba la Preview y publica desde `main` según el enunciado.
+**Siguiente paso:** [12 · Publica DevQuest con Vercel y trabaja en develop](retos/12-deploy-vercel-y-ramas.md). Está en curso: la aplicación ya está publicada en Vercel y el trabajo diario se hace en `develop`.
 
 El cuaderno de los retos 09–11 está respondido. La conversación de comprensión con el tutor sigue pendiente y es independiente del cierre funcional; no necesitas escribir otro resumen para empezar el 12.
+
+## Seguimiento · reto 12 en curso
+
+DevQuest ya está publicado y el trabajo diario vive en `develop`:
+
+- **URL de producción:** https://practicasnadunet.vercel.app (la antigua `https://practicas-2-two.vercel.app` ya no se utiliza).
+- **Flujo:** `develop → Preview → pull request → main → Production`.
+- Hecho: ramas `develop` y `main`, `devquest/vercel.json` con el rewrite a `index.html` para las rutas de React, primera integración `develop → main` y la mejora del portal en `develop` (`636e800`) con su Preview generada.
+- Pendiente: abrir la pull request `develop → main` de esa mejora, mergearla, comprobar Production después del merge y terminar las comprobaciones en el navegador. Detalle y evidencias en [12 · Publica DevQuest con Vercel y trabaja en develop](retos/12-deploy-vercel-y-ramas.md).
 
 La sección siguiente conserva la guía de instalación inicial como referencia.
 
@@ -106,7 +115,7 @@ Continúa con el [12 · Deploy en Vercel y ramas](retos/12-deploy-vercel-y-ramas
 
 - [10 · Busca productos en el servidor](retos/10-busqueda-y-filtros-api.md): GET, búsqueda por texto, categorías y consulta aplicada. **Implementado; revisión del checklist pendiente.**
 - [11 · Crea, edita y elimina mediante peticiones](retos/11-crear-editar-eliminar-api.md): POST, GET por ID, PUT y DELETE con respuestas simuladas. **Cerrado funcionalmente en `84a2a01`; conversación con el tutor pendiente.**
-- [12 · Publica DevQuest con Vercel y trabaja en develop](retos/12-deploy-vercel-y-ramas.md): despliegue, rutas SPA y recorrido de Preview a Production mediante pull request. **Por empezar; siguiente reto.**
+- [12 · Publica DevQuest con Vercel y trabaja en develop](retos/12-deploy-vercel-y-ramas.md): despliegue, rutas SPA y recorrido de Preview a Production mediante pull request. **En curso: publicado en Vercel y con el flujo `develop → PR → main`; falta la pull request del cambio visible y las comprobaciones en el navegador.**
 
 Trabaja por bloques y comprueba cada uno antes de continuar.
 

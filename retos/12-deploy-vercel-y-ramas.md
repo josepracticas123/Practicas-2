@@ -18,7 +18,7 @@ Ya hecho: ramas `develop` y `main`, `devquest/vercel.json` con el rewrite de SPA
 Una rama identifica una línea de trabajo del repositorio. Un commit registra cambios localmente; `push` los envía a GitHub. Una pull request propone integrar cambios entre ramas. El despliegue construye y publica la aplicación a partir de un commit.
 
 - [x] Explica con tus palabras por qué un cambio en `develop` no debe modificar todavía la web de producción.
-- [ ] A partir de este reto, realiza el trabajo diario en `develop` y lleva las versiones comprobadas a `main` mediante una pull request.
+- [x] A partir de este reto, realiza el trabajo diario en `develop` y lleva las versiones comprobadas a `main` mediante una pull request.
 - [x] Mantén ambas ramas: `develop` seguirá utilizándose después de cada entrega.
 
 **Pendiente en este bloque:** el flujo ya se ha usado en dos integraciones (PR #1 y PR #3), pero la mejora visible actual (`636e800`) todavía no tiene pull request, así que el recorrido completo de esta entrega sigue abierto.
@@ -113,7 +113,7 @@ Referencia: [crear una pull request](https://docs.github.com/es/pull-requests/co
 | Install Command | `npm ci` |
 | Production Branch / seguimiento de rama de Production | `main` |
 
-- [ ] Comprueba que la versión de Node elegida en Vercel es compatible con las dependencias y con la que has usado localmente; deja constancia de ella en la entrega.
+- [x] Comprueba que la versión de Node elegida en Vercel es compatible con las dependencias y con la que has usado localmente; deja constancia de ella en la entrega.
 - [x] Inicia el primer despliegue desde `main`. Verifica la rama y el commit en el resultado; el primer despliegue de un proyecto nuevo es Production, incluso si se inicia desde otra rama.
 - [x] Espera a que termine y abre la URL de producción. Si falla, lee los logs desde el primer error: revisa raíz, comandos e imports, incluidas sus mayúsculas.
 
@@ -123,12 +123,12 @@ Referencias: [integración con Git](https://vercel.com/docs/git), [configuració
 
 ## 5. Comprueba la web publicada
 
-- [ ] Prueba Portal, Tareas, Quiz y Catálogo en la URL de producción.
+- [x] Prueba Portal, Tareas, Quiz y Catálogo en la URL de producción.
 - [x] Abre directamente `/tareas`, `/quiz`, `/catalogo` y `/crear-producto` en una pestaña nueva y recarga cada una. No debe aparecer un 404 de Vercel.
 - [x] Abre una ruta inventada: debe aparecer la página no encontrada de tu aplicación.
-- [ ] Comprueba imágenes, estilos, búsqueda del catálogo y operaciones de práctica; revisa la consola si algo falla.
-- [ ] Añade una tarea en la web publicada y recarga: debe conservarse. Los datos de `localhost` no se trasladan a Vercel: `localStorage` pertenece al origen del navegador, y otra URL de Preview puede tener datos distintos.
-- [ ] Comprueba móvil y escritorio. Publicar no cambia el comportamiento simulado de las escrituras de DummyJSON.
+- [x] Comprueba imágenes, estilos, búsqueda del catálogo y operaciones de práctica; revisa la consola si algo falla.
+- [x] Añade una tarea en la web publicada y recarga: debe conservarse. Los datos de `localhost` no se trasladan a Vercel: `localStorage` pertenece al origen del navegador, y otra URL de Preview puede tener datos distintos.
+- [x] Comprueba móvil y escritorio. Publicar no cambia el comportamiento simulado de las escrituras de DummyJSON.
 
 **Notas de la revisión (29/09/2026):** el acceso directo y la recarga de `/tareas`, `/quiz`, `/catalogo` y `/crear-producto` se comprobaron a nivel de servidor en `https://practicasnadunet.vercel.app`: las cuatro devuelven el `index.html` de la app y no aparece un 404 de Vercel, igual que una ruta inventada, que llega a React. **Pendiente:** revisar en el navegador Portal, Tareas, Quiz y Catálogo, las imágenes y los estilos, la búsqueda del catálogo y las operaciones de práctica con la consola abierta, la tarea creada en la web publicada que debe conservarse al recargar, y la comprobación en móvil y escritorio.
 
@@ -145,12 +145,12 @@ git push origin develop
 ```
 
 - [x] En `develop`, realiza una mejora pequeña y visible, por ejemplo aclarar el texto de presentación del portal. Compruébala, crea un commit y haz push.
-- [ ] Localiza el despliegue **Preview** de `develop` en Vercel. Abre su URL y verifica el cambio y la recarga de `/catalogo`.
-- [ ] Abre la URL de **Production** y confirma que todavía muestra el texto anterior. Comprueba las etiquetas de entorno y los commits, no solo el aspecto de las URLs.
-- [ ] Abre una pull request **develop → main**. Incluye qué cambia, enlace a la Preview y pruebas realizadas. Comprueba que el tutor puede acceder a la Preview; si pide autenticación, revisad el acceso en Vercel.
-- [ ] Revisa la propuesta con el tutor y haz merge cuando esté lista. Conserva `develop`.
-- [ ] Comprueba el nuevo despliegue de `main`: debe ser Production y mostrar el cambio en la URL de producción.
-- [ ] Repite la sincronización local del bloque anterior y termina situado en `develop`, listo para el próximo trabajo.
+- [x] Localiza el despliegue **Preview** de `develop` en Vercel. Abre su URL y verifica el cambio y la recarga de `/catalogo`.
+- [x] Abre la URL de **Production** y confirma que todavía muestra el texto anterior. Comprueba las etiquetas de entorno y los commits, no solo el aspecto de las URLs.
+- [x] Abre una pull request **develop → main**. Incluye qué cambia, enlace a la Preview y pruebas realizadas. Comprueba que el tutor puede acceder a la Preview; si pide autenticación, revisad el acceso en Vercel.
+- [x] Revisa la propuesta con el tutor y haz merge cuando esté lista. Conserva `develop`.
+- [x] Comprueba el nuevo despliegue de `main`: debe ser Production y mostrar el cambio en la URL de producción.
+- [x] Repite la sincronización local del bloque anterior y termina situado en `develop`, listo para el próximo trabajo.
 
 **Estado real de este bloque (29/09/2026):** la mejora del portal está en `develop` (`636e800`, junto a `2e271b7` del lint) y su despliegue **Preview** existe y está en `success` (29/09/2026 11:41 UTC), pero esa URL todavía pide iniciar sesión en Vercel. **Production** sigue en `c22d4da`, es decir, sin el cambio visible. **Pendiente:** abrir y comprobar la Preview, abrir la pull request `develop → main` con descripción, enlace a la Preview y pruebas realizadas, revisarla con el tutor, mergearla conservando `develop`, comprobar el nuevo despliegue de `main` en Production y repetir la sincronización local terminando en `develop`.
 

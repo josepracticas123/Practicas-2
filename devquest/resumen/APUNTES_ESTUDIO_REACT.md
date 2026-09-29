@@ -5,6 +5,7 @@
 - Lee por bloques y abre el archivo del proyecto que se menciona.
 - Intenta explicar el ejemplo antes de seguir; no necesitas memorizarlo ni escribir otro resumen.
 - Anota solo lo que no entiendas, con el archivo y la expresión concreta.
+- Las preguntas de repaso con respuesta están en [Preguntas](Preguntas.md).
 - Después comenta el [repaso con el tutor](../REPASO-CON-TUTOR.md). El 09 empieza después de esa conversación.
 
 
@@ -707,19 +708,11 @@ Estos conceptos aparecen realmente en el código actual:
 
 React Router ya está instalado. `BrowserRouter` envuelve `App` en `main.jsx` y `App` declara `Routes` para `/`, `/tareas`, `/quiz` y una ruta comodín. `PortalPage` tiene un array de miniapps, `map` y el componente reutilizable `MiniappCards`; sus tarjetas de Tareas y Quiz tienen enlaces. `Header` también enlaza Portal, Tareas y Quiz. `Header` utiliza `NavLink` para distinguir la ruta activa.
 
-## 27. Lo que he aprendido en el Reto 06
+## 27. Rutas y navegación
 
-El Reto 06 está cerrado funcionalmente, incluida la cabecera móvil verificada en `f5cb81c`. Estas notas describen las rutas, el Portal y la separación actual de la aplicación.
+El enunciado y las comprobaciones del reto 06 están en [06 · Tu portal de miniapps](../../retos/06-portal-y-rutas.md); mis respuestas, en el [cuaderno](../APRENDIZAJE.md).
 
-### YA LO TENGO
-
-- Una aplicación de tareas funcional.
-- Una navegación interna por estado con botones de `TareasPage`.
-- Componentes separados para cabecera, pie, formulario y vistas.
-- Estado de tareas en `TareasPage`.
-- Persistencia de tareas en `localStorage`.
-
-### LO QUE HE APRENDIDO EN EL RETO 06
+### Qué hace cada pieza
 
 - **Separar `TareasPage`:** este paso ya está implementado: la página contiene el estado, la lectura inicial, el efecto, las acciones y las listas calculadas.
 - **Páginas:** ya existen `PortalPage` y `TareasPage` como componentes que representan pantallas completas.
@@ -735,176 +728,29 @@ El Reto 06 está cerrado funcionalmente, incluida la cabecera móvil verificada 
 - **Rutas desconocidas:** la ruta comodín ya muestra «Página no encontrada» y un enlace al portal.
 - **Estado al desmontar y montar:** al salir de la ruta de tareas, el componente puede desmontarse y perder estados locales como la sección activa o el texto de búsqueda. Al volver a montarse, el inicializador vuelve a leer las tareas persistidas. Las tareas se conservan porque están en `localStorage`, mientras que un texto sin enviar puede reiniciarse.
 
-El formulario ya centraliza el envío en `onSubmit`. Las rutas principales, los enlaces del Portal, la separación de `TareasPage` y las comprobaciones del Reto 06 están implementados.
+## 28. Preguntas de repaso
 
-## 28. Preguntas que debería saber responder
+Las preguntas del proyecto con sus respuestas están en [Preguntas de repaso](Preguntas.md).
 
-### ¿Por qué utilizas `useState`?
+## 29. Reto 07: selección y comprobación
 
-Porque necesito guardar datos que cambian y provocar un nuevo renderizado cuando cambian. Lo uso para la sección, la lista de tareas, la búsqueda y el texto del input.
+El enunciado, el checklist y las pruebas están en [07 · Tu primera pregunta del quiz](../../retos/07-quiz-respuestas.md); mis respuestas, en el [cuaderno](../APRENDIZAJE.md). Lo que conviene retener:
 
-### ¿Qué guarda cada estado de `TareasPage`?
-
-`seccionActual` guarda la vista, `tareas` guarda todas las tareas y `busqueda` guarda el texto del buscador.
-
-### ¿Por qué usas `useState(leerTareasGuardadas)`?
-
-Porque paso una función inicializadora para obtener el estado inicial desde `localStorage`. Con `()` ejecutaría la función al evaluar la expresión y pasaría directamente el array resultante.
-
-### ¿Por qué no modificas directamente `tareas`?
-
-Porque el estado debe actualizarse mediante `setTareas` y las operaciones deben producir nuevos arrays u objetos para evitar mutaciones directas.
-
-### ¿Qué hace `map`?
-
-Crea un array nuevo recorriendo el anterior. En mi código cambia `completada` para completar o recuperar una tarea y conserva las demás.
-
-### ¿Qué hace `filter`?
-
-Crea un array nuevo con los elementos que cumplen una condición. Lo uso para eliminar, separar pendientes y finalizadas y calcular resultados de búsqueda.
-
-### ¿Por qué utilizas un `id`?
-
-Para identificar una tarea concreta aunque otra tenga el mismo texto. También lo uso como `key` en las listas JSX.
-
-### ¿Qué son las props?
-
-Son valores que un padre pasa a un hijo. Por ejemplo, `TareasPage` pasa listas y funciones a `Pendientes` y `Finalizadas`.
-
-### ¿Qué es un callback en este proyecto?
-
-Es una función que un componente recibe y llama después. `Article` llama a `addTareas`, que está definida en `TareasPage`.
-
-### ¿Por qué utilizas `useEffect`?
-
-Para sincronizar la lista de tareas de React con `localStorage` después del renderizado.
-
-### ¿Qué significa `[tareas]`?
-
-Que el efecto depende de `tareas`: se ejecuta al montar y vuelve a ejecutarse cuando cambia esa dependencia.
-
-### ¿Qué ocurre si busco una tarea?
-
-Cambia `busqueda`, se vuelve a renderizar y `filter` calcula las coincidencias. La lista original no se modifica.
-
-### ¿Por qué la búsqueda no utiliza otro `useEffect`?
-
-Porque es un cálculo derivado para mostrar datos. No necesita sincronizar nada con un sistema externo.
-
-### ¿Qué ocurre al recargar?
-
-`leerTareasGuardadas` lee `devquest.tareas.v1`, convierte el JSON, valida las tareas y devuelve la lista para inicializar el estado.
-
-### ¿Qué hace `JSON.stringify`?
-
-Convierte el array de tareas en texto JSON para que `localStorage` pueda guardarlo.
-
-### ¿Qué hace `JSON.parse`?
-
-Convierte el texto JSON recuperado en valores de JavaScript que la aplicación puede validar y utilizar.
-
-### ¿Por qué utilizas `Set`?
-
-Para registrar IDs ya vistos y detectar duplicados mediante `has` y `add`.
-
-### ¿Qué ocurre si hay dos IDs iguales?
-
-El segundo ID ya existe en el `Set`, `has` devuelve `true`, `every` deja de validar la lista como correcta y la función devuelve `[]`.
-
-### ¿Qué ocurre si el JSON está corrupto?
-
-`JSON.parse` lanza un error, `catch` lo captura, se informa en la consola y la lectura devuelve `[]`.
-
-### ¿Qué ocurre si falla el guardado?
-
-La aplicación conserva las tareas en el estado de React durante la sesión, pero los cambios no persistidos podrían perderse al recargar.
-
-### ¿Cómo se envía actualmente una tarea?
-
-`Article` utiliza `<form onSubmit={enviarTarea}>`. La función recibe el evento de envío, llama a `preventDefault()`, limpia y valida el texto, añade la tarea y vacía el input. El botón tiene `type="submit"` y ya no lleva un `onClick` de envío. La implementación está presente; las pruebas de clic y Enter se registran en el checklist del 06.
-
-### ¿Qué aprendí en el Reto 06?
-
-Aprendí que `seccionActual` cambia una sección interna sin cambiar la URL, mientras que navegar a `/tareas` cambia la ruta global y muestra `TareasPage`. También aprendí que `TareasPage` conserva el estado de tareas, que se recupera desde `localStorage` al volver, mientras que estados locales como `busqueda` pueden reiniciarse al desmontar la página.
-
-## 29. Estado actual del Reto 07
-
-El Reto 07 está terminado. El recorrido completo y la pantalla final de resultados se desarrollan en el Reto 08.
-
-Está implementado:
-
-- `src/data/Preguntas.js` contiene cinco preguntas locales con `id`, `enunciado`, tres opciones, `respuestaCorrectaId` y `explicacion`.
-- `QuizPage.jsx`, la ruta `/quiz`, la tarjeta del portal y el enlace global de `Header`.
-- La pregunta actual se muestra según el recorrido del Quiz; la primera pregunta fue el punto de partida del Reto 07.
-- Los radios se generan desde los datos, tienen etiquetas asociadas, comparten `name` y usan el ID de la opción como `key`.
+- Los radios se generan desde los datos, con etiqueta asociada y el ID de la opción como `key`.
 - `seleccionadaId` empieza en `null`, vive en `QuizPage` y controla los radios mediante `checked`.
-- `QuizQuestions.jsx` recibe la pregunta, la selección, el estado de comprobación y el callback `onSeleccionar` mediante props.
-- La opción puede cambiarse antes de comprobar.
-- El formulario comprueba la respuesta una sola vez con `onSubmit` y `preventDefault()`.
-- Después de comprobar, los radios y el botón quedan bloqueados.
-- Se muestra el resultado correcto o incorrecto, la explicación y, si corresponde, la opción correcta.
-- Al recargar, se reinicia el estado local del Quiz.
-- El estado y la lógica del Quiz permanecen separados de Tareas.
+- Se comprueba una sola vez con `onSubmit` y `preventDefault()`; después los radios y el botón quedan bloqueados.
+- Se guarda el ID de la opción porque es estable y se compara con `respuestaCorrectaId`; el resultado se calcula, no se duplica en otro estado.
 
-### Qué he practicado/aprendido en el 07
+## 30. Reto 08: recorrido y resultado
 
-- Estructurar datos de preguntas y opciones.
-- Compartir estado entre una página y un componente hijo mediante props y callbacks.
-- Controlar inputs `radio` con un ID.
-- Calcular el resultado comparando los IDs de la selección y de la respuesta correcta.
-- Representar los estados antes y después de comprobar.
+El enunciado, el checklist y las pruebas están en [08 · Completa el quiz y consulta tu resultado](../../retos/08-quiz-recorrido.md); mis respuestas, en el [cuaderno](../APRENDIZAJE.md). Lo que conviene retener:
 
-### Decisiones importantes
+- `indicePregunta` marca la pregunta actual y `respuestasConfirmadas` relaciona el ID de cada pregunta con el ID de la opción elegida.
+- Una respuesta solo se confirma una vez; al avanzar se limpia la selección y la última pregunta lleva a `QuizResult`.
+- La puntuación se calcula con `filter().length`, sin un estado duplicado, y `QuizResult` recibe los datos por props.
+- «Volver a jugar» reinicia índice, selección y respuestas; recargar o salir del Quiz empieza una partida nueva sin tocar las tareas guardadas.
 
-Se guarda el ID seleccionado porque es estable y se puede comparar directamente con `respuestaCorrectaId`. El resultado se calcula a partir de esos datos, sin duplicar la comparación en otro estado. `QuizPage` conserva el estado y `QuizQuestions` recibe lo necesario para representar la pregunta y avisar de los cambios.
-
-### Pruebas realizadas
-
-Se comprobó el comportamiento del Quiz, incluyendo selección, comprobación, bloqueo y comunicación con el componente de pregunta. También se comprobaron el recorrido, el resultado, el reinicio, el responsive y el teclado. `npm run lint` y `npm run build` pasan correctamente.
-
-### Pendientes
-
-No quedan pendientes del Reto 07.
-
-## 30. Estado actual del Reto 08
-
-El Reto 08 está completado. `QuizPage` recorre todas las preguntas en orden y `QuizResult` muestra el resumen final.
-
-Está implementado:
-
-- `indicePregunta` indica qué pregunta se muestra.
-- `seleccionadaId` guarda la opción elegida para la pregunta actual.
-- `respuestasConfirmadas` relaciona cada ID de pregunta con el ID de la opción elegida.
-- Una respuesta solo se confirma una vez; después aparecen «Siguiente pregunta» o «Ver resultado» y las opciones quedan bloqueadas.
-- Al avanzar, la selección se limpia. La última pregunta lleva a `QuizResult`.
-- `QuizResult` calcula los aciertos con `filter().length` y muestra enunciado, respuesta del usuario, respuesta correcta, resultado y explicación.
-- «Volver a jugar» reinicia índice, selección y respuestas confirmadas sin recargar.
-- Recargar o salir del Quiz inicia una partida nueva y no modifica las tareas guardadas.
-- El progreso se muestra como «Pregunta X de Y».
-- `QuizPage` y `QuizResult` están separados y contienen comentarios explicativos para un perfil junior.
-
-### Qué he practicado/aprendido en el 08
-
-- Gestionar transiciones entre preguntas.
-- Actualizar un objeto de respuestas sin modificar el anterior.
-- Calcular valores derivados, como la puntuación, desde los datos existentes.
-- Reiniciar una interacción completa mediante setters.
-
-### Decisiones importantes
-
-Se guardan las respuestas usando el ID de cada pregunta y el ID de cada opción. La puntuación se calcula con `filter().length`, sin añadir un estado duplicado. El resultado vive en un componente separado y recibe la información mediante props.
-
-### Pruebas realizadas
-
-Se comprobaron partidas con todas las respuestas correctas, todas incorrectas y respuestas mezcladas. También se comprobó «Volver a jugar», el avance secuencial, el bloqueo tras confirmar y la pantalla final de resultados.
-
-`npm run lint` y `npm run build` pasan correctamente.
-
-### Pendientes
-
-No quedan pendientes del Reto 08.
-
-## 31. Estado actual del Reto 10: consultas de productos
+## 31. Catálogo: consultas a la API
 
 La ruta `/catalogo` consulta productos en DummyJSON. La consulta solo comienza al enviar el formulario o al pulsar «Mostrar todos»; escribir o cambiar el modo no hace peticiones automáticamente.
 
@@ -922,17 +768,9 @@ La ruta `/catalogo` consulta productos en DummyJSON. La consulta solo comienza a
 - `consultaAplicada`: URL, descripción, tipo y valor de la última consulta enviada.
 - `puedeReintentar`: indica si el error procede de una petición que se puede repetir.
 
-### URLs y codificación
+### Codificación de los parámetros
 
-Los modos construyen estas consultas:
-
-```text
-Todos      -> https://dummyjson.com/products?limit=12
-Texto      -> https://dummyjson.com/products/search?q=...&limit=12
-Categoría  -> https://dummyjson.com/products/category/<categoria>?limit=12
-```
-
-El texto se limpia con `trim()` y se convierte en parámetros mediante `URLSearchParams`. Así un texto con espacios o `&` se envía como un único valor de `q`. La categoría se coloca en el segmento de la URL después de aplicar `encodeURIComponent`.
+Las URLs de cada modo están en la sección «Catálogo de productos» del [README del proyecto](../README.md#catálogo-de-productos). El texto se limpia con `trim()` y se convierte en parámetros mediante `URLSearchParams`. Así un texto con espacios o `&` se envía como un único valor de `q`. La categoría se coloca en el segmento de la URL después de aplicar `encodeURIComponent`.
 
 Las categorías se solicitan con `GET /products/category-list` y no se mezclan con `productos`. La respuesta se valida con `Array.isArray` antes de guardarla.
 
@@ -954,9 +792,7 @@ Si `response.ok` es falso, falla la lectura JSON o `products` no es un array, la
 
 Las clases responsive de Tailwind cambian la cuadrícula del catálogo entre una, dos y tres columnas. Los inputs, selects y botones son controles nativos y se pueden utilizar con teclado.
 
-El Reto 11 ya tiene operaciones POST, GET por ID, PUT y DELETE simuladas. El cierre funcional está registrado en `84a2a01`.
-
-## 32. Estado actual del Reto 11: operaciones simuladas
+## 32. Escrituras simuladas (POST, PUT y DELETE)
 
 Las peticiones de escritura utilizan Fetch contra DummyJSON. La API devuelve respuestas de práctica, pero no conserva los cambios. El formulario de POST vive en `/crear-producto`, separado de la lista de productos GET.
 
@@ -972,14 +808,4 @@ Las peticiones de escritura utilizan Fetch contra DummyJSON. La API devuelve res
 - El estado de consulta es distinto de los estados de edición/guardado y eliminación. Las guardas y controles de los bloqueos y cancelaciones del checklist están corregidos y revisados.
 - La interfaz distingue las tarjetas visibles del total obtenido en la última consulta; una nueva consulta vuelve a mostrar los datos reales de DummyJSON.
 
-### Revisión de cierre · `84a2a01`
-
-El reto 11 está cerrado funcionalmente. El [registro de cierre del reto](../../retos/11-crear-editar-eliminar-api.md#registro-de-cierre) distingue las pruebas de navegador, las simulaciones aisladas y las comprobaciones declaradas por el alumno. Puedes continuar con el [reto 12](../../retos/12-deploy-vercel-y-ramas.md).
-
-- En navegador contra DummyJSON: POST, GET + PUT, cancelar edición, Escape antes de DELETE, confirmar DELETE y recuperar los datos originales con otra consulta; ruta retirada con página no encontrada.
-- Con los manejadores reales y respuestas simuladas: bloqueos durante PUT, DELETE pendiente y cancelación, errores y reintentos de PUT/DELETE, conservación del borrador y error de categorías.
-- Lint y build pasan. Las pruebas manuales de red lenta, teclado, tamaños y regresión de Tareas/Quiz figuran marcadas por el alumno; no se repitieron íntegramente en esta revisión.
-
-La simulación aislada permite comprobar transiciones concretas, pero no equivale a una prueba completa de navegador sin conexión. No se afirma una auditoría exhaustiva de accesibilidad ni de todas las combinaciones de acciones.
-
-- [ ] Conversación con el tutor sobre los conceptos de los retos 09–11. Tener las respuestas escritas no marca esta conversación como realizada.
+El reto 11 está cerrado funcionalmente en `84a2a01`; el alcance de las pruebas está en el [registro de cierre del reto](../../retos/11-crear-editar-eliminar-api.md#registro-de-cierre). Queda la conversación con el tutor sobre los conceptos de los retos 09–11.

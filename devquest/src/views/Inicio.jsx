@@ -11,6 +11,6 @@ function Inicio({ addTareas }) {
       <Article addTareas={addTareas} />
     </section>
   );
-}
+
 
 export default Inicio;

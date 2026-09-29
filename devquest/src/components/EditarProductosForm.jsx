@@ -160,24 +160,29 @@ function EditarProductosForm({ producto, onGuardado, onCancelar, onEstadoGuardad
                     />
                 </div>
 
-                <button
-                    type="submit"
-                    disabled={estadoEdicion === "editando"}
-                    className="w-full rounded-lg bg-amber-500 px-5 py-2.5 font-semibold text-gray-900 transition hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
-                >
-                    {estadoEdicion === "editando"
-                        ? "Editando..."
-                        : "Editar producto"}
-                </button>
+                {/* Los dos botones comparten contenedor para quedar alineados
+                    entre sí: en móvil ocupan el ancho del formulario y desde
+                    el breakpoint sm se colocan en fila. */}
+                <div className="flex flex-col gap-3 sm:flex-row sm:gap-2">
+                    <button
+                        type="submit"
+                        disabled={estadoEdicion === "editando"}
+                        className="w-full rounded-lg bg-amber-500 px-5 py-2.5 font-semibold text-gray-900 transition hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
+                    >
+                        {estadoEdicion === "editando"
+                            ? "Editando..."
+                            : "Editar producto"}
+                    </button>
 
-                <button
-                    type="button"
-                    onClick={onCancelar}
-                    disabled={estadoEdicion === "editando"}
-                    className="ml-2 w-full rounded-lg bg-gray-600 px-5 py-2.5 font-semibold text-white transition hover:bg-gray-500 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
-                >
-                    Cancelar
-                </button>
+                    <button
+                        type="button"
+                        onClick={onCancelar}
+                        disabled={estadoEdicion === "editando"}
+                        className="w-full rounded-lg bg-gray-600 px-5 py-2.5 font-semibold text-white transition hover:bg-gray-500 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
+                    >
+                        Cancelar
+                    </button>
+                </div>
 
 
             </form>

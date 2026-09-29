@@ -1,6 +1,6 @@
 # 12 · Publica DevQuest con Vercel y trabaja en develop
 
-**Estado:** por empezar. **Antes:** completa el checklist de cierre del [reto 11](11-crear-editar-eliminar-api.md). Puedes leer este reto mientras terminas, pero publica una versión comprobada.
+**Estado:** por empezar; siguiente reto. **Punto de partida:** el [reto 11 está cerrado funcionalmente](11-crear-editar-eliminar-api.md#registro-de-cierre) en `84a2a01`. Puedes comenzar. La conversación de comprensión con el tutor sigue pendiente por separado.
 
 **Tu misión:** compartir DevQuest mediante una URL y aprender a separar el trabajo diario de la versión publicada. Tú configurarás el despliegue y realizarás el recorrido completo con un cambio pequeño.
 

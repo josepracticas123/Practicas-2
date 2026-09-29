@@ -23,18 +23,13 @@ Los retos 01–08 están cerrados funcionalmente. La cabecera del 06 está corre
 - `npm run lint` y `npm run build` pasan en la versión revisada.
 - Las explicaciones del cuaderno y el repaso escrito están completadas. La conversación para comprobar comprensión se prepara en [Repaso con el tutor](devquest/REPASO-CON-TUTOR.md); sus checks son independientes del cierre funcional.
 
-## Seguimiento · 29/09/2026 · `fce6a5d`
+## Seguimiento · cierre del 11 en `84a2a01`
 
-El catálogo tiene implementadas las operaciones principales. En la revisión se comprobaron edición con GET + PUT, cancelación y confirmación de DELETE, actualización de tarjetas y recuperación de los datos originales al consultar de nuevo. `npm run lint` y `npm run build` pasan en esta versión.
+El reto 11 está cerrado funcionalmente: creación, edición, eliminación, bloqueos y cancelaciones revisados. Lint y build pasan. Consulta el [registro de cierre](retos/11-crear-editar-eliminar-api.md#registro-de-cierre) para ver el alcance de las comprobaciones.
 
-**Siguiente paso:** completa el [checklist de cierre del reto 11](retos/11-crear-editar-eliminar-api.md#checklist-de-cierre--empieza-aquí), en orden:
+**Siguiente paso:** [12 · Deploy en Vercel y ramas](retos/12-deploy-vercel-y-ramas.md). Trabaja en `develop`, prueba la Preview y publica desde `main` según el enunciado.
 
-1. Bloqueos durante PUT y cancelaciones durante PUT/DELETE. **Hecho** (bloques A y B).
-2. Ruta de edición incompleta. **Hecho** (bloque C).
-3. Mensajes de categorías y de carga de productos. **Hecho** (bloque D).
-4. Cuaderno, documentación y comprobaciones finales. **Documentación hecha** (bloque E); faltan las pruebas manuales (bloque F).
-
-El reto 11 sigue pendiente de cierre: falta el bloque F y la demostración al tutor. El checklist también recoge los detalles pendientes del 09 y del 10; conserva lo que ya funciona y marca cada paso después de probarlo. El [repaso con el tutor](devquest/REPASO-CON-TUTOR.md) registra por separado las conversaciones realizadas.
+El cuaderno de los retos 09–11 está respondido. La conversación de comprensión con el tutor sigue pendiente y es independiente del cierre funcional; no necesitas escribir otro resumen para empezar el 12.
 
 La sección siguiente conserva la guía de instalación inicial como referencia.
 
@@ -93,7 +88,7 @@ Lee [Tu primer componente](https://es.react.dev/learn/your-first-component) y [E
 
 **Listo para empezar:** puedes arrancar la app, cambiar un texto y explicar dónde lo has cambiado.
 
-Tras cerrar el 11, continúa con el [12 · Deploy en Vercel y ramas](retos/12-deploy-vercel-y-ramas.md): trabajo en `develop`, Preview y publicación desde `main`.
+Continúa con el [12 · Deploy en Vercel y ramas](retos/12-deploy-vercel-y-ramas.md): trabajo en `develop`, Preview y publicación desde `main`.
 
 ## Retos definidos
 
@@ -110,8 +105,8 @@ Tras cerrar el 11, continúa con el [12 · Deploy en Vercel y ramas](retos/12-de
 - [09 · Un catálogo que trae datos de una API](retos/09-primeras-llamadas-api.md): carga manual de productos, estados de carga/error y reintento. **Cerrado.**
 
 - [10 · Busca productos en el servidor](retos/10-busqueda-y-filtros-api.md): GET, búsqueda por texto, categorías y consulta aplicada. **Implementado; revisión del checklist pendiente.**
-- [11 · Crea, edita y elimina mediante peticiones](retos/11-crear-editar-eliminar-api.md): POST, GET por ID, PUT y DELETE con respuestas simuladas. **Implementado parcialmente; POST comprobado, faltan las demás pruebas y el cierre del reto.**
-- [12 · Publica DevQuest con Vercel y trabaja en develop](retos/12-deploy-vercel-y-ramas.md): despliegue, rutas SPA y recorrido de Preview a Production mediante pull request. **Por empezar, después del cierre del 11.**
+- [11 · Crea, edita y elimina mediante peticiones](retos/11-crear-editar-eliminar-api.md): POST, GET por ID, PUT y DELETE con respuestas simuladas. **Cerrado funcionalmente en `84a2a01`; conversación con el tutor pendiente.**
+- [12 · Publica DevQuest con Vercel y trabaja en develop](retos/12-deploy-vercel-y-ramas.md): despliegue, rutas SPA y recorrido de Preview a Production mediante pull request. **Por empezar; siguiente reto.**
 
 Trabaja por bloques y comprueba cada uno antes de continuar.
 

@@ -1,12 +1,12 @@
 # 11 · Crea, edita y elimina mediante peticiones
 
-**Estado:** operaciones principales implementadas; pendiente de cierre tras la revisión del 29/09/2026 (`fce6a5d`). Empieza por el checklist siguiente.
+**Estado:** Cerrado funcionalmente tras revisar `84a2a01`. Puedes continuar con el reto 12. La conversación de comprensión con el tutor se registra por separado y sigue pendiente.
 
 **Tu misión:** añadir operaciones de escritura al catálogo, practicando formularios, método HTTP, cabeceras, cuerpo JSON y actualización de la interfaz después de una respuesta correcta.
 
-## Checklist de cierre · empieza aquí
+## Checklist de cierre · completado
 
-Ya funcionan los recorridos principales de creación, edición y eliminación. En la revisión se comprobaron GET + PUT, cancelar/confirmar DELETE y recuperar los datos originales al consultar de nuevo. Lint y build pasan en la versión revisada. Conserva ese trabajo y resuelve estos bloques en orden; marca cada casilla después de comprobarla.
+Este checklist conserva las correcciones y comprobaciones de la entrega. El registro inferior documenta el cierre en `84a2a01`; no hay que repetir estos bloques para empezar el 12.
 
 ### A. Impide que dos operaciones se interfieran
 
@@ -39,7 +39,7 @@ Archivos: `App.jsx` y `EditarProductoPage.jsx`.
 
 Archivos: `CatalogoPages.jsx` y `CatalogoForm.jsx`.
 
-- [x] Conserva y muestra el valor de `mensajeErrorCategorias`: actualmente se guarda el error, pero se descarta su lectura. Colócalo junto al selector y permite repetir «Cargar categorías».
+- [x] Conserva y muestra el valor de `mensajeErrorCategorias` para que el error guardado aparezca en pantalla. Colócalo junto al selector y permite repetir «Cargar categorías».
 - [x] Muestra «Cargando productos…» mientras `estadoPeticion` sea `"cargando"`; desaparece al terminar, tanto en éxito como en error.
 - [x] **Prueba:** sin conexión, carga categorías y comprueba el mensaje. Recupera la conexión y repite. Después consulta productos con conexión lenta y comprueba el mensaje de carga y el bloqueo de controles. Restaura la conexión normal al acabar.
 
@@ -59,16 +59,26 @@ Archivos: `CatalogoPages.jsx` y `CatalogoForm.jsx`.
 - [x] Ejecuta `npm run lint` y `npm run build` desde `devquest/` después de los cambios.
 - [x] Registra debajo los resultados y revisa las casillas reabiertas de las secciones 5 y 6. Si algo falla, déjalo pendiente con una frase que explique cómo reproducirlo.
 
-| Prueba de cierre | Resultado observado |
-| --- | --- |
-| PUT lento: editar otro producto y cancelar | Pendiente |
-| DELETE lento: Escape; error y reintento | Pendiente |
-| Acceso directo a la ruta de edición | Pendiente |
-| Error de categorías y carga de productos | Pendiente |
-| Operaciones, teclado, tamaños, Tareas y Quiz | Pendiente |
-| Lint y build tras las correcciones | Pendiente |
+### Registro de cierre
 
-Los checks del enunciado que sigue conservan tu progreso. Los puntos reabiertos necesitan una nueva comprobación; el reto se cierra cuando este checklist está resuelto.
+Revisión sobre `84a2a01`. Se conservan las casillas marcadas por el alumno; esta tabla identifica qué se contrastó y cómo, sin atribuirle pruebas adicionales.
+
+| Prueba de cierre | Resultado y origen de la comprobación |
+| --- | --- |
+| PUT: editar otro producto y cancelar | Correcto: guardas y controles revisados; el navegador bloquea otras tarjetas con el editor abierto. La simulación aislada del manejador con PUT pendiente impide otro GET y otra consulta. Cancelar durante PUT está protegido en botón y manejador. La prueba manual con red lenta consta marcada por el alumno. |
+| DELETE: Escape, error y reintento | En navegador, Escape antes del envío cancela y confirmar retira solo una tarjeta. En simulación aislada, cancelar durante DELETE no cierra; un error conserva la tarjeta y reintentar permite eliminarla. El bloqueo de Escape durante el envío se contrastó en el código; la prueba manual lenta consta marcada por el alumno. |
+| Acceso directo a la ruta de edición | Verificado en navegador: `/editar-producto` muestra «Página no encontrada». La edición desde tarjetas funciona. |
+| Error de categorías y carga de productos | Renderizado de ambos mensajes comprobado en código; la simulación del fallo de categorías genera el mensaje esperado. El alumno marca la prueba manual de desconexión y recuperación. |
+| Operaciones principales | Verificadas en navegador contra DummyJSON: POST, GET + PUT, cancelar edición, DELETE y nueva consulta que recupera los datos originales. Sin errores de consola en ese recorrido. |
+| Teclado, tamaños, Tareas y Quiz | Comprobaciones declaradas mediante las casillas del alumno. No se repitió toda esta batería en la revisión de cierre; no equivale a una auditoría completa de accesibilidad. |
+| Lint y build tras las correcciones | Ambos ejecutados y correctos sobre `84a2a01`. |
+| Cuaderno | Respuestas 09–11 revisadas; explicación de `respuesta.json()` corregida. |
+
+Las pruebas aisladas utilizaron los manejadores reales con respuestas pendientes o fallidas simuladas, sin modificar la aplicación. Se distinguieron de las peticiones hechas en el navegador a DummyJSON. El registro original de entrega se conserva más abajo.
+
+**Cierre funcional aprobado. Siguiente paso: [reto 12](12-deploy-vercel-y-ramas.md).**
+
+- [ ] Comentar con el tutor los conceptos de los retos 09–11. Esta conversación sigue pendiente y no impide comenzar el 12.
 
 ## 1. Entiende la simulación
 
@@ -126,8 +136,8 @@ Esta separación evita mezclar resultados del servidor con altas que no existen 
 ## 5. Mantén coherente la pantalla
 
 - [x] Guarda el estado de la operación de escritura separado del estado de consulta del 10; utiliza nombres claros como «guardando» o «eliminando».
-- [X] Mientras haya una petición en curso, bloquea las acciones incompatibles: consultar, editar otro producto, enviar dos veces o eliminar a la vez. Comprueba el bloqueo también en los manejadores.
-- [X] Al completar o fallar, vuelve a permitir las acciones. Los errores no deben dejar botones bloqueados indefinidamente.
+- [x] Mientras haya una petición en curso, bloquea las acciones incompatibles: consultar, editar otro producto, enviar dos veces o eliminar a la vez. Comprueba el bloqueo también en los manejadores.
+- [x] Al completar o fallar, vuelve a permitir las acciones. Los errores no deben dejar botones bloqueados indefinidamente.
 - [x] Muestra los mensajes junto al formulario o producto al que pertenecen.
 - [x] Después de una edición o eliminación local, distingue «Tarjetas visibles» del «Total del servidor en la última consulta». No cambies el total del servidor fingiendo que persistió una escritura.
 - [x] Una nueva consulta sustituye el listado por el resultado real del servidor y descarta los cambios simulados sobre esas tarjetas. Cierra cualquier editor o confirmación anterior.
@@ -146,7 +156,7 @@ Esta separación evita mezclar resultados del servidor con altas que no existen 
 - [x] Tras editar o eliminar, vuelvo a consultar: reaparece el dato original y sé explicar por qué. No es un fallo de mi estado.
 - [x] Reviso en Network método, URL, cuerpo, estado HTTP y respuesta de cada operación.
 - [x] La interfaz funciona con teclado y a 375 px y 1280 px; Tareas y Quiz siguen funcionando.
-- [X] Lint y build pasan y he respondido las preguntas del bloque 11 del cuaderno.
+- [x] Lint y build pasan y he respondido las preguntas del bloque 11 del cuaderno.
 
 **Registro:** anota una prueba correcta y una fallida por método, y lo observado al volver a consultar.
 

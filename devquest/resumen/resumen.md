@@ -262,7 +262,7 @@ La respuesta se acepta solo si `response.ok` es verdadero y `products` es un arr
 
 Las clases de Tailwind organizan las tarjetas en una columna, dos o tres según el ancho disponible. Los controles son elementos HTML interactivos y se pueden recorrer con el teclado.
 
-El Reto 11 está implementado parcialmente y aún no está cerrado: el código incluye POST, GET por ID, PUT y DELETE simulados; sus pruebas completas siguen pendientes.
+El Reto 11 está cerrado funcionalmente en `84a2a01`; la conversación con el tutor sigue pendiente. El siguiente paso es el reto 12.
 
 ## Estado actual del Reto 11: escrituras simuladas
 
@@ -280,18 +280,19 @@ DummyJSON responde a POST, PUT y DELETE para practicar, pero no persiste esas es
 - «Editar» consulta primero el producto por ID. `EditarProductosForm.jsx` inicializa un borrador controlado separado del producto mostrado.
 - PUT envía el borrador validado al ID seleccionado. Al tener éxito, `CatalogoPages.jsx` reemplaza solo la tarjeta correspondiente con un array nuevo; no hace un GET automático. Si falla, la tarjeta original y el borrador se conservan.
 - «Eliminar» abre una confirmación. DELETE no necesita body y la tarjeta se retira únicamente tras comprobar una respuesta exitosa válida con `id` e `isDeleted`.
-- Los estados de consulta, edición/guardado y eliminación están separados. Hay guardas en handlers y controles; todavía falta comprobar la matriz completa de operaciones incompatibles y sus transiciones.
+- Los estados de consulta, edición/guardado y eliminación están separados. Las guardas y controles de los bloqueos y cancelaciones del checklist están corregidos y revisados.
 
-### Comprobaciones
+### Revisión de cierre · `84a2a01`
 
-- [x] En navegador con Fetch interceptado: un POST exitoso muestra la respuesta y limpia los campos; un segundo POST fallido deja visible la respuesta anterior y conserva los campos del intento fallido.
-- [x] Durante el POST se muestra `Creando...`, el botón queda deshabilitado y un envío adicional no inicia otra petición.
-- [ ] Verificar POST con valores inválidos y examinar URL, headers y body en Network.
-- [ ] Verificar GET por ID, cancelar sin PUT, éxitos/fallos de PUT y retención del borrador.
-- [ ] Verificar cancelar/confirmar DELETE, respuesta y retención de la tarjeta ante error.
-- [ ] Completar la matriz de operaciones concurrentes, los casos de ID inexistente, la consulta posterior a escrituras, responsive, teclado, Tareas/Quiz y la demostración al tutor.
+El reto 11 está cerrado funcionalmente. El [registro de cierre del reto](../../retos/11-crear-editar-eliminar-api.md#registro-de-cierre) distingue las pruebas de navegador, las simulaciones aisladas y las comprobaciones declaradas por el alumno. Puedes continuar con el [reto 12](../../retos/12-deploy-vercel-y-ramas.md).
 
-Las pruebas marcadas se hicieron con respuestas de Fetch interceptadas; no prueban persistencia ni una escritura real en DummyJSON. El checklist original de la sección 6 se conserva pendiente.
+- En navegador contra DummyJSON: POST, GET + PUT, cancelar edición, Escape antes de DELETE, confirmar DELETE y recuperar los datos originales con otra consulta; ruta retirada con página no encontrada.
+- Con los manejadores reales y respuestas simuladas: bloqueos durante PUT, DELETE pendiente y cancelación, errores y reintentos de PUT/DELETE, conservación del borrador y error de categorías.
+- Lint y build pasan. Las pruebas manuales de red lenta, teclado, tamaños y regresión de Tareas/Quiz figuran marcadas por el alumno; no se repitieron íntegramente en esta revisión.
+
+La simulación aislada permite comprobar transiciones concretas, pero no equivale a una prueba completa de navegador sin conexión. No se afirma una auditoría exhaustiva de accesibilidad ni de todas las combinaciones de acciones.
+
+- [ ] Conversación con el tutor sobre los conceptos de los retos 09–11. Tener las respuestas escritas no marca esta conversación como realizada.
 
 ## 4. Componentes y funciones
 

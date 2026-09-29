@@ -117,26 +117,14 @@ El código implementa POST, GET por ID, PUT y DELETE contra DummyJSON, además d
 - [x] Mensaje de error de categorías junto al selector y mensaje «Cargando productos...» durante la consulta.
 - [x] Ruta `/editar-producto` retirada: entrar en ella muestra «Página no encontrada».
 
-### Pruebas realizadas
+### Revisión de cierre · `84a2a01`
 
-- [x] Un POST exitoso muestra los datos recibidos y limpia el formulario.
-- [x] Un POST posterior fallido conserva visible la creación anterior y mantiene los campos del intento fallido.
-- [x] Durante POST se muestra `Creando...`, el botón queda deshabilitado y un nuevo intento de envío no crea otra petición concurrente.
-- [x] `npm run lint` y `npm run build` pasan en el estado actual.
+El reto 11 está cerrado funcionalmente. El [registro de cierre del reto](../../retos/11-crear-editar-eliminar-api.md#registro-de-cierre) distingue las pruebas de navegador, las simulaciones aisladas y las comprobaciones declaradas por el alumno. Puedes continuar con el [reto 12](../../retos/12-deploy-vercel-y-ramas.md).
 
-Las pruebas de POST usaron respuestas de Fetch interceptadas; no fueron escrituras reales en DummyJSON. Las de PUT y DELETE todavía no se han hecho en la interfaz.
+- En navegador contra DummyJSON: POST, GET + PUT, cancelar edición, Escape antes de DELETE, confirmar DELETE y recuperar los datos originales con otra consulta; ruta retirada con página no encontrada.
+- Con los manejadores reales y respuestas simuladas: bloqueos durante PUT, DELETE pendiente y cancelación, errores y reintentos de PUT/DELETE, conservación del borrador y error de categorías.
+- Lint y build pasan. Las pruebas manuales de red lenta, teclado, tamaños y regresión de Tareas/Quiz figuran marcadas por el alumno; no se repitieron íntegramente en esta revisión.
 
-### Pendiente de comprobar
+La simulación aislada permite comprobar transiciones concretas, pero no equivale a una prueba completa de navegador sin conexión. No se afirma una auditoría exhaustiva de accesibilidad ni de todas las combinaciones de acciones.
 
-- [ ] Validaciones de POST y contenido de URL, headers y body en Network con escrituras reales.
-- [ ] Reemplazo del panel tras otro POST exitoso.
-- [ ] GET antes de editar, cancelar sin PUT, éxito y fallo reales de PUT.
-- [ ] Confirmación y cancelación de DELETE, éxito y fallo con la tarjeta correspondiente.
-- [ ] Casos de ID inexistente, consulta posterior a PUT/DELETE y matriz completa de operaciones concurrentes.
-- [ ] PUT lento: editar otro producto y cancelar; DELETE lento: Escape, error y reintento.
-- [ ] Error de categorías sin conexión y mensaje de carga con conexión lenta.
-- [ ] Accesibilidad, teclado, tamaños 375 px/1280 px, Tareas y Quiz.
-
-### Conversación con el tutor
-
-- [ ] Comprobar con el tutor la comprensión de los retos 09–11. La conversación no está hecha; no se marca por tener el código escrito.
+- [ ] Conversación con el tutor sobre los conceptos de los retos 09–11. Tener las respuestas escritas no marca esta conversación como realizada.

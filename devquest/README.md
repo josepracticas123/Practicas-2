@@ -51,14 +51,14 @@ El catálogo incluye operaciones de escritura mediante Fetch. DummyJSON devuelve
 - **POST:** `/crear-producto` contiene un formulario controlado para título, descripción y precio. Valida los campos, muestra `Creando...`, conserva los valores si falla y los limpia tras éxito. La respuesta se guarda en `ultimaCreacion`, fuera del estado del catálogo, y se presenta en «Última creación simulada». El panel depende de que haya una creación exitosa guardada, no del estado de la petición: permanece visible durante un POST posterior y si este falla; un nuevo éxito lo reemplaza.
 - **GET + PUT:** desde una tarjeta se consulta primero `GET /products/{id}`. El formulario mantiene un borrador separado. Un PUT exitoso reemplaza solo la tarjeta seleccionada en el estado local; no se consulta de nuevo automáticamente. Si falla, se conservan la tarjeta y el borrador.
 - **DELETE:** una tarjeta abre una confirmación. Se valida la respuesta y solo se retira la tarjeta tras el éxito.
-- **Coherencia:** los estados de consulta, GET de edición, PUT y DELETE son independientes. El catálogo muestra tarjetas visibles y total de la última consulta por separado. Hay guardas en handlers y controles, pero falta comprobar la matriz completa de acciones incompatibles y sus transiciones.
+- **Coherencia:** los estados de consulta, GET de edición, PUT y DELETE son independientes. El catálogo muestra tarjetas visibles y total de la última consulta por separado. Hay guardas en manejadores y controles; los bloqueos y cancelaciones del checklist están corregidos y revisados.
 - Las altas POST se muestran en una ruta y estado propios; no se incorporan a la lista de productos obtenida por GET. Las tareas mantienen su persistencia existente en `localStorage`, independiente del Reto 11.
 
-#### Verificación registrada
+#### Cierre funcional · `84a2a01`
 
-En navegador, con Fetch interceptado, se comprobó una creación exitosa seguida de un POST fallido. El panel anterior permaneció visible durante la segunda petición y tras el error; los campos se conservaron. El botón mostró `Creando...`, quedó deshabilitado y un envío adicional no inició otra petición. La prueba no envió escrituras reales a DummyJSON.
+El reto 11 está cerrado funcionalmente. Se comprobaron los recorridos principales en navegador y los bloqueos, errores y reintentos con pruebas aisladas de los manejadores. Lint y build pasan. El [registro de cierre](../retos/11-crear-editar-eliminar-api.md#registro-de-cierre) detalla el alcance y distingue las comprobaciones declaradas por el alumno.
 
-Siguen pendientes las pruebas completas de GET, PUT y DELETE, los fallos de red de cada operación, la matriz completa de acciones concurrentes, la revisión integral de la sección 6 y la demostración al tutor. Los bloques A, B, C y D del checklist de `retos/11-crear-editar-eliminar-api.md` ya están resueltos y el bloque E deja la documentación al día; quedan el bloque F (pruebas de cierre) y la conversación con el tutor.
+Continúa con el [reto 12 · Vercel y ramas](../retos/12-deploy-vercel-y-ramas.md). La conversación de comprensión con el tutor sigue pendiente por separado.
 
 ## Organización del código
 

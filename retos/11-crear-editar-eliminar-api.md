@@ -77,14 +77,42 @@ Esta separación evita mezclar resultados del servidor con altas que no existen 
 - [x] Cancelar la eliminación no envía DELETE; confirmarla elimina solo la tarjeta elegida después del éxito.
 - [x] Pruebo un fallo de red en cada escritura: no hay éxito falso, no pierdo el formulario y no desaparece la tarjeta.
 - [x] Pruebo temporalmente un ID inexistente para GET, PUT y DELETE y verifico un error comprensible. Restauro el código de prueba.
-- [ ] Tras editar o eliminar, vuelvo a consultar: reaparece el dato original y sé explicar por qué. No es un fallo de mi estado.
-- [ ] Reviso en Network método, URL, cuerpo, estado HTTP y respuesta de cada operación.
+- [x] Tras editar o eliminar, vuelvo a consultar: reaparece el dato original y sé explicar por qué. No es un fallo de mi estado.
+- [x] Reviso en Network método, URL, cuerpo, estado HTTP y respuesta de cada operación.
 - [x] La interfaz funciona con teclado y a 375 px y 1280 px; Tareas y Quiz siguen funcionando.
 - [x] Lint y build pasan y he respondido las preguntas del bloque 11 del cuaderno.
 
 **Registro:** anota una prueba correcta y una fallida por método, y lo observado al volver a consultar.
 
-_Pendiente de completar._
+Registro de pruebas
+Método	Prueba correcta	Prueba fallida / comportamiento observado
+POST	Se envían title, description y price; la API responde correctamente y se muestra la última creación simulada.	
+Datos inválidos o fallo de petición: se muestra error y se conservan los campos.
+GET /products/{id} devuelve el producto solicitado con 200 OK.	
+ID inexistente: se comprueba y muestra el error correspondiente.
+PUT /products/1 → 200 OK; la respuesta devuelve el producto actualizado.	
+Sin ID correcto en la URL se obtuvo 404; se corrigió usando products/${producto.id}.
+DELETE /products/1 → 200 OK.	Tras eliminar, una consulta posterior vuelve a devolver el producto porque DummyJSON simula la escritura y no la persiste.
+
+Comprobación final de persistencia
+
+Se verificó mediante Network:
+
+PUT /products/1
+→ 200 OK
+
+GET /products/1
+→ 200 OK
+→ producto disponible
+
+DELETE /products/1
+→ 200 OK
+
+GET /products/1
+→ 200 OK
+→ el producto vuelve a aparecer
+
+Conclusión: las peticiones se realizan correctamente. El hecho de que los datos originales reaparezcan después de una nueva consulta se debe al comportamiento simulado de DummyJSON, no a un problema del estado de React.
 
 **Demostración al tutor:** crea un producto simulado; edita y elimina productos existentes; consulta de nuevo. Explica qué cambió en React y qué ocurrió realmente en el servidor.
 

@@ -59,7 +59,7 @@ function EditarProductosForm({ producto, onGuardado, onCancelar, onEstadoGuardad
         try {
             //Peticion para modificar producto
             const respuesta = await fetch(
-                `https://dummyjson.com/products/333`,
+                `https://dummyjson.com/products/${producto.id}`,
 
                 {
                     method: "PUT",

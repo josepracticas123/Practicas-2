@@ -76,8 +76,8 @@ Lee [AbortController · MDN](https://developer.mozilla.org/en-US/docs/Web/API/Ab
 
 ## 5. Registra lo aprendido
 
-- [ ] Completa el bloque 13 de [APRENDIZAJE](../devquest/APRENDIZAJE.md) con tus palabras y referencias a tu código.
-- [ ] Anota al menos tres pruebas: qué hiciste, qué esperabas y qué ocurrió.
+- [x] Completa el bloque 13 de [APRENDIZAJE](../devquest/APRENDIZAJE.md) con tus palabras y referencias a tu código.
+- [x] Anota al menos tres pruebas: qué hiciste, qué esperabas y qué ocurrió.
 
 **Alcance:** detalle de solo lectura. Editar y eliminar siguen en el catálogo. No añadas carrito, favoritos ni librerías de peticiones. Volver al catálogo puede reiniciar su consulta; conservarla entre rutas no forma parte de este reto. Un GET de DummyJSON devuelve sus datos originales, aunque antes hayas hecho un PUT simulado.
 

@@ -373,26 +373,62 @@ Si detecto un fallo, no toco `main` directamente: corrijo desde `develop`, lo co
 
 ## Reto 13 · Detalle de producto y efectos
 
-**Estado:** en curso; revisión parcial de `bc4b76b` (30/09/2026). [Enunciado y checklist](../retos/13-detalle-producto-y-efectos.md). Responde al terminar cada bloque, con tus palabras y señalando un ejemplo de tu código.
+**Estado:** terminado técnicamente; pendiente de merge a `main` y comprobación final en Vercel. [Enunciado y checklist](../retos/13-detalle-producto-y-efectos.md).
 
-- [ ] ¿De dónde sale el ID y por qué la ficha funciona al abrir su URL sin visitar antes el catálogo?
-- [ ] ¿Por qué aquí usas un efecto y en «Consultar» mantienes un manejador de evento?
-- [ ] ¿Cuándo vuelve a ejecutarse el efecto y cuándo se ejecuta su limpieza?
-- [ ] ¿Qué evita `AbortController`? ¿Cómo impides que una ejecución antigua cambie los datos o el error actuales?
-- [ ] ¿Cómo distingues ID inválido, producto inexistente, error de conexión y cancelación intencionada?
-- [ ] ¿Qué ocurre con el efecto en StrictMode durante el desarrollo y por qué no necesitas desactivarlo?
+- ¿De dónde sale el ID y por qué la ficha funciona al abrir su URL sin visitar antes el catálogo?
+El ID sale de la URL. En `App.jsx` la ruta es `/catalogo/:id`, donde `:id` es un parámetro variable, y en la página lo leo con `const { id } = useParams();` (llega como texto). Al entrar desde una tarjeta, el enlace de `ProductoCard.jsx` apunta a `/catalogo/${producto.id}`. La ficha funciona por URL directa porque no le paso el producto por props: el efecto pide por su cuenta `https://dummyjson.com/products/${id}`. Por eso `/catalogo/1` carga sin visitar antes `/catalogo`.
+- ¿Por qué aquí usas un efecto y en «Consultar» mantienes un manejador de evento?
+Porque son dos casos distintos. En el detalle manda el ID de la URL: al pasar de `/catalogo/1` a `/catalogo/2` debo pedir el producto nuevo, y eso se sincroniza con un efecto que depende de `[id]`. En el catálogo, «Consultar» es una acción del usuario, así que la petición sale del manejador `onSubmit`. Con un efecto se lanzaría sola al entrar y dependería del texto mientras escribo.
+- ¿Cuándo vuelve a ejecutarse el efecto y cuándo se ejecuta su limpieza?
+Se ejecuta al montar la página y cada vez que cambia `id`, porque la dependencia es `}, [id]);`. La limpieza (la función que devuelve el efecto) corre justo antes de la siguiente ejecución y también al salir de la página. En la mía pongo `activa = false` y llamo a `controller.abort()`: la ejecución antigua deja de contar como actual y su petición se cancela.
+- ¿Qué evita `AbortController`? ¿Cómo impides que una ejecución antigua cambie los datos o el error actuales?
+Cada ejecución crea su propio `new AbortController()` y pasa su `signal` al `fetch`; con `controller.abort()` se cancela la petición en vuelo al cambiar de ID o al salir de la página. Cancelar no basta, porque una respuesta lenta puede llegar tarde, así que cada ejecución tiene su `let activa = true` y los setters solo se usan dentro de `if (activa) { ... }`. No hay `finally`: el `cargando` se cierra dentro de esas comprobaciones, para que una ejecución vieja no toque el estado de la actual.
+- ¿Cómo distingues ID inválido, producto inexistente, error de conexión y cancelación intencionada?
+Los cuatro casos los separo así:
+  - **ID inválido:** lo compruebo antes de pedir nada, con `Number(id)` y la condición `!Number.isInteger(numeroId) || numeroId <= 0`; con `/catalogo/abc` muestro «El ID del producto no es válido.» sin hacer petición.
+  - **Producto inexistente:** la petición sí se hace y la API contesta 404 (`/products/9999` da 404 y `/products/1` da 200); `response.status === 404` lanza «Producto no encontrado.» .
+  - **Conexión u otro error HTTP:** `!response.ok` lanza «Error al cargar el producto.», y sin conexión es `fetch` quien lanza el error (un `TypeError`, no un `AbortError`); en el `catch` hago `setError(error.message)` y `setCargando(false)`.
+  - **Cancelación intencionada:** si `error.name === "AbortError"` hago `return` sin tocar ningún estado, así que el usuario no ve un error que no ha provocado él.
+- ¿Qué ocurre con el efecto en StrictMode durante el desarrollo y por qué no necesitas desactivarlo?
+En desarrollo React monta, ejecuta la limpieza y vuelve a montar, así que el efecto se ejecuta dos veces (inicio → limpieza → inicio). La primera petición se aborta y la segunda crea su propio controlador; como el `AbortError` se ignora, se ven los datos de la segunda sin ningún error. `StrictMode` sigue en `main.jsx` porque no es un fallo: avisa de efectos que no soportan repetirse, y en la versión compilada esto no pasa.
 
-Antes de continuar con la limpieza, revisa el [feedback del reto](../retos/13-detalle-producto-y-efectos.md#feedback-de-revisión--antes-de-seguir). Al explicar tus correcciones, comenta por qué guardar un error no termina automáticamente la carga y por qué `producto?.title` no oculta la ficha. No necesitas otro resumen: utiliza el espacio siguiente.
+Las correcciones del [feedback del reto](../retos/13-detalle-producto-y-efectos.md#feedback-de-revisión--antes-de-seguir) ya están en el código; las dos aclaraciones que pide el documento van aquí.
 
 **Mis explicaciones:**
 
-_Por completar._
+- **Por qué guardar un error no termina la carga.** `setError(...)` solo cambia `error`; `cargando` es otro estado y sigue en `true` hasta que algo lo baje. Por eso antes quedaba «Cargando producto…» junto al error. Ahora cierro la carga en la validación del ID (`setCargando(false)` antes del `return`) y en el `catch`, dentro del `if (activa)` que acompaña a `setError(error.message)`.
+- **Por qué `producto?.title` no oculta la ficha.** El `?.` solo evita leer una propiedad de `null` o `undefined`; no decide qué se dibuja en pantalla. Lo que oculta es `{producto && ( ... )}`, que envuelve el título, la imagen, la descripción, el precio y la categoría. Antes esas etiquetas estaban fuera y podían salir un « €» o un «Categoría:» sin datos; ahora carga, error y ficha son tres bloques separados.
 
-**Pruebas realizadas:** anota al menos tres (incluye una con red lenta).
+**Pruebas realizadas:** bloques 2, 3 y 4 del reto, en el navegador (con Network abierto) y sobre la versión actual. Queda pendiente la entrega de `develop` a `main` y la comprobación de una URL de detalle en Vercel.
 
 | Acción | Resultado esperado | Resultado observado |
 | --- | --- | --- |
-| Por completar | | |
+| Entrar desde una tarjeta con «Ver detalle» | Cambiar a `/catalogo/<id>` sin recargar y pedir ese producto a la API | La URL cambió a la del producto y la petición fue la del ID de la tarjeta. Correcto |
+| Abrir directamente `/catalogo/1` y recargar | La ficha se carga sola, sin recibir el producto por props ni pasar por el catálogo | Apareció «Cargando producto…» y después título, imagen con `alt`, descripción, precio y categoría. Correcto |
+| ID inválido: `/catalogo/abc` | Mensaje comprensible, sin ficha anterior y sin petición a la API | Se mostró «El ID del producto no es válido.», no quedó nada de la ficha y no se creó ninguna petición para `abc`. Correcto |
+| Producto inexistente: `/catalogo/9999` | Mensaje de no encontrado y la carga termina | La API contestó 404 (`/products/1` sí responde 200), se mostró «Producto no encontrado.» y desapareció «Cargando producto…». Correcto |
+| Sin conexión y después recuperarla | Error de red sin carga infinita y carga correcta al reconectar | Desconectado apareció el mensaje del error de `fetch` y la carga se cerró; al volver a conectar y recargar, la ficha se cargó bien. Correcto (sin botón de reintento: el reto no lo pide) |
+| Red lenta y salir del detalle antes de la respuesta | Se cancela la petición y no se muestra ningún error al usuario | Al salir la petición quedó cancelada (`AbortError`) y no apareció ningún mensaje de error. Correcto |
+| Cambiar rápido entre dos IDs mientras el primero carga | La respuesta lenta del primero no sustituye al segundo | Con dos enlaces temporales en la ficha (retirados después) salté de un ID a otro mientras cargaba: se mostró el producto del segundo ID y el primero no pisó ni los datos ni el error. Correcto |
+| Transición de una ficha ya cargada a `/catalogo/abc` con navegación de React | Queda solo el mensaje de ID inválido, sin la ficha anterior | El producto anterior desapareció, quedó el mensaje de ID inválido y no se hizo petición. Correcto (recargar la página no reproduce este caso porque reinicia el estado) |
+| Después de un error, navegar a un ID válido | Desaparece el error y carga el producto correcto | El error se limpió, la ficha del nuevo ID se cargó y la carga terminó. Correcto |
+| Teclado y anchuras de 375 px y 1280 px | Llegar a los enlaces con Tab y ver bien la ficha en móvil y escritorio | Se alcanzaron «Ver detalle» y «Volver a catálogo» con Tab y foco visible; la tarjeta y la ficha se adaptaron a 375 px y 1280 px. Correcto |
+| `npm run lint` | Termina sin errores | Se ejecutó desde `devquest/` y terminó sin avisos ni errores. Correcto |
+| `npm run build` | Genera `dist/` correctamente | Terminó correctamente: 116 módulos transformados y los archivos de `dist/` generados. Correcto |
+
+## Feedback de revisión · antes de seguir
+
+La ruta `/catalogo/:id`, el enlace desde las tarjetas, `useParams` y el efecto dependiente de `id` están bien encaminados. Lint y build pasan en la versión revisada. Conserva ese trabajo y centra la siguiente revisión en estos puntos:
+
+* [x] **Termina la carga cuando hay un error.** En [ProductoDetallePage.jsx](../devquest/src/pages/ProductoDetallePage.jsx), el `catch` guarda el error pero deja `cargando` en `true`. Prueba un ID positivo inexistente y una petición sin conexión: debe aparecer el error y desaparecer «Cargando producto…». Si usas `finally`, al hacer el bloque 3 recuerda impedir que una petición antigua cambie el estado de la actual.
+* [x] **Muestra solo el estado que corresponde.** La imagen, el precio y la categoría se renderizan incluso sin producto. Organiza el JSX para mostrar carga, error o ficha válida. `producto?.title` evita acceder a una propiedad de `null`, pero no oculta el resto del marcado; por eso pueden quedar un «€» o «Categoría:» sin datos.
+* [x] **Evita conservar el producto anterior ante un ID inválido.** La validación hace `return` antes de limpiar `producto`. Prueba pasar desde una ficha cargada a `/catalogo/abc` mediante un `Link` temporal de React: debe quedar el mensaje de ID inválido, sin la ficha anterior y sin petición para `abc`. Retira el enlace de prueba después. Recargar toda la página no reproduce esta transición porque reinicia el estado.
+* [x] **Corrige el comentario de la ruta.** En [App.jsx](../devquest/src/App.jsx), el comentario dentro de `<Routes>` usa `//`. Dentro del JSX debe escribirse como `{/* comentario */}`. Comprueba también que puedes explicar qué representa `:id`.
+* [x] **Comprueba la recuperación.** Después de un error o un ID inválido, navega a un ID válido: desaparece el error, se carga el producto correcto y termina la carga.
+
+**Orden para continuar:** corrige estos puntos → vuelve a comprobar el bloque 2 → sigue con el bloque 3 → realiza las pruebas del bloque 4. La ausencia de `AbortController` corresponde al trabajo que ya dejaste pendiente; no es una tarea nueva añadida por esta revisión.
+
+**Alcance de la revisión:** lectura de código, lint y build, y pruebas aisladas de la lógica que confirmaron carga activa tras un 404 y conservación del producto al pasar a un ID inválido. No se verificó visualmente el entorno de Dev Tunnels. Los checks de pruebas finales siguen abiertos para que los completes en tu navegador.
 
 ## Reto 14 · Paginación del catálogo
 

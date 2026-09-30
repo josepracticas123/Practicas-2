@@ -41,7 +41,7 @@ function ProductoDetallePage() {
 
         if (!response.ok) {
           if (response.status === 404) {
-            throw new Error("ID inválido, producto no encontrado.");
+            throw new Error("Producto no encontrado.");
           }
           throw new Error("Error al cargar el producto.");
         }

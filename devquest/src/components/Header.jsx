@@ -27,11 +27,13 @@ function Header() {
       <nav className="relative flex flex-wrap items-center justify-center gap-2 px-24 py-6 sm:gap-6 sm:px-6 sm:py-8">
         {/* Logo */}
         <div className="absolute left-6">
-          <img
-            src={logo}
-            alt="Logo del portal"
-            className="h-14 w-14 object-contain sm:h-20 sm:w-20"
-          />
+          <NavLink to="/" aria-label="Ir al portal">
+            <img
+              src={logo}
+              alt="Logo del portal"
+              className="h-14 w-14 object-contain sm:h-20 sm:w-20"
+            />
+          </NavLink>
         </div>
 
         {/* Navegación */}
@@ -59,4 +61,3 @@ function Header() {
 }
 
 export default Header;
-

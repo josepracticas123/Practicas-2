@@ -346,7 +346,7 @@ No es un problema del estado de React, sino del funcionamiento de la API de prá
 
 ## Reto 12 · Deploy en Vercel y ramas
 
-**Estado:** en curso. Ya está publicado en Vercel y el trabajo diario vive en `develop`. Hecho: ramas `develop` y `main`, `devquest/vercel.json`, primera integración `develop → main` y la mejora del portal en `develop` (`636e800`) con su Preview generada. Pendiente: la pull request del cambio visible, su merge y las comprobaciones en el navegador. [Enunciado y checklist](../retos/12-deploy-vercel-y-ramas.md).
+**Estado:** cerrado el 30/09/2026 por acuerdo con el tutor. Publicación y flujo de ramas completados; la sincronización final queda bajo revisión del tutor. [Registro de cierre](../retos/12-deploy-vercel-y-ramas.md#registro-de-cierre--30092026).
 
 - ¿Qué diferencia hay entre un commit, un push, una pull request y un despliegue? Localiza un ejemplo de cada uno en esta entrega.
 **Commit, push, pull request y despliegue:** un commit guarda el cambio en mi ordenador (`2e271b7`, `636e800`); el `push` lo sube a GitHub (mi `develop` pasó a `636e800`); la pull request propone pasar esos commits de `develop` a `main` (así se hizo con la PR #1 y la PR #3, merge `c22d4da`); y el despliegue es Vercel construyendo un commit y publicándolo (Preview de `636e800`, Production de `c22d4da`).
@@ -361,7 +361,7 @@ No es un problema del estado de React, sino del funcionamiento de la API de prá
 - ¿Por qué no aparecen en producción las tareas que guardé en localhost?
 `localStorage` guarda los datos por **origen**, no por aplicación. `http://localhost:5173` y `https://practicasnadunet.vercel.app` son orígenes distintos, así que cada uno tiene su propio almacenamiento: las tareas que creé en local se quedan en el navegador donde las creé y no viajan con el despliegue. La clave `devquest.tareas.v1` existe por separado en cada origen y puede tener contenidos diferentes (una URL de Preview también tendría los suyos). No es un fallo del despliegue: para ver tareas en la web publicada tengo que crearlas allí, y las de local siguen intactas en local.
 - ¿Cómo identifico el commit publicado y cómo preparo una corrección si detecto un fallo?
-El commit publicado lo identifico en **Vercel**, donde cada despliegue indica si es Preview o Production y a qué commit corresponde, y en **GitHub**, donde `main` es la versión publicada (`c22d4da` ahora) y `develop` es lo que se prueba en la Preview (`636e800`). En local lo confirmo con `git branch --show-current` y `git log --oneline -1`.
+El commit publicado lo identifico en **Vercel**, donde cada despliegue indica si es Preview o Production y a qué commit corresponde, La revisión del 30/09/2026 registra Production correcta de `1f53ba6` y Preview de `4866234`. `main` contiene la versión que se quiere publicar; si el despliegue falla, la web puede seguir mostrando una versión anterior. En local, `git branch --show-current` y `git log --oneline -1` identifican mi rama y commit locales, no confirman por sí solos lo publicado.
 Si detecto un fallo, no toco `main` directamente: corrijo desde `develop`, lo compruebo en local (`npm run lint`, `npm run build` y el navegador), hago commit y `push`, reviso la **Preview** de ese commit y abro o actualizo la pull request `develop → main`. Después del merge, Vercel publica un nuevo despliegue de **Production**, lo compruebo y vuelvo a sincronizar `develop` con `main`. Si el fallo ya está en producción, aviso al tutor antes de preparar la corrección.
 
 ### Notas del bloque
@@ -369,7 +369,87 @@ Si detecto un fallo, no toco `main` directamente: corrijo desde `develop`, lo co
 - **GitHub con Vercel:** al importar el repositorio, Vercel se conecta a GitHub y despliega solo. Los despliegues aparecen en GitHub creados por `vercel[bot]`: uno de **Preview** por cada `push` a `develop` y uno de **Production** cada vez que `main` recibe un merge.
 - **`npm ci`, `lint`, `build` y `preview`:** `npm ci` instala exactamente las versiones de `package-lock.json` (es lo que ejecuta Vercel). `npm run lint` revisa el código sin ejecutarlo y ahora pasa sin errores, porque `2e271b7` quitó un import que no se usaba. `npm run build` genera la carpeta `dist/`. `npm run preview` sirve esa compilación en local para revisarla; no publica nada en Internet.
 - **`-u` en el primer push:** `git push -u origin develop` sube la rama y la deja enlazada con `origin/develop`, así los siguientes `push` y `pull` no necesitan indicar el remoto ni la rama.
-- **Dudas y pendientes:** falta abrir la pull request `develop → main` con el cambio visible (`636e800`) y, después del merge, comprobar Production. También quedan por hacer las comprobaciones en el navegador (Portal, Tareas, Quiz y Catálogo, imágenes y estilos, búsqueda del catálogo, tarea guardada que se conserva al recargar y los tamaños de móvil y escritorio) y anotar la versión de Node de Vercel; en local uso Node `v24.21.0` con npm `11.19.0`. La Preview del commit `636e800` todavía pide iniciar sesión en Vercel, así que hay que revisar cómo enseñársela al tutor.
+- **Cierre acordado:** PR #3–#6 integradas y cambio visible publicado. El tutor revisa por separado la sincronización entre ramas. Las descripciones de PR, el acceso del tutor a Preview y la versión exacta de Node del servidor no quedan como tareas exigidas en esta entrega. Los ejemplos de commits anteriores se conservan como recorrido histórico.
+
+## Reto 13 · Detalle de producto y efectos
+
+**Estado:** terminado técnicamente; pendiente de merge a `main` y comprobación final en Vercel. [Enunciado y checklist](../retos/13-detalle-producto-y-efectos.md).
+
+- ¿De dónde sale el ID y por qué la ficha funciona al abrir su URL sin visitar antes el catálogo?
+El ID sale de la URL. En `App.jsx` la ruta es `/catalogo/:id`, donde `:id` es un parámetro variable, y en la página lo leo con `const { id } = useParams();` (llega como texto). Al entrar desde una tarjeta, el enlace de `ProductoCard.jsx` apunta a `/catalogo/${producto.id}`. La ficha funciona por URL directa porque no le paso el producto por props: el efecto pide por su cuenta `https://dummyjson.com/products/${id}`. Por eso `/catalogo/1` carga sin visitar antes `/catalogo`.
+- ¿Por qué aquí usas un efecto y en «Consultar» mantienes un manejador de evento?
+Porque son dos casos distintos. En el detalle manda el ID de la URL: al pasar de `/catalogo/1` a `/catalogo/2` debo pedir el producto nuevo, y eso se sincroniza con un efecto que depende de `[id]`. En el catálogo, «Consultar» es una acción del usuario, así que la petición sale del manejador `onSubmit`. Con un efecto se lanzaría sola al entrar y dependería del texto mientras escribo.
+- ¿Cuándo vuelve a ejecutarse el efecto y cuándo se ejecuta su limpieza?
+Se ejecuta al montar la página y cada vez que cambia `id`, porque la dependencia es `}, [id]);`. La limpieza (la función que devuelve el efecto) corre justo antes de la siguiente ejecución y también al salir de la página. En la mía pongo `activa = false` y llamo a `controller.abort()`: la ejecución antigua deja de contar como actual y su petición se cancela.
+- ¿Qué evita `AbortController`? ¿Cómo impides que una ejecución antigua cambie los datos o el error actuales?
+Cada ejecución crea su propio `new AbortController()` y pasa su `signal` al `fetch`; con `controller.abort()` se cancela la petición en vuelo al cambiar de ID o al salir de la página. Cancelar no basta, porque una respuesta lenta puede llegar tarde, así que cada ejecución tiene su `let activa = true` y los setters solo se usan dentro de `if (activa) { ... }`. No hay `finally`: el `cargando` se cierra dentro de esas comprobaciones, para que una ejecución vieja no toque el estado de la actual.
+- ¿Cómo distingues ID inválido, producto inexistente, error de conexión y cancelación intencionada?
+Los cuatro casos los separo así:
+  - **ID inválido:** lo compruebo antes de pedir nada, con `Number(id)` y la condición `!Number.isInteger(numeroId) || numeroId <= 0`; con `/catalogo/abc` muestro «El ID del producto no es válido.» sin hacer petición.
+  - **Producto inexistente:** la petición sí se hace y la API contesta 404 (`/products/9999` da 404 y `/products/1` da 200); `response.status === 404` lanza «Producto no encontrado.» .
+  - **Conexión u otro error HTTP:** `!response.ok` lanza «Error al cargar el producto.», y sin conexión es `fetch` quien lanza el error (un `TypeError`, no un `AbortError`); en el `catch` hago `setError(error.message)` y `setCargando(false)`.
+  - **Cancelación intencionada:** si `error.name === "AbortError"` hago `return` sin tocar ningún estado, así que el usuario no ve un error que no ha provocado él.
+- ¿Qué ocurre con el efecto en StrictMode durante el desarrollo y por qué no necesitas desactivarlo?
+En desarrollo React monta, ejecuta la limpieza y vuelve a montar, así que el efecto se ejecuta dos veces (inicio → limpieza → inicio). La primera petición se aborta y la segunda crea su propio controlador; como el `AbortError` se ignora, se ven los datos de la segunda sin ningún error. `StrictMode` sigue en `main.jsx` porque no es un fallo: avisa de efectos que no soportan repetirse, y en la versión compilada esto no pasa.
+
+Las correcciones del [feedback del reto](../retos/13-detalle-producto-y-efectos.md#feedback-de-revisión--antes-de-seguir) ya están en el código; las dos aclaraciones que pide el documento van aquí.
+
+**Mis explicaciones:**
+
+- **Por qué guardar un error no termina la carga.** `setError(...)` solo cambia `error`; `cargando` es otro estado y sigue en `true` hasta que algo lo baje. Por eso antes quedaba «Cargando producto…» junto al error. Ahora cierro la carga en la validación del ID (`setCargando(false)` antes del `return`) y en el `catch`, dentro del `if (activa)` que acompaña a `setError(error.message)`.
+- **Por qué `producto?.title` no oculta la ficha.** El `?.` solo evita leer una propiedad de `null` o `undefined`; no decide qué se dibuja en pantalla. Lo que oculta es `{producto && ( ... )}`, que envuelve el título, la imagen, la descripción, el precio y la categoría. Antes esas etiquetas estaban fuera y podían salir un « €» o un «Categoría:» sin datos; ahora carga, error y ficha son tres bloques separados.
+
+**Pruebas realizadas:** bloques 2, 3 y 4 del reto, en el navegador (con Network abierto) y sobre la versión actual. Queda pendiente la entrega de `develop` a `main` y la comprobación de una URL de detalle en Vercel.
+
+| Acción | Resultado esperado | Resultado observado |
+| --- | --- | --- |
+| Entrar desde una tarjeta con «Ver detalle» | Cambiar a `/catalogo/<id>` sin recargar y pedir ese producto a la API | La URL cambió a la del producto y la petición fue la del ID de la tarjeta. Correcto |
+| Abrir directamente `/catalogo/1` y recargar | La ficha se carga sola, sin recibir el producto por props ni pasar por el catálogo | Apareció «Cargando producto…» y después título, imagen con `alt`, descripción, precio y categoría. Correcto |
+| ID inválido: `/catalogo/abc` | Mensaje comprensible, sin ficha anterior y sin petición a la API | Se mostró «El ID del producto no es válido.», no quedó nada de la ficha y no se creó ninguna petición para `abc`. Correcto |
+| Producto inexistente: `/catalogo/9999` | Mensaje de no encontrado y la carga termina | La API contestó 404 (`/products/1` sí responde 200), se mostró «Producto no encontrado.» y desapareció «Cargando producto…». Correcto |
+| Sin conexión y después recuperarla | Error de red sin carga infinita y carga correcta al reconectar | Desconectado apareció el mensaje del error de `fetch` y la carga se cerró; al volver a conectar y recargar, la ficha se cargó bien. Correcto (sin botón de reintento: el reto no lo pide) |
+| Red lenta y salir del detalle antes de la respuesta | Se cancela la petición y no se muestra ningún error al usuario | Al salir la petición quedó cancelada (`AbortError`) y no apareció ningún mensaje de error. Correcto |
+| Cambiar rápido entre dos IDs mientras el primero carga | La respuesta lenta del primero no sustituye al segundo | Con dos enlaces temporales en la ficha (retirados después) salté de un ID a otro mientras cargaba: se mostró el producto del segundo ID y el primero no pisó ni los datos ni el error. Correcto |
+| Transición de una ficha ya cargada a `/catalogo/abc` con navegación de React | Queda solo el mensaje de ID inválido, sin la ficha anterior | El producto anterior desapareció, quedó el mensaje de ID inválido y no se hizo petición. Correcto (recargar la página no reproduce este caso porque reinicia el estado) |
+| Después de un error, navegar a un ID válido | Desaparece el error y carga el producto correcto | El error se limpió, la ficha del nuevo ID se cargó y la carga terminó. Correcto |
+| Teclado y anchuras de 375 px y 1280 px | Llegar a los enlaces con Tab y ver bien la ficha en móvil y escritorio | Se alcanzaron «Ver detalle» y «Volver a catálogo» con Tab y foco visible; la tarjeta y la ficha se adaptaron a 375 px y 1280 px. Correcto |
+| `npm run lint` | Termina sin errores | Se ejecutó desde `devquest/` y terminó sin avisos ni errores. Correcto |
+| `npm run build` | Genera `dist/` correctamente | Terminó correctamente: 116 módulos transformados y los archivos de `dist/` generados. Correcto |
+
+## Feedback de revisión · antes de seguir
+
+La ruta `/catalogo/:id`, el enlace desde las tarjetas, `useParams` y el efecto dependiente de `id` están bien encaminados. Lint y build pasan en la versión revisada. Conserva ese trabajo y centra la siguiente revisión en estos puntos:
+
+* [x] **Termina la carga cuando hay un error.** En [ProductoDetallePage.jsx](../devquest/src/pages/ProductoDetallePage.jsx), el `catch` guarda el error pero deja `cargando` en `true`. Prueba un ID positivo inexistente y una petición sin conexión: debe aparecer el error y desaparecer «Cargando producto…». Si usas `finally`, al hacer el bloque 3 recuerda impedir que una petición antigua cambie el estado de la actual.
+* [x] **Muestra solo el estado que corresponde.** La imagen, el precio y la categoría se renderizan incluso sin producto. Organiza el JSX para mostrar carga, error o ficha válida. `producto?.title` evita acceder a una propiedad de `null`, pero no oculta el resto del marcado; por eso pueden quedar un «€» o «Categoría:» sin datos.
+* [x] **Evita conservar el producto anterior ante un ID inválido.** La validación hace `return` antes de limpiar `producto`. Prueba pasar desde una ficha cargada a `/catalogo/abc` mediante un `Link` temporal de React: debe quedar el mensaje de ID inválido, sin la ficha anterior y sin petición para `abc`. Retira el enlace de prueba después. Recargar toda la página no reproduce esta transición porque reinicia el estado.
+* [x] **Corrige el comentario de la ruta.** En [App.jsx](../devquest/src/App.jsx), el comentario dentro de `<Routes>` usa `//`. Dentro del JSX debe escribirse como `{/* comentario */}`. Comprueba también que puedes explicar qué representa `:id`.
+* [x] **Comprueba la recuperación.** Después de un error o un ID inválido, navega a un ID válido: desaparece el error, se carga el producto correcto y termina la carga.
+
+**Orden para continuar:** corrige estos puntos → vuelve a comprobar el bloque 2 → sigue con el bloque 3 → realiza las pruebas del bloque 4. La ausencia de `AbortController` corresponde al trabajo que ya dejaste pendiente; no es una tarea nueva añadida por esta revisión.
+
+**Alcance de la revisión:** lectura de código, lint y build, y pruebas aisladas de la lógica que confirmaron carga activa tras un 404 y conservación del producto al pasar a un ID inválido. No se verificó visualmente el entorno de Dev Tunnels. Los checks de pruebas finales siguen abiertos para que los completes en tu navegador.
+
+## Reto 14 · Paginación del catálogo
+
+**Estado:** por empezar, después del 13. [Enunciado y checklist](../retos/14-paginacion-del-catalogo.md).
+
+- [ ] ¿Qué representan `limit`, `skip` y `total`? Calcula el `skip` de la página 3 con 12 productos por página.
+- [ ] ¿Qué datos guardas en estado y cuáles calculas? Enseña el cálculo de la última página.
+- [ ] ¿Por qué «Siguiente» utiliza la consulta aplicada y no el texto que estás escribiendo?
+- [ ] ¿Por qué no puedes llamar al setter de página y leer inmediatamente el nuevo valor en el mismo manejador?
+- [ ] Si falla la página 2 y cambias los campos, ¿qué petición hace «Reintentar»?
+- [ ] ¿Por qué borrar una tarjeta con DummyJSON no cambia el total del servidor?
+
+**Mis explicaciones:**
+
+_Por completar._
+
+**Pruebas realizadas:** anota al menos tres (incluye un filtro y un error con reintento).
+
+| Acción | Resultado esperado | Resultado observado |
+| --- | --- | --- |
+| Por completar | | |
 
 ## Comentarios explicativos en el código
 

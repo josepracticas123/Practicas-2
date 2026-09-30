@@ -39,7 +39,21 @@ El catálogo permite crear productos, consultar uno por ID, editarlo y eliminarl
 
 **Estado:** cerrado funcionalmente en `84a2a01`. El alcance de las comprobaciones está en el [registro de cierre del reto](../retos/11-crear-editar-eliminar-api.md#registro-de-cierre).
 
-Continúa con el [reto 12 · Vercel y ramas](../retos/12-deploy-vercel-y-ramas.md).
+### Publicación
+
+El [reto 12 · Vercel y ramas](../retos/12-deploy-vercel-y-ramas.md) está cerrado por acuerdo con el tutor el 30/09/2026.
+
+- **Producción:** [DevQuest](https://practicasnadunet.vercel.app).
+- **Flujo habitual:** `develop → Preview → pull request → main → Production`.
+- Comprueba en Vercel el commit del despliegue exitoso para identificar la versión publicada.
+- La sincronización final entre ramas queda bajo revisión del tutor.
+
+## Retos en curso y próximos pasos
+
+- [13 · Detalle de producto](../retos/13-detalle-producto-y-efectos.md): en curso. Ruta y carga inicial implementadas; quedan por corregir los estados de carga/error y añadir limpieza de peticiones. Consulta el feedback del enunciado.
+- [14 · Paginación](../retos/14-paginacion-del-catalogo.md): por empezar, después del 13; recorrer el catálogo conservando la consulta aplicada.
+
+Trabaja primero el 13 y continúa con el 14 cuando sus comprobaciones estén completas.
 
 ## Organización del código
 

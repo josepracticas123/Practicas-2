@@ -1,8 +1,8 @@
 # 12 · Publica DevQuest con Vercel y trabaja en develop
 
-**Estado:** en curso. **Punto de partida:** el [reto 11 está cerrado funcionalmente](11-crear-editar-eliminar-api.md#registro-de-cierre) en `84a2a01`. La conversación de comprensión del 11 sigue pendiente por separado.
+**Estado:** cerrado el 30/09/2026 por acuerdo con el tutor. Objetivo conseguido: publicar DevQuest y realizar entregas desde `develop` a `main` mediante pull requests. La sincronización final entre ramas queda bajo revisión del tutor, fuera del cierre del reto.
 
-Ya hecho: ramas `develop` y `main`, `devquest/vercel.json` con el rewrite de SPA, primera integración `develop → main` (PR #1, merge `d92283a`) y la mejora visible del portal en `develop` (`636e800`) con su Preview generada. Pendiente: la pull request `develop → main` de esa mejora, su merge, la comprobación de Production después del merge y las comprobaciones en el navegador de los bloques 5 y 6.
+José ha integrado sus PR #3, #4, #5 y #6. La mejora visible del portal pasó a producción mediante la PR #4. Se conservan ambas ramas y hay despliegues de Preview y Production correctos. Las descripciones de PR y el acceso del tutor a Preview no se exigen como pendientes de esta primera práctica de Git.
 
 **Tu misión:** compartir DevQuest mediante una URL y aprender a separar el trabajo diario de la versión publicada. Tú configurarás el despliegue y realizarás el recorrido completo con un cambio pequeño.
 
@@ -21,7 +21,7 @@ Una rama identifica una línea de trabajo del repositorio. Un commit registra ca
 - [x] A partir de este reto, realiza el trabajo diario en `develop` y lleva las versiones comprobadas a `main` mediante una pull request.
 - [x] Mantén ambas ramas: `develop` seguirá utilizándose después de cada entrega.
 
-**Pendiente en este bloque:** el flujo ya se ha usado en dos integraciones (PR #1 y PR #3), pero la mejora visible actual (`636e800`) todavía no tiene pull request, así que el recorrido completo de esta entrega sigue abierto.
+**Completado:** el recorrido `develop → Preview → PR → main → Production` está registrado en GitHub, incluida la mejora visible del portal.
 
 Para este ejercicio bastan estas dos ramas, un proyecto de Vercel y el dominio que genera Vercel. No necesitas incorporar otra miniapp ni un backend.
 
@@ -93,7 +93,7 @@ git push
 - [x] En GitHub abre una pull request con **base: `main`** y **compare: `develop`**. Revisa los archivos y describe el cambio y las pruebas realizadas.
 - [x] Revisa la propuesta con el tutor e intégrala cuando esté lista. Para este ejercicio utiliza **Create a merge commit** y conserva `develop`.
 
-**Notas de la revisión (29/09/2026):** `npm run lint` (sin errores) y `npm run build` (genera `dist/`) comprobados desde `devquest/`; `npm ci` y `npm run preview` constan como hechos por el alumno, sin dejar rastro en el repositorio. Las PR #1 y #3 se integraron sin descripción, así que la próxima debe incluir qué cambia, enlace a la Preview y pruebas realizadas.
+**Revisión del 30/09/2026:** `npm run lint` y `npm run build` pasan en `develop` (`4866234`). `npm ci` y `npm run preview` constan como realizados por el alumno. El tutor acepta las descripciones de las PR para esta primera práctica; no hace falta rehacerlas para cerrar el reto.
 
 Esta primera integración prepara `main` para el despliegue inicial. La Preview se comprobará después de conectar Vercel.
 
@@ -113,11 +113,11 @@ Referencia: [crear una pull request](https://docs.github.com/es/pull-requests/co
 | Install Command | `npm ci` |
 | Production Branch / seguimiento de rama de Production | `main` |
 
-- [x] Comprueba que la versión de Node elegida en Vercel es compatible con las dependencias y con la que has usado localmente; deja constancia de ella en la entrega.
+- Comprueba la compatibilidad de Node al configurar Vercel. **Dato no registrado al cierre:** versión exacta de Node del servidor; no se exige completarlo en esta entrega.
 - [x] Inicia el primer despliegue desde `main`. Verifica la rama y el commit en el resultado; el primer despliegue de un proyecto nuevo es Production, incluso si se inicia desde otra rama.
 - [x] Espera a que termine y abre la URL de producción. Si falla, lee los logs desde el primer error: revisa raíz, comandos e imports, incluidas sus mayúsculas.
 
-**Notas de la revisión (29/09/2026):** los ajustes de la tabla anterior están indicados por el alumno desde el panel de Vercel; no se pueden comprobar desde el repositorio. En local se usa Node `v24.21.0` con npm `11.19.0`, pero la versión de Node de Vercel sigue sin anotar. Primeros despliegues verificados en GitHub: **Production** del commit `d92283a` (`vercel[bot]`, 29/09/2026 10:44 UTC) y **Production** de `c22d4da` (11:04 UTC).
+**Alcance de la revisión:** los ajustes del panel constan como indicados por el alumno. GitHub registra Production correcta para `1f53ba6`. La versión exacta de Node de Vercel no quedó registrada; se deja como dato no verificado, sin bloquear el cierre acordado.
 
 Referencias: [integración con Git](https://vercel.com/docs/git), [configuración del build](https://vercel.com/docs/builds/configure-a-build) y [primer despliegue y entornos](https://vercel.com/docs/deployments/environments#first-deployment).
 
@@ -130,7 +130,7 @@ Referencias: [integración con Git](https://vercel.com/docs/git), [configuració
 - [x] Añade una tarea en la web publicada y recarga: debe conservarse. Los datos de `localhost` no se trasladan a Vercel: `localStorage` pertenece al origen del navegador, y otra URL de Preview puede tener datos distintos.
 - [x] Comprueba móvil y escritorio. Publicar no cambia el comportamiento simulado de las escrituras de DummyJSON.
 
-**Notas de la revisión (29/09/2026):** el acceso directo y la recarga de `/tareas`, `/quiz`, `/catalogo` y `/crear-producto` se comprobaron a nivel de servidor en `https://practicasnadunet.vercel.app`: las cuatro devuelven el `index.html` de la app y no aparece un 404 de Vercel, igual que una ruta inventada, que llega a React. **Pendiente:** revisar en el navegador Portal, Tareas, Quiz y Catálogo, las imágenes y los estilos, la búsqueda del catálogo y las operaciones de práctica con la consola abierta, la tarea creada en la web publicada que debe conservarse al recargar, y la comprobación en móvil y escritorio.
+**Revisión del 30/09/2026:** comprobados en navegador el portal con el texto actualizado, el acceso directo y la recarga de `/tareas`, `/quiz`, `/catalogo` y `/crear-producto`, y la carga de 12 productos sin errores de consola durante esa prueba. El resto de pruebas marcadas en este bloque son las declaradas por el alumno; no se han repetido todas en esta revisión.
 
 ## 6. Haz una entrega desde develop hasta producción
 
@@ -147,12 +147,12 @@ git push origin develop
 - [x] En `develop`, realiza una mejora pequeña y visible, por ejemplo aclarar el texto de presentación del portal. Compruébala, crea un commit y haz push.
 - [x] Localiza el despliegue **Preview** de `develop` en Vercel. Abre su URL y verifica el cambio y la recarga de `/catalogo`.
 - [x] Abre la URL de **Production** y confirma que todavía muestra el texto anterior. Comprueba las etiquetas de entorno y los commits, no solo el aspecto de las URLs.
-- [x] Abre una pull request **develop → main**. Incluye qué cambia, enlace a la Preview y pruebas realizadas. Comprueba que el tutor puede acceder a la Preview; si pide autenticación, revisad el acceso en Vercel.
+- [x] Abre una pull request **develop → main** y revisa los cambios que vas a integrar. Para esta primera entrega, el tutor acepta las descripciones existentes y no exige acceso compartido a Preview.
 - [x] Revisa la propuesta con el tutor y haz merge cuando esté lista. Conserva `develop`.
 - [x] Comprueba el nuevo despliegue de `main`: debe ser Production y mostrar el cambio en la URL de producción.
-- [x] Repite la sincronización local del bloque anterior y termina situado en `develop`, listo para el próximo trabajo.
+- **A cargo del tutor:** revisar la sincronización final de `main` hacia `develop`. En la revisión, `develop` estaba cuatro commits por detrás; no se marca aquí como realizada.
 
-**Estado real de este bloque (29/09/2026):** la mejora del portal está en `develop` (`636e800`, junto a `2e271b7` del lint) y su despliegue **Preview** existe y está en `success` (29/09/2026 11:41 UTC), pero esa URL todavía pide iniciar sesión en Vercel. **Production** sigue en `c22d4da`, es decir, sin el cambio visible. **Pendiente:** abrir y comprobar la Preview, abrir la pull request `develop → main` con descripción, enlace a la Preview y pruebas realizadas, revisarla con el tutor, mergearla conservando `develop`, comprobar el nuevo despliegue de `main` en Production y repetir la sincronización local terminando en `develop`.
+**Cierre del bloque (30/09/2026):** Preview de `4866234` y Production de `1f53ba6` figuran como correctas en GitHub. El cambio visible ya aparece en producción. La sincronización restante la revisa el tutor por separado.
 
 **Si falla:** un build correcto no sustituye probar la pantalla. Corrige desde `develop`, vuelve a comprobar la Preview y actualiza la pull request antes de integrarla. Si el problema se detecta en producción, avisa al tutor y prepara la corrección con el mismo recorrido.
 
@@ -162,16 +162,21 @@ git push origin develop
 - [x] Añade a la guía del proyecto la URL de producción y el flujo `develop → Preview → pull request → main → Production`.
 - [x] Completa este registro con datos reales; no marques el reto terminado solo porque Vercel muestre un despliegue exitoso.
 
+### Registro de cierre · 30/09/2026
+
 | Evidencia | Resultado |
 | --- | --- |
-| URL de producción | https://practicasnadunet.vercel.app — comprobada el 29/09/2026: responde con el `index.html` de la app y ya no pide login de Vercel. La antigua `https://practicas-2-two.vercel.app` da 404 y no se utiliza. |
-| URL de la Preview comprobada | **Pendiente.** La Preview del commit `636e800` existe y está en `success` (29/09/2026 11:41 UTC), pero su URL todavía pide iniciar sesión en Vercel y no consta la comprobación del cambio en pantalla. |
-| Pull request del cambio visible | **Pendiente.** Todavía no existe. La última PR mergeada es la #3 (`develop → main`, merge `c22d4da`); antes están la #1 (merge `d92283a`) y la #2 (dirección contraria y sin descripción). |
-| Commit de develop probado y commit de main desplegado | `develop` = `636e800` (texto del portal) y `2e271b7` (lint), probados con `npm run lint` y `npm run build`; falta la prueba en navegador. Desplegado en **Production**: `main` = `c22d4da` (29/09/2026 11:04 UTC). |
-| Versión de Node local / Vercel | Local: Node `v24.21.0` y npm `11.19.0`. Vercel: **pendiente de anotar**. |
-| Acceso directo y recarga de rutas | Comprobado a nivel de servidor en `https://practicasnadunet.vercel.app`: `/tareas`, `/quiz`, `/catalogo`, `/crear-producto` y una ruta inventada devuelven el `index.html` de la app, sin 404 de Vercel. Falta la comprobación con recarga en el navegador. |
-| Producción sin cambios antes del merge y actualizada después | Antes del merge: **sí**, Production está en `c22d4da` y el commit `636e800` solo tiene Preview. Después del merge: **pendiente**, porque la pull request y el merge todavía no se han hecho. |
-| Lint, build y pruebas funcionales | `npm run lint` sin errores y `npm run build` correcto (genera `dist/`). Pruebas funcionales en navegador (Portal, Tareas, Quiz, Catálogo, tarea guardada, móvil y escritorio): **pendientes**. |
+| URL de producción | [DevQuest publicado](https://practicasnadunet.vercel.app), accesible y con el texto actualizado del portal. |
+| Preview | [Preview de `4866234`](https://practicas-2-qd66sqo6a-jose15-3b83.vercel.app): despliegue `success` registrado en GitHub. Pide autenticación; no se exige acceso del tutor para este cierre. |
+| PR de José | [#3](https://github.com/josepracticas123/Practicas-2/pull/3), [#4](https://github.com/josepracticas123/Practicas-2/pull/4), [#5](https://github.com/josepracticas123/Practicas-2/pull/5) y [#6](https://github.com/josepracticas123/Practicas-2/pull/6), integradas de `develop` a `main`. La #4 incluye el cambio visible. |
+| Commits revisados | `develop`: `4866234`; `main`: `1f53ba6`. Production correcta registrada para este último. Son referencias de esta revisión, no valores que deban permanecer fijos. |
+| Node | Versión local registrada por el alumno: `v24.21.0`. Versión de Vercel no registrada; no bloquea el cierre. |
+| Rutas | Acceso directo y recarga comprobados en navegador para `/tareas`, `/quiz`, `/catalogo` y `/crear-producto`. |
+| Antes y después del merge | El historial distingue Preview del cambio y Production tras integrarlo; el portal publicado muestra el nuevo texto. |
+| Validación | Lint y build correctos en `develop`; portal y carga de catálogo comprobados en producción sin errores de consola durante la prueba. Las demás pruebas del checklist constan como declaradas por el alumno. |
+| Sincronización de ramas | El tutor revisará la integración pendiente de `main` en `develop`; seguimiento separado del reto cerrado. |
+
+**Criterio de cierre:** el tutor da por logrado el objetivo de esta primera práctica de despliegue y ramas. No quedan correcciones exigidas al alumno en este reto.
 
 **Demostración al tutor:** enseña la rama actual, la Preview, la pull request y la versión de producción. Explica qué desencadenó cada despliegue y por qué recargar una ruta interna funciona.
 

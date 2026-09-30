@@ -8,11 +8,11 @@ Haz primero este reto. El 14 queda para después, cuando estas comprobaciones fu
 
 ## 1. Conecta tarjeta y página
 
-- [ ] Localiza las rutas en `src/App.jsx` y las tarjetas en `src/components/ProductoCard.jsx`.
-- [ ] Crea una página de detalle y registra `/catalogo/:id`. Mantén `/catalogo` como listado.
-- [ ] Añade a cada tarjeta un `Link` «Ver detalle» con el ID del producto. Conserva los botones de editar y eliminar separados del enlace, sin anidar controles interactivos.
-- [ ] Lee `id` con `useParams` desde `react-router`, el paquete que ya usa el proyecto. Comprueba su valor: llega como texto.
-- [ ] Añade un enlace «Volver al catálogo» que también funcione si has entrado directamente desde otra pestaña.
+- [x] Localiza las rutas en `src/App.jsx` y las tarjetas en `src/components/ProductoCard.jsx`.
+- [x] Crea una página de detalle y registra `/catalogo/:id`. Mantén `/catalogo` como listado.
+- [x] Añade a cada tarjeta un `Link` «Ver detalle» con el ID del producto. Conserva los botones de editar y eliminar separados del enlace, sin anidar controles interactivos.
+- [x] Lee `id` con `useParams` desde `react-router`, el paquete que ya usa el proyecto. Comprueba su valor: llega como texto.
+- [x] Añade un enlace «Volver al catálogo» que también funcione si has entrado directamente desde otra pestaña.
 
 **Parada:** puedes abrir dos productos diferentes y sus URLs son distintas. Por ahora basta con mostrar el ID.
 
@@ -22,13 +22,13 @@ Lee [useParams · React Router](https://reactrouter.com/api/hooks/useParams).
 
 Usa `GET https://dummyjson.com/products/1`, sustituyendo `1` por el ID. La respuesta es un objeto de producto, no un objeto con un array `products`. Consulta [Get a single product · DummyJSON](https://dummyjson.com/docs/products).
 
-- [ ] Comprueba que el ID representa un entero positivo. Una URL como `/catalogo/abc` debe mostrar un mensaje comprensible sin pedir ese recurso a la API.
-- [ ] Obtén el producto automáticamente al entrar a la página. Debe funcionar aunque no hayas visitado el catálogo antes.
-- [ ] Usa un `useEffect` para sincronizar los datos con el ID de la ruta. Incluye las dependencias que utilizas; no silencies el linter.
-- [ ] Declara la función asíncrona dentro del efecto y ejecútala allí. El callback del efecto no debe ser `async`: su retorno se reserva para la limpieza.
-- [ ] Comprueba `respuesta.ok`. Distingue un HTTP 404 («Producto no encontrado») de un fallo de conexión u otro error HTTP.
-- [ ] Muestra carga, error o detalle según corresponda. Mientras se carga otro ID, no presentes los datos anteriores como si pertenecieran al nuevo.
-- [ ] Muestra título, imagen con `alt`, descripción, precio y categoría. No necesitas enseñar todos los campos de la API.
+- [x] Comprueba que el ID representa un entero positivo. Una URL como `/catalogo/abc` debe mostrar un mensaje comprensible sin pedir ese recurso a la API.
+- [x] Obtén el producto automáticamente al entrar a la página. Debe funcionar aunque no hayas visitado el catálogo antes.
+- [x] Usa un `useEffect` para sincronizar los datos con el ID de la ruta. Incluye las dependencias que utilizas; no silencies el linter.
+- [x] Declara la función asíncrona dentro del efecto y ejecútala allí. El callback del efecto no debe ser `async`: su retorno se reserva para la limpieza.
+- [x] Comprueba `respuesta.ok`. Distingue un HTTP 404 («Producto no encontrado») de un fallo de conexión u otro error HTTP.
+- [x] Muestra carga, error o detalle según corresponda. Mientras se carga otro ID, no presentes los datos anteriores como si pertenecieran al nuevo.
+- [x] Muestra título, imagen con `alt`, descripción, precio y categoría. No necesitas enseñar todos los campos de la API.
 
 **Por qué ahora un efecto:** esta página debe mantenerse sincronizada con la URL. En el catálogo, «Consultar» sigue siendo una acción del formulario; no cambies su funcionamiento para que todas las peticiones usen efectos.
 

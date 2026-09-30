@@ -346,7 +346,7 @@ No es un problema del estado de React, sino del funcionamiento de la API de prá
 
 ## Reto 12 · Deploy en Vercel y ramas
 
-**Estado:** en curso. Ya está publicado en Vercel y el trabajo diario vive en `develop`. Hecho: ramas `develop` y `main`, `devquest/vercel.json`, primera integración `develop → main` y la mejora del portal en `develop` (`636e800`) con su Preview generada. Pendiente: la pull request del cambio visible, su merge y las comprobaciones en el navegador. [Enunciado y checklist](../retos/12-deploy-vercel-y-ramas.md).
+**Estado:** cerrado el 30/09/2026 por acuerdo con el tutor. Publicación y flujo de ramas completados; la sincronización final queda bajo revisión del tutor. [Registro de cierre](../retos/12-deploy-vercel-y-ramas.md#registro-de-cierre--30092026).
 
 - ¿Qué diferencia hay entre un commit, un push, una pull request y un despliegue? Localiza un ejemplo de cada uno en esta entrega.
 **Commit, push, pull request y despliegue:** un commit guarda el cambio en mi ordenador (`2e271b7`, `636e800`); el `push` lo sube a GitHub (mi `develop` pasó a `636e800`); la pull request propone pasar esos commits de `develop` a `main` (así se hizo con la PR #1 y la PR #3, merge `c22d4da`); y el despliegue es Vercel construyendo un commit y publicándolo (Preview de `636e800`, Production de `c22d4da`).
@@ -361,7 +361,7 @@ No es un problema del estado de React, sino del funcionamiento de la API de prá
 - ¿Por qué no aparecen en producción las tareas que guardé en localhost?
 `localStorage` guarda los datos por **origen**, no por aplicación. `http://localhost:5173` y `https://practicasnadunet.vercel.app` son orígenes distintos, así que cada uno tiene su propio almacenamiento: las tareas que creé en local se quedan en el navegador donde las creé y no viajan con el despliegue. La clave `devquest.tareas.v1` existe por separado en cada origen y puede tener contenidos diferentes (una URL de Preview también tendría los suyos). No es un fallo del despliegue: para ver tareas en la web publicada tengo que crearlas allí, y las de local siguen intactas en local.
 - ¿Cómo identifico el commit publicado y cómo preparo una corrección si detecto un fallo?
-El commit publicado lo identifico en **Vercel**, donde cada despliegue indica si es Preview o Production y a qué commit corresponde, y en **GitHub**, donde `main` es la versión publicada (`c22d4da` ahora) y `develop` es lo que se prueba en la Preview (`636e800`). En local lo confirmo con `git branch --show-current` y `git log --oneline -1`.
+El commit publicado lo identifico en **Vercel**, donde cada despliegue indica si es Preview o Production y a qué commit corresponde, La revisión del 30/09/2026 registra Production correcta de `1f53ba6` y Preview de `4866234`. `main` contiene la versión que se quiere publicar; si el despliegue falla, la web puede seguir mostrando una versión anterior. En local, `git branch --show-current` y `git log --oneline -1` identifican mi rama y commit locales, no confirman por sí solos lo publicado.
 Si detecto un fallo, no toco `main` directamente: corrijo desde `develop`, lo compruebo en local (`npm run lint`, `npm run build` y el navegador), hago commit y `push`, reviso la **Preview** de ese commit y abro o actualizo la pull request `develop → main`. Después del merge, Vercel publica un nuevo despliegue de **Production**, lo compruebo y vuelvo a sincronizar `develop` con `main`. Si el fallo ya está en producción, aviso al tutor antes de preparar la corrección.
 
 ### Notas del bloque
@@ -369,7 +369,49 @@ Si detecto un fallo, no toco `main` directamente: corrijo desde `develop`, lo co
 - **GitHub con Vercel:** al importar el repositorio, Vercel se conecta a GitHub y despliega solo. Los despliegues aparecen en GitHub creados por `vercel[bot]`: uno de **Preview** por cada `push` a `develop` y uno de **Production** cada vez que `main` recibe un merge.
 - **`npm ci`, `lint`, `build` y `preview`:** `npm ci` instala exactamente las versiones de `package-lock.json` (es lo que ejecuta Vercel). `npm run lint` revisa el código sin ejecutarlo y ahora pasa sin errores, porque `2e271b7` quitó un import que no se usaba. `npm run build` genera la carpeta `dist/`. `npm run preview` sirve esa compilación en local para revisarla; no publica nada en Internet.
 - **`-u` en el primer push:** `git push -u origin develop` sube la rama y la deja enlazada con `origin/develop`, así los siguientes `push` y `pull` no necesitan indicar el remoto ni la rama.
-- **Dudas y pendientes:** falta abrir la pull request `develop → main` con el cambio visible (`636e800`) y, después del merge, comprobar Production. También quedan por hacer las comprobaciones en el navegador (Portal, Tareas, Quiz y Catálogo, imágenes y estilos, búsqueda del catálogo, tarea guardada que se conserva al recargar y los tamaños de móvil y escritorio) y anotar la versión de Node de Vercel; en local uso Node `v24.21.0` con npm `11.19.0`. La Preview del commit `636e800` todavía pide iniciar sesión en Vercel, así que hay que revisar cómo enseñársela al tutor.
+- **Cierre acordado:** PR #3–#6 integradas y cambio visible publicado. El tutor revisa por separado la sincronización entre ramas. Las descripciones de PR, el acceso del tutor a Preview y la versión exacta de Node del servidor no quedan como tareas exigidas en esta entrega. Los ejemplos de commits anteriores se conservan como recorrido histórico.
+
+## Reto 13 · Detalle de producto y efectos
+
+**Estado:** por empezar. [Enunciado y checklist](../retos/13-detalle-producto-y-efectos.md). Responde al terminar cada bloque, con tus palabras y señalando un ejemplo de tu código.
+
+- [ ] ¿De dónde sale el ID y por qué la ficha funciona al abrir su URL sin visitar antes el catálogo?
+- [ ] ¿Por qué aquí usas un efecto y en «Consultar» mantienes un manejador de evento?
+- [ ] ¿Cuándo vuelve a ejecutarse el efecto y cuándo se ejecuta su limpieza?
+- [ ] ¿Qué evita `AbortController`? ¿Cómo impides que una ejecución antigua cambie los datos o el error actuales?
+- [ ] ¿Cómo distingues ID inválido, producto inexistente, error de conexión y cancelación intencionada?
+- [ ] ¿Qué ocurre con el efecto en StrictMode durante el desarrollo y por qué no necesitas desactivarlo?
+
+**Mis explicaciones:**
+
+_Por completar._
+
+**Pruebas realizadas:** anota al menos tres (incluye una con red lenta).
+
+| Acción | Resultado esperado | Resultado observado |
+| --- | --- | --- |
+| Por completar | | |
+
+## Reto 14 · Paginación del catálogo
+
+**Estado:** por empezar, después del 13. [Enunciado y checklist](../retos/14-paginacion-del-catalogo.md).
+
+- [ ] ¿Qué representan `limit`, `skip` y `total`? Calcula el `skip` de la página 3 con 12 productos por página.
+- [ ] ¿Qué datos guardas en estado y cuáles calculas? Enseña el cálculo de la última página.
+- [ ] ¿Por qué «Siguiente» utiliza la consulta aplicada y no el texto que estás escribiendo?
+- [ ] ¿Por qué no puedes llamar al setter de página y leer inmediatamente el nuevo valor en el mismo manejador?
+- [ ] Si falla la página 2 y cambias los campos, ¿qué petición hace «Reintentar»?
+- [ ] ¿Por qué borrar una tarjeta con DummyJSON no cambia el total del servidor?
+
+**Mis explicaciones:**
+
+_Por completar._
+
+**Pruebas realizadas:** anota al menos tres (incluye un filtro y un error con reintento).
+
+| Acción | Resultado esperado | Resultado observado |
+| --- | --- | --- |
+| Por completar | | |
 
 ## Comentarios explicativos en el código
 

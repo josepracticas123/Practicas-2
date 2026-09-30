@@ -27,18 +27,18 @@ Los retos 01–08 están cerrados funcionalmente. La cabecera del 06 está corre
 
 El reto 11 está cerrado funcionalmente: creación, edición, eliminación, bloqueos y cancelaciones revisados. Lint y build pasan. Consulta el [registro de cierre](retos/11-crear-editar-eliminar-api.md#registro-de-cierre) para ver el alcance de las comprobaciones.
 
-**Siguiente paso:** [12 · Publica DevQuest con Vercel y trabaja en develop](retos/12-deploy-vercel-y-ramas.md). Está en curso: la aplicación ya está publicada en Vercel y el trabajo diario se hace en `develop`.
+**Reto 12 cerrado:** aplicación publicada y recorrido de `develop` a `main` realizado. Consulta el [registro de cierre](retos/12-deploy-vercel-y-ramas.md#registro-de-cierre--30092026). Continúa con el [reto 13 · Detalle de producto](retos/13-detalle-producto-y-efectos.md).
 
 El cuaderno de los retos 09–11 está respondido. La conversación de comprensión con el tutor sigue pendiente y es independiente del cierre funcional; no necesitas escribir otro resumen para empezar el 12.
 
-## Seguimiento · reto 12 en curso
+## Seguimiento · reto 12 cerrado (30/09/2026)
 
 DevQuest ya está publicado y el trabajo diario vive en `develop`:
 
 - **URL de producción:** https://practicasnadunet.vercel.app (la antigua `https://practicas-2-two.vercel.app` ya no se utiliza).
 - **Flujo:** `develop → Preview → pull request → main → Production`.
-- Hecho: ramas `develop` y `main`, `devquest/vercel.json` con el rewrite a `index.html` para las rutas de React, primera integración `develop → main` y la mejora del portal en `develop` (`636e800`) con su Preview generada.
-- Pendiente: abrir la pull request `develop → main` de esa mejora, mergearla, comprobar Production después del merge y terminar las comprobaciones en el navegador. Detalle y evidencias en [12 · Publica DevQuest con Vercel y trabaja en develop](retos/12-deploy-vercel-y-ramas.md).
+- Hecho: configuración SPA, Preview, PR de José #3–#6 integradas y Production correcta de `1f53ba6`, con el cambio visible del portal.
+- La sincronización final entre ramas la revisa el tutor por separado. No quedan correcciones exigidas al alumno para cerrar el 12.
 
 La sección siguiente conserva la guía de instalación inicial como referencia.
 
@@ -97,7 +97,7 @@ Lee [Tu primer componente](https://es.react.dev/learn/your-first-component) y [E
 
 **Listo para empezar:** puedes arrancar la app, cambiar un texto y explicar dónde lo has cambiado.
 
-Continúa con el [12 · Deploy en Vercel y ramas](retos/12-deploy-vercel-y-ramas.md): trabajo en `develop`, Preview y publicación desde `main`.
+El [12 · Deploy en Vercel y ramas](retos/12-deploy-vercel-y-ramas.md) está cerrado. Mantén el flujo de trabajo en `develop`, Preview y publicación desde `main`.
 
 ## Retos definidos
 
@@ -115,9 +115,12 @@ Continúa con el [12 · Deploy en Vercel y ramas](retos/12-deploy-vercel-y-ramas
 
 - [10 · Busca productos en el servidor](retos/10-busqueda-y-filtros-api.md): GET, búsqueda por texto, categorías y consulta aplicada. **Implementado; revisión del checklist pendiente.**
 - [11 · Crea, edita y elimina mediante peticiones](retos/11-crear-editar-eliminar-api.md): POST, GET por ID, PUT y DELETE con respuestas simuladas. **Cerrado funcionalmente en `84a2a01`; conversación con el tutor pendiente.**
-- [12 · Publica DevQuest con Vercel y trabaja en develop](retos/12-deploy-vercel-y-ramas.md): despliegue, rutas SPA y recorrido de Preview a Production mediante pull request. **En curso: publicado en Vercel y con el flujo `develop → PR → main`; falta la pull request del cambio visible y las comprobaciones en el navegador.**
+- [12 · Publica DevQuest con Vercel y trabaja en develop](retos/12-deploy-vercel-y-ramas.md): despliegue, rutas SPA y recorrido de Preview a Production mediante pull request. **Cerrado el 30/09/2026 por acuerdo con el tutor.**
 
-Trabaja por bloques y comprueba cada uno antes de continuar.
+- [13 · Cada producto tiene su página](retos/13-detalle-producto-y-efectos.md): ruta con ID, carga automática, dependencias y limpieza de peticiones. **Por empezar; primero para hoy.**
+- [14 · Recorre el catálogo por páginas](retos/14-paginacion-del-catalogo.md): paginación en el servidor, filtros aplicados y reintento de la página fallida. **Por empezar, después del 13.**
+
+Trabaja por bloques y comprueba cada uno antes de continuar. Para hoy, empieza por el 13 y pasa al 14 cuando funcione y puedas explicarlo. La prioridad es entenderlos; no necesitas terminar ambos a toda prisa.
 
 ## Cómo trabajar el reto
 
@@ -160,7 +163,9 @@ Practicas-2/
 │   ├── 09-primeras-llamadas-api.md
 │   ├── 10-busqueda-y-filtros-api.md
 │   ├── 11-crear-editar-eliminar-api.md
-│   └── 12-deploy-vercel-y-ramas.md
+│   ├── 12-deploy-vercel-y-ramas.md
+│   ├── 13-detalle-producto-y-efectos.md
+│   └── 14-paginacion-del-catalogo.md
 └── devquest/
     ├── APRENDIZAJE.md
     ├── package.json

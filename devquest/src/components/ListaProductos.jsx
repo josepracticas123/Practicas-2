@@ -4,6 +4,9 @@ function ListaProductos({
   consultaAplicada,
   productos,
   totalResultados,
+  pagina,
+  totalPaginas,
+  onCambiarPagina,
   onEditar,
   onEliminar,
   operacionesBloqueadas,
@@ -23,6 +26,26 @@ function ListaProductos({
         Tarjetas visibles: {productos.length} · Total del servidor en la última
         consulta: {totalResultados}
       </p>
+      <p className="mb-6">
+        Página {pagina} de {totalPaginas}
+      </p>
+      {/*Botones de paginación*/}
+      <button
+        type="button"
+        disabled={pagina === 1}
+        onClick={() => onCambiarPagina(pagina - 1)}
+        className="mb-6 mr-3 rounded bg-amber-400 px-4 py-2 text-gray-900 disabled:opacity-50"
+      >
+        Anterior
+      </button>
+      <button
+        type="button"
+        disabled={pagina === totalPaginas}
+        onClick={() => onCambiarPagina(pagina + 1)}
+        className="mb-6 rounded bg-amber-400 px-4 py-2 text-gray-900 disabled:opacity-50"
+      >
+        Siguiente
+      </button>
 
       {/* Si no hay productos, mostramos un mensaje */}
       {productos.length === 0 ? (

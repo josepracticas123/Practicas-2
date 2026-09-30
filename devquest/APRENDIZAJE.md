@@ -373,7 +373,7 @@ Si detecto un fallo, no toco `main` directamente: corrijo desde `develop`, lo co
 
 ## Reto 13 · Detalle de producto y efectos
 
-**Estado:** por empezar. [Enunciado y checklist](../retos/13-detalle-producto-y-efectos.md). Responde al terminar cada bloque, con tus palabras y señalando un ejemplo de tu código.
+**Estado:** en curso; revisión parcial de `bc4b76b` (30/09/2026). [Enunciado y checklist](../retos/13-detalle-producto-y-efectos.md). Responde al terminar cada bloque, con tus palabras y señalando un ejemplo de tu código.
 
 - [ ] ¿De dónde sale el ID y por qué la ficha funciona al abrir su URL sin visitar antes el catálogo?
 - [ ] ¿Por qué aquí usas un efecto y en «Consultar» mantienes un manejador de evento?
@@ -381,6 +381,8 @@ Si detecto un fallo, no toco `main` directamente: corrijo desde `develop`, lo co
 - [ ] ¿Qué evita `AbortController`? ¿Cómo impides que una ejecución antigua cambie los datos o el error actuales?
 - [ ] ¿Cómo distingues ID inválido, producto inexistente, error de conexión y cancelación intencionada?
 - [ ] ¿Qué ocurre con el efecto en StrictMode durante el desarrollo y por qué no necesitas desactivarlo?
+
+Antes de continuar con la limpieza, revisa el [feedback del reto](../retos/13-detalle-producto-y-efectos.md#feedback-de-revisión--antes-de-seguir). Al explicar tus correcciones, comenta por qué guardar un error no termina automáticamente la carga y por qué `producto?.title` no oculta la ficha. No necesitas otro resumen: utiliza el espacio siguiente.
 
 **Mis explicaciones:**
 

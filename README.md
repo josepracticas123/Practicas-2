@@ -117,7 +117,7 @@ El [12 · Deploy en Vercel y ramas](retos/12-deploy-vercel-y-ramas.md) está cer
 - [11 · Crea, edita y elimina mediante peticiones](retos/11-crear-editar-eliminar-api.md): POST, GET por ID, PUT y DELETE con respuestas simuladas. **Cerrado funcionalmente en `84a2a01`; conversación con el tutor pendiente.**
 - [12 · Publica DevQuest con Vercel y trabaja en develop](retos/12-deploy-vercel-y-ramas.md): despliegue, rutas SPA y recorrido de Preview a Production mediante pull request. **Cerrado el 30/09/2026 por acuerdo con el tutor.**
 
-- [13 · Cada producto tiene su página](retos/13-detalle-producto-y-efectos.md): ruta con ID, carga automática, dependencias y limpieza de peticiones. **Por empezar; primero para hoy.**
+- [13 · Cada producto tiene su página](retos/13-detalle-producto-y-efectos.md): ruta con ID, carga automática, dependencias y limpieza de peticiones. **En curso: revisa el feedback del bloque 2 antes de continuar con la limpieza de peticiones.**
 - [14 · Recorre el catálogo por páginas](retos/14-paginacion-del-catalogo.md): paginación en el servidor, filtros aplicados y reintento de la página fallida. **Por empezar, después del 13.**
 
 Trabaja por bloques y comprueba cada uno antes de continuar. Para hoy, empieza por el 13 y pasa al 14 cuando funcione y puedas explicarlo. La prioridad es entenderlos; no necesitas terminar ambos a toda prisa.

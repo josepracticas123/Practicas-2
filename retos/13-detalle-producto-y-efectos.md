@@ -1,10 +1,24 @@
 # 13 · Cada producto tiene su página
 
-**Estado:** por empezar. **Antes:** reto 12 cerrado; coordina con el tutor la sincronización de ramas antes de empezar a editar.
+**Estado:** en curso. Revisión parcial del 30/09/2026 sobre `bc4b76b`. La ruta y la carga inicial están implementadas; revisa los estados del bloque 2 antes de continuar con la limpieza del bloque 3.
 
 **Tu misión:** abrir un producto del catálogo en una página propia que también funcione al compartir su URL. Trabajarás rutas con parámetros, carga automática, dependencias de un efecto y limpieza de peticiones.
 
 Haz primero este reto. El 14 queda para después, cuando estas comprobaciones funcionen. Avanza por bloques; no hace falta terminar ambos hoy si necesitas tiempo para entenderlos.
+
+## Feedback de revisión · antes de seguir
+
+La ruta `/catalogo/:id`, el enlace desde las tarjetas, `useParams` y el efecto dependiente de `id` están bien encaminados. Lint y build pasan en la versión revisada. Conserva ese trabajo y centra la siguiente revisión en estos puntos:
+
+- [ ] **Termina la carga cuando hay un error.** En [ProductoDetallePage.jsx](../devquest/src/pages/ProductoDetallePage.jsx), el `catch` guarda el error pero deja `cargando` en `true`. Prueba un ID positivo inexistente y una petición sin conexión: debe aparecer el error y desaparecer «Cargando producto…». Si usas `finally`, al hacer el bloque 3 recuerda impedir que una petición antigua cambie el estado de la actual.
+- [ ] **Muestra solo el estado que corresponde.** La imagen, el precio y la categoría se renderizan incluso sin producto. Organiza el JSX para mostrar carga, error o ficha válida. `producto?.title` evita acceder a una propiedad de `null`, pero no oculta el resto del marcado; por eso pueden quedar un «€» o «Categoría:» sin datos.
+- [ ] **Evita conservar el producto anterior ante un ID inválido.** La validación hace `return` antes de limpiar `producto`. Prueba pasar desde una ficha cargada a `/catalogo/abc` mediante un `Link` temporal de React: debe quedar el mensaje de ID inválido, sin la ficha anterior y sin petición para `abc`. Retira el enlace de prueba después. Recargar toda la página no reproduce esta transición porque reinicia el estado.
+- [ ] **Corrige el comentario de la ruta.** En [App.jsx](../devquest/src/App.jsx), el comentario dentro de `<Routes>` usa `//`. Dentro del JSX debe escribirse como `{/* comentario */}`. Comprueba también que puedes explicar qué representa `:id`.
+- [ ] **Comprueba la recuperación.** Después de un error o un ID inválido, navega a un ID válido: desaparece el error, se carga el producto correcto y termina la carga.
+
+**Orden para continuar:** corrige estos puntos → vuelve a comprobar el bloque 2 → sigue con el bloque 3 → realiza las pruebas del bloque 4. La ausencia de `AbortController` corresponde al trabajo que ya dejaste pendiente; no es una tarea nueva añadida por esta revisión.
+
+**Alcance de la revisión:** lectura de código, lint y build, y pruebas aisladas de la lógica que confirmaron carga activa tras un 404 y conservación del producto al pasar a un ID inválido. No se verificó visualmente el entorno de Dev Tunnels. Los checks de pruebas finales siguen abiertos para que los completes en tu navegador.
 
 ## 1. Conecta tarjeta y página
 
@@ -27,7 +41,7 @@ Usa `GET https://dummyjson.com/products/1`, sustituyendo `1` por el ID. La respu
 - [x] Usa un `useEffect` para sincronizar los datos con el ID de la ruta. Incluye las dependencias que utilizas; no silencies el linter.
 - [x] Declara la función asíncrona dentro del efecto y ejecútala allí. El callback del efecto no debe ser `async`: su retorno se reserva para la limpieza.
 - [x] Comprueba `respuesta.ok`. Distingue un HTTP 404 («Producto no encontrado») de un fallo de conexión u otro error HTTP.
-- [x] Muestra carga, error o detalle según corresponda. Mientras se carga otro ID, no presentes los datos anteriores como si pertenecieran al nuevo.
+- [ ] Muestra carga, error o detalle según corresponda. Mientras se carga otro ID, no presentes los datos anteriores como si pertenecieran al nuevo.
 - [x] Muestra título, imagen con `alt`, descripción, precio y categoría. No necesitas enseñar todos los campos de la API.
 
 **Por qué ahora un efecto:** esta página debe mantenerse sincronizada con la URL. En el catálogo, «Consultar» sigue siendo una acción del formulario; no cambies su funcionamiento para que todas las peticiones usen efectos.

@@ -48,12 +48,10 @@ El [reto 12 · Vercel y ramas](../retos/12-deploy-vercel-y-ramas.md) está cerra
 - Comprueba en Vercel el commit del despliegue exitoso para identificar la versión publicada.
 - La sincronización final entre ramas queda bajo revisión del tutor.
 
-## Próximos retos
+## Retos en curso y próximos pasos
 
-Estas funciones todavía no están implementadas:
-
-- [13 · Detalle de producto](../retos/13-detalle-producto-y-efectos.md): página por ID y carga automática con limpieza.
-- [14 · Paginación](../retos/14-paginacion-del-catalogo.md): recorrer el catálogo conservando la consulta aplicada.
+- [13 · Detalle de producto](../retos/13-detalle-producto-y-efectos.md): en curso. Ruta y carga inicial implementadas; quedan por corregir los estados de carga/error y añadir limpieza de peticiones. Consulta el feedback del enunciado.
+- [14 · Paginación](../retos/14-paginacion-del-catalogo.md): por empezar, después del 13; recorrer el catálogo conservando la consulta aplicada.
 
 Trabaja primero el 13 y continúa con el 14 cuando sus comprobaciones estén completas.
 

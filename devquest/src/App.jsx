@@ -21,7 +21,7 @@ function App() {
           <Route path="/tareas" element={<TareasPage />} />
           <Route path="/quiz" element={<QuizPage />} />
           <Route path="/catalogo" element={<CatalogoPage />} />
-          // introducimos los : porque queremos que el id sea un parametro
+          { /* introducimos los : porque queremos que el id sea un parametro      */ } 
           variable.
           <Route path="/catalogo/:id" element={<ProductoDetallePage />} />
           <Route path="/crear-producto" element={<CrearProductoPage />} />

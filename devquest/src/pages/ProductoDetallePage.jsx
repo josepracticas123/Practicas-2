@@ -56,6 +56,7 @@ function ProductoDetallePage() {
         }
       } catch (error) {
         if (error.name === "AbortError") {
+          // Si el error se cancela porque cancelamos la petición, no hacer nada más
           return;
         }
         // Protegemos error sobre el producto nuevo, así la petición atigua no puede mostrar error sobre el nuevo
@@ -77,7 +78,9 @@ function ProductoDetallePage() {
     <div className="mx-4 my-6 w-auto max-w-md rounded-xl bg-gray-800 p-6 text-center text-white sm:mx-auto">
       <h1 className="text-yellow-500">Detalle del producto</h1>
       {/*taremos el id del producto*/}
-      <p>ID: {id}</p> {/*ponemos el cargando en la pantalla*/}
+      <p>ID: {id}</p>
+
+      {/*ponemos el cargando en la pantalla*/}
       {cargando && (
         <p className=" mt-6 mb-6 font-bold text-green-600">
           Cargando producto...

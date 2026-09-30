@@ -50,12 +50,12 @@ Lee [peticiones desde un efecto · React](https://react.dev/reference/react/useE
 
 ## 3. Limpia lo que dejas en marcha
 
-- [ ] Crea un `AbortController` nuevo para cada ejecución del efecto y pasa su `signal` a `fetch`.
-- [ ] Devuelve una función de limpieza que aborte esa petición al salir de la página o cambiar el ID.
-- [ ] No muestres un error al usuario cuando la petición se cancela intencionadamente.
-- [ ] Asegura que una ejecución antigua no actualiza producto, error ni carga después de su limpieza. Revisa también cualquier `finally`; cancelar no convierte una ejecución vieja en la actual.
-- [ ] Conserva `StrictMode`. Explica por qué en desarrollo puede haber un ciclo adicional de inicio, limpieza e inicio.
-- [ ] Escribe dos comentarios breves con tus palabras: por qué el efecto depende del ID y para qué sirve su limpieza.
+- [x] Crea un `AbortController` nuevo para cada ejecución del efecto y pasa su `signal` a `fetch`.
+- [x] Devuelve una función de limpieza que aborte esa petición al salir de la página o cambiar el ID.
+- [x] No muestres un error al usuario cuando la petición se cancela intencionadamente.
+- [x] Asegura que una ejecución antigua no actualiza producto, error ni carga después de su limpieza. Revisa también cualquier `finally`; cancelar no convierte una ejecución vieja en la actual.
+- [x] Conserva `StrictMode`. Explica por qué en desarrollo puede haber un ciclo adicional de inicio, limpieza e inicio.
+- [x] Escribe dos comentarios breves con tus palabras: por qué el efecto depende del ID y para qué sirve su limpieza.
 
 Lee [AbortController · MDN](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) y [ciclo adicional en desarrollo · React](https://react.dev/reference/react/useEffect#my-effect-runs-twice-when-the-component-mounts).
 
@@ -63,15 +63,15 @@ Lee [AbortController · MDN](https://developer.mozilla.org/en-US/docs/Web/API/Ab
 
 ## 4. Comprueba el recorrido
 
-- [ ] Abre un detalle desde una tarjeta y comprueba en Network el ID solicitado.
-- [ ] Abre `/catalogo/1` directamente y recarga: la ficha funciona sin recibir el producto por props ni depender del listado.
-- [ ] Prueba un ID con formato inválido y otro positivo que la API confirme como inexistente. Los mensajes son adecuados y no queda una carga infinita.
-- [ ] Prueba sin conexión; vuelve a conectarte y recarga. No es obligatorio añadir un botón de reintento en este reto.
-- [ ] Con red lenta, sal del detalle antes de recibir la respuesta. La cancelación no muestra un error al usuario.
-- [ ] Prueba cambiar entre dos IDs mediante navegación de React mientras el primero carga. Puedes añadir temporalmente dos `Link` de prueba en la ficha y retirarlos después. Cambiar la dirección con una recarga completa no comprueba este caso.
-- [ ] Comprueba que la respuesta del primer ID no sustituye al segundo, aunque llegue más tarde.
-- [ ] Revisa teclado y anchuras de 375 px y 1280 px.
-- [ ] Ejecuta `npm run lint` y `npm run build`.
+- [x] Abre un detalle desde una tarjeta y comprueba en Network el ID solicitado.
+- [x] Abre `/catalogo/1` directamente y recarga: la ficha funciona sin recibir el producto por props ni depender del listado.
+- [x] Prueba un ID con formato inválido y otro positivo que la API confirme como inexistente. Los mensajes son adecuados y no queda una carga infinita.
+- [x] Prueba sin conexión; vuelve a conectarte y recarga. No es obligatorio añadir un botón de reintento en este reto.
+- [x] Con red lenta, sal del detalle antes de recibir la respuesta. La cancelación no muestra un error al usuario.
+- [x] Prueba cambiar entre dos IDs mediante navegación de React mientras el primero carga. Puedes añadir temporalmente dos `Link` de prueba en la ficha y retirarlos después. Cambiar la dirección con una recarga completa no comprueba este caso.
+- [x] Comprueba que la respuesta del primer ID no sustituye al segundo, aunque llegue más tarde.
+- [x] Revisa teclado y anchuras de 375 px y 1280 px.
+- [x] Ejecuta `npm run lint` y `npm run build`.
 - [ ] Trabaja en `develop`, comprueba su Preview y prepara la entrega hacia `main` con el tutor. Tras publicarla, abre y recarga una URL de detalle en Vercel.
 
 ## 5. Registra lo aprendido

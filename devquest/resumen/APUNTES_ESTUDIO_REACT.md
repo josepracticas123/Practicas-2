@@ -8,8 +8,7 @@
 - Las preguntas de repaso con respuesta están en [Preguntas](Preguntas.md).
 - Después comenta el [repaso con el tutor](../REPASO-CON-TUTOR.md). El 09 empieza después de esa conversación.
 
-
-Estos apuntes describen el código que existe actualmente en `devquest/src/` y lo aprendido en los Retos 01–11. El Reto 11 está cerrado funcionalmente en `84a2a01`; la conversación con el tutor sigue pendiente.
+Estos apuntes describen el código que existe actualmente en `devquest/src/` y lo aprendido en los Retos 01–14. El Reto 11 está cerrado funcionalmente en `84a2a01`; la conversación con el tutor sigue pendiente. El Reto 14 está en curso y sus pruebas manuales siguen pendientes.
 
 ## 1. Qué he construido
 
@@ -29,7 +28,7 @@ Cada tarea se guarda como un objeto con esta forma general:
 {
 
 
-  
+
   id: "identificador-unico",
   texto: "Leer React",
   completada: false
@@ -386,7 +385,7 @@ En `TareasPage` se usa `&&`:
 
 ```jsx
 {
-  seccionActual === "inicio" && <Inicio addTareas={addTareas} />
+  seccionActual === "inicio" && <Inicio addTareas={addTareas} />;
 }
 ```
 
@@ -408,7 +407,7 @@ En las vistas, un array de tareas se convierte en varios elementos `<li>`:
     <li key={tarea.id}>
       {index + 1}. {tarea.texto}
     </li>
-  ))
+  ));
 }
 ```
 
@@ -809,3 +808,45 @@ Las peticiones de escritura utilizan Fetch contra DummyJSON. La API devuelve res
 - La interfaz distingue las tarjetas visibles del total obtenido en la última consulta; una nueva consulta vuelve a mostrar los datos reales de DummyJSON.
 
 El reto 11 está cerrado funcionalmente en `84a2a01`; el alcance de las pruebas está en el [registro de cierre del reto](../../retos/11-crear-editar-eliminar-api.md#registro-de-cierre). Queda la conversación con el tutor sobre los conceptos de los retos 09–11.
+
+## 33. Reto 14: paginación del catálogo
+
+El [enunciado y checklist del Reto 14](../../retos/14-paginacion-del-catalogo.md) pide solicitar páginas al servidor sin descargar el catálogo completo. La carga sigue siendo manual: el formulario y los botones llaman a los manejadores de `CatalogoPages.jsx`; no se añadió un efecto para cargar el catálogo.
+
+### `limit`, `skip` y `total`
+
+- `limit=12` pide como máximo 12 productos en cada respuesta.
+- `skip` es cuántos resultados se omiten antes de devolver la página. Con tamaño 12, las primeras páginas usan `skip=0`, `skip=12` y `skip=24`.
+- `total` es el total de resultados que DummyJSON informa para la consulta, no el número de productos recibidos en esta página.
+
+El desplazamiento se deriva de la página objetivo:
+
+```js
+const skipObjetivo = (paginaObjetivo - 1) * 12;
+```
+
+El total de páginas también se deriva del total del servidor:
+
+```js
+const totalPaginas = Math.ceil(totalResultados / 12);
+```
+
+Por ejemplo, 194 resultados requieren 17 páginas. En `CatalogoPages.jsx`, `pagina` y `totalResultados` son estados; `totalPaginas` y `skipObjetivo` son valores calculados. Mantenerlos calculados evita estados duplicados que podrían quedar desincronizados.
+
+### Consulta aplicada y estado como instantánea
+
+Los campos `modoConsulta`, `textoBusqueda` y `categoriaSeleccionada` son los valores editables del formulario. `consultaAplicada` guarda la consulta que produjo o intentó producir los resultados. Al paginar se usa su tipo y valor para reconstruir la URL de Todos, Texto o Categoría, de modo que editar los campos sin consultar no cambia el filtro de la lista actual.
+
+React entrega a cada renderizado una instantánea de sus estados. Llamar a `setPagina(paginaObjetivo)` solicita una actualización, pero no cambia inmediatamente la variable `pagina` capturada en ese mismo manejador. Por eso `cambiarPagina` pasa el destino explícitamente a `cargarProductos(consultaAplicada, paginaObjetivo)`, que calcula el `skip` de ese destino.
+
+Antes del `fetch`, el código guarda en `consultaAplicada` la URL intentada, descripción, tipo, valor y página. Si la petición falla, `Reintentar` pasa ese objeto a `cargarProductos`; al coincidir con la misma página, la función reutiliza la URL fallida en lugar de leer los campos actuales del formulario.
+
+### Respuesta y escrituras simuladas
+
+Una respuesta exitosa sustituye `productos` con `datos.products` y actualiza `totalResultados` con `datos.total`. No acumula páginas ni usa `slice` para simular paginación local. El indicador y las tarjetas solo se renderizan cuando el estado de petición es éxito; mientras carga o muestra error, la lista queda oculta.
+
+El DELETE simulado filtra la tarjeta de la lista local y no actualiza `totalResultados`, porque ese estado representa el total informado por el servidor. DummyJSON no persiste las escrituras de práctica: un GET posterior puede devolver el producto eliminado o su título original, como se explica en la sección 32.
+
+### Estado de la revisión
+
+La lectura del código confirma que se construyen las consultas paginadas para los tres modos, se entrega explícitamente la página objetivo, se inicia una consulta nueva en la página 1 y se conserva la URL intentada para reintentar. También muestra dos aspectos pendientes: los botones de paginación no reciben el bloqueo de operaciones cuando la edición queda abierta y no se ocultan con cero resultados, por lo que aparece «Página 1 de 0». La lectura no demuestra las respuestas observadas en Network, el recorrido real de los botones, teclado, tamaños responsive, lint, build ni el reintento sin conexión. No se marca el reto como terminado; los resultados reales se anotan en el bloque 14 de [APRENDIZAJE.md](../APRENDIZAJE.md).

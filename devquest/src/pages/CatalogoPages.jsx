@@ -16,6 +16,7 @@ function CatalogoPage() {
   const [mensajeErrorCategorias, setMensajeErrorCategorias] = useState("");
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
   const [totalResultados, setTotalResultados] = useState(0);
+  const [pagina, setPagina] = useState(1);
   const [consultaAplicada, setConsultaAplicada] = useState(null);
   const [puedeReintentar, setPuedeReintentar] = useState(false);
   const [productoEdicion, setProductoEdicion] = useState(null);
@@ -27,11 +28,29 @@ function CatalogoPage() {
   const [mensajeErrorEliminacion, setMensajeErrorEliminacion] = useState("");
   const [estadoGuardado, setEstadoGuardado] = useState("inicial");
 
-  async function cargarProductos(consultaGuardada = null) {
+  //Estado de paginación:
+  //Calculamos los productos que se saltará la API según la página
+  //const skip = (pagina - 1) * 12;
+
+  //Calculamos el número total de paginas en función del total recibido por el servidor
+  const totalPaginas = Math.ceil(totalResultados / 12);
+  function cambiarPagina(paginaObjetivo) {
+    setPagina(paginaObjetivo);
+    cargarProductos(consultaAplicada, paginaObjetivo);
+  }
+  async function cargarProductos(
+    consultaGuardada = null,
+    paginaObjetivo = pagina,
+  ) {
+    const skipObjetivo = (paginaObjetivo - 1) * 12;
+
     if (estadoPeticion === "cargando") {
       return;
     }
     if (estadoEdicion === "cargando") {
+      return;
+    }
+    if (estadoEdicion === "exito") {
       return;
     }
     if (estadoGuardado === "editando") {
@@ -46,7 +65,7 @@ function CatalogoPage() {
     setMensajeErrorEdicion("");
 
     setProductoEliminar(null);
-    setEstadoEliminacion("inicial")
+    setEstadoEliminacion("inicial");
     setMensajeErrorEliminacion("");
 
     setEstadoGuardado("inicial");
@@ -57,21 +76,57 @@ function CatalogoPage() {
     setPuedeReintentar(false);
 
     try {
-      let url = "https://dummyjson.com/products?limit=12";
+      // Construimos la consulta general usando la página actual y el valor de skip.
+      /*
+       Así, si estamos en:
+       página 1 → limit=12&skip=0
+       página 2 → limit=12&skip=12
+       página 3 → limit=12&skip=24
+        */
+
+      let url = `https://dummyjson.com/products?limit=12&skip=${skipObjetivo}`;
 
       if (consultaGuardada) {
-        url = consultaGuardada.url;
+        if (paginaObjetivo === consultaGuardada.pagina) {
+          // Reintento: usamos exactamente la URL que falló.
+          url = consultaGuardada.url;
+        } else {
+          // Paginación: reconstruimos la URL para la nueva página.
+          if (consultaGuardada.tipo === "texto") {
+            const parametros = new URLSearchParams({
+              q: consultaGuardada.valor,
+              limit: "12",
+              skip: String(skipObjetivo),
+            });
+
+            url = `https://dummyjson.com/products/search?${parametros}`;
+          }
+
+          if (consultaGuardada.tipo === "categoria") {
+            url = `https://dummyjson.com/products/category/${encodeURIComponent(
+              consultaGuardada.valor,
+            )}?limit=12&skip=${skipObjetivo}`;
+          }
+
+          if (consultaGuardada.tipo === "todos") {
+            url = `https://dummyjson.com/products?limit=12&skip=${skipObjetivo}`;
+          }
+        }
       } else {
         if (modoConsulta === "texto") {
           const parametros = new URLSearchParams({
             q: textoBusqueda.trim(),
             limit: "12",
+            skip: String(skipObjetivo),
           });
+
           url = `https://dummyjson.com/products/search?${parametros}`;
         }
 
         if (modoConsulta === "categoria") {
-          url = `https://dummyjson.com/products/category/${encodeURIComponent(categoriaSeleccionada)}?limit=12`;
+          url = `https://dummyjson.com/products/category/${encodeURIComponent(
+            categoriaSeleccionada,
+          )}?limit=12&skip=${skipObjetivo}`;
         }
       }
       let descripcionConsulta = "Todos los productos";
@@ -101,6 +156,7 @@ function CatalogoPage() {
         descripcion: descripcionConsulta,
         tipo: tipoConsulta,
         valor: valorConsulta,
+        pagina: paginaObjetivo, // Guardamos también la página para poder repetir exactamente la consulta si falla.
       });
 
       const respuesta = await fetch(url);
@@ -171,7 +227,12 @@ function CatalogoPage() {
   async function editarProducto(id) {
     // Si hay otra operación en curso no abro una edición nueva: así el GET de
     // otro producto no cierra el formulario mientras se está guardando (PUT).
-    if (estadoPeticion === "cargando" || estadoEdicion === "cargando" || estadoGuardado === "editando" || estadoEliminacion === "cargando") {
+    if (
+      estadoPeticion === "cargando" ||
+      estadoEdicion === "cargando" ||
+      estadoGuardado === "editando" ||
+      estadoEliminacion === "cargando"
+    ) {
       return;
     }
 
@@ -224,9 +285,8 @@ function CatalogoPage() {
     if (estadoGuardado === "editando") {
       return;
     }
-    setProductoEliminar(producto);// guardamos le producto seleccionado en el estado.
+    setProductoEliminar(producto); // guardamos le producto seleccionado en el estado.
     setEstadoEliminacion("confirmando");
-
   }
   function cancelarEliminacion() {
     // Mientras el DELETE está en curso no dejo cerrar la confirmación:
@@ -268,12 +328,9 @@ function CatalogoPage() {
       );
       setProductoEliminar(null); // Con esto pasamos la condicion a falsa despues de eliminar y quitamos el modal
       setEstadoEliminacion("exito");
-
-
     } catch (error) {
       setEstadoEliminacion("error");
       setMensajeErrorEliminacion(error.message);
-
     }
   }
 
@@ -297,8 +354,10 @@ function CatalogoPage() {
     };
     setTextoBusqueda("");
     (setCategoriaSeleccionada(""), setModoConsulta("todos"));
+    //Mostrar todos comienza siempre desde la primera pagina
+    setPagina(1);
 
-    cargarProductos(consultaGeneral);
+    cargarProductos(consultaGeneral, 1); // Pasamos explicitamete la pagina para que cargue la consulta de la pagina 1.
   }
   // Bloquea los controles cuando hay una lectura o una escritura en curso
   // (cargar, editar, guardar o eliminar) para que dos acciones no se pisen.
@@ -362,8 +421,9 @@ function CatalogoPage() {
               return;
             }
 
-            // Si todo está correcto, hacemos la consulta.
-            cargarProductos();
+            // Una nueva consulta siempre comienza desde la primera página.
+            setPagina(1);
+            cargarProductos(null, 1); // Pasamos explicitamete la pagina para que cargue la consulta de la pagina 1.
           }}
           estadoPeticion={estadoPeticion}
         />
@@ -407,6 +467,9 @@ function CatalogoPage() {
             consultaAplicada={consultaAplicada}
             productos={productos}
             totalResultados={totalResultados}
+            pagina={pagina}
+            totalPaginas={totalPaginas}
+            onCambiarPagina={cambiarPagina}
             onEditar={editarProducto}
             onEliminar={confirmarEliminacion}
             operacionesBloqueadas={operacionesBloqueadas}

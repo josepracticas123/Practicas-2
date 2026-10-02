@@ -34,11 +34,10 @@ function CatalogoPage() {
 
   //Calculamos el número total de paginas en función del total recibido por el servidor
   const totalPaginas = Math.ceil(totalResultados / 12);
-
   function cambiarPagina(paginaObjetivo) {
     setPagina(paginaObjetivo);
+    cargarProductos(consultaAplicada, paginaObjetivo);
   }
-
   async function cargarProductos(
     consultaGuardada = null,
     paginaObjetivo = pagina,
@@ -85,21 +84,46 @@ function CatalogoPage() {
       let url = `https://dummyjson.com/products?limit=12&skip=${skipObjetivo}`;
 
       if (consultaGuardada) {
-        url = consultaGuardada.url;
+        if (paginaObjetivo === consultaGuardada.pagina) {
+          // Reintento: usamos exactamente la URL que falló.
+          url = consultaGuardada.url;
+        } else {
+          // Paginación: reconstruimos la URL para la nueva página.
+          if (consultaGuardada.tipo === "texto") {
+            const parametros = new URLSearchParams({
+              q: consultaGuardada.valor,
+              limit: "12",
+              skip: String(skipObjetivo),
+            });
+
+            url = `https://dummyjson.com/products/search?${parametros}`;
+          }
+
+          if (consultaGuardada.tipo === "categoria") {
+            url = `https://dummyjson.com/products/category/${encodeURIComponent(
+              consultaGuardada.valor,
+            )}?limit=12&skip=${skipObjetivo}`;
+          }
+
+          if (consultaGuardada.tipo === "todos") {
+            url = `https://dummyjson.com/products?limit=12&skip=${skipObjetivo}`;
+          }
+        }
       } else {
         if (modoConsulta === "texto") {
           const parametros = new URLSearchParams({
-            // Contruirá URLs
             q: textoBusqueda.trim(),
             limit: "12",
-            skip: String(skipObjetivo), // Indica cuantos resultados omitir según la página
+            skip: String(skipObjetivo),
           });
+
           url = `https://dummyjson.com/products/search?${parametros}`;
         }
 
         if (modoConsulta === "categoria") {
-          // Añadimos el skip de la página que queremos consultar.
-          url = `https://dummyjson.com/products/category/${encodeURIComponent(categoriaSeleccionada)}?limit=12&skip=${skipObjetivo}`;
+          url = `https://dummyjson.com/products/category/${encodeURIComponent(
+            categoriaSeleccionada,
+          )}?limit=12&skip=${skipObjetivo}`;
         }
       }
       let descripcionConsulta = "Todos los productos";
@@ -396,6 +420,7 @@ function CatalogoPage() {
 
             // Una nueva consulta siempre comienza desde la primera página.
             setPagina(1);
+            cargarProductos(null, 1); // Pasamos explicitamete la pagina para que cargue la consulta de la pagina 1.
           }}
           estadoPeticion={estadoPeticion}
         />

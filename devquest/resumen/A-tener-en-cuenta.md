@@ -54,6 +54,10 @@ Tailwind → Sus clases controlan el diseño, los tamaños, los espacios y la ad
 
 `CatalogoPages.jsx` coordina las consultas a DummyJSON; el formulario no consulta hasta que se envía. Los modos y las URLs están en la sección «Catálogo de productos» del [README del proyecto](../README.md#catálogo-de-productos), y los estados, la consulta aplicada y la validación de la respuesta, en [Apuntes § 31](APUNTES_ESTUDIO_REACT.md#31-catálogo-consultas-a-la-api).
 
+Paginación del servidor: `limit=12`, `skip=(paginaObjetivo - 1) * 12` y `totalPaginas=Math.ceil(totalResultados / 12)`. `skip` cuenta resultados omitidos; no es el número de página. La página objetivo se pasa al fetch, y las páginas siguientes conservan el filtro de `consultaAplicada`. `totalPaginas` y `skip` se calculan, no se guardan como estados duplicados. Ver [Apuntes § 33](APUNTES_ESTUDIO_REACT.md#33-reto-14-paginación-del-catálogo).
+
+La consulta fallida conserva su URL, filtro y página para «Reintentar». DELETE solo quita la tarjeta local: DummyJSON simula las escrituras y el total sigue siendo el informado por el servidor. El Reto 14 sigue en curso; faltan pruebas manuales y el código aún deja los controles visibles con cero resultados y sin bloquearlos durante una edición abierta.
+
 ## Preguntas
 
 Las preguntas de repaso con respuesta están en [Preguntas.md](Preguntas.md).

@@ -50,6 +50,9 @@ function CatalogoPage() {
     if (estadoEdicion === "cargando") {
       return;
     }
+    if (estadoEdicion === "exito") {
+      return;
+    }
     if (estadoGuardado === "editando") {
       return;
     }

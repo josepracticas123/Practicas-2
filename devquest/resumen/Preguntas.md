@@ -127,3 +127,29 @@ Desde el breakpoint `sm`, que en Tailwind es de 640 px por defecto, se aplica `f
 ### ¿Qué aprendí en el reto 06?
 
 Aprendí que `seccionActual` cambia una sección interna sin cambiar la URL, mientras que navegar a `/tareas` cambia la ruta global y muestra `TareasPage`. También aprendí que `TareasPage` conserva el estado de tareas, que se recupera desde `localStorage` al volver, mientras que estados locales como `busqueda` pueden reiniciarse al desmontar la página. Las piezas de React Router están explicadas en [Apuntes § 27](APUNTES_ESTUDIO_REACT.md#27-rutas-y-navegación).
+
+## Paginación del catálogo
+
+### ¿Qué representan `limit`, `skip` y `total`?
+
+`limit` limita cuántos resultados devuelve una respuesta; `skip` es la cantidad de resultados que se omiten antes de esa página; `total` indica cuántos resultados existen para la consulta en el servidor. Con 12 por página, la página 3 usa `skip = (3 - 1) * 12 = 24`.
+
+### ¿Qué guardo y qué calculo para paginar?
+
+Guardo la página y el total recibido. Calculo el desplazamiento como `(paginaObjetivo - 1) * 12` y las páginas totales como `Math.ceil(totalResultados / 12)`. Así no guardo valores derivados en estados que podrían desincronizarse.
+
+### ¿Por qué paginar con `consultaAplicada`?
+
+Los campos del formulario pueden contener cambios todavía no consultados. `consultaAplicada` conserva el filtro que produjo la lista, así que permite pedir la página siguiente con la misma búsqueda o categoría.
+
+### ¿Por qué paso explícitamente `paginaObjetivo` al fetch?
+
+Los setters de React solicitan una actualización, pero la variable del estado en el manejador sigue siendo la instantánea del render actual. Pasar `paginaObjetivo` a la función permite construir inmediatamente el `skip` correcto sin depender de leer el nuevo estado.
+
+### ¿Qué repite «Reintentar» después de un error?
+
+La consulta guarda antes del fetch la URL, el filtro y la página intentada. «Reintentar» reutiliza esa URL si se trata de la página que falló, aunque los campos del formulario se hayan editado después.
+
+### ¿Por qué DELETE no reduce el total?
+
+El código retira la tarjeta de la lista local, pero `totalResultados` corresponde a la respuesta del servidor. DummyJSON simula DELETE sin persistirlo; por eso una petición GET posterior puede devolver otra vez ese producto. El detalle está en [Apuntes § 33](APUNTES_ESTUDIO_REACT.md#33-reto-14-paginación-del-catálogo).
